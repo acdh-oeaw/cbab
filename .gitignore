@@ -1,0 +1,15 @@
+# Byte-compiled
+__pycache__/
+*.pyc
+
+#Ipython Notebook
+.ipynb_checkpoints
+
+/db.sqlite3
+/ted/settings/mysql.py
+/ted/settings/server.py
+/playAndTry.ipynb
+/ted/db.sqlite3
+
+/vocabs/data/japbibthesaurus_03.rdf
+/vocabs/data/thepro_rdf.xml

@@ -1,0 +1,14 @@
+{% extends "webpage/base.html" %}
+
+{% block content %}
+
+<h1>{{ object}}</h1>
+
+<ul>
+    
+</ul>
+
+{% if user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'vocabs:skoslabel_update' pk=object.id %}" role="button">edit concept</a>
+{% endif %}
+{% endblock %}
