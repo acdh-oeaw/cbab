@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpage',
     'vocabs',
+    'places',
+    'burials',
+    'bib',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
@@ -45,7 +48,7 @@ REST_FRAMEWORK = {
 }
 
 SPAGHETTI_SAUCE = {
-    'apps': ['vocabs'],
+    'apps': ['vocabs', 'places', 'burials', 'bib'],
     'show_fields': False,
     'exclude': {'auth': ['user']}
 }
