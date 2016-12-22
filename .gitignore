@@ -14,3 +14,4 @@ __pycache__/
 /vocabs/data/japbibthesaurus_03.rdf
 /vocabs/data/thepro_rdf.xml
 /cbab/settings/dev_secret.py
+/cbab/settings/mysql.py
