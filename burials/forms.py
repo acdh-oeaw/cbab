@@ -1,13 +1,28 @@
-#from dal import autocomplete
+from dal import autocomplete
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from .models import *
 
+
 class BurialSiteForm(forms.ModelForm):
     class Meta:
         model = BurialSite
         fields = "__all__"
+        widgets = {
+            'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'topography': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'distance_to_next_settlement': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'type_of_burial_site': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'dating': autocomplete.ModelSelect2Multiple(
+                url='vocabs:skosconcept-autocomplete'),
+            'absolute_dating': autocomplete.ModelSelect2Multiple(
+                url='vocabs:skosconcept-autocomplete'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(BurialSiteForm, self).__init__(*args, **kwargs)
@@ -23,6 +38,12 @@ class BurialGroupForm(forms.ModelForm):
     class Meta:
         model = BurialGroup
         fields = "__all__"
+        widgets = {
+            'burial_group_type': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'material': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(BurialGroupForm, self).__init__(*args, **kwargs)
@@ -38,6 +59,22 @@ class BurialForm(forms.ModelForm):
     class Meta:
         model = Burial
         fields = "__all__"
+        widgets = {
+            'burial_type': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'material': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'construction': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'arrangement': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'cover_type': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'grave_pit_form': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+            'grave_pit_orientation': autocomplete.ModelSelect2(
+                url='vocabs:skosconcept-autocomplete'),
+        }
 
     def __init__(self, *args, **kwargs):
         super(BurialForm, self).__init__(*args, **kwargs)
