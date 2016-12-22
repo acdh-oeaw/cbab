@@ -29,7 +29,7 @@
         {% for x in object.skos_narrower %}
             <skos:narrower rdf:resource="{{ x|slice:":-12"  }}"/>
         {% endfor %}
-        <skos:exactMatch rdf:resource="{{ object.legacy_id }}"/>
+        {% if object.legacy_id %}<skos:exactMatch rdf:resource="{{ object.legacy_id }}"/>{% endif %}
 </rdf:Description>
 {% endfor %}
 
