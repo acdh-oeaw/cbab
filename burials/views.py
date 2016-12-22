@@ -206,7 +206,7 @@ class GraveGoodOtherCreate(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(GraveGoodOther, self).dispatch(*args, **kwargs)
+        return super(GraveGoodOtherCreate, self).dispatch(*args, **kwargs)
 
 
 class GraveGoodOtherUpdate(UpdateView):
