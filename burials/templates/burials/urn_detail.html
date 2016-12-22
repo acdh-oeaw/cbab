@@ -1,0 +1,38 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>burial</th>
+        <td>{{ object.burial }}</td>
+    </tr>
+    <tr>
+        <th>basic_shape</th>
+        <td>{{ object.basic_shape }}</td>
+    </tr>
+    <tr>
+        <th>urn_id</th>
+        <td>{{ object.urn_id }}</td>
+    </tr>
+    <tr>
+        <th>urn_type</th>
+        <td>{{ object.urn_type }}</td>
+    </tr>
+    <tr>
+        <th>variation</th>
+        <td>{{ object.variation }}</td>
+    </tr>
+    <tr>
+        <th>cover</th>
+        <td>{{ object.cover }}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:urn_update' pk=object.pk %}" role="button">edit urn</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>burial</th>
+        <td>{{ object.burial }}</td>
+    </tr>
+    <tr>
+        <th>age</th>
+        <td>{{ object.age }}</td>
+    </tr>
+    <tr>
+        <th>gender</th>
+        <td>{{ object.gender }}</td>
+    </tr>
+    <tr>
+        <th>temperature</th>
+        <td>{{ object.temperature }}</td>
+    </tr>
+    <tr>
+        <th>weight</th>
+        <td>{{ object.weight }}</td>
+    </tr>
+    <tr>
+        <th>pathology</th>
+        <td>{{ object.pathology }}</td>
+    </tr>
+    <tr>
+        <th>total_weight</th>
+        <td>{{ object.total_weight }}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit dead body remains</a>
+
+{% endif %}
+
+{% endblock %}

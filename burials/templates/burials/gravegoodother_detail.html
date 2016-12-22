@@ -1,0 +1,30 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>burial</th>
+        <td>{{ object.burial }}</td>
+    </tr>
+    <tr>
+        <th>food</th>
+        <td>{{ object.food }}</td>
+    </tr>
+    <tr>
+        <th>other_organic_grave_good</th>
+        <td>{{ object.other_organic_grave_good }}</td>
+    </tr>
+    <tr>
+        <th>other_organic_grave_good_text</th>
+        <td>{{ object.other_organic_grave_good_text }}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:gravegoodother_update' pk=object.pk %}" role="button">edit grave good other</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "webpage/base.html" %}
+
+{% block content %}
+
+<h1>Burial</h1>
+<a class="btn btn-primary" href="{% url 'burials:burial_create' %}" role="button">create burial</a>
+{% for object in object_list %}
+    <li>
+        <a href="{% url 'burials:burial_detail' pk=object.id %}">{{ object }}</a></li>
+{% endfor %}
+
+{% endblock %}

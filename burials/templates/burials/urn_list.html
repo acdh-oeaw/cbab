@@ -1,0 +1,12 @@
+{% extends "webpage/base.html" %}
+
+{% block content %}
+
+<h1>Urn</h1>
+<a class="btn btn-primary" href="{% url 'burials:urn_create' %}" role="button">create urn</a>
+{% for object in object_list %}
+    <li>
+        <a href="{% url 'burials:urn_detail' pk=object.id %}">{{ object }}</a></li>
+{% endfor %}
+
+{% endblock %}

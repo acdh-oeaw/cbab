@@ -1,0 +1,130 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>burial_group</th>
+        <td>{{ object.burial_group }}</td>
+    </tr>
+    <tr>
+        <th>burial_site</th>
+        <td>{{ object.burial_site }}</td>
+    </tr>
+    <tr>
+        <th>burial_id</th>
+        <td>{{ object.burial_id }}</td>
+    </tr>
+    <tr>
+        <th>C14_dendro</th>
+        <td>{{ object.C14_dendro }}</td>
+    </tr>
+    <tr>
+        <th>absolute_age</th>
+        <td>{{ object.absolute_age }}</td>
+    </tr>
+    <tr>
+        <th>burial_type</th>
+        <td>{{object.burial_type}}</td>
+    </tr>
+    <tr>
+        <th>individuals</th>
+        <td>{{object.individuals}}</td>
+    </tr>
+    <tr>
+        <th>secondary_burial</th>
+        <td>{{object.secondary_burial}}</td>
+    </tr>
+    <tr>
+        <th>secondary_burial_text</th>
+        <td>{{object.secondary_burial_text}}</td>
+    </tr>
+    <tr>
+        <th>displaced</th>
+        <td>{{object.displaced}}</td>
+    </tr>
+    <tr>
+        <th>displaced_text</th>
+        <td>{{object.displaced_text}}</td>
+    </tr>
+    <tr>
+        <th>extraordinary_burial</th>
+        <td>{{object.extraordinary_burial}}</td>
+    </tr>
+    <tr>
+        <th>extraordinary_burial_text</th>
+        <td>{{object.extraordinary_burial_text}}</td>
+    </tr>
+    <tr>
+        <th>inhumation_burial_type</th>
+        <td>{{object.inhumation_burial_type}}</td>
+    </tr>
+    <tr>
+        <th>bi_ritual_burial_type</th>
+        <td>{{object.bi_ritual_burial_type}}</td>
+    </tr>
+    <tr>
+        <th>construction</th>
+        <td>{{object.construction}}</td>
+    </tr>
+    <tr>
+        <th>arrangement</th>
+        <td>{{object.arrangement}}</td>
+    </tr>
+    <tr>
+        <th>cover</th>
+        <td>{{object.cover}}</td>
+    </tr>
+    <tr>
+        <th>cover_type</th>
+        <td>{{object.cover_type}}</td>
+    </tr>
+    <tr>
+        <th>grave_pit_form</th>
+        <td>{{object.grave_pit_form}}</td>
+    </tr>
+    <tr>
+        <th>grave_pit_orientation</th>
+        <td>{{object.grave_pit_orientation}}</td>
+    </tr>
+    <tr>
+        <th>length</th>
+        <td>{{object.length}}</td>
+    </tr>
+    <tr>
+        <th>width</th>
+        <td>{{object.width}}</td>
+    </tr>
+    <tr>
+        <th>diameter</th>
+        <td>{{object.diameter}}</td>
+    </tr>
+    <tr>
+        <th>height</th>
+        <td>{{object.height}}</td>
+    </tr>
+    <tr>
+        <th>post_holes</th>
+        <td>{{object.post_holes}}</td>
+    </tr>
+    <tr>
+        <th>surface_identification_mark</th>
+        <td>{{object.surface_identification_mark}}</td>
+    </tr>
+    <tr>
+        <th>erdgraebchen</th>
+        <td>{{object.erdgraebchen}}</td>
+    </tr>
+    <tr>
+        <th>other_features</th>
+        <td>{{object.other_features}}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:burial_update' pk=object.pk %}" role="button">edit burial</a>
+
+{% endif %}
+
+{% endblock %}

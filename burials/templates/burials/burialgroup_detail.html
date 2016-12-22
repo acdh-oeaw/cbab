@@ -1,0 +1,50 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>burial_group_id</th>
+        <td>{{ object.burial_group_id }}</td>
+    </tr>
+    <tr>
+        <th>burial_site</th>
+        <td>{{ object.burial_site }}</td>
+    </tr>
+    <tr>
+        <th>name</th>
+        <td>{{ object.name }}</td>
+    </tr>
+    <tr>
+        <th>burial_group_type</th>
+        <td>{{ object.burial_group_type }}</td>
+    </tr>
+    <tr>
+        <th>material</th>
+        <td>{{ object.material }}</td>
+    </tr>
+    <tr>
+        <th>length</th>
+        <td>{{object.length}}</td>
+    </tr>
+    <tr>
+        <th>width</th>
+        <td>{{object.width}}</td>
+    </tr>
+    <tr>
+        <th>diameter</th>
+        <td>{{object.diameter}}</td>
+    </tr>
+    <tr>
+        <th>height</th>
+        <td>{{object.height}}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:burialgroup_update' pk=object.pk %}" role="button">edit burial group</a>
+
+{% endif %}
+
+{% endblock %}
