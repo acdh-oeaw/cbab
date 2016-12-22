@@ -1,0 +1,46 @@
+{% extends "webpage/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>Name</th>
+        <td>{{ object.name }}</td>
+    </tr>
+    <tr>
+        <th>Alternative name</th>
+        <td>{{ object.alternative_name }}</td>
+    </tr>
+    <tr>
+        <th>location</th>
+        <td>{{ object.location }}</td>
+    </tr>
+    <tr>
+        <th>geographical_coordinate_reference_system</th>
+        <td>{{ object.geographical_coordinate_reference_system }}</td>
+    </tr>
+    <tr>
+        <th>topography</th>
+        <td>{{ object.topography }}</td>
+    </tr>
+    <tr>
+        <th>exact_location</th>
+        <td>{{object.exact_location}}</td>
+    </tr>
+    <tr>
+        <th>excavation</th>
+        <td>{{object.excavation}}</td>
+    </tr>
+    <tr>
+        <th>distance_to_next_settlement</th>
+        <td>{{object.distance_to_next_settlement}}</td>
+    </tr>
+</table>
+
+{% if user.is_authenticated %}
+
+<a class="btn btn-primary" href="{% url 'burials:burialsite_update' pk=object.pk %}" role="button">edit burial site</a>
+
+{% endif %}
+
+{% endblock %}
