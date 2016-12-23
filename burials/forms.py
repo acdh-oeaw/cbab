@@ -1,4 +1,5 @@
 from dal import autocomplete
+from django.core.urlresolvers import reverse
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -6,12 +7,13 @@ from .models import *
 
 
 class BurialSiteForm(forms.ModelForm):
+
     class Meta:
         model = BurialSite
         fields = "__all__"
         widgets = {
             'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
-                url='vocabs:skosconcept-autocomplete'),
+                url='../../gender-autocomplete/24'),
             'topography': autocomplete.ModelSelect2(
                 url='vocabs:skosconcept-autocomplete'),
             'distance_to_next_settlement': autocomplete.ModelSelect2(
@@ -35,6 +37,7 @@ class BurialSiteForm(forms.ModelForm):
 
 
 class BurialGroupForm(forms.ModelForm):
+
     class Meta:
         model = BurialGroup
         fields = "__all__"
@@ -56,6 +59,7 @@ class BurialGroupForm(forms.ModelForm):
 
 
 class BurialForm(forms.ModelForm):
+
     class Meta:
         model = Burial
         fields = "__all__"
@@ -87,6 +91,7 @@ class BurialForm(forms.ModelForm):
 
 
 class UrnCoverForm(forms.ModelForm):
+
     class Meta:
         model = UrnCover
         fields = "__all__"
@@ -102,6 +107,7 @@ class UrnCoverForm(forms.ModelForm):
 
 
 class UrnForm(forms.ModelForm):
+
     class Meta:
         model = Urn
         fields = "__all__"
@@ -117,6 +123,7 @@ class UrnForm(forms.ModelForm):
 
 
 class GraveGoodForm(forms.ModelForm):
+
     class Meta:
         model = GraveGood
         fields = "__all__"
@@ -132,6 +139,7 @@ class GraveGoodForm(forms.ModelForm):
 
 
 class GraveGoodOtherForm(forms.ModelForm):
+
     class Meta:
         model = GraveGoodOther
         fields = "__all__"
@@ -147,6 +155,7 @@ class GraveGoodOtherForm(forms.ModelForm):
 
 
 class DeadBodyRemainsForm(forms.ModelForm):
+
     class Meta:
         model = DeadBodyRemains
         fields = "__all__"
