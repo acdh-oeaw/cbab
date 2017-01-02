@@ -15,3 +15,4 @@ __pycache__/
 /vocabs/data/thepro_rdf.xml
 /cbab/settings/dev_secret.py
 /cbab/settings/mysql.py
+/cbab/settings/postgres.py

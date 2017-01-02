@@ -69,7 +69,7 @@ urlpatterns = [
     url(r'^deadbodyremains/update/(?P<pk>[0-9]+)$',
         views.DeadBodyRemainsUpdate.as_view(), name='deadbodyremains_update'),
     url(
-        r'^gender-autocomplete/(?P<scheme>[0-9]+)$', dal_views.GenderAC.as_view(
-            model=SkosConcept), name='gender-autocomplete',
+        r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(
+            model=SkosConcept), name='skos-constraint-ac',
     ),
 ]

@@ -1,5 +1,4 @@
 from dal import autocomplete
-from django.core.urlresolvers import reverse
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -13,9 +12,9 @@ class BurialSiteForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
-                url='../../gender-autocomplete/24'),
+                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
             'topography': autocomplete.ModelSelect2(
-                url='vocabs:skosconcept-autocomplete'),
+                url='../../skos-constraint-ac/?scheme=Topography'),
             'distance_to_next_settlement': autocomplete.ModelSelect2(
                 url='vocabs:skosconcept-autocomplete'),
             'type_of_burial_site': autocomplete.ModelSelect2(
