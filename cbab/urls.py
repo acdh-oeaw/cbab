@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'places/', include('places.urls', namespace='places')),
     url(r'^bib/', include('bib.urls', namespace='bib')),
     url(r'^burials/', include('burials.urls', namespace='burials')),
+    url(r'^browsing/', include('browsing.urls', namespace='browsing')),
 ]

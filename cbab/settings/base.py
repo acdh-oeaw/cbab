@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'places',
     'burials',
     'bib',
+    'browsing',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
