@@ -13,6 +13,13 @@ class BurialSiteDetailView(DetailView):
     model = BurialSite
     template_name = 'burials/burialsite_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(BurialSiteDetailView, self).get_context_data(**kwargs)
+        #context["dating_list"] = SkosConcept.objects.filter(skos_dating=self.kwargs.get('pk'))
+        context["dating_list"] = self.object.dating.all()
+        context["reference_list"] = self.object.reference.all()
+        return context
+
 
 class BurialSiteListView(ListView):
     model = BurialSite

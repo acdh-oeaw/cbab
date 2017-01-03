@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from vocabs.models import SkosConcept
+from burials.models import *
+from bib.models import *
 from . import views, dal_views
 
 
@@ -68,8 +70,34 @@ urlpatterns = [
         views.DeadBodyRemainsCreate.as_view(), name='deadbodyremains_create'),
     url(r'^deadbodyremains/update/(?P<pk>[0-9]+)$',
         views.DeadBodyRemainsUpdate.as_view(), name='deadbodyremains_update'),
+    #Autocomplete fields
     url(
         r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(
             model=SkosConcept), name='skos-constraint-ac',
     ),
+    url(
+        r'^place-autocomplete/$', dal_views.PlaceAC.as_view(
+            model=Place), name='place-autocomplete',
+    ),
+    url(
+        r'^book-autocomplete/$', dal_views.BookAC.as_view(
+            model=Book), name='book-autocomplete',
+    ),
+    url(
+        r'^burialsite-autocomplete/$', dal_views.BurialSiteAC.as_view(
+            model=BurialSite), name='burialsite-autocomplete',
+    ),
+    url(
+        r'^burialgroup-autocomplete/$', dal_views.BurialGroupAC.as_view(
+            model=BurialGroup), name='burialgroup-autocomplete',
+    ),
+    url(
+        r'^burial-autocomplete/$', dal_views.BurialAC.as_view(
+            model=Burial), name='burial-autocomplete',
+    ),
+    url(
+        r'^urncover-autocomplete/$', dal_views.UrnCoverAC.as_view(
+            model=UrnCover), name='urncover-autocomplete',
+    ),
+
 ]

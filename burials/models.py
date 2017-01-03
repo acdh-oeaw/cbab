@@ -35,7 +35,7 @@ class BurialSite(models.Model):
         max_length=5, blank=True,
         null=True, choices=YESNO, help_text="helptext")
     excavation = models.CharField(
-        max_length=5, blank=True,
+        max_length=50, blank=True,
         null=True, choices=FULLYPARTLYEXCAVATED, help_text="helptext")
     distance_to_next_settlement = models.ForeignKey(
         SkosConcept, blank=True, null=True,
@@ -55,7 +55,7 @@ class BurialSite(models.Model):
         Book, blank=True, help_text="Please provide helptext")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}".format(self.name)
 
     def get_absolute_url(self):
         return reverse('burials:burialsite_detail', kwargs={'pk': self.id})
@@ -211,7 +211,7 @@ class Urn(models.Model):
     variation = models.TextField(blank=True, null=True,
         help_text="helptext")
     cover = models.ForeignKey(UrnCover, blank=True,
-        null=True, help_text="helptext")    
+        null=True, help_text="helptext")
     # position_of_cremated_remains = models.ForeignKey(SkosConcept,
  #        blank=True, null=True,
  #        help_text="helptext", related_name = "skos_position_of_cremated_remains")

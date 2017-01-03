@@ -44,8 +44,10 @@
         <td>{{object.disturbance}}</td>
     </tr>
     <tr>
-        <th>dating</th>
-        <td>{{object.dating}}</td>
+      <td>Dating</td>
+      <td>{% for x in dating_list %}
+      {{ x }}<br/> <!-- find.name -->
+      {% endfor %}</td>
     </tr>
     <tr>
         <th>absolute_dating</th>
@@ -56,8 +58,12 @@
         <td>{{object.location_of_archaeological_material_and_contact_information}}</td>
     </tr>
     <tr>
-        <th>reference</th>
-        <td>{{object.reference}}</td>
+      <td>Reference</td>
+      <td>{% for x in reference_list %}
+        <a href="https://www.zotero.org/defc-orea-oeaw/items/itemKey/{{ x.zoterokey }}" target="_blank">
+      {{ x.author }}, {{ x.title }}, {{ x.publication_year }}, {{ x.place }}
+      </a><br/>
+      {% endfor %}</td>
     </tr>
 </table>
 

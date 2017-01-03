@@ -11,6 +11,8 @@ class BurialSiteForm(forms.ModelForm):
         model = BurialSite
         fields = "__all__"
         widgets = {
+            'location': autocomplete.ModelSelect2(
+                url='burials:place-autocomplete'),
             'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
             'topography': autocomplete.ModelSelect2(
@@ -23,6 +25,8 @@ class BurialSiteForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Dating'),
             'absolute_dating': autocomplete.ModelSelect2Multiple(
                 url='vocabs:skosconcept-autocomplete'),     #absolute dating has no list so far - 'List of all data from the row 107'
+            'reference': autocomplete.ModelSelect2Multiple(
+                url='burials:book-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -41,6 +45,8 @@ class BurialGroupForm(forms.ModelForm):
         model = BurialGroup
         fields = "__all__"
         widgets = {
+            'burial_site': autocomplete.ModelSelect2(
+                url='burials:burialsite-autocomplete'),
             'burial_group_type': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Burial group type'),
             'material': autocomplete.ModelSelect2(
@@ -63,6 +69,10 @@ class BurialForm(forms.ModelForm):
         model = Burial
         fields = "__all__"
         widgets = {
+            'burial_group': autocomplete.ModelSelect2(
+                url='burials:burialgroup-autocomplete'),
+            'burial_site': autocomplete.ModelSelect2(
+                url='burials:burialsite-autocomplete'),
             'burial_type': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Burial type'),
             'construction': autocomplete.ModelSelect2(
@@ -113,8 +123,12 @@ class UrnForm(forms.ModelForm):
         model = Urn
         fields = "__all__"
         widgets = {
+            'burial': autocomplete.ModelSelect2(
+                url='burials:burial-autocomplete'),
             'basic_shape': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Basic shape of urn'),
+            'cover': autocomplete.ModelSelect2(
+                url='burials:urncover-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -133,6 +147,8 @@ class GraveGoodForm(forms.ModelForm):
         model = GraveGood
         fields = "__all__"
         widgets = {
+            'burial': autocomplete.ModelSelect2(
+                url='burials:burial-autocomplete'),
             'name': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Grave good name'),
             'material': autocomplete.ModelSelect2(
@@ -159,6 +175,12 @@ class GraveGoodOtherForm(forms.ModelForm):
     class Meta:
         model = GraveGoodOther
         fields = "__all__"
+        widgets = {
+            'burial': autocomplete.ModelSelect2(
+                url='burials:burial-autocomplete'),
+        }
+
+
 
     def __init__(self, *args, **kwargs):
         super(GraveGoodOtherForm, self).__init__(*args, **kwargs)
@@ -176,6 +198,8 @@ class DeadBodyRemainsForm(forms.ModelForm):
         model = DeadBodyRemains
         fields = "__all__"
         widgets = {
+            'burial': autocomplete.ModelSelect2(
+                url='burials:burial-autocomplete'),
             'age': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Age'),
             'gender': autocomplete.ModelSelect2(
