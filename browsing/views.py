@@ -89,3 +89,72 @@ class BurialListView(GenericListView):
             burialsite_names.append(x.name)
         context["burialsite_names"] = set(burialsite_names)
         return context
+
+
+class UrnCoverListView(GenericListView):
+    model = UrnCover
+    table_class = UrnCoverTable
+    template_name = 'browsing/urncover_list_generic.html'
+    filter_class = UrnCoverListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
+class UrnListView(GenericListView):
+    model = Urn
+    table_class = UrnTable
+    template_name = 'browsing/urn_list_generic.html'
+    filter_class = UrnListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+class GraveGoodListView(GenericListView):
+    model = GraveGood
+    table_class = GraveGoodTable
+    template_name = 'browsing/gravegood_list_generic.html'
+    filter_class = GraveGoodListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
+class GraveGoodOtherListView(GenericListView):
+    model = GraveGoodOther
+    table_class = GraveGoodOtherTable
+    template_name = 'browsing/gravegoodother_list_generic.html'
+    filter_class = GraveGoodOtherListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context
+
+
+class DeadBodyRemainsListView(GenericListView):
+    model = DeadBodyRemains
+    table_class = DeadBodyRemainsTable
+    template_name = 'browsing/deadbodyremains_list_generic.html'
+    filter_class = DeadBodyRemainsListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+
+        return context

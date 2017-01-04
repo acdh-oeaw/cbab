@@ -165,3 +165,126 @@ class BurialListFilter(django_filters.FilterSet):
     class Meta:
         model = Burial
         fields = ['burial_id', 'burial_site__name']
+
+
+class UrnCoverListFilter(django_filters.FilterSet):
+    cover_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    upside_down = django_filters.ChoiceFilter(
+        choices=YESNO, help_text=False,
+    )
+    fragment = django_filters.ChoiceFilter(
+        choices=YESNO, help_text=False,
+    )
+    basic_shape = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn cover'),
+        help_text=False
+    )
+
+    class Meta:
+        model = UrnCover
+        fields = ['cover_id', 'basic_shape']
+
+
+class UrnListFilter(django_filters.FilterSet):
+    burial = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    basic_shape = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn'),
+        help_text=False
+    )
+    urn_id = django_filters.CharFilter(
+        lookup_expr='iexact', help_text=False,
+    )
+    urn_type = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    variation = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    cover = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+
+    class Meta:
+        model = Urn
+        fields = ['id', 'urn_id', 'basic_shape']
+
+
+class GraveGoodListFilter(django_filters.FilterSet):
+    burial = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    name = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'),
+        help_text=False
+    )
+    material = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Material'),
+        help_text=False
+    )
+    condition = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Condition'),
+        help_text=False
+    )
+    position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False
+    )
+    amount = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False
+    )
+
+    class Meta:
+        model = GraveGood
+        fields = ['id', 'name']
+
+
+class GraveGoodOtherListFilter(django_filters.FilterSet):
+    burial = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    food = django_filters.ChoiceFilter(
+        choices=YESNO, help_text=False,
+    )
+    other_organic_grave_good = django_filters.ChoiceFilter(
+        choices=YESNO, help_text=False,
+    )
+
+    class Meta:
+        model = GraveGoodOther
+        fields = ['id', 'burial']
+
+
+class DeadBodyRemainsListFilter(django_filters.FilterSet):
+    burial = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    age = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Age'),
+        help_text=False
+    )
+    gender = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Gender'),
+        help_text=False
+    )
+    temperature = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Cremation temperature'),
+        help_text=False
+    )
+    weight = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    pathology = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    total_weight = django_filters.CharFilter(
+        lookup_expr='iexact', help_text=False,
+    )
+
+    class Meta:
+        model = DeadBodyRemains
+        fields = ['id', 'age']
+    
