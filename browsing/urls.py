@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns = [
     url(r'burialsites/$', views.BurialSiteListView.as_view(), name='browse_burialsites'),
-    # url(r'burialgroups/$', views.BurialGroupListView.as_view(), name='browse_burialgroups'),
-    # url(r'burials/$', views.BurialListView.as_view(), name='browse_burials'),
+    url(r'burialgroups/$', views.BurialGroupListView.as_view(), name='browse_burialgroups'),
+    url(r'burials/$', views.BurialListView.as_view(), name='browse_burials'),
     # url(r'urncovers/$', views.UrnCoversListView.as_view(), name='browse_urncovers'),
     # url(r'urns/$', views.UrnListView.as_view(), name='browse_urns'),
     # url(r'gravegoods/$', views.GraveGoodListView.as_view(), name='browse_gravegoods'),

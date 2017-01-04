@@ -50,3 +50,42 @@ class BurialSiteListView(GenericListView):
             topography_names.append(x.pref_label)
         context["topography_names"] = set(topography_names)
         return context
+
+
+class BurialGroupListView(GenericListView):
+    model = BurialGroup
+    table_class = BurialGroupTable
+    template_name = 'browsing/burialgroup_list_generic.html'
+    filter_class = BurialGroupListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
+
+        topography_names = []
+        for x in SkosConcept.objects.all():
+            topography_names.append(x.pref_label)
+        context["topography_names"] = set(topography_names)
+        return context
+
+
+class BurialListView(GenericListView):
+    model = Burial
+    table_class = BurialTable
+    template_name = 'browsing/burial_list_generic.html'
+    filter_class = BurialListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
+        return context
