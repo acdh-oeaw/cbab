@@ -264,8 +264,8 @@ class GraveGoodOther(models.Model):
         null=True, choices=YESNO, help_text="helptext")
     other_organic_grave_good = models.CharField(max_length=5, blank=True,
         null=True, choices=YESNO, help_text="helptext")
-    other_organic_grave_good_text = models.CharField(max_length=5, blank=True,
-        null=True, choices=YESNO, help_text="helptext")
+    other_organic_grave_good_text = models.TextField(blank=True, null=True,
+        help_text="helptext")
 
 
     def __str__(self):
