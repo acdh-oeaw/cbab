@@ -4,78 +4,72 @@ from burials.models import *
 
 
 class BurialSiteTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
+    db_id = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')], accessor='id')
     name = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
 
     class Meta:
         model = BurialSite
-        fields = ['name']
+        fields = ['db_id', 'name', 'type_of_burial_site']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class BurialGroupTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
+    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id', verbose_name='district')
+    db_id = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')], accessor='id')
     burial_group_id = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
+    burial_site = tables.Column()
 
     class Meta:
         model = BurialGroup
-        fields = ['burial_group_id']
+        fields = ['db_id', 'burial_group_id', 'burial_group_type']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class BurialTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
+    db_id = tables.LinkColumn('burials:burial_detail', args=[A('pk')], accessor='id')
     burial_id = tables.LinkColumn('burials:burial_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
 
     class Meta:
         model = Burial
-        fields = ['burial_id']
+        fields = ['db_id', 'burial_id', 'burial_site']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class UrnCoverTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
+    db_id = tables.LinkColumn('burials:urncover_detail', args=[A('pk')], accessor='id')
     cover_id = tables.LinkColumn('burials:urncover_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
 
     class Meta:
         model = UrnCover
-        fields = ['cover_id']
+        fields = ['db_id', 'cover_id', 'basic_shape']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class UrnTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
     db_id = tables.LinkColumn('burials:urn_detail', args=[A('pk')], accessor='id')
     urn_id = tables.LinkColumn('burials:urn_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
         model = Urn
-        fields = ['db_id','urn_id']
+        fields = ['db_id','urn_id', 'basic_shape']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class GraveGoodTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
     db_id = tables.LinkColumn('burials:gravegood_detail', args=[A('pk')], accessor='id')
     name = tables.LinkColumn('burials:gravegood_detail', args=[A('pk')])
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
         model = GraveGood
-        fields = ['db_id','name']
+        fields = ['db_id','name', 'material']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
 class GraveGoodOtherTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
     db_id = tables.LinkColumn('burials:gravegoodother_detail', args=[A('pk')], accessor='id')
-
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
         model = GraveGood
@@ -84,10 +78,8 @@ class GraveGoodOtherTable(tables.Table):
 
 
 class DeadBodyRemainsTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id')
     db_id = tables.LinkColumn('burials:deadbodyremains_detail', args=[A('pk')], accessor='id')
-
-    # province_name = tables.Column(accessor='province.name', verbose_name='district')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
         model = GraveGood

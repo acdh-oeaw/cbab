@@ -45,10 +45,11 @@ class BurialSiteListView(GenericListView):
             burialsite_names.append(x.name)
         context["burialsite_names"] = set(burialsite_names)
 
-        topography_names = []
-        for x in SkosConcept.objects.all():
-            topography_names.append(x.pref_label)
-        context["topography_names"] = set(topography_names)
+        alternative_names = []
+        for x in BurialSite.objects.all():
+            alternative_names.append(x.alternative_name)
+        context["alternative_names"] = set(alternative_names)
+
         return context
 
 
@@ -67,10 +68,11 @@ class BurialGroupListView(GenericListView):
             burialsite_names.append(x.name)
         context["burialsite_names"] = set(burialsite_names)
 
-        topography_names = []
-        for x in SkosConcept.objects.all():
-            topography_names.append(x.pref_label)
-        context["topography_names"] = set(topography_names)
+        burialgroup_ids = []
+        for x in BurialGroup.objects.all():
+            burialgroup_ids.append(x.burial_group_id)
+        context["burialgroup_ids"] = set(burialgroup_ids)
+
         return context
 
 
@@ -116,6 +118,11 @@ class UrnListView(GenericListView):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
 
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
+
         return context
 
 class GraveGoodListView(GenericListView):
@@ -128,6 +135,16 @@ class GraveGoodListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
+
+        gravegood_names = []
+        for x in SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'):
+            gravegood_names.append(x.pref_label)
+        context["gravegood_names"] = set(gravegood_names)
+
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
 
         return context
 
@@ -143,6 +160,11 @@ class GraveGoodOtherListView(GenericListView):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
 
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
+
         return context
 
 
@@ -156,5 +178,10 @@ class DeadBodyRemainsListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
+
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
 
         return context

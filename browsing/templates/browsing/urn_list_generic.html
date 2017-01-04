@@ -16,13 +16,13 @@
 
 {% block customScripts %}
 <script>
-// var burialsite_names = [{% for name in burialsite_names %} "{{ name }}", {% endfor %}];
-//
-//     $(function() {
-//         $("#id_burial_site__name").autocomplete({
-//             source:burialsite_names
-//         });
-//     });
+var burialsite_names = [{% for name in burialsite_names %} "{{ name }}", {% endfor %}];
+
+$(function() {
+    $("#id_burial_site_name").autocomplete({
+        source:burialsite_names
+    });
+});
 
 </script>
 {% endblock %}

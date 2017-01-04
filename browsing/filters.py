@@ -58,13 +58,16 @@ class BurialSiteListFilter(django_filters.FilterSet):
 
     class Meta:
         model = BurialSite
-        fields = ['name']
+        fields = ['id', 'name']
 
     # def topography_custom_filter(self, queryset, value):
     #     return queryset.filter(topography__pref_label__icontains=value).distinct()
 
 
 class BurialGroupListFilter(django_filters.FilterSet):
+    burial_group_id = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False
+    )
     burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False
     )
@@ -91,7 +94,7 @@ class BurialGroupListFilter(django_filters.FilterSet):
 
     class Meta:
         model = BurialGroup
-        fields = ['burial_group_id', 'burial_site__name']
+        fields = ['id', 'burial_group_id', 'burial_site__name']
 
 
 class BurialListFilter(django_filters.FilterSet):
@@ -164,7 +167,7 @@ class BurialListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Burial
-        fields = ['burial_id', 'burial_site__name']
+        fields = ['id', 'burial_id', 'burial_site__name']
 
 
 class UrnCoverListFilter(django_filters.FilterSet):
@@ -184,10 +187,13 @@ class UrnCoverListFilter(django_filters.FilterSet):
 
     class Meta:
         model = UrnCover
-        fields = ['cover_id', 'basic_shape']
+        fields = ['id', 'cover_id']
 
 
 class UrnListFilter(django_filters.FilterSet):
+    burial_site_name = django_filters.MethodFilter(
+        action='burialsite_name_custom_filter', help_text=False
+        )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -210,17 +216,26 @@ class UrnListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Urn
-        fields = ['id', 'urn_id', 'basic_shape']
+        fields = ['id', 'urn_id']
+
+    def burialsite_name_custom_filter(self, queryset, value):
+        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
 
 
 class GraveGoodListFilter(django_filters.FilterSet):
+    burial_site_name = django_filters.MethodFilter(
+        action='burialsite_name_custom_filter', help_text=False
+        )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
-    name = django_filters.ModelMultipleChoiceFilter(
-        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'),
-        help_text=False
-    )
+    name = django_filters.MethodFilter(
+        action='gravegood_name_custom_filter', help_text=False
+        )
+    # name = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'),
+    #     help_text=False,
+    # )
     material = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Material'),
         help_text=False
@@ -242,7 +257,17 @@ class GraveGoodListFilter(django_filters.FilterSet):
         fields = ['id', 'name']
 
 
+    def gravegood_name_custom_filter(self, queryset, value):
+        return queryset.filter(name__pref_label__icontains=value).distinct()
+
+    def burialsite_name_custom_filter(self, queryset, value):
+        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
+
+
 class GraveGoodOtherListFilter(django_filters.FilterSet):
+    burial_site_name = django_filters.MethodFilter(
+        action='burialsite_name_custom_filter', help_text=False
+        )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -257,8 +282,14 @@ class GraveGoodOtherListFilter(django_filters.FilterSet):
         model = GraveGoodOther
         fields = ['id', 'burial']
 
+    def burialsite_name_custom_filter(self, queryset, value):
+        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
+
 
 class DeadBodyRemainsListFilter(django_filters.FilterSet):
+    burial_site_name = django_filters.MethodFilter(
+        action='burialsite_name_custom_filter', help_text=False
+        )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -287,4 +318,6 @@ class DeadBodyRemainsListFilter(django_filters.FilterSet):
     class Meta:
         model = DeadBodyRemains
         fields = ['id', 'age']
-    
+
+    def burialsite_name_custom_filter(self, queryset, value):
+        return queryset.filter(burial__burial_site__name__icontains=value).distinct()

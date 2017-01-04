@@ -19,6 +19,7 @@
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
       <!-- jQuery -->
       <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
       <!--scroll to top -->
       <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
       <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
@@ -47,7 +48,7 @@
             <span class="icon-bar"/>
             <span class="icon-bar"/>
           </button>
-        </div>  
+        </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -73,28 +74,28 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                        <a href="{% url 'burials:burialsite_list' %}">Burial Site</a>
+                        <a href="{% url 'browsing:browse_burialsites' %}">Burial Site</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:burialgroup_list' %}">Burial Group</a>
+                        <a href="{% url 'browsing:browse_burialgroups' %}">Burial Group</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:burial_list' %}">Burial</a>
+                        <a href="{% url 'browsing:browse_burials' %}">Burial</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:urncover_list' %}">Urn cover</a>
+                        <a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:urn_list' %}">Urn</a>
+                        <a href="{% url 'browsing:browse_urns' %}">Urn</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:gravegood_list' %}">Grave Good</a>
+                        <a href="{% url 'browsing:browse_gravegoods' %}">Grave Good</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:gravegoodother_list' %}">Grave Good Other</a>
+                        <a href="{% url 'browsing:browse_gravegoodsother' %}">Grave Good Other</a>
                     </li>
                     <li>
-                        <a href="{% url 'burials:deadbodyremains_list' %}">Dead Body Remains</a>
+                        <a href="{% url 'browsing:browse_deadbodyremains' %}">Dead Body Remains</a>
                     </li>
                   </ul>
                 </li>
@@ -103,7 +104,7 @@
                   <span class="caret"/>
                   </a>
                   <ul class="dropdown-menu">
-                    
+
                   </ul>
                 </li>
                 {% if user.is_authenticated %}
@@ -173,7 +174,7 @@
         {% endblock %}
       </div>
     </section>
-    
+
     <div align="text-center">
         <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
       </div>
@@ -182,24 +183,25 @@
       <div class="row text-center">
         <div class="col-sm-4">
           <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>   
+              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>
           </a>
         </div>
         <div class="col-sm-4">
             <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="{{ metadata.github }}" width="10%"/>   
+              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="{{ metadata.github }}" width="10%"/>
             </a>
         </div>
         <!-- <div class="col-sm-4">
             <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>                 
+              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>
             </a>
         </div> -->
-      </div>  
+      </div>
     </footer>
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script>
     <!-- cool share -->
       <script type="text/javascript">
         $(function (){
@@ -214,7 +216,7 @@
           $('.socialShare').shareButtons(options);
         });
       </script>
-    <!-- scroll-up-bottom -->        
+    <!-- scroll-up-bottom -->
     <script type="text/javascript">
             // Setup plugin with default settings
             $(document).ready(function() {
@@ -224,7 +226,7 @@
                     }
                 });
             });
-    </script>    
+    </script>
     {% endblock %}
   </body>
 </html>
