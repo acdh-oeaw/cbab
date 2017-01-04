@@ -70,6 +70,7 @@
 {% if user.is_authenticated %}
 
 <a class="btn btn-primary" href="{% url 'burials:burialsite_update' pk=object.pk %}" role="button">edit burial site</a>
+<a class ="btn btn-danger" href="{% url 'burials:burialsite_delete' pk=object.id %}">Delete</a>
 
 {% endif %}
 

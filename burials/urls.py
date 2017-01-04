@@ -14,6 +14,8 @@ urlpatterns = [
         name='burialsite_create'),
     url(r'^burialsite/update/(?P<pk>[0-9]+)$',
         views.BurialSiteUpdate.as_view(), name='burialsite_update'),
+    url(r'^burialsite/delete/(?P<pk>[0-9]+)$',
+        views.BurialSiteDelete.as_view(), name='burialsite_delete'),
     # BurialGroup
     url(r'^burialgroup/(?P<pk>[0-9]+)$',
         views.BurialGroupDetailView.as_view(), name='burialgroup_detail'),
@@ -23,6 +25,8 @@ urlpatterns = [
         name='burialgroup_create'),
     url(r'^burialgroup/update/(?P<pk>[0-9]+)$',
         views.BurialGroupUpdate.as_view(), name='burialgroup_update'),
+    url(r'^burialgroup/delete/(?P<pk>[0-9]+)$',
+        views.BurialGroupDelete.as_view(), name='burialgroup_delete'),
     # Burial
     url(r'^burial/(?P<pk>[0-9]+)$',
         views.BurialDetailView.as_view(), name='burial_detail'),
@@ -30,6 +34,8 @@ urlpatterns = [
     url(r'^burial/create/$', views.BurialCreate.as_view(), name='burial_create'),
     url(r'^burial/update/(?P<pk>[0-9]+)$',
         views.BurialUpdate.as_view(), name='burial_update'),
+    url(r'^burial/delete/(?P<pk>[0-9]+)$',
+        views.BurialDelete.as_view(), name='burial_delete'),
     # UrnCover
     url(r'^urncover/(?P<pk>[0-9]+)$',
         views.UrnCoverDetailView.as_view(), name='urncover_detail'),
@@ -37,6 +43,8 @@ urlpatterns = [
     url(r'^urncover/create/$', views.UrnCoverCreate.as_view(), name='urncover_create'),
     url(r'^urncover/update/(?P<pk>[0-9]+)$',
         views.UrnCoverUpdate.as_view(), name='urncover_update'),
+    url(r'^urncover/delete/(?P<pk>[0-9]+)$',
+        views.UrnCoverDelete.as_view(), name='urncover_delete'),
     # Urn
     url(r'^urn/(?P<pk>[0-9]+)$',
         views.UrnDetailView.as_view(), name='urn_detail'),
@@ -44,6 +52,8 @@ urlpatterns = [
     url(r'^urn/create/$', views.UrnCreate.as_view(), name='urn_create'),
     url(r'^urn/update/(?P<pk>[0-9]+)$',
         views.UrnUpdate.as_view(), name='urn_update'),
+    url(r'^urn/delete/(?P<pk>[0-9]+)$',
+        views.UrnDelete.as_view(), name='urn_delete'),
     # GraveGood
     url(r'^gravegood/(?P<pk>[0-9]+)$',
         views.GraveGoodDetailView.as_view(), name='gravegood_detail'),
@@ -52,6 +62,8 @@ urlpatterns = [
         name='gravegood_create'),
     url(r'^gravegood/update/(?P<pk>[0-9]+)$',
         views.GraveGoodUpdate.as_view(), name='gravegood_update'),
+    url(r'^gravegood/delete/(?P<pk>[0-9]+)$',
+        views.GraveGoodDelete.as_view(), name='gravegood_delete'),
     # GraveGoodOther
     url(r'^gravegoodother/(?P<pk>[0-9]+)$',
         views.GraveGoodOtherDetailView.as_view(), name='gravegoodother_detail'),
@@ -61,6 +73,8 @@ urlpatterns = [
         name='gravegoodother_create'),
     url(r'^gravegoodother/update/(?P<pk>[0-9]+)$',
         views.GraveGoodOtherUpdate.as_view(), name='gravegoodother_update'),
+    url(r'^gravegoodother/delete/(?P<pk>[0-9]+)$',
+        views.GraveGoodOtherDelete.as_view(), name='gravegoodother_delete'),
     # DeadBodyRemains
     url(r'^deadbodyremains/(?P<pk>[0-9]+)$',
         views.DeadBodyRemainsDetailView.as_view(), name='deadbodyremains_detail'),
@@ -70,6 +84,8 @@ urlpatterns = [
         views.DeadBodyRemainsCreate.as_view(), name='deadbodyremains_create'),
     url(r'^deadbodyremains/update/(?P<pk>[0-9]+)$',
         views.DeadBodyRemainsUpdate.as_view(), name='deadbodyremains_update'),
+    url(r'^deadbodyremains/delete/(?P<pk>[0-9]+)$',
+        views.DeadBodyRemainsDelete.as_view(), name='deadbodyremains_delete'),
     #Autocomplete fields
     url(
         r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(

@@ -60,6 +60,11 @@ class BurialSite(models.Model):
     def get_absolute_url(self):
         return reverse('burials:burialsite_detail', kwargs={'pk': self.id})
 
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
 
 class BurialGroup(models.Model):
     burial_group_id = models.CharField(
@@ -94,6 +99,11 @@ class BurialGroup(models.Model):
 
     def get_absolute_url(self):
         return reverse('burials:burialgroup_detail', kwargs={'pk': self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
 
 
 class Burial(models.Model):
@@ -177,6 +187,11 @@ class Burial(models.Model):
     def get_absolute_url(self):
         return reverse('burials:burial_detail', kwargs={'pk': self.id})
 
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
 
 class UrnCover(models.Model):
     cover_id = models.TextField(blank=True, null=True,           #ask if it is correct name for this property
@@ -195,6 +210,11 @@ class UrnCover(models.Model):
 
     def get_absolute_url(self):
         return reverse('burials:urncover_detail', kwargs={'pk':self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
 
 
 class Urn(models.Model):
@@ -228,6 +248,11 @@ class Urn(models.Model):
     def get_absolute_url(self):
         return reverse('burials:urn_detail', kwargs={'pk':self.id})
 
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
 
 class GraveGood(models.Model):
     burial = models.ForeignKey(Burial,
@@ -255,6 +280,11 @@ class GraveGood(models.Model):
     def get_absolute_url(self):
         return reverse('burials:gravegood_detail', kwargs={'pk':self.id})
 
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
 
 class GraveGoodOther(models.Model):
     burial = models.ForeignKey(Burial,
@@ -273,6 +303,11 @@ class GraveGoodOther(models.Model):
 
     def get_absolute_url(self):
         return reverse('burials:gravegoodother_detail', kwargs={'pk':self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
 
 
 class DeadBodyRemains(models.Model):
@@ -300,3 +335,8 @@ class DeadBodyRemains(models.Model):
 
     def get_absolute_url(self):
         return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name

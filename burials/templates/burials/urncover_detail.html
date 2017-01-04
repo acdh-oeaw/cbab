@@ -24,6 +24,7 @@
 {% if user.is_authenticated %}
 
 <a class="btn btn-primary" href="{% url 'burials:urncover_update' pk=object.pk %}" role="button">edit urn cover</a>
+<a class ="btn btn-danger" href="{% url 'burials:urncover_delete' pk=object.id %}">Delete</a>
 
 {% endif %}
 
