@@ -65,6 +65,26 @@
       </a><br/>
       {% endfor %}</td>
     </tr>
+  {% if burialgroup_list %}
+  <tr>
+      <th>Burial groups</th>
+      <td>
+        {% for x in burialgroup_list %}
+        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.name }}<br/></a>
+        {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
+  {% if burial_list %}
+  <tr>
+      <th>Burials</th>
+      <td>
+        {% for x in burial_list %}
+        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+        {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
 </table>
 
 {% if user.is_authenticated %}

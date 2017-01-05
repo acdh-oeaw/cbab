@@ -16,9 +16,10 @@ class BurialSiteDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BurialSiteDetailView, self).get_context_data(**kwargs)
-        #context["dating_list"] = SkosConcept.objects.filter(skos_dating=self.kwargs.get('pk'))
         context["dating_list"] = self.object.dating.all()
         context["reference_list"] = self.object.reference.all()
+        context["burialgroup_list"] = BurialGroup.objects.filter(burial_site=self.object.id)
+        context["burial_list"] = Burial.objects.filter(burial_site=self.object.id)
         return context
 
 
@@ -60,6 +61,12 @@ class BurialGroupDetailView(DetailView):
     model = BurialGroup
     template_name = 'burials/burialgroup_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(BurialGroupDetailView, self).get_context_data(**kwargs)
+        context["burial_list"] = Burial.objects.filter(burial_group=self.object.id)
+        context["gravegood_list"] = GraveGood.objects.filter(burial=self.object.id)
+        return context
+
 
 class BurialGroupListView(ListView):
     model = BurialGroup
@@ -100,6 +107,13 @@ class BurialDetailView(DetailView):
     model = Burial
     template_name = 'burials/burial_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(BurialDetailView, self).get_context_data(**kwargs)
+        context["gravegood_list"] = GraveGood.objects.filter(burial=self.object.id)
+        context["gravegoodother_list"] = GraveGoodOther.objects.filter(burial=self.object.id)
+        context["deadbodyremains_list"] = DeadBodyRemains.objects.filter(burial=self.object.id)
+        return context
+
 
 class BurialListView(ListView):
     model = Burial
@@ -139,6 +153,11 @@ class BurialDelete(DeleteView):
 class UrnCoverDetailView(DetailView):
     model = UrnCover
     template_name = 'burials/urncover_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UrnCoverDetailView, self).get_context_data(**kwargs)
+        context["urn_list"] = Urn.objects.filter(cover=self.object.id)
+        return context
 
 
 class UrnCoverListView(ListView):

@@ -5,11 +5,20 @@
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th>burial_group</th>
-        <td>{{ object.burial_group }}</td>
+        <td>
+          <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
+          {{ object.burial_group }}
+          </a>
+        </td>
     </tr>
     <tr>
         <th>burial_site</th>
-        <td>{{ object.burial_site }}</td>
+        <td>
+          <a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">
+          {{ object.burial_site }}
+          </a>
+        </td>
+
     </tr>
     <tr>
         <th>burial_id</th>
@@ -119,6 +128,36 @@
         <th>other_features</th>
         <td>{{object.other_features}}</td>
     </tr>
+    {% if gravegood_list %}
+    <tr>
+        <th>Grave goods</th>
+        <td>
+          {% for x in gravegood_list %}
+          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.name }} <br/></a>
+          {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
+    {% if gravegoodother_list %}
+    <tr>
+        <th>Grave goods other</th>
+        <td>
+          {% for x in gravegoodother_list %}
+          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+          {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
+    {% if deadbodyremains_list %}
+    <tr>
+        <th>Dead body remains</th>
+        <td>
+          {% for x in deadbodyremains_list %}
+          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+          {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
 </table>
 
 {% if user.is_authenticated %}

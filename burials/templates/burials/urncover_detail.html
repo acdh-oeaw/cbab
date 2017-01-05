@@ -3,6 +3,16 @@
 
 <h1>Urn cover {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
+  {% if urn_list %}
+  <tr>
+      <th>Urn</th>
+      <td>
+        {% for x in urn_list %}
+        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.basic_shape }} <br/></a>
+        {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
     <tr>
         <th>cover_id</th>
         <td>{{ object.cover_id }}</td>

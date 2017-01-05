@@ -9,7 +9,11 @@
     </tr>
     <tr>
         <th>burial_site</th>
-        <td>{{ object.burial_site }}</td>
+        <td>
+          <a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">
+          {{ object.burial_site }}
+        </a>
+        </td>
     </tr>
     <tr>
         <th>name</th>
@@ -39,6 +43,16 @@
         <th>height</th>
         <td>{{object.height}}</td>
     </tr>
+    {% if burial_list %}
+    <tr>
+        <th>Burials</th>
+        <td>
+          {% for x in burial_list %}
+          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+          {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
 </table>
 
 {% if user.is_authenticated %}

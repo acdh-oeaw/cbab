@@ -5,7 +5,11 @@
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th>burial</th>
-        <td>{{ object.burial }}</td>
+        <td>
+          <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
+          {{ object.burial }}
+          </a>
+        </td>
     </tr>
     <tr>
         <th>age</th>
