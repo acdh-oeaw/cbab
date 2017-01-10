@@ -6,10 +6,20 @@ body{
     display:flex;
     flex-direction:column;
     height:100%;
+    /*font-family: 'Roboto', sans-serif;*/
+    /*font-family: 'Nunito', sans-serif;*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-family: 'Pontano Sans', sans-serif;*/
+    font-family: 'Libre Franklin', sans-serif;
+
+}
+* {
+  border-radius: 0 !important;
 }
 header{
     flex:0 0 auto;
-    background-color:#333; /*#F8F8F8*/
+    background-color:#331165; /*#F8F8F8 #22267b*/
+
     color:#ffffff;
 }
 .main-content{
@@ -17,7 +27,7 @@ header{
 }
 footer{
     flex:0 0 auto;
-    background-color:#333; /*#F8F8F8*/
+    background-color:#331165; /*#331165*/
     color:#ffffff;
     font-size:13px;
     padding:20px;
@@ -27,3 +37,126 @@ footer{
     width:100%;
     margin-top:10px;
 }
+
+/*custom css*/
+
+.procustom-header {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.procustom-navbar {
+  background-color:#ffffff;
+  padding-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+  border: none;
+
+
+
+}
+#top-procustom-navbar {
+    margin: 0;
+}
+#top-procustom-navbar.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+#top-procustom-navbar.mini-nav {
+
+    box-shadow: 0 5px 5px rgba(50, 50, 50, 0.75)
+}
+
+.procustom-index{
+  background-color: #e6e5f5; /*#e6e5f5 #eaf1f7*/
+
+  height: auto;
+  padding: 40px;
+}
+.procustom-search-wrapper {
+  padding: 40px 20px 40px 20px;
+
+
+
+}
+
+.procustom-nav-tabs  {
+
+}
+.procustom-nav-tabs > li > a{
+
+  color: #777;
+}
+.procustom-nav-tabs > li.active > a{
+  background-color: #ced0d4;
+}
+
+.responsive-tabs.nav-tabs > li.active > a {
+  background-color: #ced0d4;
+
+}
+.responsive-tabs.nav-tabs > li > a:hover {
+  color:#333;
+
+}
+
+.procustom-tab-content{
+  background-color: #ffffff;
+  padding: 40px;
+  border: 1px solid #DDDDDD;
+  border-top: none;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+.procustom-panel-list {
+  margin-top: 20px;
+  border: none;
+
+}
+.procustom-panel-list > .procustom-panel-heading {
+  background-color: white;
+}
+.procustom-panel-list > .procustom-panel-body {
+
+}
+.procustom-panel-create {
+  margin-top: 20px;
+  border: none;
+}
+.procustom-panel-create > .procustom-panel-heading {
+  background-color: white;
+}
+/*.btn-primary {
+  border-radius: 0px;
+  background-color: white;
+  border-color: #2abfd4;
+  color: #2abfd4;
+  border: 3px solid;
+  font-weight: bold;
+}
+.btn-primary:hover{
+  border-radius: 0px;
+  background-color: #2abfd4;
+  border-color: #2abfd4;
+  color: white;
+  border: 3px solid;
+  font-weight: bold;
+}*/
+.procustom-dropdown-menu {
+
+}
+.procustom-form {
+  padding: 20px 0px 20px 0px;
+}
+.btn {
+  font-weight: bold;
+  font-variant: small-caps;
+}
+/*Removing rounded corners for all buttons*/
+
+/*@media (max-width: 480px) {
+  .procustom-nav-tabs > li {
+      float:none;
+  }
+}*/

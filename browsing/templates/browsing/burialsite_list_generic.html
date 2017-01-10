@@ -4,14 +4,14 @@
 {% block create_button %}
 {% if user.is_authenticated %}
  <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:burialsite_create' %}">create new Site</a>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:burialsite_create' %}">create new site</a>
 </div>
 {% endif %}
 {% endblock %}
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_burialsites' %}">Reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_burialsites' %}">reset search</a>
 {% endblock %}
 
 {% block customScripts %}

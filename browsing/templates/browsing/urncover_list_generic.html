@@ -4,14 +4,14 @@
 {% block create_button %}
 {% if user.is_authenticated %}
  <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:urncover_create' %}">create new Urn Cover</a>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:urncover_create' %}">create new urn cover</a>
 </div>
 {% endif %}
 {% endblock %}
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_urncovers' %}">Reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_urncovers' %}">reset search</a>
 {% endblock %}
 
 {% block customScripts %}

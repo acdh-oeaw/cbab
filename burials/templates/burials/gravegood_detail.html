@@ -36,7 +36,7 @@
 {% if user.is_authenticated %}
 
 <a class="btn btn-primary" href="{% url 'burials:gravegood_update' pk=object.pk %}" role="button">edit grave good</a>
-<a class ="btn btn-danger" href="{% url 'burials:gravegood_delete' pk=object.id %}">Delete</a>
+<a class ="btn btn-danger" href="{% url 'burials:gravegood_delete' pk=object.id %}">delete</a>
 
 {% endif %}
 

@@ -4,14 +4,14 @@
 {% block create_button %}
 {% if user.is_authenticated %}
  <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:deadbodyremains_create' %}">create new Dead Body Remains</a>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:deadbodyremains_create' %}">create new dead body remains</a>
 </div>
 {% endif %}
 {% endblock %}
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_deadbodyremains' %}">Reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_deadbodyremains' %}">reset search</a>
 {% endblock %}
 
 {% block customScripts %}

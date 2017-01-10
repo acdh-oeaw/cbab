@@ -4,14 +4,14 @@
 {% block create_button %}
 {% if user.is_authenticated %}
  <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:gravegoodother_create' %}">create new Grave Good Other</a>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:gravegoodother_create' %}">create new grave good other</a>
 </div>
 {% endif %}
 {% endblock %}
 
 
 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_gravegoodsother' %}">Reset search</a>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_gravegoodsother' %}">reset search</a>
 {% endblock %}
 
 {% block customScripts %}

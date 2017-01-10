@@ -2,13 +2,40 @@
 
 {% block content %}
 
-<h1>Skos Coneptes</h1>
+<div class="container">
+<div class="panel panel-default procustom-panel-list">
+    <div class="panel-heading procustom-panel-heading">
+        <h1>Skos Concepts </h1>
+        <a class="btn btn-primary" href="{% url 'vocabs:skosconcept_create' %}" role="button">create concept</a>
+    </div>
+    <div class="panel-body procustom-panel-body">
+
+      <ul class="list-group">
+       {% for object in object_list %}
+
+       <li class="list-group-item">
+                 <a href="{% url 'vocabs:skosconcept_detail' pk=object.id %}">{{ object }}</a>
+        </li>
+       {% endfor %}
+     </ul>
+    </div>
+</div>
+</div>
+
+<!-- <h1>Skos Concepts</h1>
 <a class="btn btn-primary" href="{% url 'vocabs:skosconcept_create' %}" role="button">create concept</a>
+<br>
 
 
 {% for object in object_list %}
+
     <li>
-        <a href="{% url 'vocabs:skosconcept_detail' pk=object.id %}">{{ object }}</a></li>
-{% endfor %}
+
+
+        <a href="{% url 'vocabs:skosconcept_detail' pk=object.id %}">{{ object }}</a>
+
+    </li>
+
+{% endfor %} -->
 
 {% endblock %}

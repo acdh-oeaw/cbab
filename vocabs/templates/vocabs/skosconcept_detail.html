@@ -1,10 +1,10 @@
 {% extends "webpage/base.html" %}
-{% block Titel %} {{ object }} {% endblock %} 
+{% block Titel %} {{ object }} {% endblock %}
 {% block content %}
 
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel panel-default procustom-panel-create">
+        <div class="panel-heading procustom-panel-heading">
             <h1 style="text-align: center;">
                {% if object.pref_label %} {{object.pref_label }} {% endif %}<small>{{ object.namespace }}:{{ object.notation }}</small>
                {% if user.is_authenticated %}
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="panel panel-default">
-                        
+
                         <div class="panel-body">
                             <table class="table table-bordered table-striped table-hover  ">
                                 <tr>
@@ -120,4 +120,3 @@
     </div>
 </div>
 {% endblock content %}
-
