@@ -4,11 +4,11 @@
 <h1>Burial group {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial_group_id</th>
+        <th class="col-sm-3">Burial group id</th>
         <td>{{ object.burial_group_id }}</td>
     </tr>
     <tr>
-        <th>burial_site</th>
+        <th>Burial site</th>
         <td>
           <a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">
           {{ object.burial_site }}
@@ -16,31 +16,31 @@
         </td>
     </tr>
     <tr>
-        <th>name</th>
+        <th>Name</th>
         <td>{{ object.name }}</td>
     </tr>
     <tr>
-        <th>burial_group_type</th>
+        <th>Burial group type</th>
         <td>{{ object.burial_group_type }}</td>
     </tr>
     <tr>
-        <th>material</th>
+        <th>Material</th>
         <td>{{ object.material }}</td>
     </tr>
     <tr>
-        <th>length</th>
+        <th>Length</th>
         <td>{{object.length}}</td>
     </tr>
     <tr>
-        <th>width</th>
+        <th>Width</th>
         <td>{{object.width}}</td>
     </tr>
     <tr>
-        <th>diameter</th>
+        <th>Diameter</th>
         <td>{{object.diameter}}</td>
     </tr>
     <tr>
-        <th>height</th>
+        <th>Height</th>
         <td>{{object.height}}</td>
     </tr>
     {% if burial_list %}

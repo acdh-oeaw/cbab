@@ -4,7 +4,7 @@
 <h1>Urn {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial</th>
+        <th class="col-sm-3">Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}
@@ -12,23 +12,23 @@
         </td>
     </tr>
     <tr>
-        <th>basic_shape</th>
+        <th>Basic shape</th>
         <td>{{ object.basic_shape }}</td>
     </tr>
     <tr>
-        <th>urn_id</th>
+        <th>Urn id</th>
         <td>{{ object.urn_id }}</td>
     </tr>
     <tr>
-        <th>urn_type</th>
+        <th>Urn type</th>
         <td>{{ object.urn_type }}</td>
     </tr>
     <tr>
-        <th>variation</th>
+        <th>Variation</th>
         <td>{{ object.variation }}</td>
     </tr>
     <tr>
-        <th>cover</th>
+        <th>Cover</th>
         <td>
           <a href="{% url 'burials:urncover_detail' pk=object.cover.id %}">
           {{ object.cover }}

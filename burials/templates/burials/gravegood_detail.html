@@ -4,7 +4,7 @@
 <h1>Grave good {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial</th>
+        <th class="col-sm-3">Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}
@@ -12,23 +12,23 @@
         </td>
     </tr>
     <tr>
-        <th>name</th>
+        <th>Name</th>
         <td>{{ object.name }}</td>
     </tr>
     <tr>
-        <th>material</th>
+        <th>Material</th>
         <td>{{ object.material }}</td>
     </tr>
     <tr>
-        <th>condition</th>
+        <th>Condition</th>
         <td>{{ object.condition }}</td>
     </tr>
     <tr>
-        <th>position</th>
+        <th>Position</th>
         <td>{{ object.position }}</td>
     </tr>
     <tr>
-        <th>amount</th>
+        <th>Amount</th>
         <td>{{ object.amount }}</td>
     </tr>
 </table>

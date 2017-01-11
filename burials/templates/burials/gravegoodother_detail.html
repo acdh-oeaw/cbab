@@ -4,7 +4,7 @@
 <h1>Grave good other {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial</th>
+        <th class="col-sm-3">Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}
@@ -12,15 +12,15 @@
         </td>
     </tr>
     <tr>
-        <th>food</th>
+        <th>Food</th>
         <td>{{ object.food }}</td>
     </tr>
     <tr>
-        <th>other_organic_grave_good</th>
+        <th>Other organic grave good</th>
         <td>{{ object.other_organic_grave_good }}</td>
     </tr>
     <tr>
-        <th>other_organic_grave_good_text</th>
+        <th>Other organic grave good text</th>
         <td>{{ object.other_organic_grave_good_text }}</td>
     </tr>
 </table>

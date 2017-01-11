@@ -4,7 +4,7 @@
 <h1>Burial {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial_group</th>
+        <th class="col-sm-3">Burial group</th>
         <td>
           <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
           {{ object.burial_group }}
@@ -12,7 +12,7 @@
         </td>
     </tr>
     <tr>
-        <th>burial_site</th>
+        <th>Burial site</th>
         <td>
           <a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">
           {{ object.burial_site }}
@@ -21,111 +21,111 @@
 
     </tr>
     <tr>
-        <th>burial_id</th>
+        <th>Burial id</th>
         <td>{{ object.burial_id }}</td>
     </tr>
     <tr>
-        <th>C14_dendro</th>
+        <th>C14 dendro</th>
         <td>{{ object.C14_dendro }}</td>
     </tr>
     <tr>
-        <th>absolute_age</th>
+        <th>Absolute age</th>
         <td>{{ object.absolute_age }}</td>
     </tr>
     <tr>
-        <th>burial_type</th>
+        <th>Burial type</th>
         <td>{{object.burial_type}}</td>
     </tr>
     <tr>
-        <th>individuals</th>
+        <th>Individuals</th>
         <td>{{object.individuals}}</td>
     </tr>
     <tr>
-        <th>secondary_burial</th>
+        <th>Secondary burial</th>
         <td>{{object.secondary_burial}}</td>
     </tr>
     <tr>
-        <th>secondary_burial_text</th>
+        <th>Secondary burial text</th>
         <td>{{object.secondary_burial_text}}</td>
     </tr>
     <tr>
-        <th>displaced</th>
+        <th>Displaced</th>
         <td>{{object.displaced}}</td>
     </tr>
     <tr>
-        <th>displaced_text</th>
+        <th>Displaced text</th>
         <td>{{object.displaced_text}}</td>
     </tr>
     <tr>
-        <th>extraordinary_burial</th>
+        <th>Extraordinary burial</th>
         <td>{{object.extraordinary_burial}}</td>
     </tr>
     <tr>
-        <th>extraordinary_burial_text</th>
+        <th>Extraordinary burial text</th>
         <td>{{object.extraordinary_burial_text}}</td>
     </tr>
     <tr>
-        <th>inhumation_burial_type</th>
+        <th>Inhumation burial type</th>
         <td>{{object.inhumation_burial_type}}</td>
     </tr>
     <tr>
-        <th>bi_ritual_burial_type</th>
+        <th>Bi ritual burial type</th>
         <td>{{object.bi_ritual_burial_type}}</td>
     </tr>
     <tr>
-        <th>construction</th>
+        <th>Construction</th>
         <td>{{object.construction}}</td>
     </tr>
     <tr>
-        <th>arrangement</th>
+        <th>Arrangement</th>
         <td>{{object.arrangement}}</td>
     </tr>
     <tr>
-        <th>cover</th>
+        <th>Cover</th>
         <td>{{object.cover}}</td>
     </tr>
     <tr>
-        <th>cover_type</th>
+        <th>Cover type</th>
         <td>{{object.cover_type}}</td>
     </tr>
     <tr>
-        <th>grave_pit_form</th>
+        <th>Grave pit form</th>
         <td>{{object.grave_pit_form}}</td>
     </tr>
     <tr>
-        <th>grave_pit_orientation</th>
+        <th>Grave pit orientation</th>
         <td>{{object.grave_pit_orientation}}</td>
     </tr>
     <tr>
-        <th>length</th>
+        <th>Length</th>
         <td>{{object.length}}</td>
     </tr>
     <tr>
-        <th>width</th>
+        <th>Width</th>
         <td>{{object.width}}</td>
     </tr>
     <tr>
-        <th>diameter</th>
+        <th>Diameter</th>
         <td>{{object.diameter}}</td>
     </tr>
     <tr>
-        <th>height</th>
+        <th>Height</th>
         <td>{{object.height}}</td>
     </tr>
     <tr>
-        <th>post_holes</th>
+        <th>Post holes</th>
         <td>{{object.post_holes}}</td>
     </tr>
     <tr>
-        <th>surface_identification_mark</th>
+        <th>Surface identification mark</th>
         <td>{{object.surface_identification_mark}}</td>
     </tr>
     <tr>
-        <th>erdgraebchen</th>
+        <th>Erdgraebchen</th>
         <td>{{object.erdgraebchen}}</td>
     </tr>
     <tr>
-        <th>other_features</th>
+        <th>Other features</th>
         <td>{{object.other_features}}</td>
     </tr>
     {% if gravegood_list %}

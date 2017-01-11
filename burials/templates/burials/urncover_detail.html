@@ -5,7 +5,7 @@
 <table class="table table-bordered table-striped table-hover">
   {% if urn_list %}
   <tr>
-      <th>Urn</th>
+      <th class="col-sm-3">Urn</th>
       <td>
         {% for x in urn_list %}
         <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.basic_shape }} <br/></a>
@@ -14,19 +14,19 @@
   </tr>
   {% endif %}
     <tr>
-        <th>cover_id</th>
+        <th>Cover id</th>
         <td>{{ object.cover_id }}</td>
     </tr>
     <tr>
-        <th>upside_down</th>
+        <th>Upside down</th>
         <td>{{ object.upside_down }}</td>
     </tr>
     <tr>
-        <th>fragment</th>
+        <th>Fragment</th>
         <td>{{ object.fragment }}</td>
     </tr>
     <tr>
-        <th>basic_shape</th>
+        <th>Basic shape</th>
         <td>{{ object.basic_shape }}</td>
     </tr>
 </table>

@@ -67,9 +67,9 @@
   <body role="document">
     <header class="page-header procustom-header">
       <div class="container" id="procustom-affix">
-        <div >
+        <div class="logo-container">
           <a href="{% url 'webpage:start' %}" class="navlink">
-              <img src="{% static 'webpage/img/test.png' %}"  width="20%"/>
+              <img src="{% static 'webpage/img/test.png' %}"  id="pro-logo"/>
           </a>
         </div>
     </div>
@@ -223,12 +223,12 @@
       <div class="row text-center">
         <div class="col-sm-4">
           <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>
+              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" id="acdh-logo" alt="ACDH"/>
           </a>
         </div>
         <div class="col-sm-4">
             <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="{{ metadata.github }}" width="10%"/>
+              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" id="github-logo" alt="{{ metadata.github }}"/>
             </a>
         </div>
         <!-- <div class="col-sm-4">
@@ -245,14 +245,14 @@
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script>
     <!--Fixed navbar when scrolling down-->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
     $('#top-procustom-navbar').affix({
       offset: {
           top: $('#procustom-affix').height()
       }
     });
-    </script>
-
+    </script> -->
+<!--Shadow for navbar when scrolled down-->
     <script type="text/javascript">
     var nav = $('#top-procustom-navbar'); // Change to nav div
     var nav_class = 'mini-nav'; // Change to class name

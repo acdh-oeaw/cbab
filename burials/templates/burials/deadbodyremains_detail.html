@@ -4,7 +4,7 @@
 <h1>Dead body remains {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
     <tr>
-        <th>burial</th>
+        <th class="col-sm-3">Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}
@@ -12,27 +12,27 @@
         </td>
     </tr>
     <tr>
-        <th>age</th>
+        <th>Age</th>
         <td>{{ object.age }}</td>
     </tr>
     <tr>
-        <th>gender</th>
+        <th>Gender</th>
         <td>{{ object.gender }}</td>
     </tr>
     <tr>
-        <th>temperature</th>
+        <th>Temperature</th>
         <td>{{ object.temperature }}</td>
     </tr>
     <tr>
-        <th>weight</th>
+        <th>Weight</th>
         <td>{{ object.weight }}</td>
     </tr>
     <tr>
-        <th>pathology</th>
+        <th>Pathology</th>
         <td>{{ object.pathology }}</td>
     </tr>
     <tr>
-        <th>total_weight</th>
+        <th>Total weight</th>
         <td>{{ object.total_weight }}</td>
     </tr>
 </table>
