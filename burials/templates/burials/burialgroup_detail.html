@@ -7,6 +7,7 @@
         <th class="col-sm-3">Burial group id</th>
         <td>{{ object.burial_group_id }}</td>
     </tr>
+    {% if object.burial_site %}
     <tr>
         <th>Burial site</th>
         <td>
@@ -15,6 +16,7 @@
         </a>
         </td>
     </tr>
+    {% endif %}
     <tr>
         <th>Name</th>
         <td>{{ object.name }}</td>

@@ -3,6 +3,7 @@
 
 <h1>Urn {{ object }}</h1>
 <table class="table table-bordered table-striped table-hover">
+  {% if object.burial %}
     <tr>
         <th class="col-sm-3">Burial</th>
         <td>
@@ -11,6 +12,7 @@
         </a>
         </td>
     </tr>
+    {% endif %}
     <tr>
         <th>Basic shape</th>
         <td>{{ object.basic_shape }}</td>
@@ -27,6 +29,7 @@
         <th>Variation</th>
         <td>{{ object.variation }}</td>
     </tr>
+    {% if object.cover %}
     <tr>
         <th>Cover</th>
         <td>
@@ -35,6 +38,7 @@
         </a>
         </td>
     </tr>
+    {% endif %}
 </table>
 
 {% if user.is_authenticated %}
