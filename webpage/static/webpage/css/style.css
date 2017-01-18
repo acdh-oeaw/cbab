@@ -69,15 +69,19 @@ footer{
 #top-procustom-navbar {
     margin: 0;
 }
+
 #top-procustom-navbar.affix {
     position: fixed;
     top: 0;
     width: 100%;
-
 }
+
 #procustom-affix {
   height: auto;
+
 }
+
+
 #top-procustom-navbar.mini-nav {
 
     box-shadow: 0 5px 5px rgba(50, 50, 50, 0.75)

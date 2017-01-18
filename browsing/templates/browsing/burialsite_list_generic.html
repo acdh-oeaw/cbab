@@ -13,25 +13,3 @@
 {% block reset_button %}
  <a class ="btn btn-default"  href="{% url 'browsing:browse_burialsites' %}">reset search</a>
 {% endblock %}
-
-{% block customScripts %}
-<script>
-
-var burialsite_names = [{% for name in burialsite_names %} "{{ name }}", {% endfor %}];
-var alternative_names = [{% for name in alternative_names %} "{{ name }}", {% endfor %}];
-
-
-    $(function() {
-        $("#id_alternative_name").autocomplete({
-            source: alternative_names
-        });
-    });
-    $(function() {
-        $("#id_name").autocomplete({
-            source: burialsite_names
-        });
-    });
-
-
-</script>
-{% endblock %}

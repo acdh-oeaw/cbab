@@ -13,23 +13,3 @@
 {% block reset_button %}
  <a class ="btn btn-default"  href="{% url 'browsing:browse_gravegoods' %}">reset search</a>
 {% endblock %}
-
-{% block customScripts %}
-<script>
-var gravegood_names = [{% for name in gravegood_names %} "{{ name }}", {% endfor %}];
-var burialsite_names = [{% for name in burialsite_names %} "{{ name }}", {% endfor %}];
-
-    $(function() {
-        $("#id_name").autocomplete({
-            source:gravegood_names
-        });
-    });
-
-    $(function() {
-        $("#id_burial_site_name").autocomplete({
-            source:burialsite_names
-        });
-    });
-
-</script>
-{% endblock %}
