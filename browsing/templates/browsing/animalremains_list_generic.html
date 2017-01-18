@@ -1,0 +1,15 @@
+{% extends "browsing/generic_list.html" %}
+{% block list_title %}All Animal Remains{% endblock %}
+
+{% block create_button %}
+{% if user.is_authenticated %}
+ <div>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:animalremains_create' %}">create new animal remains</a>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block reset_button %}
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_animalremains' %}">reset search</a>
+{% endblock %}

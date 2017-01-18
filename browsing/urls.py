@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'gravegoods/$', views.GraveGoodListView.as_view(), name='browse_gravegoods'),
     url(r'gravegoodsother/$', views.GraveGoodOtherListView.as_view(), name='browse_gravegoodsother'),
     url(r'deadbodyremains/$', views.DeadBodyRemainsListView.as_view(), name='browse_deadbodyremains'),
+    url(r'animalremains/$', views.AnimalRemainsListView.as_view(), name='browse_animalremains'),
 ]

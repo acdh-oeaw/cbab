@@ -57,7 +57,7 @@ class BurialSite(models.Model):
     dating = models.ManyToManyField(
         SkosConcept, blank=True, help_text="helptext", related_name="skos_dating")
     absolute_dating = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="helptext", related_name="skos_absolute_dating")
+        SkosConcept, blank=True, help_text="helptext", related_name="skos_absolute_dating")  # 7705
     location_of_archaeological_material_and_contact_information = models.TextField(
         blank=True, null=True, help_text="helptext")
     reference = models.ManyToManyField(
@@ -78,7 +78,7 @@ class BurialSite(models.Model):
 class BurialGroup(models.Model):
     burial_group_id = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="helptext", verbose_name="Burial group number")
     burial_site = models.ForeignKey(
         BurialSite, blank=True, null=True,
         help_text="helptext")
@@ -104,7 +104,7 @@ class BurialGroup(models.Model):
         help_text="helptext")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}-{}-{}".format(self.burial_site.name, self.burial_group_id, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:burialgroup_detail', kwargs={'pk': self.id})
@@ -122,7 +122,7 @@ class Burial(models.Model):
         BurialSite, blank=True, null=True, help_text="helptext")
     burial_id = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="helptext", verbose_name="Burial number")
     C14_dendro = models.CharField(
         max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext",
         verbose_name="Absolute dating (C14/Dendro)")
@@ -189,6 +189,18 @@ class Burial(models.Model):
         help_text="helptext")
     other_features = models.TextField(
         blank=True, null=True, help_text="helptext")
+    burial_filling = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        help_text="helptext", related_name="skos_burial_filling")
+    objects_in_burial = models.ManyToManyField(
+        SkosConcept, blank=True,
+        help_text="helptext", related_name="skos_objects_in_burial")
+    intentionally_deposited_in_the_burial = models.CharField(
+        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    burial_filling_type = models.TextField(
+        blank=True, null=True, help_text="helptext")
+    burial_filling_position = models.TextField(
+        blank=True, null=True, help_text="helptext")
 
     def __str__(self):
         return "{}".format(self.id)
@@ -203,7 +215,8 @@ class Burial(models.Model):
 
 
 class UrnCover(models.Model):
-    cover_id = models.TextField(blank=True, null=True, help_text="helptext")
+    cover_id = models.TextField(
+        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
     upside_down = models.CharField(
         max_length=5, blank=True,
         null=True, choices=YESNO, help_text="helptext"
@@ -237,9 +250,12 @@ class Urn(models.Model):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn"
     )
-    urn_id = models.TextField(blank=True, null=True, help_text="helptext")
-    urn_type = models.TextField(blank=True, null=True, help_text="helptext")
-    variation = models.TextField(blank=True, null=True, help_text="helptext")
+    urn_id = models.TextField(
+        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
+    urn_type = models.TextField(
+        blank=True, null=True, help_text="helptext")
+    variation = models.TextField(
+        blank=True, null=True, help_text="helptext")
     cover = models.ForeignKey(UrnCover, blank=True, null=True, help_text="helptext")
     # position_of_cremated_remains = models.ForeignKey(SkosConcept,
  #        blank=True, null=True,
@@ -252,7 +268,7 @@ class Urn(models.Model):
  #        help_text="helptext", related_name = "skos_position_of_cremated_remains_in_the_grave_pit")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}-{}".format(self.urn_id, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:urn_detail', kwargs={'pk': self.id})
@@ -264,7 +280,10 @@ class Urn(models.Model):
 
 
 class GraveGood(models.Model):
-    burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
+    burial = models.ForeignKey(
+        Burial, blank=True, null=True, help_text="helptext")
+    urn = models.ForeignKey(
+        Urn, blank=True, null=True, help_text="helptext")
     name = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_name_gravegood")
@@ -281,7 +300,7 @@ class GraveGood(models.Model):
     amount = models.IntegerField(null=True, blank=True, help_text="helptext")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}-{}".format(self.burial.burial_site.name, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:gravegood_detail', kwargs={'pk': self.id})
@@ -296,6 +315,8 @@ class GraveGoodOther(models.Model):
     burial = models.ForeignKey(
         Burial, blank=True, null=True,
         help_text="helptext")
+    urn = models.ForeignKey(
+        Urn, blank=True, null=True, help_text="helptext")
     food = models.CharField(
         max_length=5, blank=True,
         null=True, choices=YESNO, help_text="helptext")
@@ -320,6 +341,8 @@ class GraveGoodOther(models.Model):
 class DeadBodyRemains(models.Model):
     burial = models.ForeignKey(
         Burial, blank=True, null=True, help_text="helptext")
+    urn = models.ForeignKey(
+        Urn, blank=True, null=True, help_text="helptext")
     age = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext", related_name="skos_age")
     gender = models.ForeignKey(
@@ -327,7 +350,8 @@ class DeadBodyRemains(models.Model):
     temperature = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_temperature")
-    weight = models.TextField(blank=True, null=True, help_text="helptext")
+    weight = models.TextField(
+        blank=True, null=True, help_text="helptext")
     pathology = models.TextField(
         blank=True, null=True, help_text="helptext")
     total_weight = models.TextField(
@@ -338,6 +362,37 @@ class DeadBodyRemains(models.Model):
 
     def get_absolute_url(self):
         return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
+
+class AnimalRemains(models.Model):
+    burial = models.ForeignKey(
+        Burial, blank=True, null=True, help_text="helptext")
+    urn = models.ForeignKey(
+        Urn, blank=True, null=True, help_text="helptext")
+    species = models.ManyToManyField(
+        SkosConcept, blank=True, help_text="helptext", related_name="skos_species")
+    age = models.CharField(
+        max_length=255, blank=True, null=True, help_text="helptext")
+    sex = models.CharField(
+        max_length=255, blank=True, null=True, help_text="helptext")
+    weight = models.CharField(
+        max_length=255, blank=True, null=True, help_text="helptext")
+    position = models.CharField(
+        max_length=255, blank=True, null=True, help_text="helptext")
+
+    def __str__(self):
+        return "{}".format(self.id)
+
+    # def get_absolute_url(self):
+    #     return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
+
+    def get_absolute_url(self):
+        return reverse('burials:animalremains_detail', kwargs={'pk': self.id})
 
     def get_classname(self):
         """Returns the name of the class as lowercase string"""

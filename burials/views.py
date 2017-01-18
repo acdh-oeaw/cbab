@@ -47,6 +47,7 @@ class BurialSiteUpdate(UpdateView):
     def dispatch(self, *args, **kwargs):
         return super(BurialSiteUpdate, self).dispatch(*args, **kwargs)
 
+
 class BurialSiteDelete(DeleteView):
     model = BurialSite
     template_name = 'burials/confirm_delete.html'
@@ -352,3 +353,48 @@ class DeadBodyRemainsDelete(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeadBodyRemainsDelete, self).dispatch(*args, **kwargs)
+
+
+class AnimalRemainsDetailView(DetailView):
+    model = AnimalRemains
+    template_name = 'burials/animalremains_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AnimalRemainsDetailView, self).get_context_data(**kwargs)
+        context["species_list"] = self.object.species.all()
+        return context
+
+
+class AnimalRemainsListView(ListView):
+    model = AnimalRemains
+    template_name = 'burials/animalremains_list.html'
+
+
+class AnimalRemainsCreate(CreateView):
+    model = AnimalRemains
+    template_name = 'burials/animalremains_create.html'
+    form_class = AnimalRemainsForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AnimalRemainsCreate, self).dispatch(*args, **kwargs)
+
+
+class AnimalRemainsUpdate(UpdateView):
+    model = AnimalRemains
+    form_class = AnimalRemainsForm
+    template_name = 'burials/animalremains_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AnimalRemainsUpdate, self).dispatch(*args, **kwargs)
+
+
+class AnimalRemainsDelete(DeleteView):
+    model = AnimalRemains
+    template_name = 'burials/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_animalremains')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AnimalRemainsDelete, self).dispatch(*args, **kwargs)
