@@ -24,7 +24,7 @@ class BurialSiteForm(forms.ModelForm):
             'dating': autocomplete.ModelSelect2Multiple(
                 url='../../skos-constraint-ac/?scheme=Dating'),
             'absolute_dating': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),     #absolute dating has no list so far - 'List of all data from the row 107'
+                url='vocabs:skosconcept-autocomplete'),     # absolute dating has no list so far - 'List of all data from the row 107'
             'reference': autocomplete.ModelSelect2Multiple(
                 url='burials:book-autocomplete'),
         }
@@ -159,7 +159,6 @@ class GraveGoodForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Position'),
         }
 
-
     def __init__(self, *args, **kwargs):
         super(GraveGoodForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -179,8 +178,6 @@ class GraveGoodOtherForm(forms.ModelForm):
             'burial': autocomplete.ModelSelect2(
                 url='burials:burial-autocomplete'),
         }
-
-
 
     def __init__(self, *args, **kwargs):
         super(GraveGoodOtherForm, self).__init__(*args, **kwargs)
