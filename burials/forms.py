@@ -14,7 +14,7 @@ class BurialSiteForm(forms.ModelForm):
             'location': autocomplete.ModelSelect2(
                 url='burials:place-autocomplete'),
             'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
+                url='../../skos-constraint-ac/?scheme=geographicalreferencesystem'),
             'topography': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Topography'),
             'distance_to_next_settlement': autocomplete.ModelSelect2(
