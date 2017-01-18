@@ -52,7 +52,7 @@ class UrnTable(tables.Table):
 
     class Meta:
         model = Urn
-        fields = ['db_id','urn_id', 'basic_shape']
+        fields = ['db_id', 'urn_id', 'basic_shape']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
@@ -63,7 +63,7 @@ class GraveGoodTable(tables.Table):
 
     class Meta:
         model = GraveGood
-        fields = ['db_id','name', 'material']
+        fields = ['db_id', 'name', 'material']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
@@ -72,8 +72,8 @@ class GraveGoodOtherTable(tables.Table):
     burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
-        model = GraveGood
-        fields = ['db_id','burial']
+        model = GraveGoodOther
+        fields = ['db_id', 'burial']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
@@ -82,6 +82,16 @@ class DeadBodyRemainsTable(tables.Table):
     burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
 
     class Meta:
-        model = GraveGood
-        fields = ['db_id','age']
+        model = DeadBodyRemains
+        fields = ['db_id', 'age']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
+class AnimalRemainsTable(tables.Table):
+    db_id = tables.LinkColumn('burials:animalremains_detail', args=[A('pk')], accessor='id')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+
+    class Meta:
+        model = AnimalRemains
+        fields = ['db_id', 'species']
         attrs = {"class": "table table-hover table-striped table-condensed"}

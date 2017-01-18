@@ -386,10 +386,13 @@ class AnimalRemains(models.Model):
         max_length=255, blank=True, null=True, help_text="helptext")
 
     def __str__(self):
-        return "{}-{}".format(self.id)
+        return "{}".format(self.id)
 
     # def get_absolute_url(self):
     #     return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
+
+    def get_absolute_url(self):
+        return reverse('burials:animalremains_detail', kwargs={'pk': self.id})
 
     def get_classname(self):
         """Returns the name of the class as lowercase string"""

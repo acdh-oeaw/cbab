@@ -256,7 +256,6 @@ class GraveGoodListFilter(django_filters.FilterSet):
         model = GraveGood
         fields = ['id', 'name']
 
-
     def gravegood_name_custom_filter(self, queryset, value):
         return queryset.filter(name__pref_label__icontains=value).distinct()
 
@@ -318,6 +317,38 @@ class DeadBodyRemainsListFilter(django_filters.FilterSet):
     class Meta:
         model = DeadBodyRemains
         fields = ['id', 'age']
+
+    def burialsite_name_custom_filter(self, queryset, value):
+        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
+
+
+class AnimalRemainsListFilter(django_filters.FilterSet):
+    burial_site_name = django_filters.MethodFilter(
+        action='burialsite_name_custom_filter', help_text=False
+        )
+    burial = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    species = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Species'),
+        help_text=False
+    )
+    age = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    sex = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    weight = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+    position = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+    )
+
+    class Meta:
+        model = AnimalRemains
+        fields = ['id', 'species']
 
     def burialsite_name_custom_filter(self, queryset, value):
         return queryset.filter(burial__burial_site__name__icontains=value).distinct()
