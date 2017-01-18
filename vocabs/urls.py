@@ -7,6 +7,7 @@ from .models import SkosLabel, SkosConcept, SkosConceptScheme
 
 urlpatterns = [
     url(r'^$', views.SkosConceptListView.as_view(), name='skosconcept_list'),
+    url(r'^concepts/browse/$', views.SkosConceptFilterView.as_view(), name='browse_vocabs'),
     url(r'^import/$', import_views.import_skos, name='skos_import'),
     url(r'^(?P<pk>[0-9]+)$', views.SkosConceptDetailView.as_view(), name='skosconcept_detail'),
     url(r'^create/$', views.SkosConceptCreate.as_view(), name='skosconcept_create'),
@@ -31,22 +32,5 @@ urlpatterns = [
         name='skoslabel_create'),
     url(
         r'^label/update/(?P<pk>[0-9]+)$', views.SkosLabelUpdate.as_view(),
-        name='skoslabel_update'),
-    url(
-        r'^skoslabel-autocomplete/$', dal_views.SkosLabelAC.as_view(
-            model=SkosLabel, create_field='label',),
-        name='skoslabel-autocomplete',
-    ),
-    url(
-        r'^skosconceptscheme-autocomplete/$', dal_views.SkosConceptSchemeAC.as_view(
-            model=SkosConceptScheme,
-            create_field='dc_title',),
-        name='skosconceptscheme-autocomplete',
-    ),
-    url(
-        r'^skosconcept-autocomplete/$', dal_views.SkosConceptAC.as_view(
-            model=SkosConcept,
-            create_field='pref_label',),
-        name='skosconcept-autocomplete',
-    ),
+        name='skoslabel_update')
 ]

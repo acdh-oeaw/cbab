@@ -1,5 +1,6 @@
 import django_filters
-from .models import SkosConcept
+from dal import autocomplete
+from .models import SkosConcept, SkosConceptScheme
 
 
 django_filters.filters.LOOKUP_TYPES = [
@@ -20,12 +21,22 @@ django_filters.filters.LOOKUP_TYPES = [
 
 
 class SkosConceptFilter(django_filters.FilterSet):
-    pref_label = django_filters.CharFilter(lookup_expr='icontains')
-    scheme = django_filters.MethodFilter(action='custom_filter_scheme')
+
+    pref_label = django_filters.ModelMultipleChoiceFilter(
+        widget=autocomplete.Select2Multiple(url='vocabs-ac:skosconcept-autocomplete'),
+        queryset=SkosConcept.objects.all(),
+        lookup_expr='icontains',
+        label='PrefLabel',
+        help_text=False,
+    )
+
+    scheme = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConceptScheme.objects.all(),
+        lookup_expr='icontains',
+        label='in SkosConceptScheme',
+        help_text=False,
+    )
 
     class Meta:
         model = SkosConcept
         fields = ['pref_label', 'scheme']
-
-    def custom_filter_scheme(self, queryset, value):
-        return queryset.filter(scheme__legacy_id__icontains=value).distinct()

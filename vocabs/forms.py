@@ -5,6 +5,15 @@ from crispy_forms.layout import Submit
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
 
 
+class GenericFilterFormHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_class = 'genericFilterForm'
+        self.form_method = 'GET'
+        self.add_input(Submit('Filter', 'search'))
+
+
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
@@ -23,18 +32,18 @@ class SkosConceptForm(forms.ModelForm):
         model = SkosConcept
         fields = "__all__"
         widgets = {
-            'label': autocomplete.ModelSelect2Multiple(url='vocabs:skoslabel-autocomplete'),
+            'label': autocomplete.ModelSelect2Multiple(url='vocabs-ac:skoslabel-autocomplete'),
             'skos_broader': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),
+                url='vocabs-ac:skosconcept-autocomplete'),
             'skos_narrower': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),
+                url='vocabs-ac:skosconcept-autocomplete'),
             'skos_related': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),
+                url='vocabs-ac:skosconcept-autocomplete'),
             'skos_broadmatch': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),
+                url='vocabs-ac:skosconcept-autocomplete'),
             'skos_exactmatch': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),
-            'scheme': autocomplete.ModelSelect2Multiple(url='vocabs:skosconceptscheme-autocomplete')
+                url='vocabs-ac:skosconcept-autocomplete'),
+            'scheme': autocomplete.ModelSelect2Multiple(url='vocabs-ac:skosconceptscheme-autocomplete')
         }
 
     def __init__(self, *args, **kwargs):

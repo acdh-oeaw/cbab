@@ -5,7 +5,7 @@ from .filters import *
 from .forms import GenericFilterFormHelper
 from .tables import *
 
-# Create your views here.
+
 class GenericListView(SingleTableView):
     filter_class = None
     formhelper_class = None

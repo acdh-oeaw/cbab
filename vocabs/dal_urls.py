@@ -1,0 +1,30 @@
+from django.conf.urls import url
+from . import views
+from . import dal_views
+from .models import SkosLabel, SkosConcept, SkosConceptScheme
+
+
+urlpatterns = [
+    url(
+        r'^skoslabel-autocomplete/$', dal_views.SkosLabelAC.as_view(
+            model=SkosLabel, create_field='label',),
+        name='skoslabel-autocomplete',
+    ),
+    url(
+        r'^skosconceptscheme-autocomplete/$', dal_views.SkosConceptSchemeAC.as_view(
+            model=SkosConceptScheme,
+            create_field='dc_title',),
+        name='skosconceptscheme-autocomplete',
+    ),
+    url(
+        r'^skosconcept-autocomplete/$', dal_views.SkosConceptAC.as_view(
+            model=SkosConcept,
+            create_field='pref_label',),
+        name='skosconcept-autocomplete',
+    ),
+    url(
+        r'^skosconcept-pref-label-autocomplete/$',
+        dal_views.SkosConceptPrefLabalAC.as_view(),
+        name='skosconcept-label-ac',
+    ),
+]

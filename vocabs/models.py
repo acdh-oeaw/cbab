@@ -90,6 +90,10 @@ class SkosConcept(models.Model):
     skos_closematch = models.ManyToManyField('SkosConcept', blank=True, related_name="closematch")
     legacy_id = models.CharField(max_length=200, blank=True)
 
+    @property
+    def all_schemes(self):
+        return ', '.join([x.dc_title for x in self.scheme.all()])
+
     def save(self, *args, **kwargs):
         if self.notation == "":
             temp_notation = slugify(self.pref_label, allow_unicode=True)
