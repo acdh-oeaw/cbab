@@ -60,9 +60,7 @@
     <tr>
       <td>Reference</td>
       <td>{% for x in reference_list %}
-        <a href="https://www.zotero.org/defc-orea-oeaw/items/itemKey/{{ x.zoterokey }}" target="_blank">
-      {{ x.author }}, {{ x.title }}, {{ x.publication_year }}, {{ x.place }}
-      </a><br/>
+        <a  href="{{ x.get_zotero_url }}" target="_blank">{{ x }}</a><br/>
       {% endfor %}</td>
     </tr>
   {% if burialgroup_list %}

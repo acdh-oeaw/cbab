@@ -17,6 +17,15 @@ FULLYPARTLYEXCAVATED = (
 
 
 class BurialSite(models.Model):
+
+    def get_geo_default():
+        try:
+            default_value = SkosConcept.objects.get(
+                pref_label='WGS84 - World Geodetic System 1984')
+        except:
+            default_value = None
+        return default_value
+
     name = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="Please provide helptext")
@@ -26,7 +35,7 @@ class BurialSite(models.Model):
     location = models.ForeignKey(
         Place, blank=True, null=True, help_text="helptext")
     geographical_coordinate_reference_system = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
+        SkosConcept, blank=True, null=True, default=get_geo_default(),
         help_text="helptext", related_name="skos_geographical_coordinate_reference_system")
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,

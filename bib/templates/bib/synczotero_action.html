@@ -1,4 +1,4 @@
-{% extends "webpage/base.html" %} 
+{% extends "webpage/base.html" %}
 {% block content %}
 <div class="container">
 	<h1>Results</h1>
@@ -26,7 +26,7 @@
 					</tr>
 					{% for x in saved %}
 					<tr>
-						<td><a href="https://www.zotero.org/defc-orea-oeaw/items/collectionKey/5XIKB2GS/itemKey/{{ x.key }}" target="_blank">{{ x.key }}</a></td>
+						<td><a href="{{ x.get_zotero_url }}" target="_blank">{{ x.key }}</a></td>
 						<td>{{ x.title }}</td>
 						<td>{{ x.dateModified }}</td>
 					</tr>
