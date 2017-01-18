@@ -116,7 +116,7 @@ class SkosConcept(models.Model):
         super(SkosConcept, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{} ({}:{})".format(self.pref_label, self.namespace, self.notation)
+        return "{}".format(self.pref_label)
 
     def get_absolute_url(self):
         return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
