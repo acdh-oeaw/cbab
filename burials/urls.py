@@ -86,6 +86,17 @@ urlpatterns = [
         views.DeadBodyRemainsUpdate.as_view(), name='deadbodyremains_update'),
     url(r'^deadbodyremains/delete/(?P<pk>[0-9]+)$',
         views.DeadBodyRemainsDelete.as_view(), name='deadbodyremains_delete'),
+    # AnimalRemains
+    url(r'^animalremains/(?P<pk>[0-9]+)$',
+        views.AnimalRemainsDetailView.as_view(), name='animalremains_detail'),
+    url(r'^animalremains/$', views.AnimalRemainsListView.as_view(),
+        name='animalremains_list'),
+    url(r'^animalremains/create/$',
+        views.AnimalRemainsCreate.as_view(), name='animalremains_create'),
+    url(r'^animalremains/update/(?P<pk>[0-9]+)$',
+        views.AnimalRemainsUpdate.as_view(), name='animalremains_update'),
+    url(r'^animalremains/delete/(?P<pk>[0-9]+)$',
+        views.AnimalRemainsDelete.as_view(), name='animalremains_delete'),
     #Autocomplete fields
     url(
         r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(

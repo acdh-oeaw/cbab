@@ -24,7 +24,7 @@ class BurialSiteForm(forms.ModelForm):
             'dating': autocomplete.ModelSelect2Multiple(
                 url='../../skos-constraint-ac/?scheme=Dating'),
             'absolute_dating': autocomplete.ModelSelect2Multiple(
-                url='vocabs:skosconcept-autocomplete'),     # absolute dating has no list so far - 'List of all data from the row 107'
+                url='vocabs:skosconcept-autocomplete'),
             'reference': autocomplete.ModelSelect2Multiple(
                 url='burials:book-autocomplete'),
         }
@@ -207,6 +207,28 @@ class DeadBodyRemainsForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(DeadBodyRemainsForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = True
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-9'
+        self.helper.add_input(Submit('submit', 'save'),)
+
+
+class AnimalRemainsForm(forms.ModelForm):
+
+    class Meta:
+        model = AnimalRemains
+        fields = "__all__"
+        widgets = {
+            'burial': autocomplete.ModelSelect2(
+                url='burials:burial-autocomplete'),
+            'species': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Species'),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AnimalRemainsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'

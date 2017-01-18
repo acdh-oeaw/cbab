@@ -1,0 +1,12 @@
+{% extends "webpage/base.html" %}
+
+{% block content %}
+
+<h1>Animal Remains</h1>
+<a class="btn btn-primary" href="{% url 'burials:animalremains_create' %}" role="button">create animal remains</a>
+{% for object in object_list %}
+    <li>
+        <a href="{% url 'burials:animalremains_detail' pk=object.id %}">{{ object }}</a></li>
+{% endfor %}
+
+{% endblock %}
