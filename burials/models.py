@@ -5,11 +5,6 @@ from vocabs.models import SkosConcept
 from places.models import Place
 from bib.models import Book
 
-YESNO = (
-    ("yes", "yes"),
-    ("no", "no")
-)
-
 FULLYPARTLYEXCAVATED = (
     ("fully excavated", "fully excavated"),
     ("partly excavated", "partly excavated")
@@ -26,13 +21,12 @@ class BurialSite(models.Model):
         null=True, help_text="helptext")
     location = models.ForeignKey(
         Place, blank=True, null=True, help_text="helptext")
-    geographical_coordinate_reference_system = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_geographical_coordinate_reference_system")
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_topography")
     exact_location = models.NullBooleanField()
+    lng = models.FloatField(blank=True, null=True, verbose_name='longitude')
+    lat = models.FloatField(blank=True, null=True, verbose_name='latitude')
     excavation = models.CharField(
         max_length=50, blank=True,
         null=True, choices=FULLYPARTLYEXCAVATED, help_text="helptext")
