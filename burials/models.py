@@ -188,6 +188,20 @@ class Burial(models.Model):
         return class_name
 
 
+class FillingObject(models.Model):
+    burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
+    burial_filling = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        help_text="helptext", related_name="skos_filling_object")
+    amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
+    amount_comment = models.TextField(blank=True, null=True, help_text="helptext")
+    intentionally_deposited = models.NullBooleanField()
+    burial_filling_type = models.TextField(
+        blank=True, null=True, help_text="helptext")
+    burial_filling_position = models.TextField(
+        blank=True, null=True, help_text="helptext")
+
+
 class UrnCover(models.Model):
     cover_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
