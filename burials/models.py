@@ -18,14 +18,6 @@ FULLYPARTLYEXCAVATED = (
 
 class BurialSite(models.Model):
 
-    def get_geo_default():
-        try:
-            default_value = SkosConcept.objects.get(
-                pref_label='WGS84 - World Geodetic System 1984')
-        except:
-            default_value = None
-        return default_value
-
     name = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="Please provide helptext")
@@ -35,14 +27,12 @@ class BurialSite(models.Model):
     location = models.ForeignKey(
         Place, blank=True, null=True, help_text="helptext")
     geographical_coordinate_reference_system = models.ForeignKey(
-        SkosConcept, blank=True, null=True, default=get_geo_default(),
+        SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_geographical_coordinate_reference_system")
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_topography")
-    exact_location = models.CharField(
-        max_length=5, blank=True,
-        null=True, choices=YESNO, help_text="helptext")
+    exact_location = models.NullBooleanField()
     excavation = models.CharField(
         max_length=50, blank=True,
         null=True, choices=FULLYPARTLYEXCAVATED, help_text="helptext")
@@ -123,28 +113,20 @@ class Burial(models.Model):
     burial_id = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="helptext", verbose_name="Burial number")
-    C14_dendro = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext",
-        verbose_name="Absolute dating (C14/Dendro)")
+    C14_dendro = models.NullBooleanField(verbose_name="Absolute dating (C14/Dendro)")
     absolute_age = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="helptext")
     burial_type = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_burial_type")
-    individuals = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO,
-        help_text="helptext")  # do we need this field if the total number will be calculated?
-    secondary_burial = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    secondary_burial = models.NullBooleanField()
     secondary_burial_text = models.TextField(
         blank=True, null=True, help_text="helptext")
-    displaced = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    displaced = models.NullBooleanField()
     displaced_text = models.TextField(
         blank=True, null=True, help_text="helptext")
-    extraordinary_burial = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    extraordinary_burial = models.NullBooleanField()
     extraordinary_burial_text = models.TextField(
         blank=True, null=True, help_text="helptext")
     inhumation_burial_type = models.TextField(
@@ -157,8 +139,7 @@ class Burial(models.Model):
     arrangement = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_burial_arrangement")
-    cover = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    cover = models.NullBooleanField()
     cover_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_type_of_burial_cover")
@@ -195,8 +176,7 @@ class Burial(models.Model):
     objects_in_burial = models.ManyToManyField(
         SkosConcept, blank=True,
         help_text="helptext", related_name="skos_objects_in_burial")
-    intentionally_deposited_in_the_burial = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext")
+    intentionally_deposited = models.NullBooleanField()
     burial_filling_type = models.TextField(
         blank=True, null=True, help_text="helptext")
     burial_filling_position = models.TextField(
@@ -217,13 +197,8 @@ class Burial(models.Model):
 class UrnCover(models.Model):
     cover_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
-    upside_down = models.CharField(
-        max_length=5, blank=True,
-        null=True, choices=YESNO, help_text="helptext"
-    )
-    fragment = models.CharField(
-        max_length=5, blank=True, null=True, choices=YESNO, help_text="helptext"
-    )
+    upside_down = models.NullBooleanField()
+    fragment = models.NullBooleanField()
     basic_shape = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
@@ -257,15 +232,6 @@ class Urn(models.Model):
     variation = models.TextField(
         blank=True, null=True, help_text="helptext")
     cover = models.ForeignKey(UrnCover, blank=True, null=True, help_text="helptext")
-    # position_of_cremated_remains = models.ForeignKey(SkosConcept,
- #        blank=True, null=True,
- #        help_text="helptext", related_name = "skos_position_of_cremated_remains")
-    # position_of_cremated_remains_inside_the_urn_vessel = models.ForeignKey(SkosConcept,
- #        blank=True, null=True,
- #        help_text="helptext", related_name = "skos_position_of_cremated_remains_inside_the_urn_vessel")
-    # position_of_cremated_remains_in_the_grave_pit = models.ForeignKey(SkosConcept,
- #        blank=True, null=True,
- #        help_text="helptext", related_name = "skos_position_of_cremated_remains_in_the_grave_pit")
 
     def __str__(self):
         return "{}-{}".format(self.urn_id, self.id)
@@ -279,11 +245,20 @@ class Urn(models.Model):
         return class_name
 
 
-class GraveGood(models.Model):
-    burial = models.ForeignKey(
-        Burial, blank=True, null=True, help_text="helptext")
-    urn = models.ForeignKey(
-        Urn, blank=True, null=True, help_text="helptext")
+class CrematedRemainsBaseClass(models.Model):
+    """An abstract class for Grave Goods and living remains"""
+    burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
+    urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
+    position_comment = models.TextField(blank=True, null=True, help_text="helptext")
+    amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
+    amount_comment = models.TextField(blank=True, null=True, help_text="helptext")
+    secondary_depostition = models.NullBooleanField()
+
+    class Meta:
+        abstract = True
+
+
+class GraveGood(CrematedRemainsBaseClass):
     name = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_name_gravegood")
@@ -295,9 +270,8 @@ class GraveGood(models.Model):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_condition")
     position = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_position")
-    amount = models.IntegerField(null=True, blank=True, help_text="helptext")
+        SkosConcept, blank=True, null=True, help_text="helptext",
+        related_name="skos_gravegood_position")
 
     def __str__(self):
         return "{}-{}".format(self.burial.burial_site.name, self.id)
@@ -311,20 +285,14 @@ class GraveGood(models.Model):
         return class_name
 
 
-class GraveGoodOther(models.Model):
-    burial = models.ForeignKey(
-        Burial, blank=True, null=True,
-        help_text="helptext")
-    urn = models.ForeignKey(
-        Urn, blank=True, null=True, help_text="helptext")
-    food = models.CharField(
-        max_length=5, blank=True,
-        null=True, choices=YESNO, help_text="helptext")
-    other_organic_grave_good = models.CharField(
-        max_length=5, blank=True,
-        null=True, choices=YESNO, help_text="helptext")
+class GraveGoodOther(CrematedRemainsBaseClass):
+    food = models.NullBooleanField()
+    other_organic_grave_good = models.NullBooleanField()
     other_organic_grave_good_text = models.TextField(
         blank=True, null=True, help_text="helptext")
+    position = models.ForeignKey(
+        SkosConcept, blank=True, null=True, help_text="helptext",
+        related_name="skos_gravegoodother_position")
 
     def __str__(self):
         return "{}".format(self.id)
@@ -338,11 +306,7 @@ class GraveGoodOther(models.Model):
         return class_name
 
 
-class DeadBodyRemains(models.Model):
-    burial = models.ForeignKey(
-        Burial, blank=True, null=True, help_text="helptext")
-    urn = models.ForeignKey(
-        Urn, blank=True, null=True, help_text="helptext")
+class DeadBodyRemains(CrematedRemainsBaseClass):
     age = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext", related_name="skos_age")
     gender = models.ForeignKey(
@@ -356,6 +320,9 @@ class DeadBodyRemains(models.Model):
         blank=True, null=True, help_text="helptext")
     total_weight = models.TextField(
         blank=True, null=True, help_text="helptext")
+    position = models.ForeignKey(
+        SkosConcept, blank=True, null=True, help_text="helptext",
+        related_name="skos_deadbodyremains_position")
 
     def __str__(self):
         return "{}".format(self.id)
@@ -369,11 +336,7 @@ class DeadBodyRemains(models.Model):
         return class_name
 
 
-class AnimalRemains(models.Model):
-    burial = models.ForeignKey(
-        Burial, blank=True, null=True, help_text="helptext")
-    urn = models.ForeignKey(
-        Urn, blank=True, null=True, help_text="helptext")
+class AnimalRemains(CrematedRemainsBaseClass):
     species = models.ManyToManyField(
         SkosConcept, blank=True, help_text="helptext", related_name="skos_species")
     age = models.CharField(
@@ -382,14 +345,12 @@ class AnimalRemains(models.Model):
         max_length=255, blank=True, null=True, help_text="helptext")
     weight = models.CharField(
         max_length=255, blank=True, null=True, help_text="helptext")
-    position = models.CharField(
-        max_length=255, blank=True, null=True, help_text="helptext")
+    position = models.ForeignKey(
+        SkosConcept, blank=True, null=True, help_text="helptext",
+        related_name="skos_animalsremains_position")
 
     def __str__(self):
         return "{}".format(self.id)
-
-    # def get_absolute_url(self):
-    #     return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
 
     def get_absolute_url(self):
         return reverse('burials:animalremains_detail', kwargs={'pk': self.id})
