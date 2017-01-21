@@ -36,6 +36,14 @@ urlpatterns = [
         views.BurialUpdate.as_view(), name='burial_update'),
     url(r'^burial/delete/(?P<pk>[0-9]+)$',
         views.BurialDelete.as_view(), name='burial_delete'),
+    # Burialfilling
+    url(r'^burialfilling/(?P<pk>[0-9]+)$',
+        views.FillingObjectDetailView.as_view(), name='burialfilling_detail'),
+    url(r'^burialfilling/$', views.FillingObjectListView.as_view(), name='burialfilling_list'),
+    url(r'^burialfilling/create/$', views.FillingObjectCreate.as_view(),
+        name='burialfilling_create'),
+    url(r'^burialfilling/update/(?P<pk>[0-9]+)$',
+        views.FillingObjectUpdate.as_view(), name='burialfilling_update'),
     # UrnCover
     url(r'^urncover/(?P<pk>[0-9]+)$',
         views.UrnCoverDetailView.as_view(), name='urncover_detail'),

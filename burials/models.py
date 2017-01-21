@@ -169,7 +169,7 @@ class Burial(models.Model):
         help_text="helptext", related_name="skos_filling")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}-{}".format(self.burial_site, self.burial_id)
 
     def get_absolute_url(self):
         return reverse('burials:burial_detail', kwargs={'pk': self.id})

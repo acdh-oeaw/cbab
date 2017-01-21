@@ -151,6 +151,36 @@ class BurialDelete(DeleteView):
         return super(BurialDelete, self).dispatch(*args, **kwargs)
 
 
+class FillingObjectDetailView(DetailView):
+    model = FillingObject
+    template_name = 'burials/burialfilling_detail.html'
+
+
+class FillingObjectListView(ListView):
+    model = FillingObject
+    template_name = 'burials/burialfilling_list.html'
+
+
+class FillingObjectCreate(CreateView):
+    model = FillingObject
+    template_name = 'burials/burialfilling_create.html'
+    form_class = FillingObjectForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FillingObjectCreate, self).dispatch(*args, **kwargs)
+
+
+class FillingObjectUpdate(UpdateView):
+    model = FillingObject
+    form_class = FillingObjectForm
+    template_name = 'burials/fillingobject_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FillingObjectUpdate, self).dispatch(*args, **kwargs)
+
+
 class UrnCoverDetailView(DetailView):
     model = UrnCover
     template_name = 'burials/urncover_detail.html'
@@ -224,6 +254,7 @@ class UrnUpdate(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnUpdate, self).dispatch(*args, **kwargs)
+
 
 class UrnDelete(DeleteView):
     model = Urn
