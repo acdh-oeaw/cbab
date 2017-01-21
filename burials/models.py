@@ -160,21 +160,13 @@ class Burial(models.Model):
     surface_identification_mark = models.TextField(
         blank=True, null=True, help_text="helptext")
     erdgraebchen = models.TextField(
-        blank=True, null=True,  # CHANGE FOR ENGLISH
+        blank=True, null=True,
         help_text="helptext")
     other_features = models.TextField(
         blank=True, null=True, help_text="helptext")
-    burial_filling = models.ForeignKey(
+    filling = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_burial_filling")
-    objects_in_burial = models.ManyToManyField(
-        SkosConcept, blank=True,
-        help_text="helptext", related_name="skos_objects_in_burial")
-    intentionally_deposited = models.NullBooleanField()
-    burial_filling_type = models.TextField(
-        blank=True, null=True, help_text="helptext")
-    burial_filling_position = models.TextField(
-        blank=True, null=True, help_text="helptext")
+        help_text="helptext", related_name="skos_filling")
 
     def __str__(self):
         return "{}".format(self.id)
@@ -190,7 +182,7 @@ class Burial(models.Model):
 
 class FillingObject(models.Model):
     burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
-    burial_filling = models.ForeignKey(
+    filling_objects = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_filling_object")
     amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
@@ -200,28 +192,6 @@ class FillingObject(models.Model):
         blank=True, null=True, help_text="helptext")
     burial_filling_position = models.TextField(
         blank=True, null=True, help_text="helptext")
-
-
-class UrnCover(models.Model):
-    cover_id = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
-    upside_down = models.NullBooleanField()
-    fragment = models.NullBooleanField()
-    basic_shape = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
-    )
-
-    def __str__(self):
-        return "{}".format(self.id)
-
-    def get_absolute_url(self):
-        return reverse('burials:urncover_detail', kwargs={'pk': self.id})
-
-    def get_classname(self):
-        """Returns the name of the class as lowercase string"""
-        class_name = str(self.__class__.__name__).lower()
-        return class_name
 
 
 class Urn(models.Model):
@@ -239,13 +209,36 @@ class Urn(models.Model):
         blank=True, null=True, help_text="helptext")
     variation = models.TextField(
         blank=True, null=True, help_text="helptext")
-    cover = models.ForeignKey(UrnCover, blank=True, null=True, help_text="helptext")
+    urncover_exists = models.NullBooleanField()
 
     def __str__(self):
         return "{}-{}".format(self.urn_id, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:urn_detail', kwargs={'pk': self.id})
+
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
+
+class UrnCover(models.Model):
+    cover_id = models.TextField(
+        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
+    upside_down = models.NullBooleanField()
+    fragment = models.NullBooleanField()
+    basic_shape = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
+    )
+    urn = models.ForeignKey('Urn', blank=True, null=True, help_text="helptext")
+
+    def __str__(self):
+        return "{}".format(self.id)
+
+    def get_absolute_url(self):
+        return reverse('burials:urncover_detail', kwargs={'pk': self.id})
 
     def get_classname(self):
         """Returns the name of the class as lowercase string"""
