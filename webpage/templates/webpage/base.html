@@ -109,6 +109,9 @@
                   </a>
                   <ul class="dropdown-menu procustom-dropdown-menu">
                     <li>
+                        <a href="{% url 'places:place_list' %}">Locations</a>
+                    </li>
+                    <li>
                         <a href="{% url 'browsing:browse_burialsites' %}">Burial Site</a>
                     </li>
                     <li>
@@ -118,10 +121,10 @@
                         <a href="{% url 'browsing:browse_burials' %}">Burial</a>
                     </li>
                     <li>
-                        <a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a>
+                        <a href="{% url 'browsing:browse_urns' %}">Urn</a>
                     </li>
                     <li>
-                        <a href="{% url 'browsing:browse_urns' %}">Urn</a>
+                        <a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a>
                     </li>
                     <li>
                         <a href="{% url 'browsing:browse_gravegoods' %}">Grave Good</a>

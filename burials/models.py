@@ -88,7 +88,7 @@ class BurialGroup(models.Model):
         help_text="helptext")
 
     def __str__(self):
-        return "{}-{}-{}".format(self.burial_site.name, self.burial_group_id, self.id)
+        return "{}-{}".format(self.burial_site.name, self.burial_group_id)
 
     def get_absolute_url(self):
         return reverse('burials:burialgroup_detail', kwargs={'pk': self.id})

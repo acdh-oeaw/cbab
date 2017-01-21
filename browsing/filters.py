@@ -58,7 +58,7 @@ class BurialSiteListFilter(django_filters.FilterSet):
 
     class Meta:
         model = BurialSite
-        fields = ['id', 'name']
+
 
     # def topography_custom_filter(self, queryset, value):
     #     return queryset.filter(topography__pref_label__icontains=value).distinct()

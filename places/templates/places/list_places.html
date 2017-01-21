@@ -11,11 +11,14 @@
 {% endblock %}
 {% block content %}
 {% if object_list %}
-<div class="row">
+  <div class="row">
 	<div class="col-md-4">
 		<div class="panel panel-default panel-fixed" >
 			<div class="panel-heading" style="text-align:center;">
-				<h3>Places</h3><a href="{% url 'places:place_create' %}">(add another Place)</a>
+				<h3>Places</h3>
+          {% if user.is_authenticated %}
+            <a href="{% url 'places:place_create' %}">(add another Place)</a>
+          {% endif %}
 			</div>
 			<div class="panel-body">
 				<table class="table table-striped">
@@ -28,12 +31,18 @@
 					<tbody>
 						{% for object in object_list %}
 						<tr>
-							<td><a href="{% url 'places:place_edit' pk=object.id %}">{{ object }} (edit)</a></td>
+							<td>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'places:place_edit' pk=object.id %}">{{ object }} (edit)</a>
+                  {% else %}
+                  {{ object }}
+                {% endif %}
+              </td>
 							<td>{{ object.geonames_id }}</td>
 						</tr>
 						{% endfor %}
-					</tbody>	
-				</table>					
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -54,7 +63,7 @@
 	$( document ).ready(function() {
  		$("#map").remove()
     	$("#parentMap").append("<div id='map'></div>");
-        
+
     	var map = L.map('map').setView([48.69096, 9.14062], 5);
 
     	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -73,5 +82,9 @@
     	{% endfor %}
 		});
 </script>
+{% else %}
+  {% if user.is_authenticated %}
+    <h3>Places</h3><a href="{% url 'places:place_create' %}">crate a new Location/Place</a>
+  {% endif %}
 {% endif %}
 {% endblock %}

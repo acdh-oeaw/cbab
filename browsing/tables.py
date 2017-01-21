@@ -4,12 +4,13 @@ from burials.models import *
 
 
 class BurialSiteTable(tables.Table):
-    db_id = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')], accessor='id')
+    id = tables.LinkColumn(
+        'burials:burialsite_detail', args=[A('pk')], verbose_name='cbab-id')
     name = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')])
 
     class Meta:
         model = BurialSite
-        fields = ['db_id', 'name', 'type_of_burial_site']
+        fields = ['id', 'name', 'type_of_burial_site']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
@@ -26,12 +27,16 @@ class BurialGroupTable(tables.Table):
 
 
 class BurialTable(tables.Table):
-    db_id = tables.LinkColumn('burials:burial_detail', args=[A('pk')], accessor='id')
+    # cbab_id = tables.LinkColumn(
+    #     'burials:burial_detail', args=[A('pk')], accessor='id',
+    #     verbose_name='cbab-id')
     burial_id = tables.LinkColumn('burials:burial_detail', args=[A('pk')])
+    burial_site = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')])
+    burial_group = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')])
 
     class Meta:
         model = Burial
-        fields = ['db_id', 'burial_id', 'burial_site']
+        fields = ['burial_id', 'burial_site', 'burial_group']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
