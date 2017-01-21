@@ -174,7 +174,7 @@ class FillingObjectCreate(CreateView):
 class FillingObjectUpdate(UpdateView):
     model = FillingObject
     form_class = FillingObjectForm
-    template_name = 'burials/fillingobject_create.html'
+    template_name = 'burials/burialfilling_create.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
