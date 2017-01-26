@@ -291,7 +291,7 @@ class GraveGood(CrematedRemainsBaseClass):
         related_name="skos_gravegood_position")
 
     def __str__(self):
-        return "{}-{}".format(self.burial.burial_site.name, self.id)
+        return "type:{}; amount: {}; ID: {}".format(self.name, self.amount_countable, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:gravegood_detail', kwargs={'pk': self.id})

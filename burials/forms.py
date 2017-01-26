@@ -172,7 +172,7 @@ class GraveGoodForm(forms.ModelForm):
             'burial': autocomplete.ModelSelect2(
                 url='burials:burial-autocomplete'),
             'name': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Grave good name'),
+                url='../../skos-constraint-ac/?scheme=GraveGoodObject'),
             'material': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Material'),
             'condition': autocomplete.ModelSelect2(
