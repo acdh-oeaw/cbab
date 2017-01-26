@@ -1,6 +1,29 @@
 from django.db import models
 
 
+class Country(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    country = models.ForeignKey(Country, blank=True, null=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.country)
+
+
+class Province(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    region = models.ForeignKey(Region, blank=True, null=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.region)
+
+
 class AlternativeName(models.Model):
     name = models.CharField(max_length=250, blank=True, help_text="Alternative Name")
 
@@ -18,6 +41,7 @@ class Place(models.Model):
     name = models.CharField(
         max_length=250, blank=True, help_text="Normalized name"
     )
+    province = models.ForeignKey(Province, blank=True, null=True)
     alternative_name = models.ManyToManyField(
         AlternativeName,
         max_length=250, blank=True,
@@ -40,7 +64,4 @@ class Place(models.Model):
     place_type = models.CharField(choices=PLACE_TYPES, null=True, blank=True, max_length=50)
 
     def __str__(self):
-        if self.alternative_name.exists():
-            return self.name+" (" + " ".join([str(x.name) for x in self.alternative_name.all()]) + ")"
-        else:
-            return self.name
+        return "{} ({})".format(self.name, self.province)
