@@ -16,3 +16,4 @@ __pycache__/
 /cbab/settings/dev_secret.py
 /cbab/settings/mysql.py
 /cbab/settings/postgres.py
+/TryAndPlay.ipynb

@@ -30,7 +30,7 @@
     <tr>
         <th>related_filling_objects</th>
         <td>
-            {% for x in object.related_filling_objects.all %}
+            {% for x in object.fillingobject_set.all %}
               <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
@@ -48,6 +48,13 @@
         <td>
             {% for x in object.gravegood_set.all %}
               <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %} <br/><hr/>
+            {% for x in object.related_gravegoods %}
+              <li>
+                  {% for item in x %}
+                    {{item}}
+                  {% endfor %}
+              </li>
             {% endfor %}
         </td>
     </tr>

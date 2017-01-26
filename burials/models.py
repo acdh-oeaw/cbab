@@ -175,14 +175,13 @@ class Burial(models.Model):
         return reverse('burials:burial_detail', kwargs={'pk': self.id})
 
     @property
-    def related_filling_objects(self):
-        related_objects = FillingObject.objects.filter(burial=self.id)
-        return related_objects
-
-    @property
-    def related_urns(self):
-        related_objects = Urn.objects.filter(burial=self.id)
-        return related_objects
+    def related_gravegoods(self):
+        goods = []
+        for x in GraveGood.objects.filter(burial=self.id):
+            goods.append(
+                [x.name.skos_broader.all()[0].pref_label, x.name.pref_label, x.amount_countable]
+            )
+        return goods
 
     def get_classname(self):
         """Returns the name of the class as lowercase string"""
