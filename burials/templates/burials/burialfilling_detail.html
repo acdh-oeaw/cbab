@@ -5,7 +5,7 @@
 <table class="table table-bordered table-striped table-hover">
     {% if object.burial %}
     <tr>
-        <th>Burial site</th>
+        <th>Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}

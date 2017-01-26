@@ -102,9 +102,9 @@ class AnimalRemainsTable(tables.Table):
 
 
 class FillingObjectTable(tables.Table):
-    db_id = tables.LinkColumn('burials:animalremains_detail', args=[A('pk')], accessor='id')
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
-    burial = tables.LinkColumn('burials:burial_detail', args=[A('pk')], accessor='burial')
+    db_id = tables.LinkColumn('burials:burialfilling_detail', args=[A('pk')], accessor='id')
+    burial_site = tables.Column(verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = AnimalRemains

@@ -28,6 +28,22 @@
         <td>{{ object.burial_id }}</td>
     </tr>
     <tr>
+        <th> related_filling_objects</th>
+        <td>
+            {% for x in object.related_filling_objects.all %}
+              <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th> related_urns</th>
+        <td>
+            {% for x in object.related_urns.all %}
+              <li><a href="{% url 'burials:urn_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
         <th>C14 dendro</th>
         <td>{{ object.C14_dendro }}</td>
     </tr>

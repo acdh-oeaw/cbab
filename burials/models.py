@@ -174,6 +174,16 @@ class Burial(models.Model):
     def get_absolute_url(self):
         return reverse('burials:burial_detail', kwargs={'pk': self.id})
 
+    @property
+    def related_filling_objects(self):
+        related_objects = FillingObject.objects.filter(burial=self.id)
+        return related_objects
+
+    @property
+    def related_urns(self):
+        related_objects = Urn.objects.filter(burial=self.id)
+        return related_objects
+
     def get_classname(self):
         """Returns the name of the class as lowercase string"""
         class_name = str(self.__class__.__name__).lower()
