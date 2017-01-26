@@ -28,7 +28,7 @@
         <td>{{ object.burial_id }}</td>
     </tr>
     <tr>
-        <th> related_filling_objects</th>
+        <th>related_filling_objects</th>
         <td>
             {% for x in object.related_filling_objects.all %}
               <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
@@ -36,10 +36,18 @@
         </td>
     </tr>
     <tr>
-        <th> related_urns</th>
+        <th>related_urns</th>
         <td>
-            {% for x in object.related_urns.all %}
+            {% for x in object.urn_set.all %}
               <li><a href="{% url 'burials:urn_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th>related_GraveGood</th>
+        <td>
+            {% for x in object.gravegood_set.all %}
+              <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
