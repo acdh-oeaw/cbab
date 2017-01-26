@@ -36,7 +36,7 @@ class BookAC(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Book.objects.all()
         if self.q:
-            qs = qs.filter(Q(author__icontains=self.q)|Q(title__icontains=self.q))
+            qs = qs.filter(Q(author__icontains=self.q) | Q(title__icontains=self.q))
 
         return qs
 
@@ -77,6 +77,7 @@ class BurialAC(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class UrnCoverAC(autocomplete.Select2QuerySetView):
 
     def get_queryset(self):
@@ -85,8 +86,3 @@ class UrnCoverAC(autocomplete.Select2QuerySetView):
             qs = qs.filter(id__icontains=self.q)
 
         return qs
-
-
-
-
-#http://django-autocomplete-light.readthedocs.io/en/master/tutorial.html#create-an-autocomplete-view

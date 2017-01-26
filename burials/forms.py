@@ -85,6 +85,8 @@ class BurialForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Grave pit form'),
             'grave_pit_orientation': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Grave pit orientation'),
+            'filling': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Burial Filling Type'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -103,8 +105,8 @@ class FillingObjectForm(forms.ModelForm):
         model = FillingObject
         fields = "__all__"
         widgets = {
-            'basic_shape': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Basic shape of urn cover'),
+            'filling_objects': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
         }
 
     def __init__(self, *args, **kwargs):

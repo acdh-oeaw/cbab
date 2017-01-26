@@ -193,8 +193,12 @@ class FillingObject(models.Model):
     burial_filling_position = models.TextField(
         blank=True, null=True, help_text="helptext")
 
+    def __str__(self):
+        return "FO: {}({}) Site: {}".format(self.filling_objects, self.id, self.burial)
+
     def get_absolute_url(self):
         return reverse('burials:burialfilling_detail', kwargs={'pk': self.id})
+
 
 class Urn(models.Model):
     burial = models.ForeignKey(
