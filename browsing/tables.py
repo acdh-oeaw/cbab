@@ -15,7 +15,6 @@ class BurialSiteTable(tables.Table):
 
 
 class BurialGroupTable(tables.Table):
-    # site_id = tables.LinkColumn('publicrecords:site_detail', args=[A('pk')], accessor='id', verbose_name='district')
     db_id = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')], accessor='id')
     burial_group_id = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')])
     burial_site = tables.Column()
@@ -99,4 +98,15 @@ class AnimalRemainsTable(tables.Table):
     class Meta:
         model = AnimalRemains
         fields = ['db_id', 'species']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
+class FillingObjectTable(tables.Table):
+    db_id = tables.LinkColumn('burials:animalremains_detail', args=[A('pk')], accessor='id')
+    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.LinkColumn('burials:burial_detail', args=[A('pk')], accessor='burial')
+
+    class Meta:
+        model = AnimalRemains
+        fields = ['db_id', 'burial_site', 'burial', 'filling_objects']
         attrs = {"class": "table table-hover table-striped table-condensed"}

@@ -8,7 +8,12 @@ urlpatterns = [
     url(r'urncovers/$', views.UrnCoverListView.as_view(), name='browse_urncovers'),
     url(r'urns/$', views.UrnListView.as_view(), name='browse_urns'),
     url(r'gravegoods/$', views.GraveGoodListView.as_view(), name='browse_gravegoods'),
-    url(r'gravegoodsother/$', views.GraveGoodOtherListView.as_view(), name='browse_gravegoodsother'),
-    url(r'deadbodyremains/$', views.DeadBodyRemainsListView.as_view(), name='browse_deadbodyremains'),
+    url(
+        r'gravegoodsother/$', views.GraveGoodOtherListView.as_view(), name='browse_gravegoodsother'
+    ),
+    url(
+        r'deadbodyremains/$', views.DeadBodyRemainsListView.as_view(), name='browse_deadbodyremains'
+    ),
     url(r'animalremains/$', views.AnimalRemainsListView.as_view(), name='browse_animalremains'),
+    url(r'fillingobjects/$', views.FillingObjectListView.as_view(), name='browse_fillingobjects'),
 ]

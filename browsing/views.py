@@ -204,3 +204,11 @@ class AnimalRemainsListView(GenericListView):
         context["burialsite_names"] = set(burialsite_names)
 
         return context
+
+
+class FillingObjectListView(GenericListView):
+    model = FillingObject
+    table_class = FillingObjectTable
+    template_name = 'browsing/fillingobject_list_generic.html'
+    filter_class = FillingObjectListFilter
+    formhelper_class = GenericFilterFormHelper
