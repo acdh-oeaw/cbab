@@ -48,7 +48,7 @@ class BurialSite(models.Model):
         Book, blank=True, help_text="Please provide helptext")
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "BurialSite: {}".format(self.name)
 
     def get_absolute_url(self):
         return reverse('burials:burialsite_detail', kwargs={'pk': self.id})
@@ -88,7 +88,7 @@ class BurialGroup(models.Model):
         help_text="helptext")
 
     def __str__(self):
-        return "{}-{}".format(self.burial_site.name, self.burial_group_id)
+        return "{} | BurialGroup: {}".format(self.burial_site, self.burial_group_id)
 
     def get_absolute_url(self):
         return reverse('burials:burialgroup_detail', kwargs={'pk': self.id})
@@ -169,7 +169,12 @@ class Burial(models.Model):
         help_text="helptext", related_name="skos_filling")
 
     def __str__(self):
-        return "{}-{}".format(self.burial_site, self.burial_id)
+        if self.burial_site is None:
+            return "{} | Burial: {}".format(self.burial_site, self.burial_id)
+        else:
+            return "BurialGroup: {} | Burial: {}".format(
+                self.burial_group, self.burial_id
+            )
 
     def get_absolute_url(self):
         return reverse('burials:burial_detail', kwargs={'pk': self.id})
