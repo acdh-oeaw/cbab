@@ -199,6 +199,8 @@ class GraveGoodOtherForm(forms.ModelForm):
         widgets = {
             'burial': autocomplete.ModelSelect2(
                 url='burials:burial-autocomplete'),
+            'position': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -225,6 +227,8 @@ class DeadBodyRemainsForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Gender'),
             'temperature': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Cremation temperature'),
+            'position': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -247,6 +251,8 @@ class AnimalRemainsForm(forms.ModelForm):
                 url='burials:burial-autocomplete'),
             'species': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Species'),
+            'position': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
 
     def __init__(self, *args, **kwargs):

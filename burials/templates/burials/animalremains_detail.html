@@ -25,9 +25,7 @@
       {% endif %}
       <tr>
         <td>Species</td>
-        <td>{% for x in species_list %}
-        {{ x }}<br/> <!-- find.name -->
-        {% endfor %}</td>
+        <td>{{ object.species.pref_label}}</td>
       </tr>
 
     <tr>

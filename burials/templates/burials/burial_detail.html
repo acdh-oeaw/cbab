@@ -59,6 +59,30 @@
         </td>
     </tr>
     <tr>
+        <th>related_GraveGoodOther</th>
+        <td>
+            {% for x in object.gravegoodother_set.all %}
+              <li><a href="{% url 'burials:gravegoodother_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th>related_DeadBodyRemains</th>
+        <td>
+            {% for x in object.deadbodyremains_set.all %}
+              <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th>related_AnimalRemains</th>
+        <td>
+            {% for x in object.animalremains_set.all %}
+              <li><a href="{% url 'burials:animalremains_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
         <th>C14 dendro</th>
         <td>{{ object.C14_dendro }}</td>
     </tr>
@@ -69,10 +93,6 @@
     <tr>
         <th>Burial type</th>
         <td>{{object.burial_type}}</td>
-    </tr>
-    <tr>
-        <th>Individuals</th>
-        <td>{{object.individuals}}</td>
     </tr>
     <tr>
         <th>Secondary burial</th>
@@ -162,36 +182,6 @@
         <th>Other features</th>
         <td>{{object.other_features}}</td>
     </tr>
-    {% if gravegood_list %}
-    <tr>
-        <th>Grave goods</th>
-        <td>
-          {% for x in gravegood_list %}
-          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.name }} <br/></a>
-          {% endfor %}
-        </td>
-    </tr>
-    {% endif %}
-    {% if gravegoodother_list %}
-    <tr>
-        <th>Grave goods other</th>
-        <td>
-          {% for x in gravegoodother_list %}
-          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
-          {% endfor %}
-        </td>
-    </tr>
-    {% endif %}
-    {% if deadbodyremains_list %}
-    <tr>
-        <th>Dead body remains</th>
-        <td>
-          {% for x in deadbodyremains_list %}
-          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
-          {% endfor %}
-        </td>
-    </tr>
-    {% endif %}
 </table>
 
 {% if user.is_authenticated %}

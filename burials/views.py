@@ -108,13 +108,6 @@ class BurialDetailView(DetailView):
     model = Burial
     template_name = 'burials/burial_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(BurialDetailView, self).get_context_data(**kwargs)
-        context["gravegood_list"] = GraveGood.objects.filter(burial=self.object.id)
-        context["gravegoodother_list"] = GraveGoodOther.objects.filter(burial=self.object.id)
-        context["deadbodyremains_list"] = DeadBodyRemains.objects.filter(burial=self.object.id)
-        return context
-
 
 class BurialListView(ListView):
     model = Burial
@@ -389,11 +382,6 @@ class DeadBodyRemainsDelete(DeleteView):
 class AnimalRemainsDetailView(DetailView):
     model = AnimalRemains
     template_name = 'burials/animalremains_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AnimalRemainsDetailView, self).get_context_data(**kwargs)
-        context["species_list"] = self.object.species.all()
-        return context
 
 
 class AnimalRemainsListView(ListView):

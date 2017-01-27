@@ -203,7 +203,7 @@ class FillingObject(models.Model):
         blank=True, null=True, help_text="helptext")
 
     def __str__(self):
-        return "FO: {}({}) Site: {}".format(self.filling_objects, self.id, self.burial)
+        return "type: {} | amount: {}".format(self.filling_objects, self.amount_countable)
 
     def get_absolute_url(self):
         return reverse('burials:burialfilling_detail', kwargs={'pk': self.id})
@@ -290,7 +290,9 @@ class GraveGood(CrematedRemainsBaseClass):
         related_name="skos_gravegood_position")
 
     def __str__(self):
-        return "type:{}; amount: {}; ID: {}".format(self.name, self.amount_countable, self.id)
+        return "type: {} | material: {} | amount: {}".format(
+            self.name, self.material, self.amount_countable
+        )
 
     def get_absolute_url(self):
         return reverse('burials:gravegood_detail', kwargs={'pk': self.id})
@@ -311,7 +313,9 @@ class GraveGoodOther(CrematedRemainsBaseClass):
         related_name="skos_gravegoodother_position")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "food: {} | other: {} | text: {}".format(
+            self.food, self.other_organic_grave_good, self.other_organic_grave_good_text
+        )
 
     def get_absolute_url(self):
         return reverse('burials:gravegoodother_detail', kwargs={'pk': self.id})
@@ -341,7 +345,8 @@ class DeadBodyRemains(CrematedRemainsBaseClass):
         related_name="skos_deadbodyremains_position")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "age: {} | gender: {} | amount: {}".format(
+            self.age, self.gender, self.amount_countable)
 
     def get_absolute_url(self):
         return reverse('burials:deadbodyremains_detail', kwargs={'pk': self.id})
@@ -353,7 +358,7 @@ class DeadBodyRemains(CrematedRemainsBaseClass):
 
 
 class AnimalRemains(CrematedRemainsBaseClass):
-    species = models.ManyToManyField(
+    species = models.ForeignKey(
         SkosConcept, blank=True, help_text="helptext", related_name="skos_species")
     age = models.CharField(
         max_length=255, blank=True, null=True, help_text="helptext")
@@ -366,7 +371,9 @@ class AnimalRemains(CrematedRemainsBaseClass):
         related_name="skos_animalsremains_position")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "species: {} | age: {} | sex: {} | amount: {}".format(
+            self.species, self.age, self.sex, self.amount_countable
+        )
 
     def get_absolute_url(self):
         return reverse('burials:animalremains_detail', kwargs={'pk': self.id})

@@ -17,3 +17,4 @@ __pycache__/
 /cbab/settings/mysql.py
 /cbab/settings/postgres.py
 /TryAndPlay.ipynb
+/data/Tabelle_CBAB_20_12_2016.xls
