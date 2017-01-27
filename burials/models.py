@@ -169,7 +169,7 @@ class Burial(models.Model):
         help_text="helptext", related_name="skos_filling")
 
     def __str__(self):
-        if self.burial_site is None:
+        if self.burial_group is None:
             return "{} | Burial: {}".format(self.burial_site, self.burial_id)
         else:
             return "BurialGroup: {} | Burial: {}".format(
