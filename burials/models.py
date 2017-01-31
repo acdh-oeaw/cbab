@@ -40,8 +40,9 @@ class BurialSite(models.Model):
         blank=True, null=True, help_text="helptext")
     dating = models.ManyToManyField(
         SkosConcept, blank=True, help_text="helptext", related_name="skos_dating")
-    absolute_dating = models.ManyToManyField(
-        SkosConcept, blank=True, help_text="helptext", related_name="skos_absolute_dating")  # 7705
+    absolute_dating = models.CharField(
+        max_length=255, blank=True, null=True,
+        help_text="Please provide helptext")
     location_of_archaeological_material_and_contact_information = models.TextField(
         blank=True, null=True, help_text="helptext")
     reference = models.ManyToManyField(
