@@ -23,8 +23,6 @@ class BurialSiteForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Type of burial site'),
             'dating': autocomplete.ModelSelect2Multiple(
                 url='../../skos-constraint-ac/?scheme=Dating'),
-            'absolute_dating': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),     # absolute dating has no list so far - 'List of all data from the row 107'
             'reference': autocomplete.ModelSelect2Multiple(
                 url='burials:book-autocomplete'),
         }
