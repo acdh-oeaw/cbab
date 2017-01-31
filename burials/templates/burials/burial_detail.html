@@ -2,7 +2,8 @@
 {% block content %}
 
 <h1>Burial {{ object }} {{object.amount_related_gravegoods}}</h1>
-<table class="table table-bordered table-striped table-hover">
+<legend>General</legend>
+<table class="table table-bordered table-hover">
   {% if object.burial_group %}
     <tr>
         <th class="col-sm-3">Burial group</th>
@@ -15,7 +16,7 @@
     {% endif %}
     {% if object.burial_site %}
     <tr>
-        <th>Burial site</th>
+        <th class="col-sm-3">Burial site</th>
         <td>
           <a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">
           {{ object.burial_site }}
@@ -24,17 +25,71 @@
     </tr>
     {% endif %}
     <tr>
-        <th>Burial id</th>
+        <th class="col-sm-3">Burial id</th>
         <td>{{ object.burial_id }}</td>
     </tr>
+
+
+
+
     <tr>
-        <th>related_filling_objects</th>
+        <th>C14 dendro</th>
+        <td>{{ object.C14_dendro }}</td>
+    </tr>
+    <tr>
+        <th>Absolute age</th>
+        <td>{{ object.absolute_age }}</td>
+    </tr>
+    <tr>
+        <th>Burial type</th>
+        <td>{{object.burial_type}}</td>
+    </tr>
+    <tr>
+        <th>Secondary burial</th>
+        <td>{{object.secondary_burial}}</td>
+    </tr>
+    <tr>
+        <th>Secondary burial text</th>
+        <td>{{object.secondary_burial_text}}</td>
+    </tr>
+    <tr>
+        <th>Displaced</th>
+        <td>{{object.displaced}}</td>
+    </tr>
+    <tr>
+        <th>Displaced text</th>
+        <td>{{object.displaced_text}}</td>
+    </tr>
+    <tr>
+        <th>Extraordinary burial</th>
+        <td>{{object.extraordinary_burial}}</td>
+    </tr>
+    <tr>
+        <th>Extraordinary burial text</th>
+        <td>{{object.extraordinary_burial_text}}</td>
+    </tr>
+    <tr>
+        <th>Inhumation burial type</th>
+        <td>{{object.inhumation_burial_type}}</td>
+    </tr>
+    <tr>
+        <th>Bi ritual burial type</th>
+        <td>{{object.bi_ritual_burial_type}}</td>
+    </tr>
+  </table>
+
+  {% if object.fillingobject_set.all or object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
+  <legend>Related objects</legend>
+  <table class="table table-bordered table-hover">
+    <tr>
+        <th class="col-sm-3">related_filling_objects</th>
         <td>
             {% for x in object.fillingobject_set.all %}
               <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
+
     <tr>
         <th>related_urns</th>
         <td>
@@ -82,52 +137,14 @@
             {% endfor %}
         </td>
     </tr>
+  </table>
+{% endif %}
+
+
+  <legend>Grave architecture</legend>
+  <table class="table table-bordered table-hover">
     <tr>
-        <th>C14 dendro</th>
-        <td>{{ object.C14_dendro }}</td>
-    </tr>
-    <tr>
-        <th>Absolute age</th>
-        <td>{{ object.absolute_age }}</td>
-    </tr>
-    <tr>
-        <th>Burial type</th>
-        <td>{{object.burial_type}}</td>
-    </tr>
-    <tr>
-        <th>Secondary burial</th>
-        <td>{{object.secondary_burial}}</td>
-    </tr>
-    <tr>
-        <th>Secondary burial text</th>
-        <td>{{object.secondary_burial_text}}</td>
-    </tr>
-    <tr>
-        <th>Displaced</th>
-        <td>{{object.displaced}}</td>
-    </tr>
-    <tr>
-        <th>Displaced text</th>
-        <td>{{object.displaced_text}}</td>
-    </tr>
-    <tr>
-        <th>Extraordinary burial</th>
-        <td>{{object.extraordinary_burial}}</td>
-    </tr>
-    <tr>
-        <th>Extraordinary burial text</th>
-        <td>{{object.extraordinary_burial_text}}</td>
-    </tr>
-    <tr>
-        <th>Inhumation burial type</th>
-        <td>{{object.inhumation_burial_type}}</td>
-    </tr>
-    <tr>
-        <th>Bi ritual burial type</th>
-        <td>{{object.bi_ritual_burial_type}}</td>
-    </tr>
-    <tr>
-        <th>Construction</th>
+        <th class="col-sm-3">Construction</th>
         <td>{{object.construction}}</td>
     </tr>
     <tr>

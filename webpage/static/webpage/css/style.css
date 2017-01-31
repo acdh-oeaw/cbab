@@ -38,6 +38,10 @@ footer{
     margin-top:10px;
 
 }
+legend {
+  background-color: #e6e5f5;
+  padding: 10px;
+}
 
 /*custom css*/
 #pro-logo {
