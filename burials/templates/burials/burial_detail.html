@@ -76,30 +76,40 @@
         <th>Bi ritual burial type</th>
         <td>{{object.bi_ritual_burial_type}}</td>
     </tr>
+    <tr>
+        <th>Filling</th>
+        <td>{{object.filling}}</td>
+    </tr>
   </table>
 
   {% if object.fillingobject_set.all or object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
   <legend>Related objects</legend>
   <table class="table table-bordered table-hover">
+
+    {% if object.fillingobject_set.all %}
     <tr>
-        <th class="col-sm-3">related_filling_objects</th>
+        <th class="col-sm-3">Filling objects</th>
         <td>
             {% for x in object.fillingobject_set.all %}
               <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
-
+    {% endif %}
+    {% if object.urn_set.all %}
     <tr>
-        <th>related_urns</th>
+        <th>Urns</th>
         <td>
             {% for x in object.urn_set.all %}
               <li><a href="{% url 'burials:urn_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
+
+    {% if object.gravegood_set.all %}
     <tr>
-        <th>related_GraveGood</th>
+        <th>Grave Good</th>
         <td>
             {% for x in object.gravegood_set.all %}
               <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
@@ -113,30 +123,40 @@
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
+
+    {% if object.gravegoodother_set.all %}
     <tr>
-        <th>related_GraveGoodOther</th>
+        <th>Grave Good Other</th>
         <td>
             {% for x in object.gravegoodother_set.all %}
               <li><a href="{% url 'burials:gravegoodother_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
+
+    {% if object.deadbodyremains_set.all %}
     <tr>
-        <th>related_DeadBodyRemains</th>
+        <th>Dead Body Remains</th>
         <td>
             {% for x in object.deadbodyremains_set.all %}
               <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
+
+    {% if object.animalremains_set.all %}
     <tr>
-        <th>related_AnimalRemains</th>
+        <th>Animal Remains</th>
         <td>
             {% for x in object.animalremains_set.all %}
               <li><a href="{% url 'burials:animalremains_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
   </table>
 {% endif %}
 
