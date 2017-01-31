@@ -29,6 +29,8 @@ class BurialSiteForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BurialSiteForm, self).__init__(*args, **kwargs)
+        self.fields['lng'].required = True
+        self.fields['lat'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
