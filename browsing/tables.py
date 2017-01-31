@@ -29,13 +29,13 @@ class BurialTable(tables.Table):
     # cbab_id = tables.LinkColumn(
     #     'burials:burial_detail', args=[A('pk')], accessor='id',
     #     verbose_name='cbab-id')
-    burial_id = tables.LinkColumn('burials:burial_detail', args=[A('pk')])
-    burial_site = tables.LinkColumn('burials:burialsite_detail', args=[A('pk')])
-    burial_group = tables.LinkColumn('burials:burialgroup_detail', args=[A('pk')])
+    burial = tables.TemplateColumn("""<a href="{% url 'burials:burial_detail' pk=record.id %}">{{ record }}</a>""")
+    burial_site = tables.RelatedLinkColumn('burials:burialsite_detail', args=[A('pk')])
+    burial_group = tables.RelatedLinkColumn('burials:burialgroup_detail', args=[A('pk')])
 
     class Meta:
         model = Burial
-        fields = ['burial_id', 'burial_site', 'burial_group']
+        fields = ['burial', 'burial_site', 'burial_group']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 

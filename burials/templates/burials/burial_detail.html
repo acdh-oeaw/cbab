@@ -1,7 +1,7 @@
 {% extends "webpage/base.html" %}
 {% block content %}
 
-<h1>Burial {{ object }}</h1>
+<h1>Burial {{ object }} {{object.amount_related_gravegoods}}</h1>
 <table class="table table-bordered table-striped table-hover">
   {% if object.burial_group %}
     <tr>
@@ -52,7 +52,7 @@
             {% for x in object.related_gravegoods %}
               <li>
                   {% for item in x %}
-                    {{item}}
+                    {{ item }}
                   {% endfor %}
               </li>
             {% endfor %}

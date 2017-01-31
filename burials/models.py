@@ -188,6 +188,13 @@ class Burial(models.Model):
             )
         return goods
 
+    @property
+    def amount_related_gravegoods(self):
+        goods = []
+        for x in GraveGood.objects.filter(burial=self.id):
+            goods.append(x.amount_countable)
+        return sum(goods)
+
     def get_classname(self):
         """Returns the name of the class as lowercase string"""
         class_name = str(self.__class__.__name__).lower()
