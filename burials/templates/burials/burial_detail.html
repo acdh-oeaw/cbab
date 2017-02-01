@@ -1,7 +1,7 @@
 {% extends "webpage/base.html" %}
 {% block content %}
 
-<h1>Burial {{ object }} {{object.amount_related_gravegoods}}</h1>
+<h1>Burial {{ object }}</h1>
 <legend>General</legend>
 <table class="table table-bordered table-hover">
   {% if object.burial_group %}
@@ -122,6 +122,10 @@
               </li>
             {% endfor %}
         </td>
+    </tr>
+    <tr>
+      <th>Total amount Grave Good</th>
+      <td>{{object.amount_related_gravegoods}}</td>
     </tr>
     {% endif %}
 
