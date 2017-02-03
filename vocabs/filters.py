@@ -39,3 +39,4 @@ class SkosConceptFilter(django_filters.FilterSet):
 
     class Meta:
         model = SkosConcept
+        fields = '__all__'
