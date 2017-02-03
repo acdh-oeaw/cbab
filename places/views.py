@@ -1,7 +1,7 @@
-import requests, re, json
-
-from django.shortcuts import (render, render_to_response, get_object_or_404,
-	redirect)
+import requests
+import re
+import json
+from django.shortcuts import (render, render_to_response, get_object_or_404, redirect)
 from django.views import generic
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -12,7 +12,7 @@ from .forms import PlaceForm
 
 
 class PlaceListView(generic.ListView):
-    template_name ="places/list_places.html"
+    template_name = "places/list_places.html"
     context_object_name = 'object_list'
 
     def get_queryset(self):
@@ -27,10 +27,11 @@ def create_place(request):
 			form.save()
 			return redirect('places:place_list')
 		else:
-			return render(request, 'places/edit_places.html', {'form':form})
+			return render(request, 'places/edit_places.html', {'form': form})
 	else:
 		form = PlaceForm()
-		return render(request, 'places/edit_places.html', {'form':form})
+		return render(request, 'places/edit_places.html', {'form': form})
+
 
 @login_required
 def edit_place(request, pk):
@@ -59,10 +60,10 @@ def edit_place(request, pk):
         responseJSON = "hansi"
 		#form = OrtForm({'geonames_id':123})
         return render(request, 'places/edit_places.html',
-			{'object':instance, 'form':form, 'responseJSON':responseJSON}
+			{'object': instance, 'form' :form, 'responseJSON': responseJSON}
 			)
     else:
-        form = PlaceForm(request.POST, instance = instance)
+        form = PlaceForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
         return redirect('places:place_list')

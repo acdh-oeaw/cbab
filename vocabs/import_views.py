@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 import pandas as pd
 from .forms import UploadFileForm
 from .skos import SkosImporter
 from .models import *
 
 
+@login_required
 def import_skos(request):
     context = {}
     if request.method == 'POST':
@@ -20,6 +22,7 @@ def import_skos(request):
     return render(request, 'vocabs/import_skos.html', context)
 
 
+@login_required
 def import_xls(request):
     context = {}
     if request.method == 'POST':

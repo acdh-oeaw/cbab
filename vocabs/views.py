@@ -1,6 +1,8 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django_tables2 import SingleTableView, RequestConfig
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
 from .forms import SkosConceptForm, SkosConceptSchemeForm, SkosLabelForm, GenericFilterFormHelper
@@ -58,12 +60,20 @@ class SkosConceptCreate(CreateView):
     template_name = 'vocabs/skosconcept_create.html'
     form_class = SkosConceptForm
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosConceptCreate, self).dispatch(*args, **kwargs)
+
 
 class SkosConceptUpdate(UpdateView):
 
     model = SkosConcept
     form_class = SkosConceptForm
     template_name = 'vocabs/skosconcept_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosConceptUpdate, self).dispatch(*args, **kwargs)
 
 
 #####################################################
@@ -94,12 +104,20 @@ class SkosConceptSchemeCreate(CreateView):
     form_class = SkosConceptSchemeForm
     template_name = 'vocabs/skosconceptscheme_create.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosConceptSchemeCreate, self).dispatch(*args, **kwargs)
+
 
 class SkosConceptSchemeUpdate(UpdateView):
 
     model = SkosConceptScheme
     form_class = SkosConceptSchemeForm
     template_name = 'vocabs/skosconceptscheme_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosConceptSchemeUpdate, self).dispatch(*args, **kwargs)
 
 
 ###################################################
@@ -125,9 +143,17 @@ class SkosLabelCreate(CreateView):
     template_name = 'vocabs/skoslabel_create.html'
     form_class = SkosLabelForm
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosLabelCreate, self).dispatch(*args, **kwargs)
+
 
 class SkosLabelUpdate(UpdateView):
 
     model = SkosLabel
     form_class = SkosLabelForm
     template_name = 'vocabs/skoslabel_create.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosLabelUpdate, self).dispatch(*args, **kwargs)
