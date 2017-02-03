@@ -1,7 +1,7 @@
 from dal import autocomplete
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from .models import *
 
 
@@ -97,6 +97,46 @@ class BurialForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.layout = Layout(
+            Fieldset(
+            'General',
+            'burial_group',
+            'burial_site',
+            'burial_id',
+            'C14_dendro',
+            'absolute_age',
+            'burial_type',
+            'secondary_burial',
+            'secondary_burial_text',
+            'displaced',
+            'displaced_text',
+            'extraordinary_burial',
+            'extraordinary_burial_text',
+            'inhumation_burial_type',
+            'bi_ritual_burial_type',
+            'filling',
+            css_class="separate-panel",
+            ),
+            Fieldset(
+            'Grave architecture',
+            'construction',
+            'arrangement',
+            'cover',
+            'cover_type',
+            'grave_pit_form',
+            'grave_pit_orientation',
+            'length',
+            'width',
+            'diameter',
+            'height',
+            'post_holes',
+            'surface_identification_mark',
+            'erdgraebchen',
+            'other_features',
+            css_class="separate-panel"
+            )
+        )
+
 
 
 class FillingObjectForm(forms.ModelForm):
