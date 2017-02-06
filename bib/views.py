@@ -18,7 +18,7 @@ def sync_zotero_action(request):
     root = "https://api.zotero.org/users/"
     params = "{}/collections/{}/items/top?v=3&key={}".format(
         settings.Z_USER_ID, settings.Z_COLLECTION, settings.Z_API_KEY)
-    url = root + params + "&sort=dateModified&limit=10"
+    url = root + params + "&sort=dateModified&limit=25"
     books_before = len(Book.objects.all())
     try:
         r = requests.get(url)
