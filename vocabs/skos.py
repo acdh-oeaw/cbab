@@ -1,5 +1,67 @@
 import lxml.etree as ET
+import csv
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
+
+
+class Csv2SkosReader(object):
+    """
+    extract SKOS-like objects from special structured CSV sheets
+    and returns a list of dictionaries containing data needed to
+    create vocabs-entries
+    """
+
+    def __init__(self, csv_file):
+        self.csv_file = csv_file
+        try:
+            with open(self.csv_file, encoding='utf-8') as csvfile:
+                self.data = [x for x in csv.reader(csvfile, delimiter=',')]
+        except:
+            print('could not open csv file')
+        self.headers = self.data[0]
+        try:
+            self.alt_lang = (self.headers[1])[(self.headers[1]).index('@')+1:]
+        except:
+            self.alt_lang = None
+        self.schemes = set([x[0] for x in self.data[1:]])
+        self.number_of_schemes = len(self.schemes)
+
+    def get_concepts(self):
+        concepts = []
+        for x in self.data[1:]:
+            first_order = x[1].split('|')
+            if x[2] != '':
+                second_order = x[2].split('|')
+                concept = {
+                    'scheme': x[0],
+                    'concept': {
+                        'pref_label': first_order[0],
+                        'pref_label_lang': 'eng',
+                        'alt_label': self.alt_lang,
+                        'alt_label_lang': self.alt_lang,
+                        'narrower': {
+                            'scheme': x[0],
+                            'concept': {
+                                'pref_label': second_order[0],
+                                'pref_label_lang': 'eng',
+                                'alt_label': second_order[1],
+                                'alt_label_lang': self.alt_lang,
+                            }
+                        }
+                    }
+                }
+            else:
+                concept = {
+                    'scheme': x[0],
+                    'concept': {
+                        'pref_label': first_order[0],
+                        'pref_label_lang': 'eng',
+                        'alt_label': first_order[1],
+                        'alt_label_lang': self.alt_lang,
+                    }
+                }
+            concepts.append(concept)
+
+        return concepts
 
 
 class SkosReader(object):
