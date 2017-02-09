@@ -64,6 +64,44 @@ class Csv2SkosReader(object):
         return concepts
 
 
+class Csv2SkosImporter(Csv2SkosReader):
+    """Takes a special formatted csv file, parses it and imports the derived data into vocabs"""
+
+    def update_schemes(self):
+        """import/updates all conceptSchemes found in csv"""
+        report = {}
+        report['before'] = len(SkosConceptScheme.objects.all())
+        failed = []
+        success = []
+        for x in self.schemes:
+            try:
+                clean = x.split('|')[0].strip()
+            except:
+                clean = x.strip()
+            try:
+                temp_scheme, _ = SkosConceptScheme.objects.get_or_create(dc_title=clean)
+                temp_scheme.save()
+                success.append(x)
+            except:
+                failed.append(x)
+        report['failed'] = failed
+        report['success'] = success
+        report['after'] = len(SkosConceptScheme.objects.all())
+        return report
+
+    def update_concepts(self):
+        """import/updates all SkosConcepts found in csv"""
+        report = {}
+        report['before'] = len(SkosConcept.objects.all())
+        failed = []
+        success = []
+        for x in self.get_concepts():
+            #print(x['concept'])
+            pass
+        report['after'] = len(SkosConcept.objects.all())
+        return report
+
+
 class SkosReader(object):
 
     """
