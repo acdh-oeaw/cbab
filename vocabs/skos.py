@@ -13,8 +13,8 @@ class Csv2SkosReader(object):
     def __init__(self, csv_file):
         self.csv_file = csv_file
         try:
-            with open(self.csv_file, encoding='utf-8') as csvfile:
-                self.data = [x for x in csv.reader(csvfile, delimiter=',')]
+            # with open(self.csv_file, encoding='utf-8') as csvfile:
+            self.data = [x for x in csv.reader(self.csv_file, delimiter=',')]
         except:
             print('could not open csv file')
         self.headers = self.data[0]
@@ -89,6 +89,63 @@ class Csv2SkosImporter(Csv2SkosReader):
         report['after'] = len(SkosConceptScheme.objects.all())
         return report
 
+    def importConcepts(self):
+        """import/updates all SkosConcepts found in csv"""
+        report = {}
+        report['before'] = len(SkosConcept.objects.all())
+        report['schemes_before'] = len(SkosConceptScheme.objects.all())
+        failed = []
+        success = []
+        for x in self.get_concepts():
+            # get scheme
+            try:
+                clean = x['scheme'].split('|')[0].strip()
+            except:
+                clean = x['scheme'].strip()
+            temp_scheme, _ = SkosConceptScheme.objects.get_or_create(dc_title=clean)
+            # crete 1st order
+            try:
+                temp_label, _ = SkosLabel.objects.get_or_create(
+                    label=x['concept']['alt_label'],
+                    label_type='altLabel',
+                    isoCode=x['concept']['alt_label_lang']
+                )
+                temp_first, _ = SkosConcept.objects.get_or_create(
+                    pref_label=x['concept']['pref_label'],
+                    pref_label_lang=x['concept']['pref_label_lang']
+                )
+                temp_first.label = [temp_label]
+                temp_first.scheme = [temp_scheme]
+                success.append(x['concept']['pref_label'])
+            except:
+                failed.append(x['concept']['pref_label'])
+            try:
+                second = x['concept']['narrower']['concept']
+                # crete 2st order
+                try:
+                    temp_label, _ = SkosLabel.objects.get_or_create(
+                        label=second['alt_label'],
+                        label_type='altLabel',
+                        isoCode=second['alt_label_lang']
+                    )
+                    temp_second, _ = SkosConcept.objects.get_or_create(
+                        pref_label=second['pref_label'],
+                        pref_label_lang=second['pref_label_lang']
+                    )
+                    temp_second.label = [temp_label]
+                    temp_second.scheme = [temp_scheme]
+                    temp_first.skos_narrower = [temp_second]
+                    success.append(second['pref_label'])
+                except:
+                    failed.append(second['pref_label'])
+            except:
+                pass
+        report['failed'] = failed
+        report['success'] = success
+        report['after'] = len(SkosConcept.objects.all())
+        report['schemes_after'] = len(SkosConceptScheme.objects.all())
+        return report
+
     def update_concepts(self):
         """import/updates all SkosConcepts found in csv"""
         report = {}
@@ -96,7 +153,7 @@ class Csv2SkosImporter(Csv2SkosReader):
         failed = []
         success = []
         for x in self.get_concepts():
-            #print(x['concept'])
+            # print(x['concept'])
             pass
         report['after'] = len(SkosConcept.objects.all())
         return report
