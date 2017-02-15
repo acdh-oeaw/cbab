@@ -12,11 +12,11 @@ class Csv2SkosReader(object):
 
     def __init__(self, csv_file):
         self.csv_file = csv_file
-        try:
-            # with open(self.csv_file, encoding='utf-8') as csvfile:
-            self.data = [x for x in csv.reader(self.csv_file, delimiter=',')]
-        except:
-            print('could not open csv file')
+        #try:
+        #with open(self.csv_file, encoding='utf-8') as csvfile:
+        self.data = [x for x in csv.reader(self.csv_file)]
+        #except:
+        #    print('could not open csv file')
         self.headers = self.data[0]
         try:
             self.alt_lang = (self.headers[1])[(self.headers[1]).index('@')+1:]
