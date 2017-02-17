@@ -18,7 +18,7 @@
         <td>{{ object.basic_shape }}</td>
     </tr>
     <tr>
-        <th>Urn id</th>
+        <th>Urn number</th>
         <td>{{ object.urn_id }}</td>
     </tr>
     <tr>
@@ -29,16 +29,19 @@
         <th>Variation</th>
         <td>{{ object.variation }}</td>
     </tr>
-    {% if object.cover %}
+    {% if urncover_list %}
     <tr>
         <th>Cover</th>
         <td>
-          <a href="{% url 'burials:urncover_detail' pk=object.cover.id %}">
-          {{ object.cover }}
+          {% for x in urncover_list %}
+          <a href="{% url 'burials:urncover_detail' pk=x.id %}">
+          {{ x }}
         </a>
+        {% endfor %}
         </td>
     </tr>
     {% endif %}
+
 </table>
 
 {% if user.is_authenticated %}

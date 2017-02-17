@@ -78,7 +78,7 @@
       <th>Burials</th>
       <td>
         {% for x in burial_list %}
-        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">{{ x }} <br/></a>
         {% endfor %}
       </td>
   </tr>

@@ -232,7 +232,7 @@ class Urn(models.Model):
         help_text="helptext", related_name="skos_basic_shape_of_urn"
     )
     urn_id = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
+        blank=True, null=True, help_text="helptext", verbose_name="Urn number")
     urn_type = models.TextField(
         blank=True, null=True, help_text="helptext")
     variation = models.TextField(
@@ -253,17 +253,17 @@ class Urn(models.Model):
 
 class UrnCover(models.Model):
     cover_id = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Inventory number")
+        blank=True, null=True, help_text="helptext", verbose_name="Urn cover number")
     upside_down = models.NullBooleanField()
     fragment = models.NullBooleanField()
     basic_shape = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
     )
-    urn = models.ForeignKey('Urn', blank=True, null=True, help_text="helptext")
+    urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{}-{}-{}".format(self.urn, self.cover_id, self.id)
 
     def get_absolute_url(self):
         return reverse('burials:urncover_detail', kwargs={'pk': self.id})

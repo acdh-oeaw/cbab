@@ -180,7 +180,6 @@ class UrnCoverDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UrnCoverDetailView, self).get_context_data(**kwargs)
-        context["urn_list"] = Urn.objects.filter(cover=self.object.id)
         return context
 
 
@@ -223,6 +222,10 @@ class UrnDetailView(DetailView):
     model = Urn
     template_name = 'burials/urn_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(UrnDetailView, self).get_context_data(**kwargs)
+        context["urncover_list"] = UrnCover.objects.filter(urn=self.object.id)
+        return context
 
 class UrnListView(ListView):
     model = Urn
