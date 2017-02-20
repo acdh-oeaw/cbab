@@ -7,6 +7,18 @@
 <div class="panel panel-default procustom-panel-create">
     <div class="panel-heading procustom-panel-heading">
         <h1>Create/Edit Urn Cover</h1>
+        {% if object %}
+        <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'burials:burialsite_detail' pk=object.urn.burial.burial_site.id %}">{{ object.urn.burial.burial_site }}</a></li>
+        {% if object.burial.burial_group %}
+        <li><a href="{% url 'burials:burialgroup_detail' pk=object.urn.burial.burial_group.id %}">{{ object.urn.burial.burial_group }}</a></li>
+        {% endif %}
+        <li><a href="{% url 'burials:burial_detail' pk=object.urn.burial.id %}">{{ object.urn.burial }}</a></li>
+        <li><a href="{% url 'burials:urn_detail' pk=object.urn.id %}">{{ object.urn.urn_id }}</a></li>
+        <li class="active">{{ object.cover_id }}</li>
+      </ol>
+      {% endif %}
     </div>
     <div class="panel-body">
          {% crispy form %}

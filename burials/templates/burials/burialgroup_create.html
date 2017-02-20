@@ -8,6 +8,13 @@
 <div class="panel panel-default procustom-panel-create">
     <div class="panel-heading procustom-panel-heading">
         <h1>Create/Edit Burial Group</h1>
+        {% if object %}
+        <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">{{ object.burial_site }}</a></li>
+        <li class="active">Burial Group {{ object.burial_group_id }}</li>
+      </ol>
+      {% endif %}
     </div>
     <div class="panel-body">
          {% crispy form %}

@@ -2,6 +2,13 @@
 {% block content %}
 
 <h1>Burial group {{ object }}</h1>
+{% if object %}
+<ol class="breadcrumb">
+<li><a href="/">Home</a></li>
+<li><a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">{{ object.burial_site }}</a></li>
+<li class="active">Burial Group: {{ object.burial_group_id }}</li>
+</ol>
+{% endif %}
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th class="col-sm-3">Burial group id</th>
@@ -50,7 +57,7 @@
         <th>Burials</th>
         <td>
           {% for x in burial_list %}
-          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} <br/></a>
+          <a href="/burials/{{ x.get_classname }}/{{ x.id }}">{{ x }} <br/></a>
           {% endfor %}
         </td>
     </tr>

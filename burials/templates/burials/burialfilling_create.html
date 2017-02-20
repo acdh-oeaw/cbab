@@ -7,6 +7,19 @@
 <div class="panel panel-default procustom-panel-create">
     <div class="panel-heading procustom-panel-heading">
         <h1>Create/Edit Burial Filling </h1>
+        {% if object %}
+        <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'burials:burialsite_detail' pk=object.burial.burial_site.id %}">{{ object.burial.burial_site }}</a></li>
+        {% if object.burial.burial_group %}
+        <li><a href="{% url 'burials:burialgroup_detail' pk=object.burial.burial_group.id %}">
+          Burial Group: {{ object.burial.burial_group.burial_group_id }}</a></li>
+        {% endif %}
+        <li><a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
+          Burial: {{ object.burial.burial_id }}</a></li>
+        <li class="active">{{ object }}</li>
+        </ol>
+        {% endif %}
     </div>
     <div class="panel-body">
          {% crispy form %}

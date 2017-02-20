@@ -2,6 +2,12 @@
 {% block content %}
 
 <h1>Burial site {{ object }}</h1>
+{% if object %}
+<ol class="breadcrumb">
+<li><a href="/">Home</a></li>
+<li class="active">{{ object }}</li>
+</ol>
+{% endif %}
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th class="col-sm-3">Name</th>

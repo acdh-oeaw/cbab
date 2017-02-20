@@ -2,6 +2,23 @@
 {% block content %}
 
 <h1>Animal Remains {{ object }}</h1>
+{% if object %}
+<ol class="breadcrumb">
+<li><a href="/">Home</a></li>
+<li><a href="{% url 'burials:burialsite_detail' pk=object.burial.burial_site.id %}">{{ object.burial.burial_site }}</a></li>
+{% if object.burial.burial_group %}
+<li><a href="{% url 'burials:burialgroup_detail' pk=object.burial.burial_group.id %}">
+  Burial Group: {{ object.burial.burial_group.burial_group_id }}</a></li>
+{% endif %}
+<li><a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
+  Burial: {{ object.burial.burial_id }}</a></li>
+  {% if object.urn %}
+  <li><a href="{% url 'burials:urn_detail' pk=object.urn.id %}">
+    Urn: {{ object.urn.urn_id }}</a></li>
+  {% endif %}
+<li class="active">{{ object }}</li>
+</ol>
+{% endif %}
 <table class="table table-bordered table-striped table-hover">
   {% if object.burial %}
     <tr>
