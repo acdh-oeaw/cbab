@@ -11,6 +11,8 @@
 {% endif %}
 <li class="active">Burial: {{ object.burial_id }}</li>
 </ol>
+<button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
+<p></p>
 {% endif %}
 <legend>General</legend>
 <table class="table table-bordered table-hover">
@@ -186,19 +188,19 @@
         <td>{{object.arrangement}}</td>
     </tr>
     <tr>
-        <th>Cover</th>
+        <th class="col-sm-3">Cover</th>
         <td>{{object.cover}}</td>
     </tr>
     <tr>
-        <th>Cover type</th>
+        <th class="col-sm-3">Cover type</th>
         <td>{{object.cover_type}}</td>
     </tr>
     <tr>
-        <th>Grave pit form</th>
+        <th class="col-sm-3">Grave pit form</th>
         <td>{{object.grave_pit_form}}</td>
     </tr>
     <tr>
-        <th>Grave pit orientation</th>
+        <th class="col-sm-3">Grave pit orientation</th>
         <td>{{object.grave_pit_orientation}}</td>
     </tr>
     <tr>

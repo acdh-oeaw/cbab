@@ -8,6 +8,8 @@
 <li><a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">{{ object.burial_site }}</a></li>
 <li class="active">Burial Group: {{ object.burial_group_id }}</li>
 </ol>
+<button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
+<p></p>
 {% endif %}
 <table class="table table-bordered table-striped table-hover">
     <tr>

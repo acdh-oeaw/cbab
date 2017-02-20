@@ -13,6 +13,8 @@
 <li><a href="{% url 'burials:burial_detail' pk=object.burial.id %}">Burial: {{ object.burial.burial_id }}</a></li>
 <li class="active">{{ object.urn_id }}</li>
 </ol>
+<button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
+<p></p>
 {% endif %}
 <table class="table table-bordered table-striped table-hover">
   {% if object.burial %}

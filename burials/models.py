@@ -10,6 +10,12 @@ FULLYPARTLYEXCAVATED = (
     ("partly excavated", "partly excavated")
 )
 
+BOOLEAN_CHOICES = (
+    (None, 'Unknown'),
+    (True, 'Yes'),
+    (False, 'No')
+)
+
 
 class BurialSite(models.Model):
 
@@ -24,7 +30,7 @@ class BurialSite(models.Model):
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_topography")
-    exact_location = models.NullBooleanField()
+    exact_location = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     lng = models.FloatField(blank=True, null=True, verbose_name='longitude')
     lat = models.FloatField(blank=True, null=True, verbose_name='latitude')
     excavation = models.CharField(
@@ -173,7 +179,7 @@ class Burial(models.Model):
         if self.burial_group is None:
             return "{} | Burial: {}".format(self.burial_site, self.burial_id)
         else:
-            return "{} | Burial: {}".format(
+            return " {} | Burial: {}".format(
                 self.burial_group, self.burial_id
             )
 

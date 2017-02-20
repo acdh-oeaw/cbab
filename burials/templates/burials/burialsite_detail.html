@@ -8,6 +8,8 @@
 <li class="active">{{ object }}</li>
 </ol>
 {% endif %}
+<button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
+<p></p>
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th class="col-sm-3">Name</th>
@@ -19,7 +21,11 @@
     </tr>
     <tr>
         <th>Location</th>
-        <td>{{ object.location }}</td>
+        <td>
+          <a href="{% url 'places:place_edit' pk=object.location.id %}">
+          {{ object.location }}
+        </a>
+        </td>
     </tr>
     <tr>
         <th>Geographical coordinate reference system</th>
