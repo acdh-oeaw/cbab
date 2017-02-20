@@ -42,6 +42,7 @@ class BurialTable(tables.Table):
 class UrnCoverTable(tables.Table):
     db_id = tables.LinkColumn('burials:urncover_detail', args=[A('pk')], accessor='id')
     cover_id = tables.LinkColumn('burials:urncover_detail', args=[A('pk')])
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')], accessor='urn.burial')
 
     class Meta:
         model = UrnCover
@@ -52,7 +53,7 @@ class UrnCoverTable(tables.Table):
 class UrnTable(tables.Table):
     db_id = tables.LinkColumn('burials:urn_detail', args=[A('pk')], accessor='id')
     urn_id = tables.LinkColumn('burials:urn_detail', args=[A('pk')])
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = Urn
@@ -63,7 +64,7 @@ class UrnTable(tables.Table):
 class GraveGoodTable(tables.Table):
     db_id = tables.LinkColumn('burials:gravegood_detail', args=[A('pk')], accessor='id')
     name = tables.LinkColumn('burials:gravegood_detail', args=[A('pk')])
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = GraveGood
@@ -73,7 +74,7 @@ class GraveGoodTable(tables.Table):
 
 class GraveGoodOtherTable(tables.Table):
     db_id = tables.LinkColumn('burials:gravegoodother_detail', args=[A('pk')], accessor='id')
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = GraveGoodOther
@@ -83,7 +84,7 @@ class GraveGoodOtherTable(tables.Table):
 
 class DeadBodyRemainsTable(tables.Table):
     db_id = tables.LinkColumn('burials:deadbodyremains_detail', args=[A('pk')], accessor='id')
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = DeadBodyRemains
@@ -93,7 +94,7 @@ class DeadBodyRemainsTable(tables.Table):
 
 class AnimalRemainsTable(tables.Table):
     db_id = tables.LinkColumn('burials:animalremains_detail', args=[A('pk')], accessor='id')
-    burial_site = tables.Column(accessor='burial.burial_site.name', verbose_name='burial site name')
+    burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = AnimalRemains
@@ -103,10 +104,9 @@ class AnimalRemainsTable(tables.Table):
 
 class FillingObjectTable(tables.Table):
     db_id = tables.LinkColumn('burials:burialfilling_detail', args=[A('pk')], accessor='id')
-    burial_site = tables.Column(verbose_name='burial site name')
     burial = tables.RelatedLinkColumn('burials:burial_detail', args=[A('pk')])
 
     class Meta:
         model = AnimalRemains
-        fields = ['db_id', 'burial_site', 'burial', 'filling_objects']
+        fields = ['db_id', 'filling_objects', 'burial']
         attrs = {"class": "table table-hover table-striped table-condensed"}

@@ -173,7 +173,7 @@ class Burial(models.Model):
         if self.burial_group is None:
             return "{} | Burial: {}".format(self.burial_site, self.burial_id)
         else:
-            return "BurialGroup: {} | Burial: {}".format(
+            return "{} | Burial: {}".format(
                 self.burial_group, self.burial_id
             )
 
@@ -240,7 +240,7 @@ class Urn(models.Model):
     urncover_exists = models.NullBooleanField()
 
     def __str__(self):
-        return "{}-{}".format(self.urn_id, self.id)
+        return "{}-{} {}".format(self.urn_id, self.id, self.burial)
 
     def get_absolute_url(self):
         return reverse('burials:urn_detail', kwargs={'pk': self.id})
