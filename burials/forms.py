@@ -185,8 +185,13 @@ class UrnForm(forms.ModelForm):
         model = Urn
         fields = "__all__"
         widgets = {
-            'burial': autocomplete.ModelSelect2(
-                url='burials:burial-autocomplete'),
+            # 'burial': autocomplete.ModelSelect2(
+            #     url='burials:burial-autocomplete',
+            #     attrs={
+            #     'data-placeholder': 'start typing burial number ...',
+            #     'data-html': True,
+            # },
+            # ),
             'basic_shape': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Basic shape of urn'),
             'cover': autocomplete.ModelSelect2(

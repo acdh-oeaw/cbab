@@ -16,4 +16,16 @@ $(document).ready(function(){
 });
     });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var fetchedParameter = "{{ request.GET.burial }}";
+   $("#id_burial option").each(function() {
+        if($(this).text() == fetchedParameter) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+});
+</script>
 {% endblock showhidescripts %}
+
+<!--http://127.0.0.1:8000/burials/burial-autocomplete/?q=-->

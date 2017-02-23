@@ -73,7 +73,7 @@ class BurialAC(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Burial.objects.all()
         if self.q:
-            qs = qs.filter(id__icontains=self.q)
+            qs = qs.filter(burial_id__icontains=self.q)
 
         return qs
 

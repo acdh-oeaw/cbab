@@ -14,6 +14,25 @@
 <button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
 <p></p>
 {% endif %}
+{% if user.is_authenticated %}
+<legend>Create objects in this Burial</legend>
+<div>
+
+<a class ="btn btn-default btn-lg" href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">filling objects</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:urn_create' %}?burial={{ object }}">urn</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?burial={{ object }}">grave goods</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">grave goods other</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">dead body remains</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?burial={{ object }}">animal remains</a>
+
+</div>
+<p></p>
+<!-- <div>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">burial filling</a>
+
+</div> -->
+
+{% endif %}
 <legend>General</legend>
 <table class="table table-bordered table-hover">
   {% if object.burial_group %}
