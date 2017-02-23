@@ -1,4 +1,4 @@
-{% extends "webpage/base.html" %}
+{% extends "burials/base_detail.html" %}
 {% block content %}
 
 <h1>Burial {{ object }}</h1>
@@ -110,7 +110,7 @@
     {% endif %}
     {% if object.urn_set.all %}
     <tr>
-        <th>Urns</th>
+        <th class="col-sm-3">Urns</th>
         <td>
             {% for x in object.urn_set.all %}
               <li><a href="{% url 'burials:urn_detail' pk=x.id %}">{{ x }}</a></li>
@@ -121,7 +121,7 @@
 
     {% if object.gravegood_set.all %}
     <tr>
-        <th>Grave Good</th>
+        <th class="col-sm-3">Grave Good</th>
         <td>
             {% for x in object.gravegood_set.all %}
               <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
@@ -136,7 +136,7 @@
         </td>
     </tr>
     <tr>
-      <th>Total amount Grave Good</th>
+      <th class="col-sm-3">Total amount Grave Good</th>
       <td>{{object.amount_related_gravegoods}}</td>
     </tr>
     {% endif %}

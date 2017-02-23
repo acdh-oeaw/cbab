@@ -1,0 +1,19 @@
+{% extends "webpage/base.html" %}
+
+{% block showhidescripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("td:empty").parent().hide();
+    $("td").filter(function(){
+      return $(this).text() === "None";
+    }).parent().hide();
+    $("#show_hide_btn").click(function(){
+            var emptytd = $("td:empty");
+            $(emptytd).parent().toggle();
+            var nonetd = $("td").filter(function(){
+            return $(this).text() === "None"});
+            $(nonetd).parent().toggle();
+});
+    });
+</script>
+{% endblock showhidescripts %}
