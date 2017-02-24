@@ -31,8 +31,8 @@ class BurialSite(models.Model):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_topography")
     exact_location = models.NullBooleanField(choices=BOOLEAN_CHOICES)
-    lng = models.FloatField(blank=True, null=True, verbose_name='longitude')
     lat = models.FloatField(blank=True, null=True, verbose_name='latitude')
+    lng = models.FloatField(blank=True, null=True, verbose_name='longitude')
     excavation = models.CharField(
         max_length=50, blank=True,
         null=True, choices=FULLYPARTLYEXCAVATED, help_text="helptext")

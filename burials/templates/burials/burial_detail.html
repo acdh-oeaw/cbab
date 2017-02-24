@@ -1,4 +1,15 @@
 {% extends "burials/base_detail.html" %}
+{% load staticfiles %}
+{% block scriptHeader %}
+<!--leafletjs -->
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
+    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+    <script src="{% static 'webpage/libraries/leaflet.markercluster/src/leaflet.markercluster-src.js' %}"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+
+{% endblock %}
 {% block content %}
 
 <h1>Burial {{ object }}</h1>
@@ -112,6 +123,7 @@
         <td>{{object.filling}}</td>
     </tr>
   </table>
+
 
   {% if object.fillingobject_set.all or object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
   <legend>Related objects</legend>
@@ -255,12 +267,38 @@
         <td>{{object.other_features}}</td>
     </tr>
 </table>
-
 {% if user.is_authenticated %}
+{% if object.burial_site.location.lng %}
+<legend>Location</legend>
+
+<div id="map"></div><br/>
+
+{% endif %}
 
 <a class="btn btn-primary" href="{% url 'burials:burial_update' pk=object.pk %}" role="button">edit burial</a>
 <a class ="btn btn-danger" href="{% url 'burials:burial_delete' pk=object.id %}">delete</a>
 
 {% endif %}
 
+{% endblock %}
+{% block scripts-map %}
+<script type="text/javascript">
+
+    var gps1 = {{ object.burial_site.location.lat }};
+    var gps2 = {{ object.burial_site.location.lng }};
+    var nix = "nix";
+    var map = L.map('map').setView([gps1, gps2], 6);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.light',
+        accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
+        }).addTo(map);
+
+    L.marker([gps1 , gps2]).addTo(map)
+    .bindPopup('<a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">{{ object.burial_site.name }}</a>')
+    .openPopup();
+
+</script>
 {% endblock %}
