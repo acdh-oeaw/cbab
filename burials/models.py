@@ -256,6 +256,16 @@ class Urn(models.Model):
         class_name = str(self.__class__.__name__).lower()
         return class_name
 
+    @property
+    def related_gravegoods(self):
+        goods = []
+        for x in GraveGood.objects.filter(urn=self.id):
+            goods.append(
+                [x.name.skos_broader.all()[0].pref_label, x.name.pref_label, x.amount_countable]
+            )
+        return goods
+
+
 
 class UrnCover(models.Model):
     cover_id = models.TextField(

@@ -78,6 +78,61 @@
     {% endif %}
 
 </table>
+<legend>Objects in this Urn</legend>
+<table class="table table-bordered table-hover">
+  {% if object.gravegood_set.all %}
+  <tr>
+      <th class="col-sm-3">Grave Good</th>
+      <td>
+          {% for x in object.gravegood_set.all %}
+            <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
+          {% endfor %} <br/><hr/>
+          {% for x in object.related_gravegoods %}
+            <li>
+                {% for item in x %}
+                  {{ item }}
+                {% endfor %}
+            </li>
+          {% endfor %}
+      </td>
+  </tr>
+
+  {% endif %}
+  {% if object.gravegoodother_set.all %}
+  <tr>
+      <th class="col-sm-3">Grave Good Other</th>
+      <td>
+          {% for x in object.gravegoodother_set.all %}
+            <li><a href="{% url 'burials:gravegoodother_detail' pk=x.id %}">{{ x }}</a></li>
+          {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
+
+  {% if object.deadbodyremains_set.all %}
+  <tr>
+      <th class="col-sm-3">Dead Body Remains</th>
+      <td>
+          {% for x in object.deadbodyremains_set.all %}
+            <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
+          {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
+
+  {% if object.animalremains_set.all %}
+  <tr>
+      <th class="col-sm-3">Animal Remains</th>
+      <td>
+          {% for x in object.animalremains_set.all %}
+            <li><a href="{% url 'burials:animalremains_detail' pk=x.id %}">{{ x }}</a></li>
+          {% endfor %}
+      </td>
+  </tr>
+  {% endif %}
+
+</table>
+
 
 {% if user.is_authenticated %}
 

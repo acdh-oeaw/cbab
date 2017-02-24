@@ -84,7 +84,21 @@
     </tr>
     <tr>
         <th>Burial type</th>
-        <td>{{object.burial_type}}</td>
+        <td>
+          {{object.burial_type}}
+          {% if object.burial_type.skos_broader.all %}
+          {% for x in object.burial_type.skos_broader.all %}
+          <ul><li>{{ x }}
+            {% if x.skos_broader.all %}
+            {% for y in x.skos_broader.all %}
+          <ul><li>{{ y }}</li></ul>
+          {% endfor %}
+            {% endif %}
+          </li></ul>
+          {% endfor %}
+          {% endif %}
+
+        </td>
     </tr>
     <tr>
         <th>Secondary burial</th>
@@ -166,6 +180,8 @@
             {% endfor %}
         </td>
     </tr>
+    {% endif %}
+    {% if object.amount_related_gravegoods %}
     <tr>
       <th class="col-sm-3">Total amount Grave Good</th>
       <td>{{object.amount_related_gravegoods}}</td>
