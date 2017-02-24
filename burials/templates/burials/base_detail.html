@@ -37,6 +37,26 @@ $(document).ready(function(){
     });
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var fetchedParameter = "{{ request.GET.burialsite }}";
+   $("#id_burial_site option").each(function() {
+        if($(this).text() == fetchedParameter) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var fetchedParameter = "{{ request.GET.burialgroup }}";
+   $("#id_burial_group option").each(function() {
+        if($(this).text() == fetchedParameter) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+});
+</script>
 <!-- <script type="text/javascript">
 $(document).ready(function(){
     var fetchedburial = "{{ request.GET.burial }}";

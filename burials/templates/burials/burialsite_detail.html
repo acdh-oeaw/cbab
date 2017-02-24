@@ -10,6 +10,15 @@
 {% endif %}
 <button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
 <p></p>
+
+{% if user.is_authenticated %}
+<legend>Create Objects in this Burial Site</legend>
+<div>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:burialgroup_create' %}?burialsite={{ object }}">burial group</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:burial_create' %}?burialsite={{ object }}">burial</a>
+</div>
+<p></p>
+{% endif %}
 <legend>Description</legend>
 <table class="table table-bordered table-striped table-hover">
     <tr>
@@ -81,7 +90,7 @@
       <th>Burial groups</th>
       <td>
         {% for x in burialgroup_list %}
-        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">ID {{ x.id }} {{ x.name }}<br/></a>
+        <a href="/burials/{{ x.get_classname }}/{{ x.id }}">{{ x }}<br/></a>
         {% endfor %}
       </td>
   </tr>

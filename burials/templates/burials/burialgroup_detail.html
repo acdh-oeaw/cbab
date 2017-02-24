@@ -8,7 +8,15 @@
 <li><a href="{% url 'burials:burialsite_detail' pk=object.burial_site.id %}">{{ object.burial_site }}</a></li>
 <li class="active">Burial Group: {{ object.burial_group_id }}</li>
 </ol>
+
+{% endif %}
 <button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
+<p></p>
+{% if user.is_authenticated %}
+<legend>Create Objects in this Burial Site</legend>
+<div>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:burial_create' %}?burialsite={{ object.burial_site }}&burialgroup={{ object }}">burial</a>
+</div>
 <p></p>
 {% endif %}
 <legend>Description</legend>

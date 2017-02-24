@@ -45,8 +45,8 @@ class BurialGroupForm(forms.ModelForm):
         model = BurialGroup
         fields = "__all__"
         widgets = {
-            'burial_site': autocomplete.ModelSelect2(
-                url='burials:burialsite-autocomplete'),
+            # 'burial_site': autocomplete.ModelSelect2(
+            #     url='burials:burialsite-autocomplete'),
             'burial_group_type': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Burial group type'),
             'material': autocomplete.ModelSelect2(
@@ -69,10 +69,10 @@ class BurialForm(forms.ModelForm):
         model = Burial
         fields = "__all__"
         widgets = {
-            'burial_group': autocomplete.ModelSelect2(
-                url='burials:burialgroup-autocomplete'),
-            'burial_site': autocomplete.ModelSelect2(
-                url='burials:burialsite-autocomplete'),
+            # 'burial_group': autocomplete.ModelSelect2(
+            #     url='burials:burialgroup-autocomplete'),
+            # 'burial_site': autocomplete.ModelSelect2(
+            #     url='burials:burialsite-autocomplete'),
             'burial_type': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Burial type'),
             'construction': autocomplete.ModelSelect2(
