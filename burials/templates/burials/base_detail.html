@@ -57,6 +57,17 @@ $(document).ready(function(){
     });
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#breadcrumb_burial").text("{{ request.GET.burial }}");
+  $("#breadcrumb_urn").text("{{ request.GET.urn }}");
+    // $("#breadcrumb_burial").value == fetchedParameter
+
+
+
+});
+</script>
 <!-- <script type="text/javascript">
 $(document).ready(function(){
     var fetchedburial = "{{ request.GET.burial }}";

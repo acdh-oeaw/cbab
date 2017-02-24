@@ -7,9 +7,10 @@
 <div class="panel panel-default procustom-panel-create">
     <div class="panel-heading procustom-panel-heading">
         <h1>Create/Edit Grave Good</h1>
-        {% if object %}
+
         <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
+        {% if object %}
         <li><a href="{% url 'burials:burialsite_detail' pk=object.burial.burial_site.id %}">{{ object.burial.burial_site }}</a></li>
         {% if object.burial.burial_group %}
         <li><a href="{% url 'burials:burialgroup_detail' pk=object.burial.burial_group.id %}">
@@ -22,8 +23,12 @@
             Urn: {{ object.urn.urn_id }}</a></li>
           {% endif %}
         <li class="active">{{ object }}</li>
+        {% else %}
+          <li id="breadcrumb_burial"></li>
+          <li id="breadcrumb_urn"></li>
+          {% endif %}
         </ol>
-        {% endif %}
+
     </div>
     <div class="panel-body">
          {% crispy form %}
