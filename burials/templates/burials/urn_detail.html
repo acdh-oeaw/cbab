@@ -16,6 +16,23 @@
 <button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
 <p></p>
 {% endif %}
+{% if user.is_authenticated %}
+
+<legend>Create Objects in this Urn</legend>
+<div>
+  {% if urncover_list or object.urncover_exists == False %}
+  {% else %}
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:urncover_create' %}?urn={{ object }}">urn cover</a>
+  {% endif %}
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?urn={{ object }}&burial={{ object.burial }}">grave good</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?urn={{ object }}&burial={{ object.burial }}">grave good other</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?urn={{ object }}&burial={{ object.burial }}">dead body remains</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?urn={{ object }}&burial={{ object.burial }}">animal remains</a>
+</div>
+<p></p>
+
+{% endif %}
+<legend>Description</legend>
 <table class="table table-bordered table-striped table-hover">
   {% if object.burial %}
     <tr>
@@ -28,7 +45,7 @@
     </tr>
     {% endif %}
     <tr>
-        <th>Basic shape</th>
+        <th class="col-sm-3">Basic shape</th>
         <td>{{ object.basic_shape }}</td>
     </tr>
     <tr>
@@ -42,6 +59,10 @@
     <tr>
         <th>Variation</th>
         <td>{{ object.variation }}</td>
+    </tr>
+    <tr>
+      <th>Urn cover exists</th>
+      <td>{{ object.urncover_exists }}</td>
     </tr>
     {% if urncover_list %}
     <tr>

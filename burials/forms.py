@@ -99,7 +99,7 @@ class BurialForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'save'),)
         self.helper.layout = Layout(
             Fieldset(
-            'General',
+            'Description',
             'burial_group',
             'burial_site',
             'burial_id',
@@ -214,8 +214,8 @@ class GraveGoodForm(forms.ModelForm):
         model = GraveGood
         fields = "__all__"
         widgets = {
-            'burial': autocomplete.ModelSelect2(
-                url='burials:burial-autocomplete'),
+            # 'burial': autocomplete.ModelSelect2(
+            #     url='burials:burial-autocomplete'),
             'name': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=GraveGoodObject'),
             'material': autocomplete.ModelSelect2(
@@ -242,8 +242,8 @@ class GraveGoodOtherForm(forms.ModelForm):
         model = GraveGoodOther
         fields = "__all__"
         widgets = {
-            'burial': autocomplete.ModelSelect2(
-                url='burials:burial-autocomplete'),
+            # 'burial': autocomplete.ModelSelect2(
+            #     url='burials:burial-autocomplete'),
             'position': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
@@ -264,8 +264,8 @@ class DeadBodyRemainsForm(forms.ModelForm):
         model = DeadBodyRemains
         fields = "__all__"
         widgets = {
-            'burial': autocomplete.ModelSelect2(
-                url='burials:burial-autocomplete'),
+            # 'burial': autocomplete.ModelSelect2(
+            #     url='burials:burial-autocomplete'),
             'age': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Age'),
             'gender': autocomplete.ModelSelect2(
@@ -292,8 +292,8 @@ class AnimalRemainsForm(forms.ModelForm):
         model = AnimalRemains
         fields = "__all__"
         widgets = {
-            'burial': autocomplete.ModelSelect2(
-                url='burials:burial-autocomplete'),
+            # 'burial': autocomplete.ModelSelect2(
+            #     url='burials:burial-autocomplete'),
             'species': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Species'),
             'position': autocomplete.ModelSelect2(

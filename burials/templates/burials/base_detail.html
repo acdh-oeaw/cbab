@@ -1,6 +1,6 @@
 {% extends "webpage/base.html" %}
 
-{% block showhidescripts %}
+{% block scripts2 %}
 <script type="text/javascript">
 $(document).ready(function(){
     $("td:empty").parent().hide();
@@ -26,6 +26,34 @@ $(document).ready(function(){
     });
 });
 </script>
-{% endblock showhidescripts %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var fetchedParameter = "{{ request.GET.urn }}";
+   $("#id_urn option").each(function() {
+        if($(this).text() == fetchedParameter) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+});
+</script>
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+    var fetchedburial = "{{ request.GET.burial }}";
+    var fetchedurn = "{{ request.GET.urn }}";
+   $("#id_burial option").each(function() {
+        if($(this).text() == fetchedburial) {
+            $(this).attr('selected', 'selected');
+        }
+    });
+    $("#id_urn option").each(function() {
+         if($(this).text() == fetchedurn) {
+             $(this).attr('selected', 'selected');
+         }
+     });
+});
+</script> -->
+
+{% endblock scripts2 %}
 
 <!--http://127.0.0.1:8000/burials/burial-autocomplete/?q=-->

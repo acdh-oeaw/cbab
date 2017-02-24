@@ -17,10 +17,11 @@
 <button id="show_hide_btn" class="btn btn-default">show / hide all fields</button>
 <p></p>
 {% endif %}
+<legend>Description</legend>
 <table class="table table-bordered table-striped table-hover">
     {% if object.burial %}
     <tr>
-        <th>Burial</th>
+        <th class="col-sm-3">Burial</th>
         <td>
           <a href="{% url 'burials:burial_detail' pk=object.burial.id %}">
           {{ object.burial }}
@@ -29,7 +30,7 @@
     </tr>
     {% endif %}
     <tr>
-        <th>Object</th>
+        <th class="col-sm-3">Object</th>
         <td>{{ object.filling_objects }}</td>
     </tr>
     <tr>
