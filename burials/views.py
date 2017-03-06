@@ -164,6 +164,16 @@ class FillingObjectCreate(CreateView):
         return super(FillingObjectCreate, self).dispatch(*args, **kwargs)
 
 
+class FillingObjectDelete(DeleteView):
+    model = FillingObject
+    template_name = 'burials/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_fillingobjects')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(FillingObjectDelete, self).dispatch(*args, **kwargs)
+
+
 class FillingObjectUpdate(UpdateView):
     model = FillingObject
     form_class = FillingObjectForm
@@ -226,6 +236,7 @@ class UrnDetailView(DetailView):
         context = super(UrnDetailView, self).get_context_data(**kwargs)
         context["urncover_list"] = UrnCover.objects.filter(urn=self.object.id)
         return context
+
 
 class UrnListView(ListView):
     model = Urn

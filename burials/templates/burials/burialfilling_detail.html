@@ -58,6 +58,7 @@
 {% if user.is_authenticated %}
 
 <a class="btn btn-primary" href="{% url 'burials:burialfilling_update' pk=object.pk %}" role="button">edit filling object group</a>
+<a class ="btn btn-danger" href="{% url 'burials:burialfilling_delete' pk=object.id %}">delete</a>
 
 
 {% endif %}

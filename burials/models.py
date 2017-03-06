@@ -227,6 +227,11 @@ class FillingObject(models.Model):
     def get_absolute_url(self):
         return reverse('burials:burialfilling_detail', kwargs={'pk': self.id})
 
+    def get_classname(self):
+        """Returns the name of the class as lowercase string"""
+        class_name = str(self.__class__.__name__).lower()
+        return class_name
+
 
 class Urn(models.Model):
     burial = models.ForeignKey(
