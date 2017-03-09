@@ -190,9 +190,12 @@ class Burial(models.Model):
     def related_gravegoods(self):
         goods = []
         for x in GraveGood.objects.filter(burial=self.id):
-            goods.append(
-                [x.name.skos_broader.all()[0].pref_label, x.name.pref_label, x.amount_countable]
-            )
+            try:
+                goods.append(
+                    [x.name.skos_broader.all()[0].pref_label, x.name.pref_label, x.amount_countable]
+                    )
+            except:
+                goods.append([x])
         return goods
 
     @property
