@@ -8,4 +8,4 @@ PROJECT_METADATA = {
     'description': 'text to come',
     'github': 'https://github.com/acdh-oeaw/cbab',
     'purpose_de': 'Das Ziel des Projekts "CBAB" ist die Publikation von Daten über Brandgräberfeldern.',
-    'purpose_en': 'The purpose of the project "ECCE" is the publication of data about Cremeation Bronze Age Burials.'}
+    'purpose_en': 'The purpose of the project "CBAB" is the publication of data about Cremeation Bronze Age Burials.'}
