@@ -18,3 +18,7 @@ __pycache__/
 /cbab/settings/postgres.py
 /TryAndPlay.ipynb
 /data/Tabelle_CBAB_20_12_2016.xls
+
+# documentation build files
+
+/docs/_*/*
