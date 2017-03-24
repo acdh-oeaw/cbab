@@ -1,7 +1,7 @@
 {% extends "burials/base_detail.html" %}
 {% block content %}
 
-<h1>Dead body remains {{ object }}</h1>
+<h1>Anthropology {{ object }}</h1>
 {% if object %}
 <ol class="breadcrumb">
 <li><a href="/">Home</a></li>
@@ -71,7 +71,7 @@
 
 {% if user.is_authenticated %}
 
-<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit dead body remains</a>
+<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit Anthropology</a>
 <a class ="btn btn-danger" href="{% url 'burials:deadbodyremains_delete' pk=object.id %}">delete</a>
 
 {% endif %}

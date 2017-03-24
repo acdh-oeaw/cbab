@@ -1,10 +1,10 @@
 {% extends "browsing/generic_list.html" %}
-{% block list_title %}All Dead Body Remains{% endblock %}
+{% block list_title %}All Anthropology{% endblock %}
 
 {% block create_button %}
 {% if user.is_authenticated %}
  <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:deadbodyremains_create' %}">create new dead body remains</a>
+    <a class ="btn btn-primary btn-md"  href="{% url 'burials:deadbodyremains_create' %}">create new Anthropology</a>
 </div>
 {% endif %}
 {% endblock %}

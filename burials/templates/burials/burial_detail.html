@@ -33,7 +33,7 @@
 <a class ="btn btn-default btn-lg" href="{% url 'burials:urn_create' %}?burial={{ object }}">urn</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?burial={{ object }}">grave goods</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">grave goods other</a>
-<a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">dead body remains</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">Anthropology</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?burial={{ object }}">animal remains</a>
 
 </div>
@@ -190,7 +190,7 @@
 
     {% if object.gravegoodother_set.all %}
     <tr>
-        <th>Grave Good Other</th>
+        <th>Organic Grave Goods</th>
         <td>
             {% for x in object.gravegoodother_set.all %}
               <li><a href="{% url 'burials:gravegoodother_detail' pk=x.id %}">{{ x }}</a></li>
@@ -201,7 +201,7 @@
 
     {% if object.deadbodyremains_set.all %}
     <tr>
-        <th>Dead Body Remains</th>
+        <th>Anthropology</th>
         <td>
             {% for x in object.deadbodyremains_set.all %}
               <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
