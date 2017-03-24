@@ -273,14 +273,14 @@ class Urn(models.Model):
 
 
 class UrnCover(models.Model):
-    cover_id = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Urn cover number")
-    upside_down = models.NullBooleanField()
-    fragment = models.NullBooleanField()
     basic_shape = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
     )
+    upside_down = models.NullBooleanField()
+    fragment = models.NullBooleanField()
+    cover_id = models.TextField(
+        blank=True, null=True, help_text="helptext", verbose_name="Urn cover inventory number")
     urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
 
     def __str__(self):
