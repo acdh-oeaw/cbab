@@ -367,11 +367,11 @@ class DeadBodyRemains(CrematedRemainsBaseClass):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_temperature")
     weight = models.TextField(
-        blank=True, null=True, help_text="helptext")
+        blank=True, null=True, help_text="in gram")
     pathology = models.TextField(
         blank=True, null=True, help_text="helptext")
     total_weight = models.TextField(
-        blank=True, null=True, help_text="helptext")
+        blank=True, null=True, help_text="in gram", verbose_name="Total weight of Human Remmains")
     position = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_deadbodyremains_position")

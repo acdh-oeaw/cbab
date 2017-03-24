@@ -262,7 +262,10 @@ class DeadBodyRemainsForm(forms.ModelForm):
 
     class Meta:
         model = DeadBodyRemains
-        fields = "__all__"
+        fields = [
+            'burial', 'urn', 'age', 'gender', 'temperature', 'weight', 'pathology', 'total_weight',
+            'position', 'amount_countable', 'secondary_depostition', 'comment'
+        ]
         widgets = {
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
@@ -291,7 +294,7 @@ class AnimalRemainsForm(forms.ModelForm):
     class Meta:
         model = AnimalRemains
         fields = [
-            'species', 'age', 'sex', 'amount_countable',
+            'burial', 'urn', 'species', 'age', 'sex', 'amount_countable',
             'position', 'secondary_depostition', 'comment'
         ]
         widgets = {
