@@ -29,12 +29,12 @@
 <legend>Create objects in this Burial</legend>
 <div>
 
-<a class ="btn btn-default btn-lg" href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">filling objects</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:urn_create' %}?burial={{ object }}">urn</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?burial={{ object }}">grave goods</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">grave goods other</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">Anthropology</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?burial={{ object }}">animal remains</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">filling objects</a>
 
 </div>
 <p></p>
