@@ -243,7 +243,10 @@ class GraveGoodOtherForm(forms.ModelForm):
 
     class Meta:
         model = GraveGoodOther
-        fields = "__all__"
+        fields = [
+            'burial', 'urn', 'food', 'other_organic_grave_good',
+            'other_organic_grave_good_text', 'position', 'secondary_depostition', 'comment'
+        ]
         widgets = {
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
