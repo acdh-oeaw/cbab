@@ -152,16 +152,16 @@ class Burial(models.Model):
         help_text="helptext", related_name="skos_orientation_of_the_grave_pit")
     length = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     width = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     diameter = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     height = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     post_holes = models.TextField(
         blank=True, null=True, help_text="helptext")
     surface_identification_mark = models.TextField(
