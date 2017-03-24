@@ -13,7 +13,7 @@ class Region(models.Model):
     country = models.ForeignKey(Country, blank=True, null=True)
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.country)
+        return "{} ({})".format(self.country, self.name)
 
 
 class Province(models.Model):
@@ -21,7 +21,7 @@ class Province(models.Model):
     region = models.ForeignKey(Region, blank=True, null=True)
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.region)
+        return "{} ({})".format(self.region, self.name)
 
 
 class AlternativeName(models.Model):
