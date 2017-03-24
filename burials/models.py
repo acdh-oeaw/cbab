@@ -242,13 +242,14 @@ class Urn(models.Model):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn"
     )
-    urn_id = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Urn number")
     urn_type = models.TextField(
         blank=True, null=True, help_text="helptext")
     variation = models.TextField(
         blank=True, null=True, help_text="helptext")
-    urncover_exists = models.NullBooleanField()
+    urn_id = models.TextField(
+        blank=True, null=True, help_text="helptext", verbose_name="Urn Inventory Number")
+
+    urncover_exists = models.NullBooleanField(verbose_name="Urn Cover")
 
     def __str__(self):
         return "{}-{} {}".format(self.urn_id, self.id, self.burial)
