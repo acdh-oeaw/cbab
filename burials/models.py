@@ -67,12 +67,12 @@ class BurialSite(models.Model):
 
 
 class BurialGroup(models.Model):
-    burial_group_id = models.CharField(
-        max_length=255, blank=True, null=True,
-        help_text="helptext", verbose_name="Burial group number")
     burial_site = models.ForeignKey(
         BurialSite, blank=True, null=True,
         help_text="helptext")
+    burial_group_id = models.CharField(
+        max_length=255, blank=True, null=True,
+        help_text="helptext", verbose_name="Burial group number")
     name = models.TextField(
         blank=True, null=True, help_text="helptext")
     burial_group_type = models.ForeignKey(
@@ -83,16 +83,16 @@ class BurialGroup(models.Model):
         help_text="helptext", related_name="skos_material_burialgroup")
     length = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     width = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     diameter = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
     height = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="helptext")
+        help_text="cm")
 
     def __str__(self):
         return "{} | BurialGroup: {}".format(self.burial_site, self.burial_group_id)
