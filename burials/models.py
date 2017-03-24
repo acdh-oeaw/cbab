@@ -299,9 +299,8 @@ class CrematedRemainsBaseClass(models.Model):
     """An abstract class for Grave Goods and living remains"""
     burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
     urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
-    position_comment = models.TextField(blank=True, null=True, help_text="helptext")
     amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
-    amount_comment = models.TextField(blank=True, null=True, help_text="helptext")
+    comment = models.TextField(blank=True, null=True, help_text="helptext")
     secondary_depostition = models.NullBooleanField()
 
     class Meta:
@@ -311,7 +310,7 @@ class CrematedRemainsBaseClass(models.Model):
 class GraveGood(CrematedRemainsBaseClass):
     name = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
-        related_name="skos_name_gravegood")
+        related_name="skos_name_gravegood", verbose_name="Type")
     material = models.ForeignKey(
         SkosConcept,
         blank=True, null=True,
