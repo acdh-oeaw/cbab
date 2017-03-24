@@ -290,7 +290,10 @@ class AnimalRemainsForm(forms.ModelForm):
 
     class Meta:
         model = AnimalRemains
-        fields = "__all__"
+        fields = [
+            'species', 'age', 'sex', 'amount_countable',
+            'position', 'secondary_depostition', 'comment'
+        ]
         widgets = {
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),

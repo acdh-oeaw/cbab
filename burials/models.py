@@ -271,7 +271,6 @@ class Urn(models.Model):
         return goods
 
 
-
 class UrnCover(models.Model):
     cover_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Urn cover number")
