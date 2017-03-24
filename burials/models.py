@@ -107,20 +107,20 @@ class BurialGroup(models.Model):
 
 
 class Burial(models.Model):
-    burial_group = models.ForeignKey(
-        BurialGroup, blank=True, null=True, help_text="helptext")
     burial_site = models.ForeignKey(
         BurialSite, blank=True, null=True, help_text="helptext")
+    burial_group = models.ForeignKey(
+        BurialGroup, blank=True, null=True, help_text="helptext")
     burial_id = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="helptext", verbose_name="Burial number")
+    burial_type = models.ForeignKey(
+        SkosConcept, blank=True, null=True, help_text="helptext",
+        related_name="skos_burial_type")
     C14_dendro = models.NullBooleanField(verbose_name="Absolute dating (C14/Dendro)")
     absolute_age = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="helptext")
-    burial_type = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
-        related_name="skos_burial_type")
     secondary_burial = models.NullBooleanField()
     secondary_burial_text = models.TextField(
         blank=True, null=True, help_text="helptext")
