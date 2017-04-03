@@ -208,6 +208,11 @@ class SkosReader(object):
                 skos_pref_labels.append(skos_label)
             description["pref_labels"] = skos_pref_labels
 
+            skos_definitions = []
+            for y in x.findall('skos:definition', namespaces={"skos": self.ns_skos}):
+                skos_definitions.append(y.text)
+            description["definitions"] = skos_definitions
+
             skos_alt_labels = []
             for y in x.findall('skos:altLabel', namespaces={"skos": self.ns_skos}):
                 skos_label = {}
@@ -274,6 +279,11 @@ class SkosImporter(SkosReader):
                 try:
                     temp_concept.pref_label = x['pref_labels'][0]["text"]
                     temp_concept.pref_label_lang = x['pref_labels']["lang"]
+                except:
+                    pass
+                try:
+                    temp_concept.definition = x['definitions'][0]
+                    temp_concept.definition_lang = "eng"
                 except:
                     pass
                 temp_concept.save()
