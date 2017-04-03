@@ -251,7 +251,7 @@ class GraveGoodOtherForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'position': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
+                url='../../skos-constraint-ac/?scheme=Position'),
         }
 
     def __init__(self, *args, **kwargs):
