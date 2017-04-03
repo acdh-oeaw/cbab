@@ -162,6 +162,13 @@ class Burial(models.Model):
     height = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="cm")
+    filling_objects = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        help_text="helptext", related_name="skos_filling_object")
+    intentionally_deposited = models.NullBooleanField()
+    filling = models.ForeignKey(
+        SkosConcept, blank=True, null=True,
+        help_text="helptext", related_name="skos_filling")
     post_holes = models.TextField(
         blank=True, null=True, help_text="helptext")
     surface_identification_mark = models.TextField(
@@ -171,9 +178,6 @@ class Burial(models.Model):
         help_text="helptext")
     other_features = models.TextField(
         blank=True, null=True, help_text="helptext")
-    filling = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_filling")
 
     def __str__(self):
         if self.burial_group is None:
@@ -211,26 +215,26 @@ class Burial(models.Model):
         return class_name
 
 
-class FillingObject(models.Model):
-    burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
-    filling_objects = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_filling_object")
-    amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
-    intentionally_deposited = models.NullBooleanField()
-    burial_filling_comment = models.TextField(
-        blank=True, null=True, help_text="helptext", verbose_name="Comment")
-
-    def __str__(self):
-        return "type: {} | amount: {}".format(self.filling_objects, self.amount_countable)
-
-    def get_absolute_url(self):
-        return reverse('burials:burialfilling_detail', kwargs={'pk': self.id})
-
-    def get_classname(self):
-        """Returns the name of the class as lowercase string"""
-        class_name = str(self.__class__.__name__).lower()
-        return class_name
+# class FillingObject(models.Model):
+#     burial = models.ForeignKey(Burial, blank=True, null=True, help_text="helptext")
+#     filling_objects = models.ForeignKey(
+#         SkosConcept, blank=True, null=True,
+#         help_text="helptext", related_name="skos_filling_object")
+#     amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
+#     intentionally_deposited = models.NullBooleanField()
+#     burial_filling_comment = models.TextField(
+#         blank=True, null=True, help_text="helptext", verbose_name="Comment")
+#
+#     def __str__(self):
+#         return "type: {} | amount: {}".format(self.filling_objects, self.amount_countable)
+#
+#     def get_absolute_url(self):
+#         return reverse('burials:burialfilling_detail', kwargs={'pk': self.id})
+#
+#     def get_classname(self):
+#         """Returns the name of the class as lowercase string"""
+#         class_name = str(self.__class__.__name__).lower()
+#         return class_name
 
 
 class Urn(models.Model):

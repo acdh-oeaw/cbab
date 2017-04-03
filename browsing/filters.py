@@ -344,9 +344,3 @@ class AnimalRemainsListFilter(django_filters.FilterSet):
 
     def burialsite_name_custom_filter(self, queryset, value):
         return queryset.filter(burial__burial_site__name__icontains=value).distinct()
-
-
-class FillingObjectListFilter(django_filters.FilterSet):
-
-    class Meta:
-        model = FillingObject

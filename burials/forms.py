@@ -138,25 +138,24 @@ class BurialForm(forms.ModelForm):
         )
 
 
-
-class FillingObjectForm(forms.ModelForm):
-
-    class Meta:
-        model = FillingObject
-        fields = "__all__"
-        widgets = {
-            'filling_objects': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(FillingObjectForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+# class FillingObjectForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = FillingObject
+#         fields = "__all__"
+#         widgets = {
+#             'filling_objects': autocomplete.ModelSelect2(
+#                 url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
+#         }
+#
+#     def __init__(self, *args, **kwargs):
+#         super(FillingObjectForm, self).__init__(*args, **kwargs)
+#         self.helper = FormHelper()
+#         self.helper.form_tag = True
+#         self.helper.form_class = 'form-horizontal'
+#         self.helper.label_class = 'col-md-3'
+#         self.helper.field_class = 'col-md-9'
+#         self.helper.add_input(Submit('submit', 'save'),)
 
 
 class UrnCoverForm(forms.ModelForm):

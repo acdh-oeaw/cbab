@@ -15,5 +15,4 @@ urlpatterns = [
         r'deadbodyremains/$', views.DeadBodyRemainsListView.as_view(), name='browse_deadbodyremains'
     ),
     url(r'animalremains/$', views.AnimalRemainsListView.as_view(), name='browse_animalremains'),
-    url(r'fillingobjects/$', views.FillingObjectListView.as_view(), name='browse_fillingobjects'),
 ]
