@@ -85,6 +85,8 @@ class BurialForm(forms.ModelForm):
                 url='../../skos-constraint-ac/?scheme=Grave pit form'),
             'grave_pit_orientation': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Grave pit orientation'),
+            'filling_objects': autocomplete.ModelSelect2(
+                url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
             'filling': autocomplete.ModelSelect2(
                 url='../../skos-constraint-ac/?scheme=Burial Filling Type'),
         }
@@ -114,7 +116,6 @@ class BurialForm(forms.ModelForm):
                 'extraordinary_burial_text',
                 'inhumation_burial_type',
                 'bi_ritual_burial_type',
-                'filling',
                 css_class="separate-panel",
             ),
             Fieldset(
@@ -133,7 +134,14 @@ class BurialForm(forms.ModelForm):
                 'surface_identification_mark',
                 'erdgraebchen',
                 'other_features',
-                css_class="separate-panel"
+                css_class="separate-panel",
+            ),
+            Fieldset(
+                'Burial Filling',
+                'filling_objects',
+                'intentionally_deposited',
+                'filling',
+                css_class="separate-panel",
             )
         )
 

@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Burial
 
-# Register your models here.
+admin.site.register(Burial)

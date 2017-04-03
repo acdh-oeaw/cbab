@@ -34,14 +34,10 @@
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">grave goods other</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">Anthropology</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?burial={{ object }}">animal remains</a>
-<a class ="btn btn-default btn-lg" href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">filling objects</a>
 
 </div>
 <p></p>
-<!-- <div>
-    <a class ="btn btn-primary btn-md"  href="{% url 'burials:burialfilling_create' %}?burial={{ object }}">burial filling</a>
 
-</div> -->
 
 {% endif %}
 <legend>Description</legend>
@@ -139,20 +135,10 @@
   </table>
 
 
-  {% if object.fillingobject_set.all or object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
+  {% if object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
   <legend>Related objects</legend>
   <table class="table table-bordered table-hover">
 
-    {% if object.fillingobject_set.all %}
-    <tr>
-        <th class="col-sm-3">Filling objects</th>
-        <td>
-            {% for x in object.fillingobject_set.all %}
-              <li><a href="{% url 'burials:burialfilling_detail' pk=x.id %}">{{ x }}</a></li>
-            {% endfor %}
-        </td>
-    </tr>
-    {% endif %}
     {% if object.urn_set.all %}
     <tr>
         <th class="col-sm-3">Urns</th>
