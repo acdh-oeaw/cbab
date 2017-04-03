@@ -300,7 +300,8 @@ class SkosImporter(SkosReader):
                     temp_scheme, _ = SkosConceptScheme.objects.get_or_create(
                         legacy_id=z
                     )
-                    temp_scheme.dc_title = self.skosfile
+                    scheme_dctitle = z.split('/')[-1]
+                    temp_scheme.dc_title = scheme_dctitle
                     temp_scheme.save()
                     temp_concept.scheme = [temp_scheme]
                     temp_concept.save()
