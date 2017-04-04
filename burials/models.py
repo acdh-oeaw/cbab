@@ -209,6 +209,20 @@ class Burial(models.Model):
             goods.append(x.amount_countable)
         return sum(goods)
 
+    @property
+    def amount_related_deadbodyremains(self):
+        deadbodyremains = []
+        for x in DeadBodyRemains.objects.filter(burial=self.id):
+            deadbodyremains.append(x.amount_countable)
+        return sum(deadbodyremains)
+
+    @property
+    def amount_related_organic(self):
+        organic = []
+        for x in AnimalRemains.objects.filter(burial=self.id):
+            organic.append(x.amount_countable)
+        return sum(organic)
+
     def get_classname(self):
         """Returns the name of the class as lowercase string"""
         class_name = str(self.__class__.__name__).lower()

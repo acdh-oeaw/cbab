@@ -24,16 +24,16 @@
   {% else %}
   <a class ="btn btn-default btn-lg" href="{% url 'burials:urncover_create' %}?urn={{ object }}">urn cover</a>
   {% endif %}
-  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?urn={{ object }}&burial={{ object.burial }}">grave good</a>
-  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?urn={{ object }}&burial={{ object.burial }}">Organic Grave Goods</a>
-  <a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?urn={{ object }}&burial={{ object.burial }}">Anthropology</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?urn={{ object }}&burial={{ object.burial }}">grave goods</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?urn={{ object }}&burial={{ object.burial }}">anthropology</a>
+  <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?urn={{ object }}&burial={{ object.burial }}">organic grave goods</a>
   <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?urn={{ object }}&burial={{ object.burial }}">animal remains</a>
 </div>
 <p></p>
 
 {% endif %}
 <legend>Description</legend>
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-hover">
   {% if object.burial %}
     <tr>
         <th class="col-sm-3">Burial</th>
@@ -82,7 +82,7 @@
 <table class="table table-bordered table-hover">
   {% if object.gravegood_set.all %}
   <tr>
-      <th class="col-sm-3">Grave Good</th>
+      <th class="col-sm-3">Grave Goods</th>
       <td>
           {% for x in object.gravegood_set.all %}
             <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>

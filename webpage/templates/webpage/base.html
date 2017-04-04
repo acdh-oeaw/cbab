@@ -121,6 +121,7 @@
                     <li>
                         <a href="{% url 'places:place_list' %}">Locations</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
                         <a href="{% url 'browsing:browse_burialsites' %}">Burial Site</a>
                     </li>
@@ -130,24 +131,31 @@
                     <li>
                         <a href="{% url 'browsing:browse_burials' %}">Burial</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
                         <a href="{% url 'browsing:browse_urns' %}">Urn</a>
                     </li>
                     <li>
                         <a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
-                        <a href="{% url 'browsing:browse_gravegoods' %}">Grave Good</a>
+                        <a href="{% url 'browsing:browse_gravegoods' %}">Grave Goods</a>
                     </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="{% url 'browsing:browse_deadbodyremains' %}">Anthropology</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Organic</li>
+
                     <li>
                         <a href="{% url 'browsing:browse_gravegoodsother' %}">Organic Grave Goods</a>
                     </li>
                     <li>
-                        <a href="{% url 'browsing:browse_deadbodyremains' %}">Anthropology</a>
-                    </li>
-                    <li>
                         <a href="{% url 'browsing:browse_animalremains' %}">Animal Remains</a>
                     </li>
+
                     {% if user.is_authenticated %}
                     <li role="separator" class="divider"></li>
                     <li>
