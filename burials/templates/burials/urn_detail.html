@@ -78,6 +78,8 @@
     {% endif %}
 
 </table>
+
+{% if object.gravegood_set.all  or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
 <legend>Objects in this Urn</legend>
 <table class="table table-bordered table-hover">
   {% if object.gravegood_set.all %}
@@ -86,14 +88,8 @@
       <td>
           {% for x in object.gravegood_set.all %}
             <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
-          {% endfor %} <br/><hr/>
-          {% for x in object.related_gravegoods %}
-            <li>
-                {% for item in x %}
-                  {{ item }}
-                {% endfor %}
-            </li>
           {% endfor %}
+
       </td>
   </tr>
 
@@ -132,6 +128,7 @@
   {% endif %}
 
 </table>
+{% endif %}
 
 
 {% if user.is_authenticated %}
