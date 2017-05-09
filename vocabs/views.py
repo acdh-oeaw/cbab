@@ -1,8 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 from django_tables2 import SingleTableView, RequestConfig
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
 from .forms import SkosConceptForm, SkosConceptSchemeForm, SkosLabelForm, GenericFilterFormHelper
@@ -74,6 +75,16 @@ class SkosConceptUpdate(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SkosConceptUpdate, self).dispatch(*args, **kwargs)
+
+
+class SkosConceptDelete(DeleteView):
+    model = SkosConcept
+    template_name = 'vocabs/confirm_delete.html'
+    success_url = reverse_lazy('vocabs:browse_vocabs')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SkosConceptDelete, self).dispatch(*args, **kwargs)
 
 
 #####################################################
