@@ -49,10 +49,6 @@
         <td>{{ object.basic_shape }}</td>
     </tr>
     <tr>
-        <th>Urn number</th>
-        <td>{{ object.urn_id }}</td>
-    </tr>
-    <tr>
         <th>Urn type</th>
         <td>{{ object.urn_type }}</td>
     </tr>
@@ -61,8 +57,12 @@
         <td>{{ object.variation }}</td>
     </tr>
     <tr>
+        <th>Urn Inventory number</th>
+        <td>{{ object.urn_id }}</td>
+    </tr>
+    <tr>
       <th>Urn cover exists</th>
-      <td>{{ object.urncover_exists }}</td>
+      <td>{{ object.get_urncover_exists_display }}</td>
     </tr>
     {% if urncover_list %}
     <tr>

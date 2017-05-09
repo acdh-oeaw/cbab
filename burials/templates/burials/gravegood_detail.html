@@ -44,12 +44,16 @@
       </tr>
       {% endif %}
     <tr>
-        <th>Name</th>
+        <th>Type</th>
         <td>{{ object.name }}</td>
     </tr>
     <tr>
         <th>Material</th>
         <td>{{ object.material }}</td>
+    </tr>
+    <tr>
+        <th>Amount</th>
+        <td>{{ object.amount_countable }}</td>
     </tr>
     <tr>
         <th>Condition</th>
@@ -60,8 +64,12 @@
         <td>{{ object.position }}</td>
     </tr>
     <tr>
-        <th>Amount</th>
-        <td>{{ object.amount_countable }}</td>
+        <th>Secondary deposition</th>
+        <td>{{ object.get_secondary_depostition_display }}</td>
+    </tr>
+    <tr>
+        <th>Comment</th>
+        <td>{{ object.comment }}</td>
     </tr>
 </table>
 

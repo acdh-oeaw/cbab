@@ -45,11 +45,11 @@
         {% endif %}
     <tr>
         <th>Food</th>
-        <td>{{ object.food }}</td>
+        <td>{{ object.get_food_display }}</td>
     </tr>
     <tr>
         <th>Other organic grave good</th>
-        <td>{{ object.other_organic_grave_good }}</td>
+        <td>{{ object.get_other_organic_grave_good_display }}</td>
     </tr>
     <tr>
         <th>Other organic grave good text</th>
@@ -61,7 +61,7 @@
     </tr>
     <tr>
         <th>Secondary deposition</th>
-        <td>{{ object.secondary_depostition }}</td>
+        <td>{{ object.get_secondary_depostition_display }}</td>
     </tr>
     <tr>
         <th>Comment</th>

@@ -42,16 +42,6 @@
 {% endif %}
 <legend>Description</legend>
 <table class="table table-bordered table-hover">
-  {% if object.burial_group %}
-    <tr>
-        <th class="col-sm-3">Burial group</th>
-        <td>
-          <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
-          {{ object.burial_group }}
-          </a>
-        </td>
-    </tr>
-    {% endif %}
     {% if object.burial_site %}
     <tr>
         <th class="col-sm-3">Burial site</th>
@@ -62,21 +52,19 @@
         </td>
     </tr>
     {% endif %}
+    {% if object.burial_group %}
+      <tr>
+          <th class="col-sm-3">Burial group</th>
+          <td>
+            <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
+            {{ object.burial_group }}
+            </a>
+          </td>
+      </tr>
+      {% endif %}
     <tr>
         <th class="col-sm-3">Burial number</th>
         <td>{{ object.burial_id }}</td>
-    </tr>
-
-
-
-
-    <tr>
-        <th>C14 dendro</th>
-        <td>{{ object.C14_dendro }}</td>
-    </tr>
-    <tr>
-        <th>Absolute age</th>
-        <td>{{ object.absolute_age }}</td>
     </tr>
     <tr>
         <th>Burial type</th>
@@ -97,8 +85,19 @@
         </td>
     </tr>
     <tr>
+        <th>Absolute age</th>
+        <td>{{ object.absolute_age }}</td>
+    </tr>
+
+    <tr>
+        <th>C14 dendro</th>
+        <td>{{ object.get_C14_dendro_display }}</td>
+    </tr>
+
+    <tr>
         <th>Secondary burial</th>
-        <td>{{object.secondary_burial}}</td>
+        <td>{{object.get_secondary_burial_display}}</td>
+
     </tr>
     <tr>
         <th>Secondary burial text</th>
@@ -106,7 +105,7 @@
     </tr>
     <tr>
         <th>Displaced</th>
-        <td>{{object.displaced}}</td>
+        <td>{{ object.get_displaced_display }}</td>
     </tr>
     <tr>
         <th>Displaced text</th>
@@ -114,7 +113,7 @@
     </tr>
     <tr>
         <th>Extraordinary burial</th>
-        <td>{{object.extraordinary_burial}}</td>
+        <td>{{ object.get_extraordinary_burial_display }}</td>
     </tr>
     <tr>
         <th>Extraordinary burial text</th>
@@ -140,7 +139,7 @@
   </tr>
   <tr>
       <th class="col-sm-3">Intentionally deposited</th>
-      <td>{{ object.intentionally_deposited }}</td>
+      <td>{{ object.get_intentionally_deposited_display }}</td>
   </tr>
   <tr>
       <th class="col-sm-3">Filling</th>
@@ -255,7 +254,7 @@
     </tr>
     <tr>
         <th class="col-sm-3">Cover</th>
-        <td>{{object.cover}}</td>
+        <td>{{ object.get_cover_display }}</td>
     </tr>
     <tr>
         <th class="col-sm-3">Cover type</th>

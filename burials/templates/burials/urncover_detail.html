@@ -20,7 +20,22 @@
 {% endif %}
 <legend>Description</legend>
 <table class="table table-bordered table-hover">
-
+    <tr>
+        <th>Basic shape</th>
+        <td>{{ object.basic_shape }}</td>
+    </tr>
+    <tr>
+        <th>Upside down</th>
+        <td>{{ object.get_upside_down_display }}</td>
+    </tr>
+    <tr>
+        <th>Fragment</th>
+        <td>{{ object.get_fragment_display }}</td>
+    </tr>
+    <tr>
+        <th class="col-sm-3">Cover number</th>
+        <td>{{ object.cover_id }}</td>
+    </tr>
     <tr>
         <th class="col-sm-3">Urn</th>
         <td>
@@ -29,22 +44,7 @@
         </a>
         </td>
     </tr>
-    <tr>
-        <th class="col-sm-3">Cover number</th>
-        <td>{{ object.cover_id }}</td>
-    </tr>
-    <tr>
-        <th>Upside down</th>
-        <td>{{ object.upside_down }}</td>
-    </tr>
-    <tr>
-        <th>Fragment</th>
-        <td>{{ object.fragment }}</td>
-    </tr>
-    <tr>
-        <th>Basic shape</th>
-        <td>{{ object.basic_shape }}</td>
-    </tr>
+
 </table>
 
 {% if user.is_authenticated %}

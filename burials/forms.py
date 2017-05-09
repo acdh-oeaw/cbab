@@ -5,6 +5,13 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from .models import *
 
 
+BOOLEAN_CHOICES = (
+    (None, 'Unknown'),
+    (True, 'Yes'),
+    (False, 'No')
+)
+
+
 class BurialSiteForm(forms.ModelForm):
 
     class Meta:

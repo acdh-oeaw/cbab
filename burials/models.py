@@ -11,9 +11,9 @@ FULLYPARTLYEXCAVATED = (
 )
 
 BOOLEAN_CHOICES = (
-    (None, 'Unknown'),
-    (True, 'Yes'),
-    (False, 'No')
+    (None, "Unknown"),
+    (True, "Yes"),
+    (False, "No")
 )
 
 
@@ -117,17 +117,18 @@ class Burial(models.Model):
     burial_type = models.ForeignKey(
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_burial_type")
-    C14_dendro = models.NullBooleanField(verbose_name="Absolute dating (C14/Dendro)")
+    C14_dendro = models.NullBooleanField(verbose_name="Absolute dating (C14/Dendro)",
+        choices=BOOLEAN_CHOICES)
     absolute_age = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="helptext")
-    secondary_burial = models.NullBooleanField()
+    secondary_burial = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     secondary_burial_text = models.TextField(
         blank=True, null=True, help_text="helptext")
-    displaced = models.NullBooleanField()
+    displaced = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     displaced_text = models.TextField(
         blank=True, null=True, help_text="helptext")
-    extraordinary_burial = models.NullBooleanField()
+    extraordinary_burial = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     extraordinary_burial_text = models.TextField(
         blank=True, null=True, help_text="helptext")
     inhumation_burial_type = models.TextField(
@@ -140,7 +141,7 @@ class Burial(models.Model):
     arrangement = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_burial_arrangement")
-    cover = models.NullBooleanField()
+    cover = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     cover_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_type_of_burial_cover")
@@ -165,7 +166,7 @@ class Burial(models.Model):
     filling_objects = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_filling_object")
-    intentionally_deposited = models.NullBooleanField()
+    intentionally_deposited = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     filling = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_filling")
@@ -267,7 +268,8 @@ class Urn(models.Model):
     urn_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Urn Inventory Number")
 
-    urncover_exists = models.NullBooleanField(verbose_name="Urn Cover")
+    urncover_exists = models.NullBooleanField(verbose_name="Urn Cover",
+        choices=BOOLEAN_CHOICES)
 
     def __str__(self):
         return "{}-{} {}".format(self.urn_id, self.id, self.burial)
@@ -295,8 +297,8 @@ class UrnCover(models.Model):
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
     )
-    upside_down = models.NullBooleanField()
-    fragment = models.NullBooleanField()
+    upside_down = models.NullBooleanField(choices=BOOLEAN_CHOICES)
+    fragment = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     cover_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Urn cover inventory number")
     urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
@@ -319,7 +321,7 @@ class CrematedRemainsBaseClass(models.Model):
     urn = models.ForeignKey(Urn, blank=True, null=True, help_text="helptext")
     amount_countable = models.IntegerField(null=True, blank=True, help_text="helptext")
     comment = models.TextField(blank=True, null=True, help_text="helptext")
-    secondary_depostition = models.NullBooleanField()
+    secondary_depostition = models.NullBooleanField(choices=BOOLEAN_CHOICES)
 
     class Meta:
         abstract = True
@@ -355,8 +357,8 @@ class GraveGood(CrematedRemainsBaseClass):
 
 
 class GraveGoodOther(CrematedRemainsBaseClass):
-    food = models.NullBooleanField()
-    other_organic_grave_good = models.NullBooleanField()
+    food = models.NullBooleanField(choices=BOOLEAN_CHOICES)
+    other_organic_grave_good = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     other_organic_grave_good_text = models.TextField(
         blank=True, null=True, help_text="helptext")
     position = models.ForeignKey(
