@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Anthropology</h1>
-<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_create' %}" role="button">create Anthropology</a>
+<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_create' %}" role="button">create anthropology</a>
 {% for object in object_list %}
     <li>
         <a href="{% url 'burials:deadbodyremains_detail' pk=object.id %}">{{ object }}</a></li>

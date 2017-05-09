@@ -22,7 +22,7 @@
 <p></p>
 {% endif %}
 <legend>Description</legend>
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-hover">
   {% if object.burial %}
     <tr>
         <th class="col-sm-3">Burial</th>
@@ -45,21 +45,33 @@
         {% endif %}
     <tr>
         <th>Food</th>
-        <td>{{ object.food }}</td>
+        <td>{{ object.get_food_display }}</td>
     </tr>
     <tr>
         <th>Other organic grave good</th>
-        <td>{{ object.other_organic_grave_good }}</td>
+        <td>{{ object.get_other_organic_grave_good_display }}</td>
     </tr>
     <tr>
         <th>Other organic grave good text</th>
         <td>{{ object.other_organic_grave_good_text }}</td>
     </tr>
+    <tr>
+        <th>Position</th>
+        <td>{{ object.position }}</td>
+    </tr>
+    <tr>
+        <th>Secondary deposition</th>
+        <td>{{ object.get_secondary_depostition_display }}</td>
+    </tr>
+    <tr>
+        <th>Comment</th>
+        <td>{{ object.comment }}</td>
+    </tr>
 </table>
 
 {% if user.is_authenticated %}
 
-<a class="btn btn-primary" href="{% url 'burials:gravegoodother_update' pk=object.pk %}" role="button">edit Organic Grave Goods</a>
+<a class="btn btn-primary" href="{% url 'burials:gravegoodother_update' pk=object.pk %}" role="button">edit organic grave goods</a>
 <a class ="btn btn-danger" href="{% url 'burials:gravegoodother_delete' pk=object.id %}">delete</a>
 
 {% endif %}

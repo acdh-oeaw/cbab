@@ -20,11 +20,8 @@
 <p></p>
 {% endif %}
 <legend>Description</legend>
-<table class="table table-bordered table-striped table-hover">
-    <tr>
-        <th class="col-sm-3">Burial group id</th>
-        <td>{{ object.burial_group_id }}</td>
-    </tr>
+<table class="table table-bordered table-hover">
+
     {% if object.burial_site %}
     <tr>
         <th>Burial site</th>
@@ -35,6 +32,10 @@
         </td>
     </tr>
     {% endif %}
+    <tr>
+        <th class="col-sm-3">Burial group number</th>
+        <td>{{ object.burial_group_id }}</td>
+    </tr>
     <tr>
         <th>Name</th>
         <td>{{ object.name }}</td>

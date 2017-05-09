@@ -31,8 +31,8 @@
 
 <a class ="btn btn-default btn-lg" href="{% url 'burials:urn_create' %}?burial={{ object }}">urn</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:gravegood_create' %}?burial={{ object }}">grave goods</a>
-<a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">grave goods other</a>
-<a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">Anthropology</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object }}">anthropology</a>
+<a class ="btn btn-default btn-lg" href="{% url 'burials:gravegoodother_create' %}?burial={{ object }}">organic grave goods</a>
 <a class ="btn btn-default btn-lg" href="{% url 'burials:animalremains_create' %}?burial={{ object }}">animal remains</a>
 
 </div>
@@ -42,16 +42,6 @@
 {% endif %}
 <legend>Description</legend>
 <table class="table table-bordered table-hover">
-  {% if object.burial_group %}
-    <tr>
-        <th class="col-sm-3">Burial group</th>
-        <td>
-          <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
-          {{ object.burial_group }}
-          </a>
-        </td>
-    </tr>
-    {% endif %}
     {% if object.burial_site %}
     <tr>
         <th class="col-sm-3">Burial site</th>
@@ -62,21 +52,19 @@
         </td>
     </tr>
     {% endif %}
+    {% if object.burial_group %}
+      <tr>
+          <th class="col-sm-3">Burial group</th>
+          <td>
+            <a href="{% url 'burials:burialgroup_detail' pk=object.burial_group.id %}">
+            {{ object.burial_group }}
+            </a>
+          </td>
+      </tr>
+      {% endif %}
     <tr>
         <th class="col-sm-3">Burial number</th>
         <td>{{ object.burial_id }}</td>
-    </tr>
-
-
-
-
-    <tr>
-        <th>C14 dendro</th>
-        <td>{{ object.C14_dendro }}</td>
-    </tr>
-    <tr>
-        <th>Absolute age</th>
-        <td>{{ object.absolute_age }}</td>
     </tr>
     <tr>
         <th>Burial type</th>
@@ -97,8 +85,19 @@
         </td>
     </tr>
     <tr>
+        <th>Absolute age</th>
+        <td>{{ object.absolute_age }}</td>
+    </tr>
+
+    <tr>
+        <th>C14 dendro</th>
+        <td>{{ object.get_C14_dendro_display }}</td>
+    </tr>
+
+    <tr>
         <th>Secondary burial</th>
-        <td>{{object.secondary_burial}}</td>
+        <td>{{object.get_secondary_burial_display}}</td>
+
     </tr>
     <tr>
         <th>Secondary burial text</th>
@@ -106,7 +105,7 @@
     </tr>
     <tr>
         <th>Displaced</th>
-        <td>{{object.displaced}}</td>
+        <td>{{ object.get_displaced_display }}</td>
     </tr>
     <tr>
         <th>Displaced text</th>
@@ -114,7 +113,7 @@
     </tr>
     <tr>
         <th>Extraordinary burial</th>
-        <td>{{object.extraordinary_burial}}</td>
+        <td>{{ object.get_extraordinary_burial_display }}</td>
     </tr>
     <tr>
         <th>Extraordinary burial text</th>
@@ -128,31 +127,49 @@
         <th>Bi ritual burial type</th>
         <td>{{object.bi_ritual_burial_type}}</td>
     </tr>
-    <tr>
-        <th>Filling</th>
-        <td>{{object.filling}}</td>
-    </tr>
   </table>
 
 
-  {% if object.urn_set.all or object.gravegood_set.all or object.gravegoodother_set.all or object.deadbodyremains_set.all or object.animalremains_set.all %}
-  <legend>Related objects</legend>
-  <table class="table table-bordered table-hover">
+{% if object.filling_objects or object.intentionally_deposited or object.filling %}
+<legend>Burial Filling</legend>
+<table class="table table-bordered table-hover">
+  <tr>
+      <th class="col-sm-3">Filling objects</th>
+      <td>{{ object.filling_objects }}</td>
+  </tr>
+  <tr>
+      <th class="col-sm-3">Intentionally deposited</th>
+      <td>{{ object.get_intentionally_deposited_display }}</td>
+  </tr>
+  <tr>
+      <th class="col-sm-3">Filling</th>
+      <td>{{ object.filling }}</td>
+  </tr>
+</table>
+{% endif %}
 
-    {% if object.urn_set.all %}
+
+
+
+{% if object.urn_set.all %}
+  <legend>Urn</legend>
+  <table class="table table-bordered table-hover">
     <tr>
-        <th class="col-sm-3">Urns</th>
+        <th class="col-sm-3">Urn</th>
         <td>
             {% for x in object.urn_set.all %}
               <li><a href="{% url 'burials:urn_detail' pk=x.id %}">{{ x }}</a></li>
             {% endfor %}
         </td>
     </tr>
-    {% endif %}
+  </table>
+{% endif %}
 
-    {% if object.gravegood_set.all %}
+{% if object.gravegood_set.all %}
+  <legend>Grave Goods</legend>
+  <table class="table table-bordered table-hover">
     <tr>
-        <th class="col-sm-3">Grave Good</th>
+        <th class="col-sm-3">Grave Goods</th>
         <td>
             {% for x in object.gravegood_set.all %}
               <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
@@ -166,17 +183,40 @@
             {% endfor %}
         </td>
     </tr>
-    {% endif %}
     {% if object.amount_related_gravegoods %}
     <tr>
-      <th class="col-sm-3">Total amount Grave Good</th>
+      <th class="col-sm-3">Total amount</th>
       <td>{{object.amount_related_gravegoods}}</td>
     </tr>
     {% endif %}
+  </table>
+{% endif %}
 
+{% if object.deadbodyremains_set.all %}
+  <legend>Anthropology</legend>
+  <table class="table table-bordered table-hover">
+    <tr>
+        <th class="col-sm-3">Anthropology</th>
+        <td>
+            {% for x in object.deadbodyremains_set.all %}
+              <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+      <th>Total amount</th>
+      <td>{{ object.amount_related_deadbodyremains }}</td>
+    </tr>
+  </table>
+{% endif %}
+
+
+{% if object.gravegoodother_set.all or object.animalremains_set.all%}
+  <legend>Organic</legend>
+  <table class="table table-bordered table-hover">
     {% if object.gravegoodother_set.all %}
     <tr>
-        <th>Organic Grave Goods</th>
+        <th class="col-sm-3">Organic Grave Goods</th>
         <td>
             {% for x in object.gravegoodother_set.all %}
               <li><a href="{% url 'burials:gravegoodother_detail' pk=x.id %}">{{ x }}</a></li>
@@ -184,21 +224,9 @@
         </td>
     </tr>
     {% endif %}
-
-    {% if object.deadbodyremains_set.all %}
-    <tr>
-        <th>Anthropology</th>
-        <td>
-            {% for x in object.deadbodyremains_set.all %}
-              <li><a href="{% url 'burials:deadbodyremains_detail' pk=x.id %}">{{ x }}</a></li>
-            {% endfor %}
-        </td>
-    </tr>
-    {% endif %}
-
     {% if object.animalremains_set.all %}
     <tr>
-        <th>Animal Remains</th>
+        <th class="col-sm-3">Animal Remains</th>
         <td>
             {% for x in object.animalremains_set.all %}
               <li><a href="{% url 'burials:animalremains_detail' pk=x.id %}">{{ x }}</a></li>
@@ -206,6 +234,10 @@
         </td>
     </tr>
     {% endif %}
+    <tr>
+      <th>Total amount of Animal Remains</th>
+      <td>{{ object.amount_related_organic }}</td>
+    </tr>
   </table>
 {% endif %}
 
@@ -222,7 +254,7 @@
     </tr>
     <tr>
         <th class="col-sm-3">Cover</th>
-        <td>{{object.cover}}</td>
+        <td>{{ object.get_cover_display }}</td>
     </tr>
     <tr>
         <th class="col-sm-3">Cover type</th>
@@ -269,14 +301,14 @@
         <td>{{object.other_features}}</td>
     </tr>
 </table>
-{% if user.is_authenticated %}
+
 {% if object.burial_site.location.lng %}
 <legend>Location</legend>
 
 <div id="map"></div><br/>
-
 {% endif %}
 
+{% if user.is_authenticated %}
 <a class="btn btn-primary" href="{% url 'burials:burial_update' pk=object.pk %}" role="button">edit burial</a>
 <a class ="btn btn-danger" href="{% url 'burials:burial_delete' pk=object.id %}">delete</a>
 

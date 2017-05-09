@@ -22,7 +22,7 @@
 <p></p>
 {% endif %}
 <legend>Description</legend>
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-hover">
   {% if object.burial %}
     <tr>
         <th class="col-sm-3">Burial</th>
@@ -56,12 +56,24 @@
         <td>{{ object.sex }}</td>
     </tr>
     <tr>
+        <th>Amount</th>
+        <td>{{object.amount_countable}}</td>
+    </tr>
+    <tr>
         <th>Weight</th>
         <td>{{object.weight}}</td>
     </tr>
     <tr>
         <th>Position</th>
         <td>{{object.position}}</td>
+    </tr>
+    <tr>
+        <th>Secondary deposition</th>
+        <td>{{ object.get_secondary_depostition_display }}</td>
+    </tr>
+    <tr>
+        <th>Comment</th>
+        <td>{{ object.comment }}</td>
     </tr>
 
 </table>
