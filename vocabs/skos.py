@@ -207,6 +207,10 @@ class SkosReader(object):
                 skos_label['lang'] = y.attrib['{http://www.w3.org/XML/1998/namespace}lang']
                 skos_pref_labels.append(skos_label)
             description["pref_labels"] = skos_pref_labels
+            skos_definitions = []
+            for y in x.findall('skos:definition', namespaces={"skos": self.ns_skos}):
+                skos_definitions.append(y.text)
+            description["definitions"] = skos_definitions
 
             skos_alt_labels = []
             for y in x.findall('skos:altLabel', namespaces={"skos": self.ns_skos}):
@@ -276,6 +280,11 @@ class SkosImporter(SkosReader):
                     temp_concept.pref_label_lang = x['pref_labels']["lang"]
                 except:
                     pass
+                try:
+                    temp_concept.definition = x['definitions'][0]
+                    temp_concept.definition_lang = "eng"
+                except:
+                    pass
                 temp_concept.save()
 
                 for y in x['pref_labels'][1:]:
@@ -300,7 +309,8 @@ class SkosImporter(SkosReader):
                     temp_scheme, _ = SkosConceptScheme.objects.get_or_create(
                         legacy_id=z
                     )
-                    temp_scheme.dc_title = self.skosfile
+                    scheme_dctitle = z.split('/')[-1]
+                    temp_scheme.dc_title = scheme_dctitle
                     temp_scheme.save()
                     temp_concept.scheme = [temp_scheme]
                     temp_concept.save()
