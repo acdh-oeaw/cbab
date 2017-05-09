@@ -2,6 +2,10 @@
 __pycache__/
 *.pyc
 
+
+# IDE
+.idea
+
 #Ipython Notebook
 .ipynb_checkpoints
 
