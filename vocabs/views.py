@@ -86,6 +86,7 @@ class SkosConceptDelete(DeleteView):
     def dispatch(self, *args, **kwargs):
         return super(SkosConceptDelete, self).dispatch(*args, **kwargs)
 
+
 #####################################################
 #   ConceptScheme
 #####################################################

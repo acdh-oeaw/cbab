@@ -21,15 +21,15 @@ class BurialSiteForm(forms.ModelForm):
             'location': autocomplete.ModelSelect2(
                 url='burials:place-autocomplete'),
             'geographical_coordinate_reference_system': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=geographicalreferencesystem'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=geographicalreferencesystem'),
             'topography': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Topography'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Topography'),
             'distance_to_next_settlement': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Distance to next settlement'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Distance to next settlement'),
             'type_of_burial_site': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Type of burial site'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Type of burial site'),
             'dating': autocomplete.ModelSelect2Multiple(
-                url='../../skos-constraint-ac/?scheme=Dating'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Dating'),
             'reference': autocomplete.ModelSelect2Multiple(
                 url='burials:book-autocomplete'),
         }
@@ -55,9 +55,9 @@ class BurialGroupForm(forms.ModelForm):
             # 'burial_site': autocomplete.ModelSelect2(
             #     url='burials:burialsite-autocomplete'),
             'burial_group_type': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial group type'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial group type'),
             'material': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Material'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Material'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -81,21 +81,21 @@ class BurialForm(forms.ModelForm):
             # 'burial_site': autocomplete.ModelSelect2(
             #     url='burials:burialsite-autocomplete'),
             'burial_type': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial type'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial type'),
             'construction': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial construction'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial construction'),
             'arrangement': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial arrangement'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial arrangement'),
             'cover_type': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Cover type'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Cover type'),
             'grave_pit_form': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Grave pit form'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Grave pit form'),
             'grave_pit_orientation': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Grave pit orientation'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Grave pit orientation'),
             'filling_objects': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial Filling Objects'),
             'filling': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Burial Filling Type'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Burial Filling Type'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -160,7 +160,7 @@ class BurialForm(forms.ModelForm):
 #         fields = "__all__"
 #         widgets = {
 #             'filling_objects': autocomplete.ModelSelect2(
-#                 url='../../skos-constraint-ac/?scheme=Burial Filling Objects'),
+#                 url='../../../vocabs/skos-constraint-ac/?scheme=Burial Filling Objects'),
 #         }
 #
 #     def __init__(self, *args, **kwargs):
@@ -180,7 +180,7 @@ class UrnCoverForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'basic_shape': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Basic shape of urn cover'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Basic shape of urn cover'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -207,7 +207,7 @@ class UrnForm(forms.ModelForm):
             # },
             # ),
             'basic_shape': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Basic shape of urn'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Basic shape of urn'),
             'cover': autocomplete.ModelSelect2(
                 url='burials:urncover-autocomplete'),
         }
@@ -234,13 +234,13 @@ class GraveGoodForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'name': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=GraveGoodObject'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=GraveGoodObject'),
             'material': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Material'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Material'),
             'condition': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Condition'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Condition'),
             'position': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Position'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -265,7 +265,7 @@ class GraveGoodOtherForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'position': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Position'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -290,13 +290,13 @@ class DeadBodyRemainsForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'age': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Age'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Age'),
             'gender': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Gender'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Gender'),
             'temperature': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Cremation temperature'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Cremation temperature'),
             'position': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -321,9 +321,9 @@ class AnimalRemainsForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'species': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Species'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Species'),
             'position': autocomplete.ModelSelect2(
-                url='../../skos-constraint-ac/?scheme=Position of the cremated remains'),
+                url='../../../vocabs/skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
 
     def __init__(self, *args, **kwargs):

@@ -99,10 +99,6 @@ urlpatterns = [
         views.AnimalRemainsDelete.as_view(), name='animalremains_delete'),
     #Autocomplete fields
     url(
-        r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(
-            model=SkosConcept), name='skos-constraint-ac',
-    ),
-    url(
         r'^place-autocomplete/$', dal_views.PlaceAC.as_view(
             model=Place), name='place-autocomplete',
     ),

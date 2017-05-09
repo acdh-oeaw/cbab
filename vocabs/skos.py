@@ -207,7 +207,6 @@ class SkosReader(object):
                 skos_label['lang'] = y.attrib['{http://www.w3.org/XML/1998/namespace}lang']
                 skos_pref_labels.append(skos_label)
             description["pref_labels"] = skos_pref_labels
-
             skos_definitions = []
             for y in x.findall('skos:definition', namespaces={"skos": self.ns_skos}):
                 skos_definitions.append(y.text)
