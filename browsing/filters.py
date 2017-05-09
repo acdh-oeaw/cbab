@@ -241,7 +241,7 @@ class GraveGoodListFilter(django_filters.FilterSet):
         help_text=False
     )
     amount = django_filters.NumberFilter(
-        lookup_expr='exact', help_text=False
+        lookup_expr='exact', help_text=False, name="amount_countable"
     )
 
     class Meta:
@@ -306,6 +306,7 @@ class DeadBodyRemainsListFilter(django_filters.FilterSet):
         lookup_expr='iexact', help_text=False,
     )
 
+
     class Meta:
         model = DeadBodyRemains
         fields = ['id', 'age']
@@ -336,6 +337,9 @@ class AnimalRemainsListFilter(django_filters.FilterSet):
     )
     position = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+    )
+    amount = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False, name="amount_countable"
     )
 
     class Meta:

@@ -29,7 +29,10 @@ class BurialTable(tables.Table):
     # cbab_id = tables.LinkColumn(
     #     'burials:burial_detail', args=[A('pk')], accessor='id',
     #     verbose_name='cbab-id')
-    burial = tables.TemplateColumn("""<a href="{% url 'burials:burial_detail' pk=record.id %}">{{ record }}</a>""")
+    burial = tables.TemplateColumn(
+        """<a href="{% url 'burials:burial_detail' pk=record.id %}">{{ record }}</a>""",
+        order_by='burial_site')
+    # burial = tables.RelatedLinkColumn('burials:burial_detail', accessor="record.id")
     burial_site = tables.RelatedLinkColumn('burials:burialsite_detail', args=[A('pk')])
     burial_group = tables.RelatedLinkColumn('burials:burialgroup_detail', args=[A('pk')])
 

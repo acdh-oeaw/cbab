@@ -74,7 +74,7 @@
         <td>{{object.disturbance}}</td>
     </tr>
     <tr>
-      <td>Dating</td>
+      <th>Dating</th>
       <td>{% for x in dating_list %}
       {{ x }}<br/> <!-- find.name -->
       {% endfor %}</td>
@@ -88,7 +88,7 @@
         <td>{{object.location_of_archaeological_material_and_contact_information}}</td>
     </tr>
     <tr>
-      <td>Reference</td>
+      <th>Reference</th>
       <td>{% for x in reference_list %}
         <a  href="{{ x.get_zotero_url }}" target="_blank">{{ x }}</a><br/>
       {% endfor %}</td>
