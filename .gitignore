@@ -3,6 +3,10 @@ __pycache__/
 *.pyc
 
 
+# test coverage
+.coverage
+cover/
+
 # IDE
 .idea
 
