@@ -68,7 +68,7 @@
         <td>{{ object.pathology }}</td>
     </tr>
     <tr>
-        <th>Total weight</th>
+        <th>Total weight of Human Remains</th>
         <td>{{ object.total_weight }}</td>
     </tr>
     <tr>
@@ -87,7 +87,7 @@
 
 {% if user.is_authenticated %}
 
-<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit Anthropology</a>
+<a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit anthropology</a>
 <a class ="btn btn-danger" href="{% url 'burials:deadbodyremains_delete' pk=object.id %}">delete</a>
 
 {% endif %}
