@@ -90,7 +90,7 @@
     <tr>
       <td>Reference</td>
       <td>{% for x in reference_list %}
-        <a  href="{{ x.get_zotero_url }}" target="_blank">{{ x }}</a><br/>
+        {% if x.get_zotero_url %}<a  href="{{ x.get_zotero_url }}" target="_blank">{{ x }}</a> {% else %}{{ x }}{% endif %}<br/>
       {% endfor %}</td>
     </tr>
   {% if burialgroup_list %}
