@@ -1,325 +1,221 @@
+<!DOCTYPE html>
 {% load staticfiles %}
 {% load webpage_extras %}
-
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <title>{% block Titel %} {% projects_metadata 'title' %}{% endblock %}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      {% block metaDescription %}
-      <meta name="description" content="{{ metadata.description }}">
-      {% endblock %}
-      <meta name="author" content="{{ metadata.author }}">
-      <!-- Bootstrap -->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap337/css/bootstrap.min.css' %}"/></link>
-      <!-- custom css -->
-      <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}"/></link>
-      <!--Extra Fonts Link-->
-      <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
-      <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet">
-      <!-- custom less -->
-      <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}"/></link>
-      <!--scroll to top CSS -->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
-      <!-- LESS -->
-      <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
-      <!-- jQuery -->
-      <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
-      <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/> -->
-      <!--scroll to top -->
-      <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
-      <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<head>
+    <meta charset="utf-8">
+    <title>{% block Titel %} {% projects_metadata 'title' %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block metaDescription %}
+        <meta name="description" content="{{ metadata.description }}">
+    {% endblock %}
+    <meta name="author" content="{{ metadata.author }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap337/css/bootstrap.min.css' %}"/></link>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}"/></link>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500" rel="stylesheet">
+    <!-- custom less -->
+    <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}"/></link>
+    <!--scroll to top CSS -->
+    <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
+    <!-- LESS -->
+    <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+    <!--scroll to top -->
+    <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
         <script type="text/javascript">
             window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"{% url 'webpage:imprint' %}","theme":"dark-bottom"};
         </script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
-        <!-- End Cookie Consent plugin -->
-        <!-- cool-share plugin http://tutorialzine.com/2014/08/cool-share-jquery-plugin/ -->
-            <link rel="stylesheet" href="{% static 'webpage/libraries/cool-share/plugin.css' %}"/></link>
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-            <script src="{% static 'webpage/libraries/cool-share/plugin.js' %}"/></script>
-        <!-- End fo cool-share -->
-        <!-- Piwik -->
+    <!-- End Cookie Consent plugin -->
+    <!-- cool-share plugin http://tutorialzine.com/2014/08/cool-share-jquery-plugin/ -->
+        <link rel="stylesheet" href="{% static 'webpage/libraries/cool-share/plugin.css' %}"/></link>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+        <script src="{% static 'webpage/libraries/cool-share/plugin.js' %}"></script>
+    <!-- End fo cool-share -->
+    <!-- Piwik -->
         <script type="text/javascript">
-        var _paq = _paq || [];
-        _paq.push(["setDomains", ["*.cbab.acdh.oeaw.ac.at/","*.cbab.eos.arz.oeaw.ac.at"]]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//piwik.apollo.arz.oeaw.ac.at/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId', '48']);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
+            var _paq = _paq || [];
+            _paq.push(["setDomains", ["*.cbab.acdh.oeaw.ac.at/","*.cbab.eos.arz.oeaw.ac.at"]]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="//piwik.apollo.arz.oeaw.ac.at/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', '48']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
         </script>
-<noscript><p><img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=48" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
-      {% block scriptHeader %}
-      {% endblock %}
-  </head>
-
-  <body role="document">
+        <noscript><p><img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=48" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+    {% block scriptHeader %}
+    {% endblock %}
+</head>
+<body role="document">
     <header class="page-header procustom-header">
-      <div class="container" id="procustom-affix">
-        <div class="logo-container">
-          <a href="{% url 'webpage:start' %}" class="navlink">
-              <img src="{% static 'webpage/img/test.png' %}"  id="pro-logo"/>
-          </a>
+        <div class="container" id="procustom-affix">
+            <div class="logo-container">
+                <a href="{% url 'webpage:start' %}" class="navlink">
+                    <img src="{% static 'webpage/img/test.png' %}"  id="pro-logo"/>
+                </a>
+            </div>
         </div>
-    </div>
-
-    <nav class="navbar navbar-default navbar-static-top procustom-navbar" id="top-procustom-navbar" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation!</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                  <span class="caret"/>
-                  </a>
-                  <ul class="dropdown-menu procustom-dropdown-menu">
-                    <li>
-                        <a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'webpage:about' %}">About</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'datamodel:plate' %}">Application's data model</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'webpage:imprint' %}">Impressum / Imprint</a>
-                    </li>
-                  </ul>
-              </li>
-               <li class="dropdown">
-                {% if user.is_authenticated %}
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Curate and Browse the Data
-                  <span class="caret"/>
-                  </a>
-                  {% else %}
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse the Data
-                  <span class="caret"/>
-                  </a>
-                  {% endif %}
-
-                  <ul class="dropdown-menu procustom-dropdown-menu">
-                    <li>
-                        <a href="{% url 'places:place_list' %}">Locations</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'browsing:browse_burialsites' %}">Burial Site</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'browsing:browse_burialgroups' %}">Burial Group</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'browsing:browse_burials' %}">Burial</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'browsing:browse_urns' %}">Urn</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'browsing:browse_gravegoods' %}">Grave Goods</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'browsing:browse_deadbodyremains' %}">Anthropology</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Organic</li>
-
-                    <li>
-                        <a href="{% url 'browsing:browse_gravegoodsother' %}">Organic Grave Goods</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'browsing:browse_animalremains' %}">Animal Remains</a>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a>
-                    </li>
-                    {% endif %}
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analyze the Data
-                  <span class="caret"/>
-                  </a>
-                  <ul class="dropdown-menu procustom-dropdown-menu">
-
-                  </ul>
-                </li>
-                {% if user.is_authenticated %}
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vocabs Curation
-                    <span class="caret"/>
-                    </a>
-                    <ul class="dropdown-menu procustom-dropdown-menu">
-                      <li>
-                          <a href="{% url 'vocabs:skosconceptscheme_list' %}">Concept Schemes</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'vocabs:browse_vocabs' %}">Concepts</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'vocabs:skoslabel_list' %}">Labels</a>
-                      </li>
-                      <li role="separator" class="divider"></li>
-                      <li>
-                          <a href="{% url 'vocabs:skos_import' %}">Import SKOS (RDF/XML)</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'vocabs:skos_csv_import' %}">Import Vocabs from CSV</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'api-root' %}">Export SKOS (API)</a>
-                      </li>
+        <nav class="navbar navbar-default navbar-static-top procustom-navbar" id="top-procustom-navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation!</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
+                                <span class="caret"/>
+                            </a>
+                            <ul class="dropdown-menu procustom-dropdown-menu">
+                                <li><a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a></li>
+                                <li><a href="{% url 'webpage:about' %}">About</a></li>
+                                <li><a href="{% url 'datamodel:plate' %}">Application's data model</a></li>
+                                <li><a href="{% url 'webpage:imprint' %}">Impressum / Imprint</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            {% if user.is_authenticated %}
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Curate and Browse the Data <span class="caret"/>
+                                </a>
+                            {% else %}
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Browse the Data <span class="caret"/>
+                                </a>
+                            {% endif %}
+                            <ul class="dropdown-menu procustom-dropdown-menu">
+                                <li><a href="{% url 'places:place_list' %}">Locations</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'browsing:browse_burialsites' %}">Burial Site</a></li>
+                                <li><a href="{% url 'browsing:browse_burialgroups' %}">Burial Group</a></li>
+                                <li><a href="{% url 'browsing:browse_burials' %}">Burial</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'browsing:browse_urns' %}">Urn</a></li>
+                                <li><a href="{% url 'browsing:browse_urncovers' %}">Urn cover</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'browsing:browse_gravegoods' %}">Grave Goods</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'browsing:browse_deadbodyremains' %}">Anthropology</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Organic</li>
+                                <li><a href="{% url 'browsing:browse_gravegoodsother' %}">Organic Grave Goods</a></li>
+                                <li><a href="{% url 'browsing:browse_animalremains' %}">Animal Remains</a></li>
+                                {% if user.is_authenticated %}
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Analyze the Data <span class="caret"/>
+                            </a>
+                            <ul class="dropdown-menu procustom-dropdown-menu">
+                            </ul>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Vocabs Curation <span class="caret"/>
+                                </a>
+                                <ul class="dropdown-menu procustom-dropdown-menu">
+                                    <li><a href="{% url 'vocabs:skosconceptscheme_list' %}">Concept Schemes</a></li>
+                                    <li><a href="{% url 'vocabs:browse_vocabs' %}">Concepts</a></li>
+                                    <li><a href="{% url 'vocabs:skoslabel_list' %}">Labels</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url 'vocabs:skos_import' %}">Import SKOS (RDF/XML)</a></li>
+                                    <li><a href="{% url 'vocabs:skos_csv_import' %}">Import Vocabs from CSV</a></li>
+                                    <li><a href="{% url 'api-root' %}">Export SKOS (API)</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
-                  </li>
-                  {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                {% if user.is_authenticated %}
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"/>&nbsp;{{ user.get_username }}
-                  </a>
-                  <ul class="dropdown-menu procustom-dropdown-menu">
-                        <li>
-                            <a href="{% url 'webpage:user_login' %}">Log-In</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            {% if user.is_authenticated %}
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"/> {{ user.get_username }}
+                                </a>
+                                <ul class="dropdown-menu procustom-dropdown-menu">
+                                    <li><a href="{% url 'webpage:user_logout' %}">Log-Out</a></li>
+                                </ul>
+                            {% else %}
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"/>
+                                </a>
+                                <ul class="dropdown-menu procustom-dropdown-menu">
+                                    <li><a href="{% url 'webpage:user_login' %}">Log-In</a></li>
+                                </ul>
+                            {% endif %}
                         </li>
-                        <li>
-                            <a href="{% url 'webpage:user_logout' %}">Log-Out</a>
-                        </li>
-                      </ul>
-                {% else %}
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"/>
-                  </a>
-                      <ul class="dropdown-menu procustom-dropdown-menu">
-                        <li>
-                            <a href="{% url 'webpage:user_login' %}">Log-In</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'webpage:user_logout' %}">Log-Out</a>
-                        </li>
-                      </ul>
-                {% endif %}
-              </li>
-            </ul>
-        </div>
-        </div>
-    </nav>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
-    <!-- <div class="alert alert-danger">
-      <strong>Be Aware!</strong> This Site/Service is at a very early state of developement. Everything can change at any time.
-    </div> -->
-
     <section class="main-content">
-      {% block procustom-index %}
-      {% endblock %}
-      <div id="content" class="container">
-        {% block content %}
-        {% endblock %}
-      </div>
+    {% block procustom-index %}{% endblock %}
+        <div id="content" class="container">
+            {% block content %}{% endblock %}
+        </div>
     </section>
-
     <div align="text-center">
-        <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
-      </div>
-
-    <footer>
-      <div class="container">
-      <div class="row text-center">
-        <div class="col-sm-4">
-          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" id="acdh-logo" alt="ACDH" title="Austrian Centre for Digital Humanities"/>
-          </a>
-        </div>
-        <div class="col-sm-4">
-            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" id="github-logo" alt="{{ metadata.github }}" title="Github source code"/>
-            </a>
-        </div>
-        <div class="col-sm-4">
-            <a href="http://www.orea.oeaw.ac.at/home/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/OREA_white.png' %}" id="orea-logo" alt="OREA" title="Institute for Oriental and European Archaeology"/>
-            </a>
-        </div>
-      </div>
+        <span class="socialShare"><!-- The share buttons will be inserted here --></span>
     </div>
+    <footer>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-4">
+                    <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
+                        <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" id="acdh-logo" alt="ACDH" title="Austrian Centre for Digital Humanities"/>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
+                        <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" id="github-logo" alt="{{ metadata.github }}" title="Github source code"/>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a href="http://www.orea.oeaw.ac.at/home/" class="navlink" target="_blank">
+                        <img src="{% static 'webpage/img/OREA_white.png' %}" id="orea-logo" alt="OREA" title="Institute for Oriental and European Archaeology"/>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
-
     {% block scripts %}
-    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
-    <!-- <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script> -->
-    <!--Fixed navbar when scrolling down-->
-    <!-- <script type="text/javascript">
-    $('#top-procustom-navbar').affix({
-      offset: {
-          top: $('#procustom-affix').height()
-      }
-    });
-    </script> -->
-<!--Shadow for navbar when scrolled down-->
-
-    <!-- <script type="text/javascript">
-    var nav = $('#top-procustom-navbar'); // Change to nav div
-    var nav_class = 'mini-nav'; // Change to class name
-    var threshold = 100; // Change to pixels scrolled
-
-    $(window).scroll(function () {
-    var distance = $(this).scrollTop();
-    if (distance > threshold) { // If scrolled past threshold
-        nav.addClass(nav_class); // Add class to nav
-    } else { // If user scrolls back to top
-        if (nav.hasClass(nav_class)) { // And if class has been added
-            nav.removeClass(nav_class); // Remove it
-        }
-    }
-});
-    </script> -->
-
-    <!-- cool share -->
-      <script type="text/javascript">
+        <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
+        <!-- cool share -->
+        <script type="text/javascript">
         $(function (){
-          var options = {
-            twitter: {
-              text: '',
-              via: ''
+            var options = {
+                twitter: {
+                text: '',
+                via: ''
             },
             facebook : true,
             googlePlus : true
-          };
-          $('.socialShare').shareButtons(options);
+            };
+            $('.socialShare').shareButtons(options);
         });
-      </script>
-    <!-- scroll-up-bottom -->
-    <script type="text/javascript">
+        </script>
+        <!-- scroll-up-bottom -->
+        <script type="text/javascript">
             // Setup plugin with default settings
             $(document).ready(function() {
                 $.apScrollTop({
@@ -328,9 +224,9 @@
                     }
                 });
             });
-    </script>
+        </script>
     {% endblock %}
     {% block scripts2 %}
     {% endblock scripts2 %}
-  </body>
+</body>
 </html>
