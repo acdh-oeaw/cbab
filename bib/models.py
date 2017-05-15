@@ -19,7 +19,10 @@ class Book(models.Model):
 
     def get_zotero_url(self):
         "Returns the objects URL pointing to its Zotero entry"
-        return "/".join([settings.Z_BASE_URL, settings.Z_COLLECTION, 'itemKey', self.zoterokey])
+        try:
+            return "/".join([settings.Z_BASE_URL, settings.Z_COLLECTION, 'itemKey', self.zoterokey])
+        except:
+            return None
 
     def __str__(self):
         return "{}, {}".format(self.author, self.title)
