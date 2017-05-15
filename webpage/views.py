@@ -27,14 +27,10 @@ def user_login(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect(request.GET.get('next', '/'))
-                else:
-                    return HttpResponse('not active.')
-            else:
-                return HttpResponse('user does not exist')
+            if user and user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(request.GET.get('next', '/'))
+            return HttpResponse('user does not exist')
     else:
         form = form_user_login()
         return render(request, 'webpage/user_login.html', {'form': form})
