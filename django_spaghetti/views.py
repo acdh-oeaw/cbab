@@ -72,10 +72,9 @@ def plate(request):
                 'label':label,
                 'shape':'box',
                 'group':model.app_label,
-                'title':get_template("django_spaghetti/meatball.html").render(
-                    Context({'model':model,'fields':fields,})
-                    )
-
+                'title':get_template("django_spaghetti/meatball.html").render({
+                    'model':model,'fields':fields,
+                })
             }
         )
 

@@ -20,35 +20,35 @@
                     <form action="/browsing/burialsites/?name=name" class="procustom-form">
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" placeholder="Enter name of the Burial Site..." required/>
-                            </br><span class="text-muted">e.g. Athens</span>
+                            <br /><span class="text-muted">e.g. Athens</span>
                         </div>
-                        </br>
+                        <br />
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="search"/>
                         </div>
-                        <a href="{% url 'browsing:browse_burialsites' %}" type="button" class="btn btn-default">
+                        <a href="{% url 'browsing:browse_burialsites' %}" class="btn btn-default">
                             advanced search options
                         </a>
                     </form>
                 </div>
                 <div id="BurialGroups" class="tab-pane fade">
                     <h2>Search CBAB Database for</h2>
-                    <h2>Burial Groups</h2></br>
-                    <a href="{% url 'browsing:browse_burialgroups' %}" type="button" class="btn btn-primary">
+                    <h2>Burial Groups</h2><br />
+                    <a href="{% url 'browsing:browse_burialgroups' %}" class="btn btn-primary">
                         search
                     </a>
                 </div>
                 <div id="Burials" class="tab-pane fade">
                     <h2>Search CBAB Database for</h2>
-                    <h2>Burials</h2></br>
-                    <a href="{% url 'browsing:browse_burials' %}" type="button" class="btn btn-primary">
+                    <h2>Burials</h2><br />
+                    <a href="{% url 'browsing:browse_burials' %}" class="btn btn-primary">
                         search
                     </a>
                 </div>
                 <div id="GraveGoods" class="tab-pane fade">
                     <h2>Search CBAB Database for</h2>
-                    <h2>Grave Goods</h2></br>
-                    <a href="{% url 'browsing:browse_gravegoods' %}" type="button" class="btn btn-primary">
+                    <h2>Grave Goods</h2><br />
+                    <a href="{% url 'browsing:browse_gravegoods' %}" class="btn btn-primary">
                         search
                     </a>
                 </div>
