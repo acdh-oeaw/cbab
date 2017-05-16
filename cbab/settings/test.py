@@ -21,7 +21,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     '--with-coverage',          # generate coverage
-    '--cover-package=webpage',  # define what to cover
+    '--cover-package=webpage,django_spaghetti',  # define what to cover
     '--cover-html',             # generate a html cover report
     '--nocapture',              # needed to show print output in console
     '--nologcapture',           # needed to show print output in console
