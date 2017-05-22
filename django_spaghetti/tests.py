@@ -7,4 +7,4 @@ class WebpageTest(TestCase):
         self.client = Client()
 
     def test_webpage(self):
-        response = self.client.get('/datamodel/')
+        self.client.get('/datamodel/')
