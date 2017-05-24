@@ -10,6 +10,10 @@ cover/
 # IDE
 .idea
 
+# migrations
+diauma/migrations/*
+
+
 #Ipython Notebook
 .ipynb_checkpoints
 
