@@ -162,7 +162,7 @@ class Burial(models.Model):
         help_text="cm")
     height = models.CharField(
         max_length=255, blank=True, null=True,
-        help_text="cm")
+        help_text="cm", verbose_name="Depth")
     filling_objects = models.ForeignKey(
         SkosConcept, blank=True, null=True,
         help_text="helptext", related_name="skos_filling_object")
