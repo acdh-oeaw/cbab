@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Place
-from .forms import PlaceForm
+from .forms import PlaceForm, PlaceFormCreate
 
 
 class PlaceListView(generic.ListView):
@@ -22,14 +22,14 @@ class PlaceListView(generic.ListView):
 @login_required
 def create_place(request):
 	if request.method == "POST":
-		form = PlaceForm(request.POST)
+		form = PlaceFormCreate(request.POST)
 		if form.is_valid():
 			form.save()
 			return redirect('places:place_list')
 		else:
 			return render(request, 'places/edit_places.html', {'form': form})
 	else:
-		form = PlaceForm()
+		form = PlaceFormCreate()
 		return render(request, 'places/edit_places.html', {'form': form})
 
 
