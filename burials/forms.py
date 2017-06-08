@@ -100,6 +100,7 @@ class BurialForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BurialForm, self).__init__(*args, **kwargs)
+        self.fields['burial_site'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
