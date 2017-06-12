@@ -27,4 +27,8 @@ urlpatterns = [
         dal_views.SkosConceptPrefLabalAC.as_view(),
         name='skosconcept-label-ac',
     ),
+    url(
+        r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(model=SkosConcept),
+        name='skos-constraint-ac',
+    )
 ]

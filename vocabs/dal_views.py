@@ -3,6 +3,24 @@ from .models import SkosLabel, SkosConcept, SkosConceptScheme
 from django.db.models import Q
 
 
+class SKOSConstraintACNoHierarchy(autocomplete.Select2QuerySetView):
+
+    def get_queryset(self):
+        scheme = self.request.GET.get('scheme')
+        try:
+            selected_scheme = SkosConceptScheme.objects.get(dc_title=scheme)
+            qs = SkosConcept.objects.filter(scheme=selected_scheme)
+        except:
+            qs = SkosConcept.objects.all()
+
+        if self.q:
+            qs = qs.filter(
+                Q(pref_label__icontains=self.q)
+            )
+
+        return qs
+
+
 class SKOSConstraintAC(autocomplete.Select2QuerySetView):
     def get_result_label(self, item):
         if len(item.skos_broader.all()) > 0:

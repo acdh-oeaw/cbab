@@ -34,8 +34,4 @@ urlpatterns = [
     url(
         r'^label/update/(?P<pk>[0-9]+)$', views.SkosLabelUpdate.as_view(),
         name='skoslabel_update'),
-    url(
-        r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(model=SkosConcept),
-        name='skos-constraint-ac',
-        ),
 ]
