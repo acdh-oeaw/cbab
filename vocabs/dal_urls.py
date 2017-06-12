@@ -30,5 +30,10 @@ urlpatterns = [
     url(
         r'^skos-constraint-ac/$', dal_views.SKOSConstraintAC.as_view(model=SkosConcept),
         name='skos-constraint-ac',
+    ),
+    url(
+        r'^skos-constraint-no-hierarchy-ac/$', dal_views.SKOSConstraintACNoHierarchy.as_view(
+            model=SkosConcept),
+        name='skos-constraint-no-hierarchy-ac',
     )
 ]
