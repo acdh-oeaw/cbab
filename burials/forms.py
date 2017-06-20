@@ -315,7 +315,7 @@ class AnimalRemainsForm(forms.ModelForm):
             # 'burial': autocomplete.ModelSelect2(
             #     url='burials:burial-autocomplete'),
             'species': autocomplete.ModelSelect2(
-                url='../../../vocabs-ac/skos-constraint-ac/?scheme=Species'),
+                url='../../../vocabs-ac/skos-constraint-no-hierarchy-ac/?scheme=Species'),
             'position': autocomplete.ModelSelect2(
                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Position of the cremated remains'),
         }
