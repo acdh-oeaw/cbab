@@ -181,7 +181,7 @@ class UrnCoverForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'basic_shape': autocomplete.ModelSelect2(
-                url='../../../vocabs-ac/skos-constraint-ac/?scheme=Basic shape of urn cover'),
+                url='../../../vocabs-ac/skos-constraint-no-hierarchy-ac/?scheme=Basic shape of urn cover'),
         }
 
     def __init__(self, *args, **kwargs):
