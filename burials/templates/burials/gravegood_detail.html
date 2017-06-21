@@ -77,6 +77,7 @@
 
 <a class="btn btn-primary" href="{% url 'burials:gravegood_update' pk=object.pk %}" role="button">edit grave goods</a>
 <a class ="btn btn-danger" href="{% url 'burials:gravegood_delete' pk=object.id %}">delete</a>
+<a class ="btn btn-default" href="{% url 'burials:gravegood_create' %}?burial={{ object.burial }}">create new grave goods in this burial</a>
 
 {% endif %}
 

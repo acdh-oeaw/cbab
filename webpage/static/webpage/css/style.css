@@ -199,11 +199,12 @@ legend {
   font-weight: bold;
   font-variant: small-caps;
   white-space: normal;
+  margin-bottom: 10px;
 
 }
-.btn-default {
+/*.custom-default {
   margin-bottom: 10px;
-}
+}*/
 /*Removing rounded corners for all buttons*/
 
 /*@media (max-width: 480px) {
