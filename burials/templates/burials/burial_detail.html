@@ -137,7 +137,11 @@
 <table class="table table-bordered table-hover">
   <tr>
       <th class="col-sm-3">Filling objects</th>
-      <td>{{ object.filling_objects }}</td>
+        <td>
+            {% for x in object.filling_objects.all %}
+                {{ x }}<br/>
+            {% endfor %}
+        </td>
   </tr>
   <tr>
       <th class="col-sm-3">Intentionally deposited</th>

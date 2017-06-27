@@ -92,7 +92,7 @@ class BurialForm(forms.ModelForm):
                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Grave pit form'),
             'grave_pit_orientation': autocomplete.ModelSelect2(
                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Grave pit orientation'),
-            'filling_objects': autocomplete.ModelSelect2(
+            'filling_objects': autocomplete.ModelSelect2Multiple(
                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Burial Filling Objects'),
             'filling': autocomplete.ModelSelect2(
                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Burial Filling Type'),
