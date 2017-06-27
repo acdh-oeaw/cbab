@@ -163,8 +163,8 @@ class Burial(models.Model):
     height = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="cm", verbose_name="Depth")
-    filling_objects = models.ForeignKey(
-        SkosConcept, blank=True, null=True,
+    filling_objects = models.ManyToManyField(
+        SkosConcept, blank=True,
         help_text="helptext", related_name="skos_filling_object")
     intentionally_deposited = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     filling = models.ForeignKey(
