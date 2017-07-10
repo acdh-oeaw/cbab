@@ -73,6 +73,7 @@
 
 <a class="btn btn-primary" href="{% url 'burials:gravegoodother_update' pk=object.pk %}" role="button">edit organic grave goods</a>
 <a class ="btn btn-danger" href="{% url 'burials:gravegoodother_delete' pk=object.id %}">delete</a>
+<a class ="btn btn-default" href="{% url 'burials:gravegoodother_create' %}?burial={{ object.burial }}">create new organic grave goods in this burial</a>
 
 {% endif %}
 

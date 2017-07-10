@@ -89,6 +89,7 @@
 
 <a class="btn btn-primary" href="{% url 'burials:deadbodyremains_update' pk=object.pk %}" role="button">edit anthropology</a>
 <a class ="btn btn-danger" href="{% url 'burials:deadbodyremains_delete' pk=object.id %}">delete</a>
+<a class ="btn btn-default" href="{% url 'burials:deadbodyremains_create' %}?burial={{ object.burial }}">create new anthropology in this burial</a>
 
 {% endif %}
 

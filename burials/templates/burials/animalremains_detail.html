@@ -82,6 +82,7 @@
 
 <a class="btn btn-primary" href="{% url 'burials:animalremains_update' pk=object.pk %}" role="button">edit animal remains</a>
 <a class ="btn btn-danger" href="{% url 'burials:animalremains_delete' pk=object.id %}">delete</a>
+<a class ="btn btn-default" href="{% url 'burials:animalremains_create' %}?burial={{ object.burial }}">create new animal remains in this burial</a>
 
 {% endif %}
 
