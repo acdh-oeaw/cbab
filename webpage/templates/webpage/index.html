@@ -2,135 +2,90 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% block content %}
-
-
-
-
-  <!--OLD HOMEPAGE-->
-  <!-- <div class="container text-center"> -->
-  <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"/>
-            <li data-target="#myCarousel" data-slide-to="1"/>
-        </ol>
-
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="{% static 'webpage/img/ACDH_Panorama_Postkarte_motiv01.jpg' %}" alt="First" width="1200" height="600" title="by Sandra Lehecka"/>
-                <div class="carousel-caption"></div>
-            </div>
-            <div class="item">
-                <img src="{% static 'webpage/img/ACDH_Panorama_Postkarte_motiv02.jpg' %}" alt="a nice feature picture" width="1200" height="600" title="by Sandra Lehecka"/>
-                <div class="carousel-caption"></div>
+{% endblock %}
+{% block procustom-index %}
+<div class="container-fluid procustom-index">
+    <div class="container">
+        <div class="procustom-search-wrapper">
+            <ul class="nav nav-tabs procustom-nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#BurialSites">Burial Sites</a></li>
+                <li><a data-toggle="tab" href="#BurialGroups">Burial Groups</a></li>
+                <li><a data-toggle="tab" href="#Burials">Burials</a></li>
+                <li><a data-toggle="tab" href="#GraveGoods">Grave Goods</a></li>
+            </ul>
+            <div class="tab-content procustom-tab-content">
+                <div id="BurialSites" class="tab-pane fade in active">
+                    <h2>Search CBAB Database for</h2>
+                    <h2>Burial Sites</h2>
+                    <form action="/browsing/burialsites/?name=name" class="procustom-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Enter name of the Burial Site..." required/>
+                            <br /><span class="text-muted">e.g. Athens</span>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit" value="search"/>
+                        </div>
+                        <a href="{% url 'browsing:browse_burialsites' %}" class="btn btn-default">
+                            advanced search options
+                        </a>
+                    </form>
+                </div>
+                <div id="BurialGroups" class="tab-pane fade">
+                    <h2>Search CBAB Database for</h2>
+                    <h2>Burial Groups</h2><br />
+                    <a href="{% url 'browsing:browse_burialgroups' %}" class="btn btn-primary">
+                        search
+                    </a>
+                </div>
+                <div id="Burials" class="tab-pane fade">
+                    <h2>Search CBAB Database for</h2>
+                    <h2>Burials</h2><br />
+                    <a href="{% url 'browsing:browse_burials' %}" class="btn btn-primary">
+                        search
+                    </a>
+                </div>
+                <div id="GraveGoods" class="tab-pane fade">
+                    <h2>Search CBAB Database for</h2>
+                    <h2>Grave Goods</h2><br />
+                    <a href="{% url 'browsing:browse_gravegoods' %}" class="btn btn-primary">
+                        search
+                    </a>
+                </div>
             </div>
         </div>
-
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
     </div>
-    <h1 style="text-align:center">{% projects_metadata 'title' %}</h1>
-    <h3>{% projects_metadata 'subtitle' %}</h3>
-    <p>{% projects_metadata 'description' %}</p> -->
-    <!-- </div> -->
-    <!--TILL HERE-->
-  {% endblock %}
-
-  {% block procustom-index %}
-  <div class="container-fluid procustom-index">
-    <div class="container">
-
-      <div class="procustom-search-wrapper">
-
-
-
-    <ul class="nav nav-tabs procustom-nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#BurialSites">Burial Sites</a></li>
-      <li><a data-toggle="tab" href="#BurialGroups">Burial Groups</a></li>
-      <li><a data-toggle="tab" href="#Burials">Burials</a></li>
-      <li><a data-toggle="tab" href="#GraveGoods">Grave Goods</a></li>
-    </ul>
-
-
-    <div class="tab-content procustom-tab-content">
-      <div id="BurialSites" class="tab-pane fade in active">
-        <h2>Search CBAB Database for</h2>
-        <h2>Burial Sites</h2>
-
-        <form action="/browsing/burialsites/?name=name" class="procustom-form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Enter name of the Burial Site..." required/>
-                      </br>
-                        <span class="text-muted">e.g. Athens</span>
-                    </div>
-                  </br>
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="search" />
-
-                    </div>
-                    <a href="{% url 'browsing:browse_burialsites' %}" type="button" class="btn btn-default" >advanced search options</a>
-        </form>
-      </div>
-      <div id="BurialGroups" class="tab-pane fade">
-        <h2>Search CBAB Database for</h2>
-        <h2>Burial Groups</h2>
-        </br>
-        <a href="{% url 'browsing:browse_burialgroups' %}" type="button" class="btn btn-primary" >search</a>
-      </div>
-      <div id="Burials" class="tab-pane fade">
-        <h2>Search CBAB Database for</h2>
-        <h2>Burials</h2>
-      </br>
-        <a href="{% url 'browsing:browse_burials' %}" type="button" class="btn btn-primary" >search</a>
-      </div>
-      <div id="GraveGoods" class="tab-pane fade">
-        <h2>Search CBAB Database for</h2>
-        <h2>Grave Goods</h2>
-      </br>
-        <a href="{% url 'browsing:browse_gravegoods' %}" type="button" class="btn btn-primary" >search</a>
-      </div>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-
+</div>
 <!--Responsive tabs for smaller screens-->
 <script type="text/javascript">
-$.fn.responsiveTabs = function() {
-  this.addClass('responsive-tabs');
-  this.append($('<span class="glyphicon glyphicon-triangle-bottom"></span>'));
-  this.append($('<span class="glyphicon glyphicon-triangle-top"></span>'));
+    $.fn.responsiveTabs = function() {
+        this.addClass('responsive-tabs');
+        this.append($('<span class="glyphicon glyphicon-triangle-bottom"></span>'));
+        this.append($('<span class="glyphicon glyphicon-triangle-top"></span>'));
 
-  this.on('click', 'li.active > a, span.glyphicon', function() {
-    this.toggleClass('open');
-  }.bind(this));
+        this.on('click', 'li.active > a, span.glyphicon', function() {
+            this.toggleClass('open');
+        }.bind(this));
 
-  this.on('click', 'li:not(.active) > a', function() {
-    this.removeClass('open');
-  }.bind(this));
-};
-
-$('.nav.nav-tabs').responsiveTabs();
+        this.on('click', 'li:not(.active) > a', function() {
+            this.removeClass('open');
+        }.bind(this));
+    };
+    $('.nav.nav-tabs').responsiveTabs();
 </script>
-
 <!--Keep active tab on page refresh-->
 <script>
- $(document).ready(function() {
-    if(location.hash) {
-        $('a[href=' + location.hash + ']').tab('show');
-    }
-    $(document.body).on("click", "a[data-toggle]", function(event) {
-        location.hash = this.getAttribute("href");
+    $(document).ready(function() {
+        if(location.hash) {
+            $('a[href=' + location.hash + ']').tab('show');
+        }
+        $(document.body).on("click", "a[data-toggle]", function(event) {
+            location.hash = this.getAttribute("href");
+        });
     });
-});
-$(window).on('popstate', function() {
-    var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
-    $('a[href=' + anchor + ']').tab('show');
-});
-
+    $(window).on('popstate', function() {
+        var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+        $('a[href=' + anchor + ']').tab('show');
+    });
 </script>
-
-
-  {% endblock %}
+{% endblock %}

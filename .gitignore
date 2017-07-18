@@ -2,6 +2,18 @@
 __pycache__/
 *.pyc
 
+
+# test coverage
+.coverage
+cover/
+
+# IDE
+.idea
+
+# migrations
+diauma/migrations/*
+
+
 #Ipython Notebook
 .ipynb_checkpoints
 

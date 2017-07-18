@@ -5,6 +5,9 @@ from burials.models import *
 from vocabs.models import *
 from places.models import *
 
+# To do: django_filters.MethodFilter are commented because raising errors after version upgrade
+# test and remove if not needed anymore
+
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
     ('exact', 'Is equal to'),
@@ -58,6 +61,7 @@ class BurialSiteListFilter(django_filters.FilterSet):
 
     class Meta:
         model = BurialSite
+        fields = '__all__'
 
 
 class BurialGroupListFilter(django_filters.FilterSet):
@@ -187,9 +191,9 @@ class UrnCoverListFilter(django_filters.FilterSet):
 
 
 class UrnListFilter(django_filters.FilterSet):
-    burial_site_name = django_filters.MethodFilter(
-        action='burialsite_name_custom_filter', help_text=False
-        )
+    #burial_site_name = django_filters.MethodFilter(
+    #    action='burialsite_name_custom_filter', help_text=False
+    #    )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -219,15 +223,15 @@ class UrnListFilter(django_filters.FilterSet):
 
 
 class GraveGoodListFilter(django_filters.FilterSet):
-    burial_site_name = django_filters.MethodFilter(
-        action='burialsite_name_custom_filter', help_text=False
-        )
+    #burial_site_name = django_filters.MethodFilter(
+    #    action='burialsite_name_custom_filter', help_text=False
+    #    )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
-    name = django_filters.MethodFilter(
-        action='gravegood_name_custom_filter', help_text=False
-        )
+    #name = django_filters.MethodFilter(
+    #    action='gravegood_name_custom_filter', help_text=False
+    #    )
     # name = django_filters.ModelMultipleChoiceFilter(
     #     queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'),
     #     help_text=False,
@@ -260,9 +264,9 @@ class GraveGoodListFilter(django_filters.FilterSet):
 
 
 class GraveGoodOtherListFilter(django_filters.FilterSet):
-    burial_site_name = django_filters.MethodFilter(
-        action='burialsite_name_custom_filter', help_text=False
-        )
+    #burial_site_name = django_filters.MethodFilter(
+    #    action='burialsite_name_custom_filter', help_text=False
+    #    )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -282,9 +286,9 @@ class GraveGoodOtherListFilter(django_filters.FilterSet):
 
 
 class DeadBodyRemainsListFilter(django_filters.FilterSet):
-    burial_site_name = django_filters.MethodFilter(
-        action='burialsite_name_custom_filter', help_text=False
-        )
+    #burial_site_name = django_filters.MethodFilter(
+    #    action='burialsite_name_custom_filter', help_text=False
+    #    )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
@@ -320,9 +324,9 @@ class DeadBodyRemainsListFilter(django_filters.FilterSet):
 
 
 class AnimalRemainsListFilter(django_filters.FilterSet):
-    burial_site_name = django_filters.MethodFilter(
-        action='burialsite_name_custom_filter', help_text=False
-        )
+    #burial_site_name = django_filters.MethodFilter(
+    #    action='burialsite_name_custom_filter', help_text=False
+    #    )
     burial = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
     )
