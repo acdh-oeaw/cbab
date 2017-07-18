@@ -51,6 +51,10 @@ class BurialSiteListFilter(django_filters.FilterSet):
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='type of burial site'),
         help_text=False
     )
+    dating = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='dating'),
+        help_text=False
+    )
 
     class Meta:
         model = BurialSite
