@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'burials',
     'bib',
     'browsing',
+    'guardian',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
@@ -75,6 +76,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cbab.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
