@@ -54,7 +54,9 @@ class BurialSiteUpdate(UpdateView):
         kwargs['user'] = self.request.user
         return kwargs
 
-    @method_decorator(permission_required('burials.change_burialsite', (BurialSite, 'id', 'pk'), return_403=True))
+    @method_decorator(permission_required(
+        'burials.change_burialsite', (BurialSite, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialSiteUpdate, self).dispatch(*args, **kwargs)
@@ -65,7 +67,9 @@ class BurialSiteDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_burialsites')
 
-    @method_decorator(permission_required('burials.delete_burialsite', (BurialSite, 'id', 'pk'), return_403=True))
+    @method_decorator(permission_required(
+        'burials.delete_burialsite', (BurialSite, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialSiteDelete, self).dispatch(*args, **kwargs)
@@ -92,6 +96,11 @@ class BurialGroupCreate(CreateView):
     template_name = 'burials/burialgroup_create.html'
     form_class = BurialGroupForm
 
+    def get_form_kwargs(self):
+        kwargs = super(BurialGroupCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialGroupCreate, self).dispatch(*args, **kwargs)
@@ -102,7 +111,9 @@ class BurialGroupUpdate(UpdateView):
     form_class = BurialGroupForm
     template_name = 'burials/burialgroup_create.html'
 
-    @method_decorator(permission_required('burialgroup.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_burialgroup', (BurialGroup, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialGroupUpdate, self).dispatch(*args, **kwargs)
@@ -113,7 +124,9 @@ class BurialGroupDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_burialgroups')
 
-    @method_decorator(permission_required('burialgroup.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_burialgroup', (BurialGroup, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialGroupDelete, self).dispatch(*args, **kwargs)
@@ -134,6 +147,11 @@ class BurialCreate(CreateView):
     template_name = 'burials/burial_create.html'
     form_class = BurialForm
 
+    def get_form_kwargs(self):
+        kwargs = super(BurialCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialCreate, self).dispatch(*args, **kwargs)
@@ -144,7 +162,9 @@ class BurialUpdate(UpdateView):
     form_class = BurialForm
     template_name = 'burials/burial_create.html'
 
-    @method_decorator(permission_required('burial.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_burial', (Burial, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialUpdate, self).dispatch(*args, **kwargs)
@@ -155,7 +175,9 @@ class BurialDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_burials')
 
-    @method_decorator(permission_required('burial.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_burial', (Burial, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialDelete, self).dispatch(*args, **kwargs)
@@ -180,6 +202,11 @@ class UrnCoverCreate(CreateView):
     template_name = 'burials/urncover_create.html'
     form_class = UrnCoverForm
 
+    def get_form_kwargs(self):
+        kwargs = super(UrnCoverCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnCoverCreate, self).dispatch(*args, **kwargs)
@@ -190,7 +217,9 @@ class UrnCoverUpdate(UpdateView):
     form_class = UrnCoverForm
     template_name = 'burials/urncover_create.html'
 
-    @method_decorator(permission_required('urncover.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_urncover', (UrnCover, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnCoverUpdate, self).dispatch(*args, **kwargs)
@@ -201,7 +230,9 @@ class UrnCoverDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_urncovers')
 
-    @method_decorator(permission_required('urncover.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_urncover', (UrnCover, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnCoverDelete, self).dispatch(*args, **kwargs)
@@ -227,6 +258,11 @@ class UrnCreate(CreateView):
     template_name = 'burials/urn_create.html'
     form_class = UrnForm
 
+    def get_form_kwargs(self):
+        kwargs = super(UrnCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnCreate, self).dispatch(*args, **kwargs)
@@ -237,7 +273,9 @@ class UrnUpdate(UpdateView):
     form_class = UrnForm
     template_name = 'burials/urn_create.html'
 
-    @method_decorator(permission_required('urn.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_urn', (Urn, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnUpdate, self).dispatch(*args, **kwargs)
@@ -248,7 +286,9 @@ class UrnDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_urns')
 
-    @method_decorator(permission_required('urn.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_urn', (Urn, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UrnDelete, self).dispatch(*args, **kwargs)
@@ -269,6 +309,11 @@ class GraveGoodCreate(CreateView):
     template_name = 'burials/gravegood_create.html'
     form_class = GraveGoodForm
 
+    def get_form_kwargs(self):
+        kwargs = super(GraveGoodCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodCreate, self).dispatch(*args, **kwargs)
@@ -279,7 +324,9 @@ class GraveGoodUpdate(UpdateView):
     form_class = GraveGoodForm
     template_name = 'burials/gravegood_create.html'
 
-    @method_decorator(permission_required('gravegood.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_gravegood', (GraveGood, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodUpdate, self).dispatch(*args, **kwargs)
@@ -290,7 +337,9 @@ class GraveGoodDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_gravegoods')
 
-    @method_decorator(permission_required('gravegood.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_gravegood', (GraveGood, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodDelete, self).dispatch(*args, **kwargs)
@@ -311,6 +360,11 @@ class GraveGoodOtherCreate(CreateView):
     template_name = 'burials/gravegoodother_create.html'
     form_class = GraveGoodOtherForm
 
+    def get_form_kwargs(self):
+        kwargs = super(GraveGoodOtherCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodOtherCreate, self).dispatch(*args, **kwargs)
@@ -321,7 +375,9 @@ class GraveGoodOtherUpdate(UpdateView):
     form_class = GraveGoodOtherForm
     template_name = 'burials/gravegoodother_create.html'
 
-    @method_decorator(permission_required('gravegoodother.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_gravegoodother', (GraveGoodOther, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodOtherUpdate, self).dispatch(*args, **kwargs)
@@ -332,7 +388,9 @@ class GraveGoodOtherDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_gravegoodsother')
 
-    @method_decorator(permission_required('gravegoodother.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_gravegoodother', (GraveGoodOther, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(GraveGoodOtherDelete, self).dispatch(*args, **kwargs)
@@ -353,6 +411,11 @@ class DeadBodyRemainsCreate(CreateView):
     template_name = 'burials/deadbodyremains_create.html'
     form_class = DeadBodyRemainsForm
 
+    def get_form_kwargs(self):
+        kwargs = super(DeadBodyRemainsCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeadBodyRemainsCreate, self).dispatch(*args, **kwargs)
@@ -363,7 +426,9 @@ class DeadBodyRemainsUpdate(UpdateView):
     form_class = DeadBodyRemainsForm
     template_name = 'burials/deadbodyremains_create.html'
 
-    @method_decorator(permission_required('DeadBodyRemains.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_deadbodyremains', (DeadBodyRemains, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeadBodyRemainsUpdate, self).dispatch(*args, **kwargs)
@@ -374,7 +439,9 @@ class DeadBodyRemainsDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_deadbodyremains')
 
-    @method_decorator(permission_required('DeadBodyRemains.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_deadbodyremains', (DeadBodyRemains, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeadBodyRemainsDelete, self).dispatch(*args, **kwargs)
@@ -395,6 +462,11 @@ class AnimalRemainsCreate(CreateView):
     template_name = 'burials/animalremains_create.html'
     form_class = AnimalRemainsForm
 
+    def get_form_kwargs(self):
+        kwargs = super(AnimalRemainsCreate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AnimalRemainsCreate, self).dispatch(*args, **kwargs)
@@ -405,7 +477,9 @@ class AnimalRemainsUpdate(UpdateView):
     form_class = AnimalRemainsForm
     template_name = 'burials/animalremains_create.html'
 
-    @method_decorator(permission_required('AnimalRemains.change',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.change_animalremains', (AnimalRemains, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AnimalRemainsUpdate, self).dispatch(*args, **kwargs)
@@ -416,7 +490,9 @@ class AnimalRemainsDelete(DeleteView):
     template_name = 'burials/confirm_delete.html'
     success_url = reverse_lazy('browsing:browse_animalremains')
 
-    @method_decorator(permission_required('AnimalRemains.delete',  raise_exception=True))
+    @method_decorator(permission_required(
+        'burials.delete_animalremainss', (AnimalRemains, 'id', 'pk'), return_403=True)
+    )
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AnimalRemainsDelete, self).dispatch(*args, **kwargs)
