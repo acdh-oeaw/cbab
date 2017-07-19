@@ -2,6 +2,8 @@
 __pycache__/
 *.pyc
 
+# sensetive data
+cbab/settings/server.py
 
 # test coverage
 .coverage
