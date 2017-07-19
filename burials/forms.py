@@ -1,4 +1,6 @@
 from dal import autocomplete
+from guardian.shortcuts import assign_perm
+from django.contrib.auth.models import User, Group
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
@@ -35,6 +37,7 @@ class BurialSiteForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(BurialSiteForm, self).__init__(*args, **kwargs)
         self.fields['lng'].required = True
         self.fields['lat'].required = True
@@ -44,6 +47,15 @@ class BurialSiteForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+        print(kwargs)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(BurialSiteForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_burialsite', user, current_object)
+        assign_perm('change_burialsite', superusergroup, current_object)
+        return current_object
 
 
 class BurialGroupForm(forms.ModelForm):

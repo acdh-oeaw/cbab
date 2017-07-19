@@ -1,7 +1,7 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse_lazy
 from .models import *
@@ -43,6 +43,12 @@ class BurialSiteUpdate(UpdateView):
     form_class = BurialSiteForm
     template_name = 'burials/burialsite_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(BurialSiteUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    @method_decorator(permission_required('burialsite.change',  raise_exception=True))
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(BurialSiteUpdate, self).dispatch(*args, **kwargs)
