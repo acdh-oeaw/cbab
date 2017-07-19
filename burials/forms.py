@@ -75,6 +75,7 @@ class BurialGroupForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(BurialGroupForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -82,6 +83,16 @@ class BurialGroupForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(BurialGroupForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_burialgroup', user, current_object)
+        assign_perm('delete_burialgroup', user, current_object)
+        assign_perm('change_burialgroup', superusergroup, current_object)
+        assign_perm('delete_burialgroup', superusergroup, current_object)
+        return current_object
 
 
 class BurialForm(forms.ModelForm):
@@ -113,6 +124,7 @@ class BurialForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(BurialForm, self).__init__(*args, **kwargs)
         self.fields['burial_site'].required = True
         self.helper = FormHelper()
@@ -168,26 +180,6 @@ class BurialForm(forms.ModelForm):
         )
 
 
-# class FillingObjectForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = FillingObject
-#         fields = "__all__"
-#         widgets = {
-#             'filling_objects': autocomplete.ModelSelect2(
-#                 url='../../../vocabs-ac/skos-constraint-ac/?scheme=Burial Filling Objects'),
-#         }
-#
-#     def __init__(self, *args, **kwargs):
-#         super(FillingObjectForm, self).__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.form_tag = True
-#         self.helper.form_class = 'form-horizontal'
-#         self.helper.label_class = 'col-md-3'
-#         self.helper.field_class = 'col-md-9'
-#         self.helper.add_input(Submit('submit', 'save'),)
-
-
 class UrnCoverForm(forms.ModelForm):
 
     class Meta:
@@ -199,6 +191,7 @@ class UrnCoverForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(UrnCoverForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -206,6 +199,16 @@ class UrnCoverForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(UrnCoverForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_urncover', user, current_object)
+        assign_perm('delete_urncover', user, current_object)
+        assign_perm('change_urncover', superusergroup, current_object)
+        assign_perm('delete_urncover', superusergroup, current_object)
+        return current_object
 
 
 class UrnForm(forms.ModelForm):
@@ -221,6 +224,7 @@ class UrnForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(UrnForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -228,6 +232,16 @@ class UrnForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(UrnForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_urn', user, current_object)
+        assign_perm('delete_urn', user, current_object)
+        assign_perm('change_urn', superusergroup, current_object)
+        assign_perm('delete_urn', superusergroup, current_object)
+        return current_object
 
 
 class GraveGoodForm(forms.ModelForm):
@@ -252,6 +266,7 @@ class GraveGoodForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(GraveGoodForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -259,6 +274,16 @@ class GraveGoodForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(GraveGoodForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_gravegood', user, current_object)
+        assign_perm('delete_gravegood', user, current_object)
+        assign_perm('change_gravegood', superusergroup, current_object)
+        assign_perm('delete_gravegood', superusergroup, current_object)
+        return current_object
 
 
 class GraveGoodOtherForm(forms.ModelForm):
@@ -277,6 +302,7 @@ class GraveGoodOtherForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(GraveGoodOtherForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -284,6 +310,16 @@ class GraveGoodOtherForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(GraveGoodOtherForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_gravegoodformother', user, current_object)
+        assign_perm('delete_gravegoodformother', user, current_object)
+        assign_perm('change_gravegoodformother', superusergroup, current_object)
+        assign_perm('delete_gravegoodformother', superusergroup, current_object)
+        return current_object
 
 
 class DeadBodyRemainsForm(forms.ModelForm):
@@ -308,6 +344,7 @@ class DeadBodyRemainsForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(DeadBodyRemainsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -315,6 +352,16 @@ class DeadBodyRemainsForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(DeadBodyRemainsForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_deadbodyremains', user, current_object)
+        assign_perm('delete_deadbodyremains', user, current_object)
+        assign_perm('change_deadbodyremains', superusergroup, current_object)
+        assign_perm('delete_deadbodyremains', superusergroup, current_object)
+        return current_object
 
 
 class AnimalRemainsForm(forms.ModelForm):
@@ -335,6 +382,7 @@ class AnimalRemainsForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(AnimalRemainsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -342,3 +390,13 @@ class AnimalRemainsForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-9'
         self.helper.add_input(Submit('submit', 'save'),)
+
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(AnimalRemainsForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_animalremains', user, current_object)
+        assign_perm('delete_animalremains', user, current_object)
+        assign_perm('change_animalremains', superusergroup, current_object)
+        assign_perm('delete_animalremains', superusergroup, current_object)
+        return current_object
