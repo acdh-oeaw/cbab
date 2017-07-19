@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 
-# sensetive data
+# sensitive data
 cbab/settings/server.py
 
 # test coverage
