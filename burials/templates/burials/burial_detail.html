@@ -209,10 +209,12 @@
             {% endfor %}
         </td>
     </tr>
+    {% if object.amount_related_deadbodyremains > 0 %}
     <tr>
       <th>Total amount</th>
       <td>{{ object.amount_related_deadbodyremains }}</td>
     </tr>
+    {% endif %}
   </table>
 {% endif %}
 

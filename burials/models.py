@@ -207,21 +207,24 @@ class Burial(models.Model):
     def amount_related_gravegoods(self):
         goods = []
         for x in GraveGood.objects.filter(burial=self.id):
-            goods.append(x.amount_countable)
+            if x.amount_countable:
+                goods.append(x.amount_countable)
         return sum(goods)
 
     @property
     def amount_related_deadbodyremains(self):
         deadbodyremains = []
         for x in DeadBodyRemains.objects.filter(burial=self.id):
-            deadbodyremains.append(x.amount_countable)
+            if x.amount_countable:
+                deadbodyremains.append(x.amount_countable)
         return sum(deadbodyremains)
 
     @property
     def amount_related_organic(self):
         organic = []
         for x in AnimalRemains.objects.filter(burial=self.id):
-            organic.append(x.amount_countable)
+            if x.amount_countable:
+                organic.append(x.amount_countable)
         return sum(organic)
 
     def get_classname(self):
