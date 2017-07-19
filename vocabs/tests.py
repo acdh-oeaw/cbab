@@ -20,5 +20,5 @@ class VocabsTest(TestCase):
         rv = self.client.get('/vocabs/create/')
         self.assertContains(rv, 'Pref label')
         form_data = {'pref_label': 'test concept'}
-        self.client.post('/vocabs/create/', form_data, follow=True)
+        rv = self.client.post('/vocabs/create/', form_data, follow=True)
         self.assertContains(rv, 'test concept')

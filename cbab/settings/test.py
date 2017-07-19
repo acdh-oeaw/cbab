@@ -21,7 +21,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     '--with-coverage',          # generate coverage
-    '--cover-package=bib,browsing,burials,cbab,django_spaghetti,doc,places,vocabs,webpage',
+    '--cover-package=bib,browsing,burials,cbab,django_spaghetti,places,vocabs,webpage',
     '--cover-html',             # generate a html cover report
     '--nocapture',              # needed to show print output in console
     '--nologcapture',           # needed to show print output in console
