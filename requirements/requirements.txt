@@ -41,7 +41,6 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.5.3
 sphinx-rtd-theme==0.2.4
-tei==0.5.1
 testpath==0.3
 tornado==4.4.2
 traitlets==4.3.1
