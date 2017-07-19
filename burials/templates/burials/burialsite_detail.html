@@ -29,6 +29,7 @@
         <th>Alternative name</th>
         <td>{{ object.alternative_name }}</td>
     </tr>
+    {% if object.location %}
     <tr>
         <th>Location</th>
         <td>
@@ -37,6 +38,7 @@
         </a>
         </td>
     </tr>
+    {% endif %}
     <tr>
         <th>Geographical coordinate reference system</th>
         <td>{{ object.geographical_coordinate_reference_system }}</td>

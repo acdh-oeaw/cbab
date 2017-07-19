@@ -54,7 +54,9 @@ class BurialSiteForm(forms.ModelForm):
         current_object = super(BurialSiteForm, self).save(*args, **kwargs)
         user = self.user
         assign_perm('change_burialsite', user, current_object)
+        assign_perm('delete_burialsite', user, current_object)
         assign_perm('change_burialsite', superusergroup, current_object)
+        assign_perm('delete_burialsite', superusergroup, current_object)
         return current_object
 
 
