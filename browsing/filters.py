@@ -25,9 +25,8 @@ django_filters.filters.LOOKUP_TYPES = [
 ]
 
 YESNO = (
-    ('', '---------'),
-    ("yes", "yes"),
-    ("no", "no")
+    (True, "Yes"),
+    (False, "No")
 )
 
 
@@ -37,7 +36,8 @@ class BurialSiteListFilter(django_filters.FilterSet):
         help_text=False
     )
     alternative_name = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False
+        lookup_expr='icontains', help_text=False,
+        label="Alternative name"
     )
     location = django_filters.ModelMultipleChoiceFilter(
         queryset=Place.objects.all(), help_text=False
@@ -66,10 +66,12 @@ class BurialSiteListFilter(django_filters.FilterSet):
 
 class BurialGroupListFilter(django_filters.FilterSet):
     burial_group_id = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False
+        lookup_expr='icontains', help_text=False,
+        label="Burial group number"
     )
     burial_site__name = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False
+        lookup_expr='icontains', help_text=False,
+        label="Burial site name"
     )
     burial_group_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial group type'),
@@ -102,32 +104,41 @@ class BurialListFilter(django_filters.FilterSet):
         lookup_expr='exact', help_text=False,
     )
     burial_group = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False
+        lookup_expr='icontains', help_text=False,
+        label="Burial group"
     )
     burial_site__name = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False
-    )
-    C14_dendro = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Burial site name"
+    )
+    C14_dendro = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        label="Absolute dating (C14/Dendro)",
+        choices=YESNO
     )
     absolute_age = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Absolute age"
     )
     burial_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial type'),
         help_text=False
     )
-    individuals = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
-    )
+    # i don't know what this is? there is no field 'individuals' in models
+    # individuals = django_filters.ChoiceFilter(
+    #     choices=YESNO, help_text=False,
+    # )
     secondary_burial = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     displaced = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     extraordinary_burial = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     construction = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial construction'),
@@ -138,7 +149,8 @@ class BurialListFilter(django_filters.FilterSet):
         help_text=False
     )
     cover = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     cover_type = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Cover type'),
