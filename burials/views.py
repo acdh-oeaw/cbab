@@ -111,6 +111,11 @@ class BurialGroupUpdate(UpdateView):
     form_class = BurialGroupForm
     template_name = 'burials/burialgroup_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(BurialGroupUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(permission_required(
         'burials.change_burialgroup', (BurialGroup, 'id', 'pk'), return_403=True)
     )
@@ -161,6 +166,11 @@ class BurialUpdate(UpdateView):
     model = Burial
     form_class = BurialForm
     template_name = 'burials/burial_create.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(BurialUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     @method_decorator(permission_required(
         'burials.change_burial', (Burial, 'id', 'pk'), return_403=True)
@@ -216,6 +226,11 @@ class UrnCoverUpdate(UpdateView):
     model = UrnCover
     form_class = UrnCoverForm
     template_name = 'burials/urncover_create.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(UrnCoverUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     @method_decorator(permission_required(
         'burials.change_urncover', (UrnCover, 'id', 'pk'), return_403=True)
@@ -273,6 +288,11 @@ class UrnUpdate(UpdateView):
     form_class = UrnForm
     template_name = 'burials/urn_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(UrnUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(permission_required(
         'burials.change_urn', (Urn, 'id', 'pk'), return_403=True)
     )
@@ -323,6 +343,11 @@ class GraveGoodUpdate(UpdateView):
     model = GraveGood
     form_class = GraveGoodForm
     template_name = 'burials/gravegood_create.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(GraveGoodUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     @method_decorator(permission_required(
         'burials.change_gravegood', (GraveGood, 'id', 'pk'), return_403=True)
@@ -375,6 +400,11 @@ class GraveGoodOtherUpdate(UpdateView):
     form_class = GraveGoodOtherForm
     template_name = 'burials/gravegoodother_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(GraveGoodOtherUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(permission_required(
         'burials.change_gravegoodother', (GraveGoodOther, 'id', 'pk'), return_403=True)
     )
@@ -426,6 +456,11 @@ class DeadBodyRemainsUpdate(UpdateView):
     form_class = DeadBodyRemainsForm
     template_name = 'burials/deadbodyremains_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(DeadBodyRemainsUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     @method_decorator(permission_required(
         'burials.change_deadbodyremains', (DeadBodyRemains, 'id', 'pk'), return_403=True)
     )
@@ -476,6 +511,11 @@ class AnimalRemainsUpdate(UpdateView):
     model = AnimalRemains
     form_class = AnimalRemainsForm
     template_name = 'burials/animalremains_create.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(AnimalRemainsUpdate, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     @method_decorator(permission_required(
         'burials.change_animalremains', (AnimalRemains, 'id', 'pk'), return_403=True)
