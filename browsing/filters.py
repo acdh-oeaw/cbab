@@ -186,15 +186,29 @@ class UrnCoverListFilter(django_filters.FilterSet):
     cover_id = django_filters.CharFilter(
         lookup_expr='exact', help_text=False,
     )
+    urn__urn_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Urn Inventory Number"
+    )
     upside_down = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     fragment = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     basic_shape = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn cover'),
         help_text=False
+    )
+    urn__burial__burial_site__name = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Burial site"
+    )
+    urn__burial__burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Burial number"
     )
 
     class Meta:
