@@ -203,35 +203,47 @@ class UrnCoverListFilter(django_filters.FilterSet):
 
 
 class UrnListFilter(django_filters.FilterSet):
-    #burial_site_name = django_filters.MethodFilter(
-    #    action='burialsite_name_custom_filter', help_text=False
-    #    )
-    burial = django_filters.CharFilter(
+    burial__burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Burial site"
     )
+    burial__burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Burial number"
+    )
+    burial__burial_type__pref_label = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Burial type"
+    )
+    # burial__burial_type__pref_label = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial type'),
+    #     help_text=False,
+    #     label="Burial type"
+    # )
     basic_shape = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn'),
         help_text=False
     )
     urn_id = django_filters.CharFilter(
         lookup_expr='iexact', help_text=False,
+        label="Urn Inventory Number"
     )
     urn_type = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Urn type"
     )
     variation = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Variation"
     )
-    cover = django_filters.CharFilter(
-        lookup_expr='icontains', help_text=False,
+    urncover_exists = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO, label="Urn cover exists"
     )
 
     class Meta:
         model = Urn
         fields = ['id', 'urn_id']
-
-    def burialsite_name_custom_filter(self, queryset, value):
-        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
 
 
 class GraveGoodListFilter(django_filters.FilterSet):
