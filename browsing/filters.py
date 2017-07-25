@@ -306,25 +306,38 @@ class GraveGoodListFilter(django_filters.FilterSet):
 
 
 class GraveGoodOtherListFilter(django_filters.FilterSet):
-    #burial_site_name = django_filters.MethodFilter(
-    #    action='burialsite_name_custom_filter', help_text=False
-    #    )
-    burial = django_filters.CharFilter(
+    burial__burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Burial site"
+    )
+    burial__burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Burial number"
+    )
+    urn__urn_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Urn Inventory Number"
     )
     food = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
     )
     other_organic_grave_good = django_filters.ChoiceFilter(
-        choices=YESNO, help_text=False,
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False
+    )
+    secondary_depostition = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO, label="Secondary deposition"
     )
 
     class Meta:
         model = GraveGoodOther
-        fields = ['id', 'burial']
-
-    def burialsite_name_custom_filter(self, queryset, value):
-        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
+        fields = ['id', ]
 
 
 class DeadBodyRemainsListFilter(django_filters.FilterSet):
