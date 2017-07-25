@@ -264,16 +264,22 @@ class GraveGoodListFilter(django_filters.FilterSet):
     #burial_site_name = django_filters.MethodFilter(
     #    action='burialsite_name_custom_filter', help_text=False
     #    )
-    burial = django_filters.CharFilter(
+    burial__burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Burial site"
     )
-    #name = django_filters.MethodFilter(
-    #    action='gravegood_name_custom_filter', help_text=False
-    #    )
-    # name = django_filters.ModelMultipleChoiceFilter(
-    #     queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave good name'),
-    #     help_text=False,
-    # )
+    burial__burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Burial number"
+    )
+    urn__urn_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Urn Inventory Number"
+    )
+    name = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='GraveGoodObject'),
+        help_text=False, label="Type"
+    )
     material = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Material'),
         help_text=False
@@ -289,16 +295,14 @@ class GraveGoodListFilter(django_filters.FilterSet):
     amount = django_filters.NumberFilter(
         lookup_expr='exact', help_text=False, name="amount_countable"
     )
+    secondary_depostition = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO, label="Secondary deposition"
+    )
 
     class Meta:
         model = GraveGood
         fields = ['id', 'name']
-
-    def gravegood_name_custom_filter(self, queryset, value):
-        return queryset.filter(name__pref_label__icontains=value).distinct()
-
-    def burialsite_name_custom_filter(self, queryset, value):
-        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
 
 
 class GraveGoodOtherListFilter(django_filters.FilterSet):

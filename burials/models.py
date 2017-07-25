@@ -275,7 +275,7 @@ class Urn(models.Model):
         choices=BOOLEAN_CHOICES)
 
     def __str__(self):
-        return "{}-{} {}".format(self.urn_id, self.id, self.burial)
+        return "{}- ID {} {}".format(self.urn_id, self.id, self.burial)
 
     def get_absolute_url(self):
         return reverse('burials:urn_detail', kwargs={'pk': self.id})
