@@ -341,11 +341,17 @@ class GraveGoodOtherListFilter(django_filters.FilterSet):
 
 
 class DeadBodyRemainsListFilter(django_filters.FilterSet):
-    #burial_site_name = django_filters.MethodFilter(
-    #    action='burialsite_name_custom_filter', help_text=False
-    #    )
-    burial = django_filters.CharFilter(
+    burial__burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Burial site"
+    )
+    burial__burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Burial number"
+    )
+    urn__urn_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label="Urn Inventory Number"
     )
     age = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Age'),
@@ -361,21 +367,33 @@ class DeadBodyRemainsListFilter(django_filters.FilterSet):
     )
     weight = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Weight"
     )
     pathology = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
+        label="Pathology"
     )
     total_weight = django_filters.CharFilter(
         lookup_expr='iexact', help_text=False,
+        label="Total weight"
+    )
+    amount_countable = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False
+    )
+    position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(
+        scheme__dc_title__iexact='Position of the cremated remains'),
+        help_text=False
+    )
+    secondary_depostition = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO, label="Secondary deposition"
     )
 
 
     class Meta:
         model = DeadBodyRemains
         fields = ['id', 'age']
-
-    def burialsite_name_custom_filter(self, queryset, value):
-        return queryset.filter(burial__burial_site__name__icontains=value).distinct()
 
 
 class AnimalRemainsListFilter(django_filters.FilterSet):
