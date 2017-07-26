@@ -368,11 +368,6 @@ class GraveGoodOther(CrematedRemainsBaseClass):
         SkosConcept, blank=True, null=True, help_text="helptext",
         related_name="skos_gravegoodother_position")
 
-    # def __str__(self):
-    #     return "food: {} | other: {} | text: {}".format(
-    #         self.food, self.other_organic_grave_good, self.other_organic_grave_good_text
-    #     )
-
     def __str__(self):
         if self.food is True and (self.other_organic_grave_good is False or self.other_organic_grave_good is None):
             return "food ID {}".format(self.id)
