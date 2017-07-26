@@ -315,10 +315,10 @@ class GraveGoodOtherForm(forms.ModelForm):
         superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
         current_object = super(GraveGoodOtherForm, self).save(*args, **kwargs)
         user = self.user
-        assign_perm('change_gravegoodformother', user, current_object)
-        assign_perm('delete_gravegoodformother', user, current_object)
-        assign_perm('change_gravegoodformother', superusergroup, current_object)
-        assign_perm('delete_gravegoodformother', superusergroup, current_object)
+        assign_perm('change_gravegoodother', user, current_object)
+        assign_perm('delete_gravegoodother', user, current_object)
+        assign_perm('change_gravegoodother', superusergroup, current_object)
+        assign_perm('delete_gravegoodother', superusergroup, current_object)
         return current_object
 
 
