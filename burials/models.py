@@ -270,7 +270,6 @@ class Urn(models.Model):
         blank=True, null=True, help_text="helptext")
     urn_id = models.TextField(
         blank=True, null=True, help_text="helptext", verbose_name="Urn Inventory Number")
-
     urncover_exists = models.NullBooleanField(verbose_name="Urn Cover",
         choices=BOOLEAN_CHOICES)
 
