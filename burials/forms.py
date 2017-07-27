@@ -179,6 +179,16 @@ class BurialForm(forms.ModelForm):
             )
         )
 
+    def save(self, *args, **kwargs):
+        superusergroup, _ = Group.objects.get_or_create(name='superusergroup')
+        current_object = super(BurialForm, self).save(*args, **kwargs)
+        user = self.user
+        assign_perm('change_burial', user, current_object)
+        assign_perm('delete_burial', user, current_object)
+        assign_perm('change_burial', superusergroup, current_object)
+        assign_perm('delete_burial', superusergroup, current_object)
+        return current_object
+
 
 class UrnCoverForm(forms.ModelForm):
 
