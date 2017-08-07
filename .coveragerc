@@ -1,0 +1,6 @@
+[report]
+omit =
+    # omit migrations
+    */migrations/*
+    # omit settings
+    */settings/*
