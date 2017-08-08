@@ -194,7 +194,7 @@ class UrnCoverForm(forms.ModelForm):
 
     class Meta:
         model = UrnCover
-        fields = "__all__"
+        fields = ['urn', 'basic_shape', 'upside_down', 'fragment', 'cover_id']
         widgets = {
             'basic_shape': autocomplete.ModelSelect2(
                 url='../../../vocabs-ac/skos-constraint-no-hierarchy-ac/?scheme=Basic shape of urn cover'),
@@ -203,6 +203,7 @@ class UrnCoverForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(UrnCoverForm, self).__init__(*args, **kwargs)
+        self.fields['urn'].required = True
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'

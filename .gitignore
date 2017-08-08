@@ -36,3 +36,4 @@ diauma/migrations/*
 # documentation build files
 
 /docs/_*/*
+/setPermissions.ipynb
