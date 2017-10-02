@@ -676,11 +676,11 @@ class MainListFilter(django_filters.FilterSet):
     gravegoodother__position = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
         help_text=False,
-        label="Grave Good Other position"
+        label="Organic Grave Good position"
     )
     gravegoodother__amount_countable = django_filters.NumberFilter(
         lookup_expr='exact', help_text=False,
-        distinct=True, label="Grave Good Other amount"
+        distinct=True, label="Organic Grave Good amount"
     )
     #DeadBodyRemains search fields
     deadbodyremains__age = django_filters.ModelMultipleChoiceFilter(

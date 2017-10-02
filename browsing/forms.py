@@ -89,12 +89,12 @@ class MainListFilterFormHelper(FormHelper):
                     'gravegood__amount_countable',
                     css_id="grave_good_search_options"),
                 AccordionGroup(
-                    'Grave Good Other search options',
+                    'Organic Grave Good search options',
                     'gravegoodother__food',
                     'gravegoodother__other_organic_grave_good',
                     'gravegoodother__position',
                     'gravegoodother__amount_countable',
-                    css_id="grave_good_other_search_options"),
+                    css_id="organic_grave_good_search_options"),
                 AccordionGroup(
                     'Anthropology search options',
                     'deadbodyremains__age',
