@@ -211,7 +211,7 @@ class MainListView(GenericListView):
     table_class = BurialTable
     template_name = 'browsing/main_list_generic.html'
     filter_class = MainListFilter
-    formhelper_class = GenericFilterFormHelper
+    formhelper_class = MainListFilterFormHelper
 
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
