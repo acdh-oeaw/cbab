@@ -45,8 +45,8 @@ class BurialSite(models.Model):
     disturbance = models.TextField(
         blank=True, null=True, help_text="helptext")
     total_graves = models.CharField(
-        max_length=255, blank=True, verbose_name="Total number of excvated graves",
-        null=True, help_text="Total number of excvated graves")
+        max_length=255, blank=True, verbose_name="Total number of excavated graves",
+        null=True, help_text="Total number of excavated graves")
     dating = models.ManyToManyField(
         SkosConcept, blank=True, help_text="helptext", related_name="skos_dating")
     absolute_dating = models.CharField(

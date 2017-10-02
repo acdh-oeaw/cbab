@@ -29,6 +29,11 @@ YESNO = (
     (False, "No")
 )
 
+FULLYPARTLYEXCAVATED = (
+    ("fully excavated", "fully excavated"),
+    ("partly excavated", "partly excavated")
+)
+
 
 class BurialSiteListFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(
@@ -448,10 +453,54 @@ class MainListFilter(django_filters.FilterSet):
         lookup_expr='icontains', help_text=False,
         label="Burial group"
     )
+    #BurialSite search fields
     burial_site__name = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False,
         label="Burial site name"
     )
+    burial_site__alternative_name = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Burial site alternative name"
+    )
+    burial_site__location = django_filters.ModelMultipleChoiceFilter(
+        queryset=Place.objects.all(), help_text=False
+    )
+    burial_site__topography = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Topography'),
+        help_text=False
+    )
+    burial_site__excavation = django_filters.ChoiceFilter(
+        help_text=False,
+        label="Excavation",
+        choices=FULLYPARTLYEXCAVATED
+    )
+    burial_site__distance_to_next_settlement = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Distance to next settlement'),
+        help_text=False
+    )
+    burial_site__type_of_burial_site = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Type of burial site'),
+        help_text=False,
+        label="Type of burial site"
+    )
+    burial_site__disturbance = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=False
+    )
+    burial_site__total_graves = django_filters.CharFilter(
+        lookup_expr='exact',
+        help_text=False,
+        label = BurialSite._meta.get_field('total_graves').verbose_name
+    )
+    burial_site__dating = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Dating'),
+        help_text=False
+    )
+    burial_site__absolute_dating = django_filters.CharFilter(
+        lookup_expr='icontains',
+        help_text=False
+    )
+    #Burial search fields
     C14_dendro = django_filters.ChoiceFilter(
         null_label='Unknown', help_text=False,
         label="Absolute dating (C14/Dendro)",
@@ -545,6 +594,143 @@ class MainListFilter(django_filters.FilterSet):
         lookup_expr='icontains', help_text=False,
         label = "Other features"
     )
+    #Urn search fields
+    urn__basic_shape = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn'),
+        help_text=False,
+        label="Basic shape of urn"
+    )
+    urn__urn_type = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Urn type"
+    )
+    urn__variation = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Urn variation"
+    )
+    urn__urn_id = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = Urn._meta.get_field('urn_id').verbose_name
+    )
+    urn__urncover_exists = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO,
+        label="Urn cover exists?"
+    )
+    #UrnCover search fields
+    urn__urncover__basic_shape = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Basic shape of urn cover'),
+        help_text=False,
+        label="Basic shape of urn cover"
+    )
+    urn__urncover__upside_down = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO,
+        label="Urn cover upside down"
+    )
+    urn__urncover__fragment = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO,
+        label="Fragment"
+    )
+    urn__urncover__cover_id = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = UrnCover._meta.get_field('cover_id').verbose_name
+    )
+    #GraveGood search fields
+    gravegood__name = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='GraveGoodObject'),
+        help_text=False,
+        label="Grave Good type"
+    )
+    gravegood__material = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Material'),
+        help_text=False,
+        label="Grave Good material"
+    )
+    gravegood__condition = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Condition'),
+        help_text=False,
+        label="Grave Good condition"
+    )
+    gravegood__position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False,
+        label="Grave Good position"
+    )
+    #GraveGoodOther search fields
+    gravegoodother__food = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO,
+        label="Food"
+    )
+    gravegoodother__other_organic_grave_good = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO,
+        label="Other organic grave good"
+    )
+    gravegoodother__position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False,
+        label="Grave Good Other position"
+    )
+    #DeadBodyRemains search fields
+    deadbodyremains__age = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Age'),
+        help_text=False,
+        label="Anthropology age"
+    )
+    deadbodyremains__gender = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Gender'),
+        help_text=False,
+        label="Anthropology gender"
+    )
+    deadbodyremains__temperature = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Cremation temperature'),
+        help_text=False,
+        label="Cremation temperature"
+    )
+    deadbodyremains__position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False,
+        label="Anthropology position"
+    )
+    deadbodyremains__weight = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label = "Anthropology weight in gram"
+    )
+    deadbodyremains__pathology = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Pathology"
+    )
+    deadbodyremains__total_weight = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label = DeadBodyRemains._meta.get_field('total_weight').verbose_name
+    )
+    #AnimalRemains search fields
+    animalremains__species = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Species'),
+        help_text=False,
+        label="Species"
+    )
+    animalremains__age = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Animal remains age"
+    )
+    animalremains__sex = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Animal remains sex"
+    )
+    animalremains__weight = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+        label = "Animal remains weight"
+    )
+    animalremains__position = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
+        help_text=False,
+        label="Animal remains position"
+    )
+
 
     class Meta:
         model = Burial
