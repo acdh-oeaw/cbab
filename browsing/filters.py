@@ -658,6 +658,10 @@ class MainListFilter(django_filters.FilterSet):
         help_text=False,
         label="Grave Good position"
     )
+    gravegood__amount_countable = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False,
+        distinct=True, label="Grave Good amount"
+    )
     #GraveGoodOther search fields
     gravegoodother__food = django_filters.ChoiceFilter(
         null_label='Unknown', help_text=False,
@@ -673,6 +677,10 @@ class MainListFilter(django_filters.FilterSet):
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Position'),
         help_text=False,
         label="Grave Good Other position"
+    )
+    gravegoodother__amount_countable = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False,
+        distinct=True, label="Grave Good Other amount"
     )
     #DeadBodyRemains search fields
     deadbodyremains__age = django_filters.ModelMultipleChoiceFilter(
@@ -707,6 +715,10 @@ class MainListFilter(django_filters.FilterSet):
         lookup_expr='exact', help_text=False,
         label = DeadBodyRemains._meta.get_field('total_weight').verbose_name
     )
+    deadbodyremains__amount_countable = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False,
+        distinct=True, label="Anthropology amount"
+    )
     #AnimalRemains search fields
     animalremains__species = django_filters.ModelMultipleChoiceFilter(
         queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Species'),
@@ -730,6 +742,11 @@ class MainListFilter(django_filters.FilterSet):
         help_text=False,
         label="Animal remains position"
     )
+    animalremains__amount_countable = django_filters.NumberFilter(
+        lookup_expr='exact', help_text=False,
+        distinct=True, label="Animal Remains amount"
+    )
+
 
 
     class Meta:

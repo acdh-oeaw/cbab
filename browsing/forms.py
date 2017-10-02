@@ -86,12 +86,14 @@ class MainListFilterFormHelper(FormHelper):
                     'gravegood__material',
                     'gravegood__condition',
                     'gravegood__position',
+                    'gravegood__amount_countable',
                     css_id="grave_good_search_options"),
                 AccordionGroup(
                     'Grave Good Other search options',
                     'gravegoodother__food',
                     'gravegoodother__other_organic_grave_good',
                     'gravegoodother__position',
+                    'gravegoodother__amount_countable',
                     css_id="grave_good_other_search_options"),
                 AccordionGroup(
                     'Anthropology search options',
@@ -102,6 +104,7 @@ class MainListFilterFormHelper(FormHelper):
                     'deadbodyremains__weight',
                     'deadbodyremains__pathology',
                     'deadbodyremains__total_weight',
+                    'deadbodyremains__amount_countable',
                     css_id="anthropology_search_options"),
                 AccordionGroup(
                     'Animal Remains search options',
@@ -110,6 +113,7 @@ class MainListFilterFormHelper(FormHelper):
                     'animalremains__sex',
                     'animalremains__weight',
                     'animalremains__position',
+                    'animalremains__amount_countable',
                     css_id="animal_remains_search_options"),
                 css_id="accordion",
                 )
