@@ -204,3 +204,20 @@ class AnimalRemainsListView(GenericListView):
         context["burialsite_names"] = set(burialsite_names)
 
         return context
+
+
+class MainListView(GenericListView):
+    model = Burial
+    table_class = BurialTable
+    template_name = 'browsing/main_list_generic.html'
+    filter_class = MainListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        burialsite_names = []
+        for x in BurialSite.objects.all():
+            burialsite_names.append(x.name)
+        context["burialsite_names"] = set(burialsite_names)
+        return context

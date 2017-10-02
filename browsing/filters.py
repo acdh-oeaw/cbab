@@ -438,3 +438,114 @@ class AnimalRemainsListFilter(django_filters.FilterSet):
     class Meta:
         model = AnimalRemains
         fields = ['id', 'species']
+
+
+class MainListFilter(django_filters.FilterSet):
+    burial_id = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    burial_group = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Burial group"
+    )
+    burial_site__name = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Burial site name"
+    )
+    C14_dendro = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        label="Absolute dating (C14/Dendro)",
+        choices=YESNO
+    )
+    absolute_age = django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label="Absolute age"
+    )
+    burial_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial type'),
+        help_text=False
+    )
+    # i don't know what this is? there is no field 'individuals' in models
+    # individuals = django_filters.ChoiceFilter(
+    #     choices=YESNO, help_text=False,
+    # )
+    secondary_burial = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    displaced = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    extraordinary_burial = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    construction = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial construction'),
+        help_text=False
+    )
+    arrangement = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial arrangement'),
+        help_text=False
+    )
+    cover = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    cover_type = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Cover type'),
+        help_text=False
+    )
+    grave_pit_form = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave pit form'),
+        help_text=False
+    )
+    grave_pit_orientation = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Grave pit orientation'),
+        help_text=False
+    )
+    length = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    width = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    diameter = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    height = django_filters.CharFilter(
+        lookup_expr='exact', help_text=False,
+    )
+    filling_objects = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial Filling Objects'),
+        help_text=False
+    )
+    intentionally_deposited = django_filters.ChoiceFilter(
+        null_label='Unknown', help_text=False,
+        choices=YESNO
+    )
+    filling = django_filters.ModelMultipleChoiceFilter(
+        queryset=SkosConcept.objects.filter(scheme__dc_title__iexact='Burial Filling Type'),
+        help_text=False
+    )
+    post_holes =  django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Post holes"
+    )
+    surface_identification_mark =  django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Surface Identification Mark"
+    )
+    erdgraebchen =  django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Erdgraebchen"
+    )
+    other_features =  django_filters.CharFilter(
+        lookup_expr='icontains', help_text=False,
+        label = "Other features"
+    )
+
+    class Meta:
+        model = Burial
+        fields = ['id', 'burial_id', 'burial_site__name']
