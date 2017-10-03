@@ -214,10 +214,15 @@ class MainListView(GenericListView):
     formhelper_class = MainListFilterFormHelper
 
     def get_context_data(self, **kwargs):
-        context = super(GenericListView, self).get_context_data()
+        context = super(MainListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        burialsite_names = []
-        for x in BurialSite.objects.all():
-            burialsite_names.append(x.name)
-        context["burialsite_names"] = set(burialsite_names)
+        burialsites = []
+        for x in self.get_queryset():
+            burialsites.append(x.burial_site)
+        context["burialsites"] = set(burialsites)
+        
+        burials = []
+        for x in self.get_queryset():
+            burials.append(x)
+        context["burials"] = set(burials)
         return context

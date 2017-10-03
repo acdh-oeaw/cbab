@@ -20,7 +20,7 @@ class MainListFilterFormHelper(FormHelper):
         self.helper = FormHelper()
         self.form_class = 'genericFilterForm'
         self.form_method = 'GET'
-        self.helper.form_tag = False
+        #self.helper.form_tag = False
         self.add_input(Submit('Filter', 'Search'))
         self.layout = Layout(
             Accordion(

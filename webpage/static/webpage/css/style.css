@@ -233,3 +233,8 @@ font-size: 3.1vw;
 table th, table td  {
 font-size: 3.1vw;
 }*/
+
+.empty-div {
+  height:60px;
+  width:100%;
+}

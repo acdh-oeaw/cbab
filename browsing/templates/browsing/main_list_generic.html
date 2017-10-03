@@ -1,15 +1,321 @@
-{% extends "browsing/generic_list.html" %}
-{% block list_title %}All data{% endblock %}
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load django_tables2 %}
+{% load i18n %}
+{% block Titel %} See all {{ object.classname }} {% endblock %}
+{% block scriptHeader %}
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/></link>
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.Default.css' %}"/></link>
 
-{% block create_button %}
+     <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+     <script src="{% static 'webpage/libraries/leaflet.markercluster/src/leaflet.markercluster-src.js' %}"></script>
+     <style>
+         #map { 
+          height: 500px; 
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
+     </style>
+{% endblock %}
+{% block content %}
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+var fetchedParameter = "{{ table.page.number }}";
+$("#goto option").each(function() {
+    if($(this).text() == fetchedParameter) {
+        $(this).attr('selected', 'selected');
+    }
+});
+
+});
+</script>
+
+<div class="container">
+
+<div class="panel panel-default procustom-panel-list">
+    <div class="panel-heading procustom-panel-heading">
+
+        <h1>{% block list_title %}All data{% endblock %}</h1>
+
+    {% block create_button %}
 {% if user.is_authenticated %}
  <div>
     <a class ="btn btn-primary btn-md"  href="{% url 'burials:burial_create' %}">create new burial</a>
 </div>
 {% endif %}
 {% endblock %}
-
-
-{% block reset_button %}
+    </div>
+    <div class="panel-body procustom-panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                {% load django_tables2 crispy_forms_tags %}
+                {% crispy filter.form filter.form.helper %}
+                {% block reset_button %}
  <a class ="btn btn-default"  href="{% url 'browsing:browse_all' %}">reset search</a>
+{% endblock %}
+
+            </div>
+            <div class="col-md-8 full-width-tabs">
+
+ {% with table.paginator.count as total %}
+    <legend>Total results: {{ total }}</legend>
+    {% endwith %}
+            <ul class="nav nav-tabs nav-justified">
+  				<li class="active"><a data-toggle="tab" href="#results-table">Results table</a></li>
+  				<li><a data-toggle="tab" href="#map">Results on the map</a></li>
+			</ul>
+			<div class="empty-div"></div>
+
+
+<div class="tab-content">
+
+
+<div id="results-table" class="tab-pane fade in active">
+
+   
+
+
+
+      {% block table %}
+      <table{% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
+          {% block table.thead %}
+          {% if table.show_header %}
+          <thead>
+              <tr>
+              {% for column in table.columns %}
+                  {% if column.orderable %}
+                  <th {{ column.attrs.th.as_html }}><a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a></th>
+                  {% else %}
+                  <th {{ column.attrs.th.as_html }}>{{ column.header }}</th>
+                  {% endif %}
+              {% endfor %}
+              </tr>
+          </thead>
+          {% endif %}
+          {% endblock table.thead %}
+          {% block table.tbody %}
+          <tbody>
+              {% for row in table.page.object_list|default:table.rows %} {# support pagination #}
+              {% block table.tbody.row %}
+              <tr {{ row.attrs.as_html }}>
+                  {% for column, cell in row.items %}
+                      <td {{ column.attrs.td.as_html }}>{% if column.localize == None %}{{ cell }}{% else %}{% if column.localize %}{{ cell|localize }}{% else %}{{ cell|unlocalize }}{% endif %}{% endif %}</td>
+                  {% endfor %}
+              </tr>
+              {% endblock table.tbody.row %}
+              {% empty %}
+              {% if table.empty_text %}
+              {% block table.tbody.empty_text %}
+              <tr><td colspan="{{ table.columns|length }}">{{ table.empty_text }}</td></tr>
+              {% endblock table.tbody.empty_text %}
+              {% endif %}
+              {% endfor %}
+          </tbody>
+          {% endblock table.tbody %}
+          {% block table.tfoot %}
+          {% if table.has_footer %}
+          <tfoot>
+              <tr>
+              {% for column in table.columns %}
+                  <td>{{ column.footer }}</td>
+              {% endfor %}
+              </tr>
+          </tfoot>
+          {% endif %}
+          {% endblock table.tfoot %}
+      </table>
+      {% endblock table %}
+
+      {% block pagination.allpages %}
+
+      <ul class="pagination">
+<div>
+{% with table.page.object_list|length as count %}
+<p>Page total: {{ count }}</p>
+{% endwith %}
+</div>
+
+<!--if more than 15 pages switches to select page form -->
+
+        {% if table.paginator.page_range|length > 15 %}
+
+<!--if has previous page - previous button -->
+
+        {% if table.page.has_previous %}
+        {% block pagination.previous.goto %}
+        <li class="previous">
+          <a href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}" style="border-radius: 0px;">{% trans "Previous" %}</a>
+        </li>
+        {% endblock pagination.previous.goto %}
+        {% endif %}
+
+
+<!--select form if more than 15 pages -->
+
+<div class="form-group">
+  <label for="goto">Go to page</label>
+    <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
+        {% for p in table.paginator.page_range %}
+            <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+        {% endfor %}
+    </select>
+
+
+
+</div>
+
+
+<!--Page # of total -->
+{% if table.page.has_previous or table.page.has_next %}
+{% block pagination.cardinality %}
+{% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
+<p>Page {{ current }} of {{ total }}</p>
+{% endblocktrans %}
+{% endblock pagination.cardinality %}
+{% endif %}
+
+<!--if has next page - next button -->
+
+{% if table.page.has_next %}
+{% block pagination.next.goto %}
+  <li class="next">
+  <a href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
+  </li>
+{% endblock pagination.next.goto %}
+{% endif %}
+
+
+<!--else condition  - if less than 15 pages  - shows page number buttons-->
+
+        {% else %}
+
+
+        {% if table.page.has_previous %}
+        {% block pagination.previous %}
+        <li class="previous">
+          <a href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}" style="border-radius: 0px;">{% trans "Previous" %}</a>
+        </li>
+        {% endblock pagination.previous %}
+        {% endif %}
+
+        {% for p in table.paginator.page_range %}
+        {% if p == table.page.number %}
+        <li><a href="{% querystring table.prefixed_page_field=p %}" style="background-color:#337ab7; border-color: #2e6da4; color: #ffffff; border-radius: 0px;"> {{ p }}</a>
+        </li>
+         {% else %}
+        <li>
+          <a href="{% querystring table.prefixed_page_field=p %}" style="border-radius: 0px;"> {{ p }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+
+        {% if table.page.has_next %}
+        {% block pagination.next %}
+          <li class="next">
+          <a href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
+          </li>
+        {% endblock pagination.next %}
+        {% endif %}
+
+
+        {% endif %}
+
+
+      </ul>
+      {% endblock pagination.allpages %}
+
+</div><!--results-table ends-->
+
+<div id="map" class="tab-pane fade">
+</div>
+<script>
+
+    var mapLayerGroups = [];
+    function onEachFeature(feature, layer) {
+            var lg = mapLayerGroups[feature.relation_type];
+            if (lg === undefined) {
+                lg = new L.layerGroup();
+                mapLayerGroups[feature.relation_type] = lg;
+            }
+
+            //add the feature to the layer
+            lg.addLayer(layer);
+            //mymap.fitBounds(lg.getBounds(), {'maxZoom': 12});
+
+            if (feature.properties && feature.properties.popupContent) {
+                popupContent = feature.properties.popupContent;
+            }
+
+            layer.bindPopup(feature.properties.popupContent);
+
+        };
+
+
+        var mymap = L.map('map', {
+            fullscreenControl: true,
+        }).setView([0, 0], 2);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.light',
+            accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
+        }).addTo(mymap);
+        var markers = L.markerClusterGroup({});
+        // var bounds = new L.LatLngBounds(markers);
+        // var build_data =  [{% for obj in burials %}{"geometry": {"type": "Point", "coordinates": [ {{ obj.burial_site.location.lng }}, {{ obj.burial_site.location.lat }} ]}, "type": "Feature",
+        //     "properties": {"popupContent": "<table class='table table-striped'><tr><th>Burial Site</th><td> {{ obj.burial_site.name }}</td></tr><tr><th>Burial</th><td><a href='{% url "burials:burial_detail" pk=obj.id %}'>{{obj}}</a><br/></td></tr></tr></table>" }, "id": "{{ obj.id }}" }{% if forloop.last %}] {% else %},{% endif %}{% empty %}]{% endfor %}
+
+        var build_data =  [
+        {% for obj in burialsites %}
+        {"geometry": 
+        	{"type": "Point", "coordinates": [ {{ obj.lng }}, {{ obj.lat }} ]},
+         "type": "Feature",
+         "properties": {"popupContent":
+         "<table class='table table-striped'><tr><th>Burial Site</th><td><a href='{% url "burials:burialsite_detail" pk=obj.id %}'>{{ obj.name }}</a></td></tr><tr><th>Burials</th><td>{% for x in burials %}{% if x.burial_site.name == obj.name %} <a href='{% url "burials:burial_detail" pk=x.id %}'>{{x}}</a><br/>{% endif %} {%endfor%}</td></tr></table>" },
+          "id": "{{ x.id }}" }
+          {% if forloop.last %}
+          {% else %}
+          ,
+          {% endif %}
+          {% empty %}
+          
+          {% endfor %}]
+        var geoJsonLayer = L.geoJson( build_data, {onEachFeature: onEachFeature});
+        markers.addLayer(geoJsonLayer);
+        mymap.addLayer(markers);
+        mymap.fitBounds(markers.getBounds(), {'maxZoom': 12});
+    </script>
+
+
+
+
+
+
+
+
+</div><!--tab-content ends-->
+
+</div><!--col-md-8 ends-->
+
+</div><!--row ends-->
+
+ </div><!--panel-body ends-->
+
+</div><!--panel ends-->
+
+</div> <!--container ends-->
+
+{% block customScripts %}
+
+ 
+
+    
+
+{% endblock %}
 {% endblock %}
