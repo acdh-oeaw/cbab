@@ -1,0 +1,21 @@
+{% extends "webpage/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="imprint container">
+
+   <h1>Using and Citing CBAB</h1>
+
+   <p>
+      Unless stated otherwise, all CBAB online data is licensed by OREA ÖAW under the <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> license. As such, you are free to share, use and remix CBAB data, as long as you attribute the source data accordingly.
+   </p>
+   <p>When citing CBAB records please refer to the URL of the site and the date accessed. </p>
+	<p>Example of citation: </p>
+      <cite>CBAB: Cremation Bronze Age Burials, https://cbab.acdh.oeaw.ac.at/burials/burial/5, accessed {% now "F d, Y" %}.</cite>
+ 
+
+</div>
+
+{% endblock %}

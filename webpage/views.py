@@ -17,6 +17,10 @@ class ImprintView(TemplateView):
     template_name = "webpage/imprint.html"
 
 
+class TermsOfUseView(TemplateView):
+    template_name = "webpage/terms_of_use.html"
+
+
 #################################################################
 #               views for login/logout                          #
 #################################################################
