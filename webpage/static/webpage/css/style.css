@@ -238,3 +238,11 @@ font-size: 3.1vw;
   height:60px;
   width:100%;
 }
+ .footer_link {
+      color: #ffffff;
+    }
+    .footer_link:hover,
+    .footer_link:active,
+    .footer_link:focus {
+      color: #ffffff;
+    }
