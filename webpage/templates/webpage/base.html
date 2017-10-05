@@ -25,6 +25,8 @@
       <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}"/></link>
       <!--scroll to top CSS -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
+      <!--imageviewer-->
+      <link rel="stylesheet" href="{% static 'webpage/libraries/imageviewer/dist/viewer.css' %}" type="text/css"/>
       <!-- LESS -->
       <script type="text/javascript" src="{% static 'webpage/libraries/less/less.min.js' %}"></script>
       <!-- jQuery -->
@@ -292,6 +294,17 @@
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
+    <!-- <script src="{% static 'webpage/libraries/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'webpage/libraries/bootstrap/dist/js/bootstrap.min.js'  %}"></script>
+<script src="{% static 'webpage/libraries/imageviewer/dist/viewer.js' %}"></script>
+<script>
+$(function () {
+    var options = {
+    url: 'originalUrl'};
+        $('.images').viewer(options);
+});
+
+</script> -->
     <!-- <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script> -->
     <!--Fixed navbar when scrolling down-->
     <!-- <script type="text/javascript">
