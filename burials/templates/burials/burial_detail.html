@@ -178,15 +178,10 @@
         <th class="col-sm-3">Grave Goods</th>
         <td>
             {% for x in object.gravegood_set.all %}
+            
               <li><a href="{% url 'burials:gravegood_detail' pk=x.id %}">{{ x }}</a></li>
-            {% endfor %} <br/><hr/>
-            {% for x in object.related_gravegoods %}
-              <li>
-                  {% for item in x %}
-                    {{ item }}
-                  {% endfor %}
-              </li>
-            {% endfor %}
+            {% endfor %} <br/>
+        
         </td>
     </tr>
     {% if object.amount_related_gravegoods %}
