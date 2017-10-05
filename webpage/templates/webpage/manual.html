@@ -1,0 +1,89 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% load webpage_extras %}
+{% block title %} Imprint {% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>User Manual for CBAB-Database (<b>C</b>remation <b>B</b>ronze <b>A</b>ge <b>B</b>urials)</h1>
+    <p style="font-size: 8"><i class="fa fa-clock-o" aria-hidden="true"></i> Last updated: Aug 9th, 2017</p>
+
+    <ul id="docs-outline">
+        <li><a href="#overview"><b></b></a></li>
+        <ul>
+            <li><a href="#section1"></a></li>
+            <li><a href="#section2"></a></li>
+            <li><a href="#section3"></a></li>
+            <li><a href="#section4"></a></li>
+        </ul>
+    </ul>
+
+    <h3>Who can use CBAB?</h3>
+    <p>CBAB is intended to be an open share database free to use for everybody interested in cremation burials dating to the European Bronze Age.</p>
+
+    <h3>What can you do without a CBAB-Account?</h3>
+    <p>You can browse the data for basic information on burial sites (location, number of burials, literature, scientists in charge of the material, etc.), specific burials (eg. Grave 15 in Franzhausen-Kokoron, Austria) and create maps for e.g. talks or papers.</p>
+
+    <h3>What can you do with a CBAB-Account?</h3>
+    <p>Furthermore you have the opportunity to make enquiries about certain data e.g. burial features like grave types combined with anthropological data or grave goods. In order to use this service you need an account that gives you full access to the CBAB-Database.</p>
+    <p>With this account you can not only customise your enquiries but also create burial sites and burials in the database yourself.</p>
+
+    <h3>Why should I enter data?</h3>
+    <p>Because more data available in CBAB will give you and others more research options, better enquiry results, more accurate mappings and bring your own work in front of a bigger audience.</p>
+
+    <h3>What to enter in the CBAB-Database?</h3>
+    <p><li>any cremation burial you like, if it is a (potential) Bronze Age grave</li>
+        <li>any archaeological site including excavated Bronze Age cremation burials</li>
+    </p>
+
+    <p>If only part of a cemetery was excavated, you can create a new <b>Burial Site</b> and enter the excavated cremations (see 1. How to create a <b>Burial Site?</b>)</p>
+
+    <h3>What not to enter in the CBAB-Database?</h3>
+    <p><li>any inhumation grave or cremation burials from other periods e.g. Early Bronze Age or Iron Age</br>
+        If such graves appear within a (biritual) cemetery that provide Bronze Age cremation burials, you can mention them in a textbox implemented in the <b>Burial Site</b> form
+        (see 1. How to create a <b>Burial Site</b>?)</li>
+    <li>any features only known from archaeological surveys</li></p>
+    <p>The CBAB-Database asks for very detailed information on Bronze Age cremation burials in order to provide researchers with detailed information on this specific burial form. Therefore CBAB demands <u>excavated</u> burials to maximize the knowledge on cremations.</p>
+
+    <h3>How to enter data in CBAB?</h3>
+    <ol>
+        <li>ask for an account to be able to curate data</li>
+        <li>check if the literature you want to quote is already in the CBAB-Zotero database;</li>
+            <li>if not please contact the database-team, who will put it in Zotero for you</li>
+        <li>create the burial site</li>
+        <li>from the location you can start to curate a burial</li>
+        <li>from the burial you can enter more specific information on e.g. the urn vessel, grave goods, anthropological results, etc.</li>
+    </ol>
+
+    <div id="section1">
+        <h3>How to create a new Burial site</h3>
+        <p>Go to https://cbab.acdh.oeaw.ac.at and log in with your personal credentials on the right side of the top bar.</p>
+        <img src="{% static 'webpage/img/manual/resource1.png' %}" style="width:100%">
+            <p>Click <b>Curate and Browse the Data</b> and choose <b>Locations</b></p>
+            <p>Check if the burial site you want to create is in or close to any of the mentioned locations.</p>
+            <img src="{% static 'webpage/img/manual/resource2.png' %}" style="width:100%">
+           <p>If not, create a new place (location) with <b>add another Place</b>.</p>
+                <img src="{% static 'webpage/img/manual/resource3.png' %}" style="width:100%">
+                    <p>Enter the name of the place (location) and start typing the country´s name into <b>Province</b>. The drop down list has an autocomplete function and you should be able to find the province in seconds
+                        <b>SAVE</b>.</p>
+                    <p>After having saved the new place (location) click <b>Curate and Browse the Data</b> and choose <b>Burial Site</b>. Press the button <b>Create New Site</b>.</p>
+                    <img src="{% static 'webpage/img/manual/resource4.png' %}" style="width:100%">
+                        <p>Start filling out the form by using the official name of the burial site and (if existing) its alternative name (eg. Bügeleisenschnitt, Walter 81, Ugly Tree, etc.).</p>
+                        <img src="{% static 'webpage/img/manual/resource5.png' %}" style="width:100%">
+                            <p>Start filling out <b><u>every</u></b> box as exactly as possible with the help of the drop down lists.<br/>
+                                Please notice: all drop down lists come with an autocomplete function and you have to choose <b><u>one</u></b> option. If you find a specific term missing in a list please contact the database-team.</p>
+                            <p><b>Latitude</b> and <b>Longitude</b> are both mandatory for creating a burial site.<br/>
+                            If the literature or excavation documentation do not provide you with <b>Latitude</b> and <b>Longitude</b>, please use google maps to complement them.</p>
+
+                            <p><b>Disturbance</b> and <b>Absolute Dating</b> need to be filled out, if you have anything to report.
+                                If you have C14-dates please quote the sample numbers (eg. KIA 4382).</p>
+
+                            <b>Dating</b> is the only drop down list, where you can choose several terms. So if the urn field contains Bz D, Ha A and Ha B burials you choose these three options
+                            </p>
+    <img src="{% static 'webpage/img/manual/resource6.png' %}" style="width:100%">
+        <p><b>Location of archaeological material and contact information</b> are not mandatory. If you don’t have the information who is in charge of the material or where it is kept, please mention this in the box. </p>
+        <p><b>Reference</b> is a drop down as well, which functions with the literature in the Zotero-database. Just remember, if you like to add references, you first have to be put in the Zotero-databse by the CBAB-Team (send us an email).</p>
+        <p>By <b>Save</b> you will come to the overview of the <b>Burial Site</b> that you just created. If you want to change any of Burial Site properties (Disturbance, Dating, Location of archaeological material etc.) please click the button <b>Edit Burial Site</b> and save again the changes that you made.</p>
+<img src="{% static 'webpage/img/manual/resource7.png' %}" style="width:100%">
+    </div>
+{% endblock %}

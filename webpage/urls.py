@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^imprint/$', views.ImprintView.as_view(), name='imprint'),
     url(r'^terms-of-use/$', views.TermsOfUseView.as_view(), name='terms-of-use'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
+    url(r'^manual/$', views.ManualView.as_view(), name='manual'),
     url(r'^accounts/login/$', views.user_login, name='user_login'),
     url(r'^logout/$', views.user_logout, name='user_logout'),
 ]
