@@ -4,12 +4,16 @@
 {% load i18n %}
 {% block Titel %} See all {{ object.classname }} {% endblock %}
 {% block scriptHeader %}
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
+  <!--leafletjs -->
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/>
+    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+
+
     <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/></link>
     <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.Default.css' %}"/></link>
-
-     <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-     <script src="{% static 'webpage/libraries/leaflet.markercluster/src/leaflet.markercluster-src.js' %}"></script>
+    <script src="{% static 'webpage/libraries/leaflet.markercluster/src/leaflet.markercluster-src.js' %}"></script>
+     {% endblock %}
+     {% block content %}
      <style>
          #map { 
           height: 500px; 
@@ -17,70 +21,63 @@
           margin-bottom: 30px;
         }
      </style>
-{% endblock %}
-{% block content %}
+        
+     
+     <script type="text/javascript">
+      $(document).ready(function() {
+      var fetchedParameter = "{{ table.page.number }}";
+      $("#goto option").each(function() {
+          if($(this).text() == fetchedParameter) {
+              $(this).attr('selected', 'selected');
+          }
+      });
+      });
+    </script>
 
-<script type="text/javascript">
+     <div class="container">
 
-$(document).ready(function() {
+     <div class="panel panel-default procustom-panel-list">
 
-var fetchedParameter = "{{ table.page.number }}";
-$("#goto option").each(function() {
-    if($(this).text() == fetchedParameter) {
-        $(this).attr('selected', 'selected');
-    }
-});
-
-});
-</script>
-
-<div class="container">
-
-<div class="panel panel-default procustom-panel-list">
-    <div class="panel-heading procustom-panel-heading">
-
-        <h1>{% block list_title %}All data{% endblock %}</h1>
-
+    <!-- PANEL HEADING -->
+      <div class="panel-heading procustom-panel-heading">
+       <h1>{% block list_title %}Search CBAB database{% endblock %}</h1>
     {% block create_button %}
-{% if user.is_authenticated %}
- <div>
+    {% if user.is_authenticated %}
     <a class ="btn btn-primary btn-md"  href="{% url 'burials:burial_create' %}">create new burial</a>
-</div>
-{% endif %}
-{% endblock %}
-    </div>
-    <div class="panel-body procustom-panel-body">
-        <div class="row">
-            <div class="col-md-4">
+    {% endif %}
+    {% endblock %}
+      </div><!--panel heading-->
+
+     <!--  PANEL BODY -->
+     <div class="panel-body procustom-panel-body">
+
+
+      <div class="col-md-4">
                 {% load django_tables2 crispy_forms_tags %}
                 {% crispy filter.form filter.form.helper %}
                 {% block reset_button %}
- <a class ="btn btn-default"  href="{% url 'browsing:browse_all' %}">reset search</a>
-{% endblock %}
+                 <a class ="btn btn-default"  href="{% url 'browsing:browse_all' %}">
+                 reset search
+                 </a>
+                {% endblock %}
+               
+     </div>
 
-            </div>
-            <div class="col-md-8 full-width-tabs">
-
- {% with table.paginator.count as total %}
+     <div class="col-md-8">
+     {% with table.paginator.count as total %}
     <legend>Total results: {{ total }}</legend>
     {% endwith %}
-            <ul class="nav nav-tabs nav-justified">
-  				<li class="active"><a data-toggle="tab" href="#results-table">Results table</a></li>
-  				<li><a data-toggle="tab" href="#map">Results on the map</a></li>
-			</ul>
-			<div class="empty-div"></div>
+
+    <!-- MAP -->
+
+     <div id="map">
+     </div>
+     <div class="empty-div"></div>
 
 
-<div class="tab-content">
-
-
-<div id="results-table" class="tab-pane fade in active">
-
-   
-
-
-
-      {% block table %}
+    <!-- BLOCK TABLE -->
+    <div id="results-table">
+    {% block table %}
       <table{% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
           {% block table.thead %}
           {% if table.show_header %}
@@ -130,14 +127,16 @@ $("#goto option").each(function() {
       </table>
       {% endblock table %}
 
+
+     <!-- PAGINATION FOR TABLE -->
       {% block pagination.allpages %}
 
       <ul class="pagination">
-<div>
-{% with table.page.object_list|length as count %}
-<p>Page total: {{ count }}</p>
-{% endwith %}
-</div>
+      <div>
+      {% with table.page.object_list|length as count %}
+      <p>Page total: {{ count }}</p>
+      {% endwith %}
+      </div>
 
 <!--if more than 15 pages switches to select page form -->
 
@@ -156,37 +155,34 @@ $("#goto option").each(function() {
 
 <!--select form if more than 15 pages -->
 
-<div class="form-group">
-  <label for="goto">Go to page</label>
-    <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
-        {% for p in table.paginator.page_range %}
-            <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
-        {% endfor %}
-    </select>
-
-
-
-</div>
+        <div class="form-group">
+        <label for="goto">Go to page</label>
+          <select class="form-control" id="goto" onchange="javascript:location.href = this.value;">
+          {% for p in table.paginator.page_range %}
+              <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+          {% endfor %}
+          </select>
+        </div>
 
 
 <!--Page # of total -->
-{% if table.page.has_previous or table.page.has_next %}
-{% block pagination.cardinality %}
-{% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
-<p>Page {{ current }} of {{ total }}</p>
-{% endblocktrans %}
-{% endblock pagination.cardinality %}
-{% endif %}
+          {% if table.page.has_previous or table.page.has_next %}
+          {% block pagination.cardinality %}
+          {% blocktrans with table.page.number as current and table.paginator.num_pages as total %}
+          <p>Page {{ current }} of {{ total }}</p>
+          {% endblocktrans %}
+          {% endblock pagination.cardinality %}
+          {% endif %}
 
 <!--if has next page - next button -->
 
-{% if table.page.has_next %}
-{% block pagination.next.goto %}
-  <li class="next">
-  <a href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
-  </li>
-{% endblock pagination.next.goto %}
-{% endif %}
+          {% if table.page.has_next %}
+          {% block pagination.next.goto %}
+            <li class="next">
+            <a href="{% querystring table.prefixed_page_field=table.page.next_page_number %}" style="border-radius: 0px;">{% trans "Next" %}</a>
+            </li>
+          {% endblock pagination.next.goto %}
+          {% endif %}
 
 
 <!--else condition  - if less than 15 pages  - shows page number buttons-->
@@ -222,18 +218,22 @@ $("#goto option").each(function() {
         {% endblock pagination.next %}
         {% endif %}
 
-
         {% endif %}
 
 
-      </ul>
+      </ul><!--ul class="pagination"-->
       {% endblock pagination.allpages %}
+      </div><!--results table-->
 
-</div><!--results-table ends-->
+     </div>
 
-<div id="map" class="tab-pane fade">
-</div>
-<script>
+     </div><!--panel body-->
+   
+
+     </div><!--panel default-->
+     </div><!--container-->
+       <script>
+
 
     var mapLayerGroups = [];
     function onEachFeature(feature, layer) {
@@ -267,14 +267,10 @@ $("#goto option").each(function() {
             accessToken: 'pk.eyJ1Ijoic2VubmllcmVyIiwiYSI6ImNpbHk1YWV0bDAwZnB2dW01d2l1Y3phdmkifQ.OljQLEhqeAygai2y6VoSwQ'
         }).addTo(mymap);
         var markers = L.markerClusterGroup({});
-        // var bounds = new L.LatLngBounds(markers);
-        // var build_data =  [{% for obj in burials %}{"geometry": {"type": "Point", "coordinates": [ {{ obj.burial_site.location.lng }}, {{ obj.burial_site.location.lat }} ]}, "type": "Feature",
-        //     "properties": {"popupContent": "<table class='table table-striped'><tr><th>Burial Site</th><td> {{ obj.burial_site.name }}</td></tr><tr><th>Burial</th><td><a href='{% url "burials:burial_detail" pk=obj.id %}'>{{obj}}</a><br/></td></tr></tr></table>" }, "id": "{{ obj.id }}" }{% if forloop.last %}] {% else %},{% endif %}{% empty %}]{% endfor %}
-
         var build_data =  [
         {% for obj in burialsites %}
         {"geometry": 
-        	{"type": "Point", "coordinates": [ {{ obj.lng }}, {{ obj.lat }} ]},
+          {"type": "Point", "coordinates": [ {{ obj.lng }}, {{ obj.lat }} ]},
          "type": "Feature",
          "properties": {"popupContent":
          "<table class='table table-striped'><tr><th>Burial Site</th><td><a href='{% url "burials:burialsite_detail" pk=obj.id %}'>{{ obj.name }}</a></td></tr><tr><th>Burials</th><td>{% for x in burials %}{% if x.burial_site.name == obj.name %} <a href='{% url "burials:burial_detail" pk=x.id %}'>{{x}}</a><br/>{% endif %} {%endfor%}</td></tr></table>" },
@@ -290,32 +286,8 @@ $("#goto option").each(function() {
         markers.addLayer(geoJsonLayer);
         mymap.addLayer(markers);
         mymap.fitBounds(markers.getBounds(), {'maxZoom': 12});
+
+
     </script>
 
-
-
-
-
-
-
-
-</div><!--tab-content ends-->
-
-</div><!--col-md-8 ends-->
-
-</div><!--row ends-->
-
- </div><!--panel-body ends-->
-
-</div><!--panel ends-->
-
-</div> <!--container ends-->
-
-{% block customScripts %}
-
- 
-
-    
-
-{% endblock %}
-{% endblock %}
+     {% endblock %}
