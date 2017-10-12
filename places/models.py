@@ -63,5 +63,8 @@ class Place(models.Model):
     )
     place_type = models.CharField(choices=PLACE_TYPES, null=True, blank=True, max_length=50)
 
+    class Meta:
+        ordering  = ['name']
+
     def __str__(self):
         return "{} ({})".format(self.name, self.province)
