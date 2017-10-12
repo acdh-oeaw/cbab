@@ -37,3 +37,4 @@ diauma/migrations/*
 
 /docs/_*/*
 /setPermissions.ipynb
+/cbab/settings/mysql_demo.py
