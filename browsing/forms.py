@@ -51,7 +51,8 @@ class MainListFilterFormHelper(FormHelper):
                     'surface_identification_mark',
                     'erdgraebchen',
                     'other_features',
-                    css_id="burial_search_fields"
+                    css_id="burial_search_fields",
+                    active=False,
                 ),
                 AccordionGroup(
                     'Burial site search options',
