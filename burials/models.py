@@ -385,7 +385,8 @@ class GraveGoodOther(CrematedRemainsBaseClass):
     other_organic_grave_good_text = models.TextField(
         blank=True, null=True, help_text="helptext")
     position = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/17' target='_blank'>See Position Concept Schema</a>",
         related_name="skos_gravegoodother_position")
 
     def __str__(self):
@@ -409,12 +410,17 @@ class GraveGoodOther(CrematedRemainsBaseClass):
 
 class DeadBodyRemains(CrematedRemainsBaseClass):
     age = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext", related_name="skos_age")
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/23' target='_blank'>See Age Concept Schema</a>",
+        related_name="skos_age")
     gender = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext", related_name="skos_gender")
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/24' target='_blank'>See Gender Concept Schema</a>",
+        related_name="skos_gender")
     temperature = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_temperature")
+        help_text="<a href='/vocabs/scheme/25' target='_blank'>See Cremation temperature Concept Schema</a>",
+        related_name="skos_temperature")
     weight = models.TextField(
         blank=True, null=True, help_text="in gram")
     pathology = models.TextField(
@@ -422,7 +428,8 @@ class DeadBodyRemains(CrematedRemainsBaseClass):
     total_weight = models.TextField(
         blank=True, null=True, help_text="in gram", verbose_name="Total weight of Human Remains")
     position = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/17' target='_blank'>See Position Concept Schema</a>",
         related_name="skos_deadbodyremains_position")
 
     def __str__(self):
@@ -440,7 +447,9 @@ class DeadBodyRemains(CrematedRemainsBaseClass):
 
 class AnimalRemains(CrematedRemainsBaseClass):
     species = models.ForeignKey(
-        SkosConcept, blank=True, help_text="helptext", related_name="skos_species")
+        SkosConcept, blank=True,
+        help_text="<a href='/vocabs/scheme/29' target='_blank'>See Species Concept Schema</a>",
+        related_name="skos_species")
     age = models.CharField(
         max_length=255, blank=True, null=True, help_text="helptext")
     sex = models.CharField(
@@ -448,7 +457,8 @@ class AnimalRemains(CrematedRemainsBaseClass):
     weight = models.CharField(
         max_length=255, blank=True, null=True, help_text="helptext")
     position = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/17' target='_blank'>See Position Concept Schema</a>",
         related_name="skos_animalsremains_position")
 
     def __str__(self):
