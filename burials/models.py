@@ -29,7 +29,7 @@ class BurialSite(models.Model):
         Place, blank=True, null=True, help_text="helptext")
     topography = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="<a href='/vocabs/scheme/1' target='_blank'>See Topography list</a>", related_name="skos_topography")
+        help_text="<a href='/vocabs/scheme/1' target='_blank'>See Topography Concept Schema</a>", related_name="skos_topography")
     exact_location = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     lat = models.FloatField(blank=True, null=True, verbose_name='latitude')
     lng = models.FloatField(blank=True, null=True, verbose_name='longitude')
@@ -38,10 +38,10 @@ class BurialSite(models.Model):
         null=True, choices=FULLYPARTLYEXCAVATED, help_text="helptext")
     distance_to_next_settlement = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="<a href='/vocabs/scheme/2' target='_blank'>See Distance list</a>", related_name="skos_distance_to_next_settlement")
+        help_text="<a href='/vocabs/scheme/2' target='_blank'>See Distance Concept Schema</a>", related_name="skos_distance_to_next_settlement")
     type_of_burial_site = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="<a href='/vocabs/scheme/3' target='_blank'>See Type of Burial site list</a>", related_name="skos_type_of_burial_site")
+        help_text="<a href='/vocabs/scheme/3' target='_blank'>See Type of Burial site Concept Schema</a>", related_name="skos_type_of_burial_site")
     disturbance = models.TextField(
         blank=True, null=True, help_text="helptext")
     total_graves = models.CharField(
@@ -49,7 +49,7 @@ class BurialSite(models.Model):
         null=True, help_text="Total number of excavated graves")
     dating = models.ManyToManyField(
         SkosConcept, blank=True,
-        help_text="<a href='/vocabs/scheme/4' target='_blank'>See Dating list</a>", related_name="skos_dating")
+        help_text="<a href='/vocabs/scheme/4' target='_blank'>See Dating Concept Schema</a>", related_name="skos_dating")
     absolute_dating = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="Please provide helptext")
