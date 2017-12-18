@@ -124,7 +124,8 @@ class Burial(models.Model):
         max_length=255, blank=True, null=True,
         help_text="helptext", verbose_name="Burial number")
     burial_type = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/7' target='_blank'>See Burial type Concept Schema</a>",
         related_name="skos_burial_type")
     C14_dendro = models.NullBooleanField(verbose_name="Absolute dating (C14/Dendro)",
         choices=BOOLEAN_CHOICES)
@@ -146,20 +147,25 @@ class Burial(models.Model):
         blank=True, null=True, help_text="helptext", verbose_name="Bi-ritual burial type")
     construction = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_burial_construction")
+        help_text="<a href='/vocabs/scheme/8' target='_blank'>See Burial construction Concept Schema</a>",
+        related_name="skos_burial_construction")
     arrangement = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_burial_arrangement")
+        help_text="<a href='/vocabs/scheme/9' target='_blank'>See Burial arrangement Concept Schema</a>",
+        related_name="skos_burial_arrangement")
     cover = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     cover_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_type_of_burial_cover")
+        help_text="<a href='/vocabs/scheme/10' target='_blank'>See Cover type Concept Schema</a>",
+        related_name="skos_type_of_burial_cover")
     grave_pit_form = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_form_of_the_grave_pit")
+        help_text="<a href='/vocabs/scheme/11' target='_blank'>See Grave pit form Concept Schema</a>",
+        related_name="skos_form_of_the_grave_pit")
     grave_pit_orientation = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_orientation_of_the_grave_pit")
+        help_text="<a href='/vocabs/scheme/12' target='_blank'>See Grave pit orientation Concept Schema</a>",
+        related_name="skos_orientation_of_the_grave_pit")
     length = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="cm")
@@ -174,11 +180,13 @@ class Burial(models.Model):
         help_text="cm", verbose_name="Depth")
     filling_objects = models.ManyToManyField(
         SkosConcept, blank=True,
-        help_text="helptext", related_name="skos_filling_object")
+        help_text="<a href='/vocabs/scheme/26' target='_blank'>See Burial filling objects Concept Schema</a>",
+        related_name="skos_filling_object")
     intentionally_deposited = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     filling = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_filling")
+        help_text="<a href='/vocabs/scheme/27' target='_blank'>See Burial filling type Concept Schema</a>",
+        related_name="skos_filling")
     post_holes = models.TextField(
         blank=True, null=True, help_text="helptext")
     surface_identification_mark = models.TextField(
