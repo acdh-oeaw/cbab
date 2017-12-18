@@ -18,7 +18,6 @@ BOOLEAN_CHOICES = (
 
 
 class BurialSite(models.Model):
-
     name = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="Please provide helptext")
@@ -85,10 +84,12 @@ class BurialGroup(models.Model):
         blank=True, null=True, help_text="helptext")
     burial_group_type = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_type_of_burial_group")
+        help_text="<a href='/vocabs/scheme/5' target='_blank'>See Burial group type Concept Schema</a>",
+        related_name="skos_type_of_burial_group")
     material = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_material_burialgroup")
+        help_text="<a href='/vocabs/scheme/6' target='_blank'>See Material Concept Schema</a>",
+        related_name="skos_material_burialgroup")
     length = models.CharField(
         max_length=255, blank=True, null=True,
         help_text="cm")
