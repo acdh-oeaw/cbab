@@ -8,6 +8,7 @@ cbab/settings/server.py
 # test coverage
 .coverage
 cover/
+cbabdev/
 
 # IDE
 .idea
