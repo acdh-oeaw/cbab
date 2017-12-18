@@ -279,8 +279,8 @@ class Urn(models.Model):
         help_text="helptext")
     basic_shape = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_basic_shape_of_urn"
-    )
+        help_text="<a href='/vocabs/scheme/13' target='_blank'>See Basic shape of urn Concept Schema</a>",
+        related_name="skos_basic_shape_of_urn")
     urn_type = models.TextField(
         blank=True, null=True, help_text="helptext")
     variation = models.TextField(
@@ -314,8 +314,8 @@ class Urn(models.Model):
 class UrnCover(models.Model):
     basic_shape = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_basic_shape_of_urn_cover"
-    )
+        help_text="<a href='/vocabs/scheme/14' target='_blank'>See Basic shape of urn cover Concept Schema</a>",
+        related_name="skos_basic_shape_of_urn_cover")
     upside_down = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     fragment = models.NullBooleanField(choices=BOOLEAN_CHOICES)
     cover_id = models.TextField(
@@ -348,17 +348,21 @@ class CrematedRemainsBaseClass(models.Model):
 
 class GraveGood(CrematedRemainsBaseClass):
     name = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/28' target='_blank'>See Grave good object Concept Schema</a>",
         related_name="skos_name_gravegood", verbose_name="Type")
     material = models.ForeignKey(
         SkosConcept,
         blank=True, null=True,
-        help_text="helptext", related_name="skos_material")
+        help_text="<a href='/vocabs/scheme/6' target='_blank'>See Material Concept Schema</a>",
+        related_name="skos_material")
     condition = models.ForeignKey(
         SkosConcept, blank=True, null=True,
-        help_text="helptext", related_name="skos_condition")
+        help_text="<a href='/vocabs/scheme/16' target='_blank'>See Condition Concept Schema</a>",
+        related_name="skos_condition")
     position = models.ForeignKey(
-        SkosConcept, blank=True, null=True, help_text="helptext",
+        SkosConcept, blank=True, null=True,
+        help_text="<a href='/vocabs/scheme/17' target='_blank'>See Position Concept Schema</a>",
         related_name="skos_gravegood_position")
 
     def __str__(self):
