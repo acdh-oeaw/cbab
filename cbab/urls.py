@@ -37,5 +37,5 @@ urlpatterns = [
     url(r'^bib/', include('bib.urls', namespace='bib')),
     url(r'^burials/', include('burials.urls', namespace='burials')),
     url(r'^browsing/', include('browsing.urls', namespace='browsing')),
-    url(r'^docs/', include_docs_urls(title='CBAB API', public=False)),
+    url(r'^api/docs/', include_docs_urls(title='CBAB API', public=False)),
 ]
