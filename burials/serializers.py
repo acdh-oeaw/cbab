@@ -1,11 +1,12 @@
 from rest_framework import serializers
 from .models import *
+from vocabs.serializers import *
 
 
 class BurialSiteSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = BurialSite
-        fields = '__all__'
+	class Meta:
+		model = BurialSite
+		fields = '__all__'
 
 
 class BurialGroupSerializer(serializers.HyperlinkedModelSerializer):
