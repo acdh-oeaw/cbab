@@ -5,6 +5,7 @@ from places.apis_views import PlaceViewSet
 from bib.api_views import BookViewSet
 from burials.api_views import *
 from vocabs import api_views
+from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
 router.register(r'burialsites', BurialSiteViewSet)
@@ -36,4 +37,5 @@ urlpatterns = [
     url(r'^bib/', include('bib.urls', namespace='bib')),
     url(r'^burials/', include('burials.urls', namespace='burials')),
     url(r'^browsing/', include('browsing.urls', namespace='browsing')),
+    url(r'^api/docs/', include_docs_urls(title='CBAB API', public=False))
 ]
