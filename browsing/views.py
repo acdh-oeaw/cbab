@@ -267,7 +267,16 @@ class MainListDownloadView(GenericListView):
             'Interntionally deposited',
             'Filling', 'Post holes',
             'Surface identification mark', 'Erdgraebchen',
-            'Other features']
+            'Other features',
+            'Urn',
+            'Grave good',
+            'Grave good amount',
+            'Anthropology',
+            'Anthropology amount',
+            'Organic grave good',
+            'Animal remains',
+            'Animal remains amount'
+            ]
         )
         for obj in self.get_queryset():
             writer.writerow([obj.id, obj.burial_id,
@@ -296,6 +305,14 @@ class MainListDownloadView(GenericListView):
                 obj.post_holes,
                 obj.surface_identification_mark,
                 obj.erdgraebchen,
-                obj.other_features
+                obj.other_features,
+                '; '.join([str(x) for x in obj.urn_set.all()]),
+                '; '.join([str(x.name) for x in obj.gravegood_set.all()]),
+                obj.amount_related_gravegoods,
+                '; '.join([str(x) for x in obj.deadbodyremains_set.all()]),
+                obj.amount_related_deadbodyremains,
+                '; '.join([str(x) for x in obj.gravegoodother_set.all()]),
+                '; '.join([str(x.species) for x in obj.animalremains_set.all()]),
+                obj.amount_related_organic
                 ])
         return response
