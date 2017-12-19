@@ -40,6 +40,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 SPAGHETTI_SAUCE = {
     'apps': ['vocabs', 'places', 'burials', 'bib'],
     'show_fields': False,
