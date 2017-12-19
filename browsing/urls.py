@@ -16,4 +16,5 @@ urlpatterns = [
     ),
     url(r'animalremains/$', views.AnimalRemainsListView.as_view(), name='browse_animalremains'),
     url(r'all/$', views.MainListView.as_view(), name='browse_all'),
+    url(r'download-results/$', views.MainListDownloadView.as_view(), name='download-results'),
 ]

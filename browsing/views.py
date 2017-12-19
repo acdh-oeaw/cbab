@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django_tables2 import SingleTableView, RequestConfig
 from burials.models import *
 from .filters import *
 from .forms import GenericFilterFormHelper
 from .tables import *
+import csv
+import re
+import time
+import datetime
+import requests
+from django.http import HttpResponse
+from django.template import RequestContext
 
 
 class GenericListView(SingleTableView):
@@ -226,3 +233,59 @@ class MainListView(GenericListView):
             burials.append(x)
         context["burials"] = set(burials)
         return context
+
+
+class MainListDownloadView(GenericListView):
+    model = Burial
+    table_class = BurialTable
+    template_name = 'browsing/main_list_generic.html'
+    filter_class = MainListFilter
+    formhelper_class = MainListFilterFormHelper
+
+    def render_to_response(self, context, **kwargs):
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        response = HttpResponse(content_type='text/csv')
+        filename = "cbab_export_{}".format(timestamp)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        writer = csv.writer(response, delimiter=",")
+        writer.writerow([
+            'Burial ID', 'Burial number', 'Burial site', 'Burial site location',
+            'Burial group', 'Burial type',
+            'Absolute dating (C14/Dendro)', 'Absolute age', 'Secondary burial',
+            'Secondary burial text', 'Displaced',
+            'Displaced text',
+            'Extraordinary burial', 'Extraordinary burial text',
+            'Inhumation burial type', 'Bi-ritual burial type', 'Construction',
+            'Arrangement',
+            'Cover', 'Cover type',
+            'Grave pit form',
+            'Grave pit orientation',
+            'Length', 'Width', 
+            'Diameter', 'Heigth',
+            'Filling objects',
+            'Interntionally deposited',
+            'Filling', 'Post holes',
+            'Surface identification mark', 'Erdgraebchen',
+            'Other features']
+        )
+        for obj in self.get_queryset():
+            writer.writerow([obj.id, obj.burial_id,
+                obj.burial_site.name, obj.burial_site.location,
+                obj.burial_group, obj.burial_type, obj.C14_dendro,
+                obj.absolute_age, obj.secondary_burial, obj.secondary_burial_text,
+                obj.displaced, obj.displaced_text, obj.extraordinary_burial,
+                obj.extraordinary_burial_text, obj.inhumation_burial_type,
+                obj.bi_ritual_burial_type, obj.construction,
+                obj.arrangement, obj.cover, obj.cover_type,
+                obj.grave_pit_form, obj.grave_pit_orientation,
+                obj.length, obj.width, obj.diameter,
+                obj.height,
+                '; '.join([obj.pref_label for obj in obj.filling_objects.all()]),
+                obj.intentionally_deposited,
+                obj.filling,
+                obj.post_holes,
+                obj.surface_identification_mark,
+                obj.erdgraebchen,
+                obj.other_features
+                ])
+        return response
