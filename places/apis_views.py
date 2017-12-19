@@ -12,4 +12,3 @@ class PlaceViewSet(viewsets.ModelViewSet):
 class AlternativNameViewSet(viewsets.ModelViewSet):
     queryset = AlternativeName.objects.all()
     serializer_class = AlternativeNameSerializer
-
