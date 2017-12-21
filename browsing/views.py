@@ -249,7 +249,9 @@ class MainListDownloadView(GenericListView):
         response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
         writer = csv.writer(response, delimiter=",")
         writer.writerow([
-            'Burial ID', 'Burial number', 'Burial site', 'Burial site location',
+            'Burial ID', 'Burial number', 'Burial site',
+            'Place name',
+            'Province', 'Geonames ID',
             'Latitude', 'Longitude',
             'Burial group', 'Burial type',
             'Absolute dating (C14/Dendro)', 'Absolute age', 'Secondary burial',
@@ -280,7 +282,10 @@ class MainListDownloadView(GenericListView):
         )
         for obj in self.get_queryset():
             writer.writerow([obj.id, obj.burial_id,
-                obj.burial_site.name, obj.burial_site.location,
+                obj.burial_site.name,
+                obj.burial_site.location.name,
+                obj.burial_site.location.province,
+                obj.burial_site.location.geonames_id,
                 obj.burial_site.lat, obj.burial_site.lng,
                 obj.burial_group, obj.burial_type,
                 obj.get_C14_dendro_display(),
