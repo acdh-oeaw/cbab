@@ -10,6 +10,7 @@ class AlternativeNameSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PlaceHelperSerializer(serializers.HyperlinkedModelSerializer):
+    province = serializers.CharField()
 
     class Meta:
         model = Place
@@ -17,6 +18,7 @@ class PlaceHelperSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PlaceSerializer(serializers.HyperlinkedModelSerializer):
+    province = serializers.CharField()
     alternative_name = AlternativeNameSerializer(many=True)
     part_of = PlaceHelperSerializer(many=False)
 

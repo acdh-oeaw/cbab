@@ -56,9 +56,10 @@
                 {% load django_tables2 crispy_forms_tags %}
                 {% crispy filter.form filter.form.helper %}
                 {% block reset_button %}
-                 <a class ="btn btn-default"  href="{% url 'browsing:browse_all' %}">
-                 reset search
-                 </a>
+                 <a class ="btn btn-default"  href="{% url 'browsing:browse_all' %}">reset search</a>
+                 {% if user.is_authenticated %}
+                 <a class ="btn btn-default" href="{% url 'browsing:download-results' %}{% querystring %}">download search results (.csv)</a>
+                 {% endif %}
                 {% endblock %}
                
      </div>
@@ -73,6 +74,13 @@
      <div id="map">
      </div>
      <div class="empty-div"></div>
+
+
+     <h1>
+        <button type="button" class="btn btn-default btn-sm" data-toggle="popover" data-content="Order results by clicking on column name">
+          <span class="glyphicon glyphicon-question-sign"></span> help
+        </button> 
+    </h1>
 
 
     <!-- BLOCK TABLE -->

@@ -45,7 +45,11 @@ $("#goto option").each(function() {
     <legend>Total results: {{ total }}</legend>
     {% endwith %}
 
-
+    <h1>
+        <button type="button" class="btn btn-default btn-sm" data-toggle="popover" data-content="Order results by clicking on column name">
+          <span class="glyphicon glyphicon-question-sign"></span> help
+        </button> 
+    </h1>
 
       {% block table %}
       <table{% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
@@ -201,5 +205,6 @@ $("#goto option").each(function() {
     </div>
 </div>
 </div>
-{% block customScripts %}{% endblock %}
+{% block customScripts %}
+{% endblock %}
 {% endblock %}
