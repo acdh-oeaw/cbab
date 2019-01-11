@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^$', views.StartView.as_view(), name="start"),
     url(r'^favicon\.ico$', favicon_view),
     url(r'^imprint/$', views.ImprintView.as_view(), name='imprint'),
+    url(r'^project-info/$', views.project_info, name='project_info'),
     url(r'^terms-of-use/$', views.TermsOfUseView.as_view(), name='terms-of-use'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     url(r'^manual/$', views.ManualView.as_view(), name='manual'),

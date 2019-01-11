@@ -1,8 +1,11 @@
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 from .forms import form_user_login
+from .metadata import PROJECT_METADATA as PM
+from copy import deepcopy
+
 
 
 class AboutView(TemplateView):
@@ -45,3 +48,26 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render_to_response('webpage/user_logout.html')
+
+
+#################################################################
+#                    project info view                          #
+#################################################################
+
+
+def project_info(request):
+
+    """
+    returns a dict providing metadata about the current project
+    """
+
+    info_dict = deepcopy(PM)
+
+    if request.user.is_authenticated:
+        pass
+    else:
+        del info_dict['matomo_id']
+        del info_dict['matomo_url']
+    info_dict['base_tech'] = 'django'
+    info_dict['framework'] = 'djangobaseproject'
+    return JsonResponse(info_dict)
