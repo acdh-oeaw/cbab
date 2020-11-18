@@ -15,14 +15,14 @@
      {% endblock %}
      {% block content %}
      <style>
-         #map { 
-          height: 500px; 
+         #map {
+          height: 500px;
           margin-top: 30px;
           margin-bottom: 30px;
         }
      </style>
-        
-     
+
+
      <script type="text/javascript">
       $(document).ready(function() {
       var fetchedParameter = "{{ table.page.number }}";
@@ -61,7 +61,7 @@
                  <a class ="btn btn-default" href="{% url 'browsing:download-results' %}{% querystring %}">download search results (.csv)</a>
                  {% endif %}
                 {% endblock %}
-               
+
      </div>
 
      <div class="col-md-8">
@@ -79,7 +79,7 @@
      <h1>
         <button type="button" class="btn btn-default btn-sm" data-toggle="popover" data-content="Order results by clicking on column name">
           <span class="glyphicon glyphicon-question-sign"></span> help
-        </button> 
+        </button>
     </h1>
 
 
@@ -236,7 +236,7 @@
      </div>
 
      </div><!--panel body-->
-   
+
 
      </div><!--panel default-->
      </div><!--container-->
@@ -268,16 +268,14 @@
             fullscreenControl: true,
         }).setView([0, 0], 2);
 
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.light',
-            accessToken: 'pk.eyJ1IjoiY3NhZTgwOTIiLCJhIjoiY2lnM2FoZWpjMDJqZnY1a2gxdWl6a29kaiJ9.FQXlsKIu60WhiXLrfI59VA'
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18
         }).addTo(mymap);
         var markers = L.markerClusterGroup({});
         var build_data =  [
         {% for obj in burialsites %}
-        {"geometry": 
+        {"geometry":
           {"type": "Point", "coordinates": [ {{ obj.lng }}, {{ obj.lat }} ]},
          "type": "Feature",
          "properties": {"popupContent":
@@ -288,7 +286,7 @@
           ,
           {% endif %}
           {% empty %}
-          
+
           {% endfor %}]
         var geoJsonLayer = L.geoJson( build_data, {onEachFeature: onEachFeature});
         markers.addLayer(geoJsonLayer);
