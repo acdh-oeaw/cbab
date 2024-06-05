@@ -38,3 +38,5 @@ diauma/migrations/*
 
 /docs/_*/*
 /setPermissions.ipynb
+cbab/settings/local.py
+venv/
