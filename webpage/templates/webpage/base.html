@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load webpage_extras %}
 
 <!DOCTYPE html>
@@ -154,13 +154,6 @@
                     <li>
                         <a href="{% url 'browsing:browse_animalremains' %}">Animal Remains</a>
                     </li>
-
-                    {% if user.is_authenticated %}
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{% url 'bib:synczotero' %}">Import new Items from Zotero</a>
-                    </li>
-                    {% endif %}
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -190,12 +183,6 @@
                           <a href="{% url 'vocabs:skoslabel_list' %}">Labels</a>
                       </li>
                       <li role="separator" class="divider"></li>
-                      <li>
-                          <a href="{% url 'vocabs:skos_import' %}">Import SKOS (RDF/XML)</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'vocabs:skos_csv_import' %}">Import Vocabs from CSV</a>
-                      </li>
                       <li>
                           <a href="{% url 'api-root' %}">Export SKOS (API)</a>
                       </li>
