@@ -1,22 +1,22 @@
-from django.conf.urls import url, include
+from django.urls import include, re_path
 from django.contrib import admin
 from rest_framework import routers
 from places.apis_views import PlaceViewSet
 from bib.api_views import BookViewSet
-from burials.api_views import *
+from burials import api_views as burial_api_views
 from vocabs import api_views
 from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
-router.register(r"burialsites", BurialSiteViewSet)
-router.register(r"burialgroups", BurialGroupViewSet)
-router.register(r"burials", BurialViewSet)
-router.register(r"urns", UrnViewSet)
-router.register(r"urncovers", UrnCoverViewSet)
-router.register(r"gravegoods", GraveGoodViewSet)
-router.register(r"gravegoodothers", GraveGoodOtherViewSet)
-router.register(r"anthropology", AnthropologyViewSet)
-router.register(r"animalremains", AnimalRemainsViewSet)
+router.register(r"burialsites", burial_api_views.BurialSiteViewSet)
+router.register(r"burialgroups", burial_api_views.BurialGroupViewSet)
+router.register(r"burials", burial_api_views.BurialViewSet)
+router.register(r"urns", burial_api_views.UrnViewSet)
+router.register(r"urncovers", burial_api_views.UrnCoverViewSet)
+router.register(r"gravegoods", burial_api_views.GraveGoodViewSet)
+router.register(r"gravegoodothers", burial_api_views.GraveGoodOtherViewSet)
+router.register(r"anthropology", burial_api_views.AnthropologyViewSet)
+router.register(r"animalremains", burial_api_views.AnimalRemainsViewSet)
 router.register(r"skoslabels", api_views.SkosLabelViewSet)
 router.register(r"skosnamespaces", api_views.SkosNamespaceViewSet)
 router.register(r"skosconceptschemes", api_views.SkosConceptSchemeViewSet)
@@ -26,16 +26,16 @@ router.register(r"Book", BookViewSet)
 
 
 urlpatterns = [
-    url(r"^api/", include(router.urls)),
-    url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    url(r"^admin/", admin.site.urls),
-    url(r"^", include("webpage.urls", namespace="webpage")),
-    url(r"^vocabs/", include("vocabs.urls", namespace="vocabs")),
-    url(r"^vocabs-ac/", include("vocabs.dal_urls", namespace="vocabs-ac")),
-    url(r"^datamodel/", include("django_spaghetti.urls", namespace="datamodel")),
-    url(r"places/", include("places.urls", namespace="places")),
-    url(r"^bib/", include("bib.urls", namespace="bib")),
-    url(r"^burials/", include("burials.urls", namespace="burials")),
-    url(r"^browsing/", include("browsing.urls", namespace="browsing")),
-    url(r"^api/docs/", include_docs_urls(title="CBAB API", public=False)),
+    re_path(r"^api/", include(router.urls)),
+    re_path(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    re_path(r"^admin/", admin.site.urls),
+    re_path(r"^", include("webpage.urls", namespace="webpage")),
+    re_path(r"^vocabs/", include("vocabs.urls", namespace="vocabs")),
+    re_path(r"^vocabs-ac/", include("vocabs.dal_urls", namespace="vocabs-ac")),
+    re_path(r"^datamodel/", include("django_spaghetti.urls", namespace="datamodel")),
+    re_path(r"places/", include("places.urls", namespace="places")),
+    re_path(r"^bib/", include("bib.urls", namespace="bib")),
+    re_path(r"^burials/", include("burials.urls", namespace="burials")),
+    re_path(r"^browsing/", include("browsing.urls", namespace="browsing")),
+    re_path(r"^api/docs/", include_docs_urls(title="CBAB API", public=False)),
 ]
