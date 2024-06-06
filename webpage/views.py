@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
@@ -49,7 +49,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return render_to_response("webpage/user_logout.html")
+    return render("webpage/user_logout.html")
 
 
 #################################################################

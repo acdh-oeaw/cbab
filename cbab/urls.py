@@ -5,7 +5,6 @@ from places.apis_views import PlaceViewSet
 from bib.api_views import BookViewSet
 from burials import api_views as burial_api_views
 from vocabs import api_views
-from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
 router.register(r"burialsites", burial_api_views.BurialSiteViewSet)
@@ -32,10 +31,8 @@ urlpatterns = [
     re_path(r"^", include("webpage.urls", namespace="webpage")),
     re_path(r"^vocabs/", include("vocabs.urls", namespace="vocabs")),
     re_path(r"^vocabs-ac/", include("vocabs.dal_urls", namespace="vocabs-ac")),
-    re_path(r"^datamodel/", include("django_spaghetti.urls", namespace="datamodel")),
     re_path(r"places/", include("places.urls", namespace="places")),
     re_path(r"^bib/", include("bib.urls", namespace="bib")),
     re_path(r"^burials/", include("burials.urls", namespace="burials")),
     re_path(r"^browsing/", include("browsing.urls", namespace="browsing")),
-    re_path(r"^api/docs/", include_docs_urls(title="CBAB API", public=False)),
 ]

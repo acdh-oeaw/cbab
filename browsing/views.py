@@ -1,16 +1,12 @@
-from django.shortcuts import render, render_to_response
 from django_tables2 import SingleTableView, RequestConfig
 from burials.models import *
 from .filters import *
 from .forms import GenericFilterFormHelper
 from .tables import *
 import csv
-import re
 import time
 import datetime
-import requests
 from django.http import HttpResponse
-from django.template import RequestContext
 
 
 class GenericListView(SingleTableView):
