@@ -9,9 +9,9 @@ class GenericFilterFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super(GenericFilterFormHelper, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.form_class = 'genericFilterForm'
-        self.form_method = 'GET'
-        self.add_input(Submit('Filter', 'search'))
+        self.form_class = "genericFilterForm"
+        self.form_method = "GET"
+        self.add_input(Submit("Filter", "search"))
 
 
 class UploadFileForm(forms.Form):
@@ -21,10 +21,12 @@ class UploadFileForm(forms.Form):
         super(UploadFileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'import'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "import"),
+        )
 
 
 class SkosConceptForm(forms.ModelForm):
@@ -32,28 +34,39 @@ class SkosConceptForm(forms.ModelForm):
         model = SkosConcept
         fields = "__all__"
         widgets = {
-            'label': autocomplete.ModelSelect2Multiple(url='vocabs-ac:skoslabel-autocomplete'),
-            'skos_broader': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),
-            'skos_narrower': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),
-            'skos_related': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),
-            'skos_broadmatch': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),
-            'skos_exactmatch': autocomplete.ModelSelect2Multiple(
-                url='vocabs-ac:skosconcept-autocomplete'),
-            'scheme': autocomplete.ModelSelect2Multiple(url='vocabs-ac:skosconceptscheme-autocomplete')
+            "label": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skoslabel-autocomplete"
+            ),
+            "skos_broader": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconcept-autocomplete"
+            ),
+            "skos_narrower": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconcept-autocomplete"
+            ),
+            "skos_related": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconcept-autocomplete"
+            ),
+            "skos_broadmatch": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconcept-autocomplete"
+            ),
+            "skos_exactmatch": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconcept-autocomplete"
+            ),
+            "scheme": autocomplete.ModelSelect2Multiple(
+                url="vocabs-ac:skosconceptscheme-autocomplete"
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super(SkosConceptForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )
 
 
 class SkosConceptSchemeForm(forms.ModelForm):
@@ -65,10 +78,12 @@ class SkosConceptSchemeForm(forms.ModelForm):
         super(SkosConceptSchemeForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )
 
 
 class SkosLabelForm(forms.ModelForm):
@@ -80,7 +95,9 @@ class SkosLabelForm(forms.ModelForm):
         super(SkosLabelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3'
-        self.helper.field_class = 'col-md-9'
-        self.helper.add_input(Submit('submit', 'save'),)
+        self.helper.form_class = "form-horizontal"
+        self.helper.label_class = "col-md-3"
+        self.helper.field_class = "col-md-9"
+        self.helper.add_input(
+            Submit("submit", "save"),
+        )

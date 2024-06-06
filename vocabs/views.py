@@ -6,7 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django_tables2 import SingleTableView, RequestConfig
 from .models import SkosConcept, SkosConceptScheme, SkosLabel
-from .forms import SkosConceptForm, SkosConceptSchemeForm, SkosLabelForm, GenericFilterFormHelper
+from .forms import (
+    SkosConceptForm,
+    SkosConceptSchemeForm,
+    SkosLabelForm,
+    GenericFilterFormHelper,
+)
 from .tables import SkosConceptTable
 from .filters import SkosConceptFilter
 
@@ -14,7 +19,7 @@ from .filters import SkosConceptFilter
 class GenericListView(SingleTableView):
     filter_class = None
     formhelper_class = None
-    context_filter_name = 'filter'
+    context_filter_name = "filter"
     paginate_by = 25
 
     def get_queryset(self, **kwargs):
@@ -25,8 +30,9 @@ class GenericListView(SingleTableView):
 
     def get_table(self, **kwargs):
         table = super(GenericListView, self).get_table()
-        RequestConfig(self.request, paginate={
-            'page': 1, 'per_page': self.paginate_by}).configure(table)
+        RequestConfig(
+            self.request, paginate={"page": 1, "per_page": self.paginate_by}
+        ).configure(table)
         return table
 
     def get_context_data(self, **kwargs):
@@ -38,7 +44,7 @@ class GenericListView(SingleTableView):
 class SkosConceptFilterView(GenericListView):
     model = SkosConcept
     table_class = SkosConceptTable
-    template_name = 'vocabs/skosconcept_filter.html'
+    template_name = "vocabs/skosconcept_filter.html"
     filter_class = SkosConceptFilter
     formhelper_class = GenericFilterFormHelper
 
@@ -46,19 +52,19 @@ class SkosConceptFilterView(GenericListView):
 class SkosConceptDetailView(DetailView):
 
     model = SkosConcept
-    template_name = 'vocabs/skosconcept_detail.html'
+    template_name = "vocabs/skosconcept_detail.html"
 
 
 class SkosConceptListView(ListView):
 
     model = SkosConcept
-    template_name = 'vocabs/skosconcept_list.html'
+    template_name = "vocabs/skosconcept_list.html"
 
 
 class SkosConceptCreate(CreateView):
 
     model = SkosConcept
-    template_name = 'vocabs/skosconcept_create.html'
+    template_name = "vocabs/skosconcept_create.html"
     form_class = SkosConceptForm
 
     @method_decorator(login_required)
@@ -70,7 +76,7 @@ class SkosConceptUpdate(UpdateView):
 
     model = SkosConcept
     form_class = SkosConceptForm
-    template_name = 'vocabs/skosconcept_create.html'
+    template_name = "vocabs/skosconcept_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -79,8 +85,8 @@ class SkosConceptUpdate(UpdateView):
 
 class SkosConceptDelete(DeleteView):
     model = SkosConcept
-    template_name = 'vocabs/confirm_delete.html'
-    success_url = reverse_lazy('vocabs:browse_vocabs')
+    template_name = "vocabs/confirm_delete.html"
+    success_url = reverse_lazy("vocabs:browse_vocabs")
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -95,25 +101,25 @@ class SkosConceptDelete(DeleteView):
 class SkosConceptSchemeDetailView(DetailView):
 
     model = SkosConceptScheme
-    template_name = 'vocabs/skosconceptscheme_detail.html'
+    template_name = "vocabs/skosconceptscheme_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(SkosConceptSchemeDetailView, self).get_context_data(**kwargs)
-        context["concepts"] = SkosConcept.objects.filter(scheme=self.kwargs.get('pk'))
+        context["concepts"] = SkosConcept.objects.filter(scheme=self.kwargs.get("pk"))
         return context
 
 
 class SkosConceptSchemeListView(ListView):
 
     model = SkosConceptScheme
-    template_name = 'vocabs/skosconceptscheme_list.html'
+    template_name = "vocabs/skosconceptscheme_list.html"
 
 
 class SkosConceptSchemeCreate(CreateView):
 
     model = SkosConceptScheme
     form_class = SkosConceptSchemeForm
-    template_name = 'vocabs/skosconceptscheme_create.html'
+    template_name = "vocabs/skosconceptscheme_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -124,7 +130,7 @@ class SkosConceptSchemeUpdate(UpdateView):
 
     model = SkosConceptScheme
     form_class = SkosConceptSchemeForm
-    template_name = 'vocabs/skosconceptscheme_create.html'
+    template_name = "vocabs/skosconceptscheme_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -139,19 +145,19 @@ class SkosConceptSchemeUpdate(UpdateView):
 class SkosLabelDetailView(DetailView):
 
     model = SkosLabel
-    template_name = 'vocabs/skoslabel_detail.html'
+    template_name = "vocabs/skoslabel_detail.html"
 
 
 class SkosLabelListView(ListView):
 
     model = SkosLabel
-    template_name = 'vocabs/skoslabel_list.html'
+    template_name = "vocabs/skoslabel_list.html"
 
 
 class SkosLabelCreate(CreateView):
 
     model = SkosLabel
-    template_name = 'vocabs/skoslabel_create.html'
+    template_name = "vocabs/skoslabel_create.html"
     form_class = SkosLabelForm
 
     @method_decorator(login_required)
@@ -163,7 +169,7 @@ class SkosLabelUpdate(UpdateView):
 
     model = SkosLabel
     form_class = SkosLabelForm
-    template_name = 'vocabs/skoslabel_create.html'
+    template_name = "vocabs/skoslabel_create.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

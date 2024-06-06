@@ -1,8 +1,15 @@
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 from .models import (
-    Burial, BurialSite, BurialGroup, Urn, UrnCover, GraveGood, GraveGoodOther, DeadBodyRemains,
-    AnimalRemains
+    Burial,
+    BurialSite,
+    BurialGroup,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
 )
 
 

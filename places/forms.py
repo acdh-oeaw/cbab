@@ -7,8 +7,8 @@ from .models import Place
 class PlaceForm(forms.ModelForm):
     class Meta:
         model = Place
-        exclude = ['alternative_name']
-        fields = ['name', 'province', 'geonames_id', 'lat', 'lng']
+        exclude = ["alternative_name"]
+        fields = ["name", "province", "geonames_id", "lat", "lng"]
 
     def __init__(self, *args, **kwargs):
         super(PlaceForm, self).__init__(*args, **kwargs)
@@ -19,7 +19,7 @@ class PlaceForm(forms.ModelForm):
 class PlaceFormCreate(forms.ModelForm):
     class Meta:
         model = Place
-        fields = ['name', 'province']
+        fields = ["name", "province"]
 
     def __init__(self, *args, **kwargs):
         super(PlaceFormCreate, self).__init__(*args, **kwargs)

@@ -10,18 +10,18 @@ DEFAULT_PEFIX = os.path.basename(settings.BASE_DIR)
 DEFAULT_NAMESPACE = "http://www.vocabs/{}/".format(DEFAULT_PEFIX)
 
 LABEL_TYPES = (
-    ('prefLabel', 'prefLabel'),
-    ('altLabel', 'altLabel'),
-    ('hiddenLabel', 'hiddenLabel'),
+    ("prefLabel", "prefLabel"),
+    ("altLabel", "altLabel"),
+    ("hiddenLabel", "hiddenLabel"),
 )
 
 RELATION_TYPES = (
-    ('narrower', 'narrower'),
-    ('broader', 'broader'),
-    ('related', 'related'),
-    ('broadMatch', 'broadMatch'),
-    ('relatedMatch', 'relatedMatch'),
-    ('exactMatch', 'exactMatch'),
+    ("narrower", "narrower"),
+    ("broader", "broader"),
+    ("related", "related"),
+    ("broadMatch", "broadMatch"),
+    ("relatedMatch", "relatedMatch"),
+    ("exactMatch", "exactMatch"),
 )
 
 
@@ -35,14 +35,17 @@ class SkosNamespace(models.Model):
 
 class SkosConceptScheme(models.Model):
     dc_title = models.CharField(max_length=300, blank=True)
-    namespace = models.ForeignKey(SkosNamespace, blank=True, null=True, on_delete=models.SET_NULL)
+    namespace = models.ForeignKey(
+        SkosNamespace, blank=True, null=True, on_delete=models.SET_NULL
+    )
     dct_creator = models.URLField(blank=True)
     legacy_id = models.CharField(max_length=200, blank=True)
 
     def save(self, *args, **kwargs):
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX
+            )
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
@@ -50,18 +53,27 @@ class SkosConceptScheme(models.Model):
         super(SkosConceptScheme, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('vocabs:skosconceptscheme_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skosconceptscheme_detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return "{}:{}".format(self.namespace, self.dc_title)
 
 
 class SkosLabel(models.Model):
-    label = models.CharField(max_length=100, blank=True, help_text="The entities label or name.")
+    label = models.CharField(
+        max_length=100, blank=True, help_text="The entities label or name."
+    )
     label_type = models.CharField(
-        max_length=30, blank=True, choices=LABEL_TYPES, help_text="The type of the label.")
+        max_length=30,
+        blank=True,
+        choices=LABEL_TYPES,
+        help_text="The type of the label.",
+    )
     isoCode = models.CharField(
-        max_length=3, blank=True, help_text="The ISO 639-3 code for the label's language.")
+        max_length=3,
+        blank=True,
+        help_text="The ISO 639-3 code for the label's language.",
+    )
 
     def __str__(self):
         if self.label_type != "":
@@ -70,7 +82,7 @@ class SkosLabel(models.Model):
             return "{} @{}".format(self.label, self.isoCode)
 
     def get_absolute_url(self):
-        return reverse('vocabs:skoslabel_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skoslabel_detail", kwargs={"pk": self.id})
 
 
 class SkosConcept(models.Model):
@@ -81,18 +93,32 @@ class SkosConcept(models.Model):
     definition_lang = models.CharField(max_length=3, blank=True, default="eng")
     label = models.ManyToManyField(SkosLabel, blank=True)
     notation = models.CharField(max_length=300, blank=True)
-    namespace = models.ForeignKey(SkosNamespace, blank=True, null=True, on_delete=models.SET_NULL)
-    skos_broader = models.ManyToManyField('SkosConcept', blank=True, related_name="narrower")
-    skos_narrower = models.ManyToManyField('SkosConcept', blank=True, related_name="broader")
-    skos_related = models.ManyToManyField('SkosConcept', blank=True, related_name="related")
-    skos_broadmatch = models.ManyToManyField('SkosConcept', blank=True, related_name="broadmatch")
-    skos_exactmatch = models.ManyToManyField('SkosConcept', blank=True, related_name="exactmatch")
-    skos_closematch = models.ManyToManyField('SkosConcept', blank=True, related_name="closematch")
+    namespace = models.ForeignKey(
+        SkosNamespace, blank=True, null=True, on_delete=models.SET_NULL
+    )
+    skos_broader = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="narrower"
+    )
+    skos_narrower = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="broader"
+    )
+    skos_related = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="related"
+    )
+    skos_broadmatch = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="broadmatch"
+    )
+    skos_exactmatch = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="exactmatch"
+    )
+    skos_closematch = models.ManyToManyField(
+        "SkosConcept", blank=True, related_name="closematch"
+    )
     legacy_id = models.CharField(max_length=200, blank=True)
 
     @property
     def all_schemes(self):
-        return ', '.join([x.dc_title for x in self.scheme.all()])
+        return ", ".join([x.dc_title for x in self.scheme.all()])
 
     def save(self, *args, **kwargs):
         if self.notation == "":
@@ -107,7 +133,8 @@ class SkosConcept(models.Model):
 
         if self.namespace is None:
             temp_namespace, _ = SkosNamespace.objects.get_or_create(
-                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX)
+                namespace=DEFAULT_NAMESPACE, prefix=DEFAULT_PEFIX
+            )
             temp_namespace.save()
             self.namespace = temp_namespace
         else:
@@ -119,4 +146,4 @@ class SkosConcept(models.Model):
         return "{}".format(self.pref_label)
 
     def get_absolute_url(self):
-        return reverse('vocabs:skosconcept_detail', kwargs={'pk': self.id})
+        return reverse("vocabs:skosconcept_detail", kwargs={"pk": self.id})

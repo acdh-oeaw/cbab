@@ -7,7 +7,6 @@ from .metadata import PROJECT_METADATA as PM
 from copy import deepcopy
 
 
-
 class AboutView(TemplateView):
     template_name = "webpage/about.html"
 
@@ -23,31 +22,34 @@ class ImprintView(TemplateView):
 class TermsOfUseView(TemplateView):
     template_name = "webpage/terms_of_use.html"
 
+
 class ManualView(TemplateView):
     template_name = "webpage/manual.html"
+
 
 #################################################################
 #               views for login/logout                          #
 #################################################################
 
+
 def user_login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = form_user_login(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
+            user = authenticate(username=cd["username"], password=cd["password"])
             if user and user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(request.GET.get('next', '/'))
-            return HttpResponse('user does not exist')
+                return HttpResponseRedirect(request.GET.get("next", "/"))
+            return HttpResponse("user does not exist")
     else:
         form = form_user_login()
-        return render(request, 'webpage/user_login.html', {'form': form})
+        return render(request, "webpage/user_login.html", {"form": form})
 
 
 def user_logout(request):
     logout(request)
-    return render_to_response('webpage/user_logout.html')
+    return render_to_response("webpage/user_logout.html")
 
 
 #################################################################
@@ -56,7 +58,6 @@ def user_logout(request):
 
 
 def project_info(request):
-
     """
     returns a dict providing metadata about the current project
     """
@@ -66,8 +67,8 @@ def project_info(request):
     if request.user.is_authenticated:
         pass
     else:
-        del info_dict['matomo_id']
-        del info_dict['matomo_url']
-    info_dict['base_tech'] = 'django'
-    info_dict['framework'] = 'djangobaseproject'
+        del info_dict["matomo_id"]
+        del info_dict["matomo_url"]
+    info_dict["base_tech"] = "django"
+    info_dict["framework"] = "djangobaseproject"
     return JsonResponse(info_dict)
