@@ -3,13 +3,29 @@ Django settings for CBAB project.
 """
 
 import os
+from pathlib import Path
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(os.path.join(__file__, "../")))
-)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+REDMINE_ID = "7601"
+SECRET_KEY = os.environ.get("SECRET_KEY", "rlYWFQbF")
+
+
+if os.environ.get("DEBUG", False):
+    print(os.environ.get("DEBUG", False))
+    DEBUG = True
+else:
+    DEBUG = False
+
+ADD_ALLOWED_HOST = os.environ.get("ALLOWED_HOST", "*")
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "0.0.0.0",
+    ADD_ALLOWED_HOST,
+]
 
 # Application definition
 
@@ -84,6 +100,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "cbab.wsgi.application"
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get("POSTGRES_DB", "cbab"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+        'HOST': os.environ.get("POSTGRES_HOST", "localhost"),
+        'PORT': os.environ.get("POSTEGRES_PORT", "3306"),
+    }
+}
+
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "guardian.backends.ObjectPermissionBackend",
@@ -114,5 +141,5 @@ MEDIA_URL = "/media/"
 
 # To do: if Z_BASE_URL, Z_COLLECTION are missing get_zotero_url() throws an error, this
 # workaround (setting empty ones) prevents the errors but still produces invalid urls - please fix
-Z_BASE_URL = ""
-Z_COLLECTION = ""
+Z_BASE_URL = "https://www.zotero.org/mgavranovic/items/collectionKey"
+Z_COLLECTION = "4CRPGG6W"
