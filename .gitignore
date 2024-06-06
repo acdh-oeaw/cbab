@@ -40,3 +40,4 @@ diauma/migrations/*
 /setPermissions.ipynb
 cbab/settings/local.py
 venv/
+secret.env
