@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from guardian.decorators import permission_required
 from django.utils.decorators import method_decorator
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 

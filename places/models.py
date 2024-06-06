@@ -10,7 +10,9 @@ class Country(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=250, blank=True)
-    country = models.ForeignKey(Country, blank=True, null=True)
+    country = models.ForeignKey(
+        Country, blank=True, null=True, on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return "{} ({})".format(self.country, self.name)
@@ -18,7 +20,7 @@ class Region(models.Model):
 
 class Province(models.Model):
     name = models.CharField(max_length=250, blank=True)
-    region = models.ForeignKey(Region, blank=True, null=True)
+    region = models.ForeignKey(Region, blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return "{} ({})".format(self.region, self.name)
@@ -32,39 +34,32 @@ class AlternativeName(models.Model):
 
 
 class Place(models.Model):
-    PLACE_TYPES = (
-        ("city", "city"),
-        ("country", "country")
-    )
+    PLACE_TYPES = (("city", "city"), ("country", "country"))
 
     """Holds information about places."""
-    name = models.CharField(
-        max_length=250, blank=True, help_text="Normalized name"
+    name = models.CharField(max_length=250, blank=True, help_text="Normalized name")
+    province = models.ForeignKey(
+        Province, blank=True, null=True, on_delete=models.SET_NULL
     )
-    province = models.ForeignKey(Province, blank=True, null=True)
     alternative_name = models.ManyToManyField(
-        AlternativeName,
-        max_length=250, blank=True,
-        help_text="Alternative names"
+        AlternativeName, max_length=250, blank=True, help_text="Alternative names"
     )
-    geonames_id = models.CharField(
-        max_length=50, blank=True,
-        help_text="GND-ID"
-    )
-    lat = models.DecimalField(
-        max_digits=20, decimal_places=12,
-        blank=True, null=True
-    )
-    lng = models.DecimalField(
-        max_digits=20, decimal_places=12, blank=True, null=True
-    )
+    geonames_id = models.CharField(max_length=50, blank=True, help_text="GND-ID")
+    lat = models.DecimalField(max_digits=20, decimal_places=12, blank=True, null=True)
+    lng = models.DecimalField(max_digits=20, decimal_places=12, blank=True, null=True)
     part_of = models.ForeignKey(
-        "Place", null=True, blank=True, help_text="A place (country) this place is part of."
+        "Place",
+        null=True,
+        blank=True,
+        help_text="A place (country) this place is part of.",
+        on_delete=models.SET_NULL,
     )
-    place_type = models.CharField(choices=PLACE_TYPES, null=True, blank=True, max_length=50)
+    place_type = models.CharField(
+        choices=PLACE_TYPES, null=True, blank=True, max_length=50
+    )
 
     class Meta:
-        ordering  = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return "{} ({})".format(self.name, self.province)
