@@ -10,9 +10,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-REDMINE_ID = "7601"
+REDMINE_ID = os.environ.get("REDMINE_ID", "7601")
 ACDH_IMPRINT_URL = "https://imprint.acdh.oeaw.ac.at/"
-SECRET_KEY = os.environ.get("SECRET_KEY", "rlYWFQbF")
+SECRET_KEY = os.environ.get("SECRET_KEY", "rlYWFQbFuwofjjafjwo")
 
 
 if os.environ.get("DEBUG", False):
