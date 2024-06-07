@@ -41,3 +41,4 @@ diauma/migrations/*
 cbab/settings/local.py
 venv/
 secret.env
+docker.env

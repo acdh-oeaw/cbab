@@ -21,3 +21,18 @@ Please refer to the file COPYING in the root directory of this repository.
 * copy and adatpt `env.env` to `env.secret` and run (adapted) `set_env_varibales.sh` (or choose any other method you like to set environment variables)
 * start the dev-server `python manage.py runserver` (run migrations if needed)
 
+## Docker
+
+At the ACDH-CH we use a centralized database-server. So instead of spawning a database for each service our services are talking to a database on this centralized db-server. This setup is reflected in the dockerized setting as well, meaning it expects an already existing database (either on your host, e.g. accessible via 'localhost' or some remote one)
+
+### building the image
+
+* `docker build -t cbab:latest .`
+* `docker build -t cbab:latest --no-cache .`
+
+
+### running the image
+
+To run the image you should provide an `.env` file to pass in needed environment variables; see example below:
+
+* `docker run -it -p 8020:8020 --rm --env-file docker.env --name cbab cbab:latest`
