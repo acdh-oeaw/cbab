@@ -1,3 +1,5 @@
+import requests
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
@@ -15,16 +17,35 @@ class StartView(TemplateView):
     template_name = "webpage/index.html"
 
 
-class ImprintView(TemplateView):
-    template_name = "webpage/imprint.html"
-
-
 class TermsOfUseView(TemplateView):
     template_name = "webpage/terms_of_use.html"
 
 
 class ManualView(TemplateView):
     template_name = "webpage/manual.html"
+
+
+class ImprintView(TemplateView):
+    template_name = "webpage/imprint.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            imprint_url = f"{settings.ACDH_IMPRINT_URL}{settings.REDMINE_ID}"
+        except Exception as e:
+            context["imprint_body"] = e
+            return context
+        r = requests.get(imprint_url)
+        if r.status_code == 200:
+            context["imprint_body"] = f"{r.text}"
+        else:
+            context["imprint_body"] = """
+            On of our services is currently not available.\
+            Please try it later or write an email to\
+            acdh-ch-helpdesk@oeaw.ac.at; if you are service provide,\
+            make sure that you provided ACDH_IMPRINT_URL and REDMINE_ID
+            """
+        return context
 
 
 #################################################################
