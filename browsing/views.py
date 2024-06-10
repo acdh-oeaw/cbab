@@ -348,7 +348,7 @@ class MainListDownloadView(GenericListView):
                     obj.burial_site.lng,
                     obj.burial_group,
                     obj.burial_type,
-                    obj.get_C14_dendro_display(),
+                    obj.get_c14_dendro_display(),
                     obj.absolute_age,
                     obj.get_secondary_burial_display(),
                     obj.secondary_burial_text,
