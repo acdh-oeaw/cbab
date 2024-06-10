@@ -120,7 +120,6 @@ else:
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "guardian.backends.ObjectPermissionBackend",
 )
 
 # Password validation

@@ -72,7 +72,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return render("webpage/user_logout.html")
+    return render(request, "webpage/user_logout.html")
 
 
 #################################################################
