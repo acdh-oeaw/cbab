@@ -1,6 +1,6 @@
 [![flake8 Lint](https://github.com/acdh-oeaw/cbab/actions/workflows/lint.yml/badge.svg)](https://github.com/acdh-oeaw/cbab/actions/workflows/lint.yml)
-[![Test](https://github.com/acdh-oeaw/cbab/actions/workflows/test.yml/badge.svg)](https://acdh-oeaw.github.io/cbab/
-[![workflows starter](https://github.com/acdh-oeaw/cbab/actions/workflows/starter.yaml/badge.svg)](https://github.com/acdh-oeaw/cbab/actions/workflows/starter.yaml))
+[![Test](https://github.com/acdh-oeaw/cbab/actions/workflows/test.yml/badge.svg)](https://acdh-oeaw.github.io/cbab/)
+[![workflows starter](https://github.com/acdh-oeaw/cbab/actions/workflows/starter.yaml/badge.svg)](https://github.com/acdh-oeaw/cbab/actions/workflows/starter.yaml)
 
 # About
 
