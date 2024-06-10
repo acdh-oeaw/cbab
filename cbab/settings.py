@@ -16,7 +16,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "rlYWFQbFuwofjjafjwo")
 
 
 if os.environ.get("DEBUG", False):
-    print(os.environ.get("DEBUG", False))
     DEBUG = True
 else:
     DEBUG = False
