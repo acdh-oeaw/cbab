@@ -298,31 +298,17 @@ $(document).ready(function(){
 });
 </script>
 
-    <!-- cool share -->
-      <script type="text/javascript">
-        $(function (){
-          var options = {
-            twitter: {
-              text: '',
-              via: ''
-            },
-            facebook : true,
-            googlePlus : true
-          };
-          $('.socialShare').shareButtons(options);
-        });
-      </script>
     <!-- scroll-up-bottom -->
-    <script type="text/javascript">
-            // Setup plugin with default settings
-            $(document).ready(function() {
-                $.apScrollTop({
-                    'onInit': function(evt) {
-                        console.log('apScrollTop: init');
-                    }
-                });
-            });
-    </script>
+<script type="text/javascript">
+  // Setup plugin with default settings
+  $(document).ready(function() {
+      $.apScrollTop({
+          'onInit': function(evt) {
+              console.log('apScrollTop: init');
+          }
+      });
+  });
+</script>
     {% endblock %}
     {% block scripts2 %}
     {% endblock scripts2 %}
