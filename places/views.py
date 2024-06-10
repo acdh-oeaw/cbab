@@ -1,10 +1,9 @@
 import requests
-import re
 import json
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic.edit import DeleteView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Place

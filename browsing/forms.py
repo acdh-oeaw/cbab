@@ -1,8 +1,6 @@
-from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Field
-from crispy_forms.bootstrap import *
-from burials.models import *
+from crispy_forms.layout import Submit, Layout
+from crispy_forms.bootstrap import Accordion, AccordionGroup
 
 
 class GenericFilterFormHelper(FormHelper):
