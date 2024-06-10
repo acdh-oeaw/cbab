@@ -42,6 +42,7 @@ from .filters import (
     AnimalRemainsListFilter,
 )
 
+from vocabs.models import SkosConcept
 
 
 class GenericListView(SingleTableView):

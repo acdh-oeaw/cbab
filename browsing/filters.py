@@ -265,9 +265,6 @@ class UrnListFilter(django_filters.FilterSet):
 
 
 class GraveGoodListFilter(django_filters.FilterSet):
-    # burial_site_name = django_filters.MethodFilter(
-    #    action='burialsite_name_custom_filter', help_text=False
-    #    )
     burial__burial_site__name = django_filters.CharFilter(
         lookup_expr="icontains", help_text=False, label="Burial site"
     )
@@ -295,7 +292,7 @@ class GraveGoodListFilter(django_filters.FilterSet):
         help_text=False,
     )
     amount = django_filters.NumberFilter(
-        lookup_expr="exact", help_text=False, name="amount_countable"
+        lookup_expr="exact", help_text=False, label="amount_countable"
     )
     secondary_depostition = django_filters.ChoiceFilter(
         null_label="Unknown",

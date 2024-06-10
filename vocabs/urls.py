@@ -52,7 +52,9 @@ urlpatterns = [
         views.SkosLabelDetailView.as_view(),
         name="skoslabel_detail",
     ),
-    re_path(r"^label/create/$", views.SkosLabelCreate.as_view(), name="skoslabel_create"),
+    re_path(
+        r"^label/create/$", views.SkosLabelCreate.as_view(), name="skoslabel_create"
+    ),
     re_path(
         r"^label/update/(?P<pk>[0-9]+)$",
         views.SkosLabelUpdate.as_view(),

@@ -10,7 +10,9 @@ urlpatterns = [
         views.BurialSiteDetailView.as_view(),
         name="burialsite_detail",
     ),
-    re_path(r"^burialsite/$", views.BurialSiteListView.as_view(), name="burialsite_list"),
+    re_path(
+        r"^burialsite/$", views.BurialSiteListView.as_view(), name="burialsite_list"
+    ),
     re_path(
         r"^burialsite/create/$",
         views.BurialSiteCreate.as_view(),
@@ -75,7 +77,9 @@ urlpatterns = [
         name="urncover_detail",
     ),
     re_path(r"^urncover/$", views.UrnCoverListView.as_view(), name="urncover_list"),
-    re_path(r"^urncover/create/$", views.UrnCoverCreate.as_view(), name="urncover_create"),
+    re_path(
+        r"^urncover/create/$", views.UrnCoverCreate.as_view(), name="urncover_create"
+    ),
     re_path(
         r"^urncover/update/(?P<pk>[0-9]+)$",
         views.UrnCoverUpdate.as_view(),
@@ -90,8 +94,12 @@ urlpatterns = [
     re_path(r"^urn/(?P<pk>[0-9]+)$", views.UrnDetailView.as_view(), name="urn_detail"),
     re_path(r"^urn/$", views.UrnListView.as_view(), name="urn_list"),
     re_path(r"^urn/create/$", views.UrnCreate.as_view(), name="urn_create"),
-    re_path(r"^urn/update/(?P<pk>[0-9]+)$", views.UrnUpdate.as_view(), name="urn_update"),
-    re_path(r"^urn/delete/(?P<pk>[0-9]+)$", views.UrnDelete.as_view(), name="urn_delete"),
+    re_path(
+        r"^urn/update/(?P<pk>[0-9]+)$", views.UrnUpdate.as_view(), name="urn_update"
+    ),
+    re_path(
+        r"^urn/delete/(?P<pk>[0-9]+)$", views.UrnDelete.as_view(), name="urn_delete"
+    ),
     # GraveGood
     re_path(
         r"^gravegood/(?P<pk>[0-9]+)$",

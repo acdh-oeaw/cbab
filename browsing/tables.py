@@ -1,6 +1,16 @@
 import django_tables2 as tables
 from django_tables2.utils import A
-from burials.models import *
+from burials.models import (
+    BurialSite,
+    BurialGroup,
+    Burial,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
+)
 
 
 class BurialSiteTable(tables.Table):
@@ -29,18 +39,12 @@ class BurialGroupTable(tables.Table):
 
 
 class BurialTable(tables.Table):
-    # cbab_id = tables.LinkColumn(
-    #     'burials:burial_detail', args=[A('pk')], accessor='id',
-    #     verbose_name='cbab-id')
     burial = tables.TemplateColumn(
         """<a href="{% url 'burials:burial_detail' pk=record.id %}">{{ record }}</a>""",
         order_by="burial_site",
     )
-    # burial = tables.RelatedLinkColumn('burials:burial_detail', accessor="record.id")
-    burial_site = tables.RelatedLinkColumn("burials:burialsite_detail", args=[A("pk")])
-    burial_group = tables.RelatedLinkColumn(
-        "burials:burialgroup_detail", args=[A("pk")]
-    )
+    burial_site = tables.RelatedLinkColumn()
+    burial_group = tables.RelatedLinkColumn()
 
     class Meta:
         model = Burial
@@ -51,9 +55,6 @@ class BurialTable(tables.Table):
 class UrnCoverTable(tables.Table):
     db_id = tables.LinkColumn("burials:urncover_detail", args=[A("pk")], accessor="id")
     cover_id = tables.LinkColumn("burials:urncover_detail", args=[A("pk")])
-    burial = tables.RelatedLinkColumn(
-        "burials:burial_detail", args=[A("pk")], accessor="urn.burial"
-    )
 
     class Meta:
         model = UrnCover
@@ -64,7 +65,7 @@ class UrnCoverTable(tables.Table):
 class UrnTable(tables.Table):
     db_id = tables.LinkColumn("burials:urn_detail", args=[A("pk")], accessor="id")
     urn_id = tables.LinkColumn("burials:urn_detail", args=[A("pk")])
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = Urn
@@ -75,7 +76,7 @@ class UrnTable(tables.Table):
 class GraveGoodTable(tables.Table):
     db_id = tables.LinkColumn("burials:gravegood_detail", args=[A("pk")], accessor="id")
     name = tables.LinkColumn("burials:gravegood_detail", args=[A("pk")])
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = GraveGood
@@ -87,7 +88,7 @@ class GraveGoodOtherTable(tables.Table):
     db_id = tables.LinkColumn(
         "burials:gravegoodother_detail", args=[A("pk")], accessor="id"
     )
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = GraveGoodOther
@@ -99,7 +100,7 @@ class DeadBodyRemainsTable(tables.Table):
     db_id = tables.LinkColumn(
         "burials:deadbodyremains_detail", args=[A("pk")], accessor="id"
     )
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = DeadBodyRemains
@@ -111,7 +112,7 @@ class AnimalRemainsTable(tables.Table):
     db_id = tables.LinkColumn(
         "burials:animalremains_detail", args=[A("pk")], accessor="id"
     )
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = AnimalRemains
@@ -123,7 +124,7 @@ class FillingObjectTable(tables.Table):
     db_id = tables.LinkColumn(
         "burials:burialfilling_detail", args=[A("pk")], accessor="id"
     )
-    burial = tables.RelatedLinkColumn("burials:burial_detail", args=[A("pk")])
+    burial = tables.RelatedLinkColumn()
 
     class Meta:
         model = AnimalRemains

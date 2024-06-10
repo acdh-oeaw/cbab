@@ -16,12 +16,8 @@
       <!-- custom css -->
       <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}"/>
 
-      <!-- custom less -->
-      <link rel="stylesheet/less" type="text/css" href="{% static 'webpage/css/style.less' %}"/>
       <!--scroll to top CSS -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}" />
-      <!--imageviewer-->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/imageviewer/dist/viewer.css' %}" type="text/css"/>
       <!-- jQuery -->
       <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
       <!--scroll to top -->
@@ -253,45 +249,6 @@
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
-    <!-- <script src="{% static 'webpage/libraries/jquery/dist/jquery.min.js' %}"></script>
-<script src="{% static 'webpage/libraries/bootstrap/dist/js/bootstrap.min.js'  %}"></script>
-<script src="{% static 'webpage/libraries/imageviewer/dist/viewer.js' %}"></script>
-<script>
-$(function () {
-    var options = {
-    url: 'originalUrl'};
-        $('.images').viewer(options);
-});
-
-</script> -->
-    <!-- <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script> -->
-    <!--Fixed navbar when scrolling down-->
-    <!-- <script type="text/javascript">
-    $('#top-procustom-navbar').affix({
-      offset: {
-          top: $('#procustom-affix').height()
-      }
-    });
-    </script> -->
-<!--Shadow for navbar when scrolled down-->
-
-    <!-- <script type="text/javascript">
-    var nav = $('#top-procustom-navbar'); // Change to nav div
-    var nav_class = 'mini-nav'; // Change to class name
-    var threshold = 100; // Change to pixels scrolled
-
-    $(window).scroll(function () {
-    var distance = $(this).scrollTop();
-    if (distance > threshold) { // If scrolled past threshold
-        nav.addClass(nav_class); // Add class to nav
-    } else { // If user scrolls back to top
-        if (nav.hasClass(nav_class)) { // And if class has been added
-            nav.removeClass(nav_class); // Remove it
-        }
-    }
-});
-    </script> -->
- <!-- popover -->   
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover(); 
@@ -302,11 +259,7 @@ $(document).ready(function(){
 <script type="text/javascript">
   // Setup plugin with default settings
   $(document).ready(function() {
-      $.apScrollTop({
-          'onInit': function(evt) {
-              console.log('apScrollTop: init');
-          }
-      });
+      $.apScrollTop();
   });
 </script>
     {% endblock %}
