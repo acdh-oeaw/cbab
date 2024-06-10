@@ -5,19 +5,16 @@
 {% block Titel %} See all {{ object.classname }} {% endblock %}
 {% block scriptHeader %}
   <!--leafletjs -->
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/>
+    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.Default.css' %}"/>
     <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/>
     <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-
-
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/></link>
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.Default.css' %}"/></link>
     <script src="{% static 'webpage/libraries/leaflet.markercluster/dist/leaflet.markercluster.js' %}"></script>
      {% endblock %}
      {% block content %}
      <style>
          #map {
           height: 500px;
-          width: 500px;
           margin-top: 30px;
           margin-bottom: 30px;
         }
