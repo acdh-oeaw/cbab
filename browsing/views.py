@@ -4,7 +4,8 @@ import datetime
 from django.http import HttpResponse
 from django_tables2 import SingleTableView, RequestConfig
 
-from .forms import GenericFilterFormHelper
+from .forms import GenericFilterFormHelper, MainListFilterFormHelper
+
 
 from burials.models import (
     Burial,
@@ -30,7 +31,6 @@ from .tables import (
 )
 from .filters import (
     MainListFilter,
-    MainListFilterFormHelper,
     BurialListFilter,
     BurialSiteListFilter,
     BurialGroupListFilter,

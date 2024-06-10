@@ -1,5 +1,4 @@
 from django.contrib import admin
-from guardian.admin import GuardedModelAdmin
 from .models import (
     Burial,
     BurialSite,
@@ -13,39 +12,39 @@ from .models import (
 )
 
 
-class BurialSiteAdmin(GuardedModelAdmin):
+class BurialSiteAdmin(admin.ModelAdmin):
     pass
 
 
-class BurialAdmin(GuardedModelAdmin):
+class BurialAdmin(admin.ModelAdmin):
     pass
 
 
-class BurialGroupAdmin(GuardedModelAdmin):
+class BurialGroupAdmin(admin.ModelAdmin):
     pass
 
 
-class UrnAdmin(GuardedModelAdmin):
+class UrnAdmin(admin.ModelAdmin):
     pass
 
 
-class UrnCoverAdmin(GuardedModelAdmin):
+class UrnCoverAdmin(admin.ModelAdmin):
     pass
 
 
-class GraveGoodAdmin(GuardedModelAdmin):
+class GraveGoodAdmin(admin.ModelAdmin):
     pass
 
 
-class GraveGoodOtherAdmin(GuardedModelAdmin):
+class GraveGoodOtherAdmin(admin.ModelAdmin):
     pass
 
 
-class DeadBodyRemainsAdmin(GuardedModelAdmin):
+class DeadBodyRemainsAdmin(admin.ModelAdmin):
     pass
 
 
-class AnimalRemainsAdmin(GuardedModelAdmin):
+class AnimalRemainsAdmin(admin.ModelAdmin):
     pass
 
 

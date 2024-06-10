@@ -1,9 +1,21 @@
 import django_filters
-from . import forms
-from browsing.forms import *
-from burials.models import *
-from vocabs.models import *
-from places.models import *
+from burials.models import (
+    BurialSite,
+    BurialGroup,
+    Burial,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
+)
+from vocabs.models import (
+    SkosConcept,
+)
+from places.models import (
+    Place,
+)
 
 # To do: django_filters.MethodFilter are commented because raising errors after version upgrade
 # test and remove if not needed anymore

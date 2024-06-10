@@ -1,17 +1,24 @@
 from dal import autocomplete
-from guardian.shortcuts import assign_perm
-from django.contrib.auth.models import User, Group
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
-from .models import *
+from crispy_forms.layout import Layout, Fieldset, Submit
+from .models import (
+    BurialSite,
+    BurialGroup,
+    Burial,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
+)
 
 
 BOOLEAN_CHOICES = ((None, "Unknown"), (True, "Yes"), (False, "No"))
 
 
 class BurialSiteForm(forms.ModelForm):
-
     class Meta:
         model = BurialSite
         fields = "__all__"
@@ -52,19 +59,8 @@ class BurialSiteForm(forms.ModelForm):
         )
         print(kwargs)
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(BurialSiteForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_burialsite", user, current_object)
-        assign_perm("delete_burialsite", user, current_object)
-        assign_perm("change_burialsite", superusergroup, current_object)
-        assign_perm("delete_burialsite", superusergroup, current_object)
-        return current_object
-
 
 class BurialGroupForm(forms.ModelForm):
-
     class Meta:
         model = BurialGroup
         fields = "__all__"
@@ -91,19 +87,8 @@ class BurialGroupForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(BurialGroupForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_burialgroup", user, current_object)
-        assign_perm("delete_burialgroup", user, current_object)
-        assign_perm("change_burialgroup", superusergroup, current_object)
-        assign_perm("delete_burialgroup", superusergroup, current_object)
-        return current_object
-
 
 class BurialForm(forms.ModelForm):
-
     class Meta:
         model = Burial
         fields = "__all__"
@@ -196,19 +181,8 @@ class BurialForm(forms.ModelForm):
             ),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(BurialForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_burial", user, current_object)
-        assign_perm("delete_burial", user, current_object)
-        assign_perm("change_burial", superusergroup, current_object)
-        assign_perm("delete_burial", superusergroup, current_object)
-        return current_object
-
 
 class UrnCoverForm(forms.ModelForm):
-
     class Meta:
         model = UrnCover
         fields = ["urn", "basic_shape", "upside_down", "fragment", "cover_id"]
@@ -231,19 +205,8 @@ class UrnCoverForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(UrnCoverForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_urncover", user, current_object)
-        assign_perm("delete_urncover", user, current_object)
-        assign_perm("change_urncover", superusergroup, current_object)
-        assign_perm("delete_urncover", superusergroup, current_object)
-        return current_object
-
 
 class UrnForm(forms.ModelForm):
-
     class Meta:
         model = Urn
         fields = "__all__"
@@ -266,19 +229,8 @@ class UrnForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(UrnForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_urn", user, current_object)
-        assign_perm("delete_urn", user, current_object)
-        assign_perm("change_urn", superusergroup, current_object)
-        assign_perm("delete_urn", superusergroup, current_object)
-        return current_object
-
 
 class GraveGoodForm(forms.ModelForm):
-
     class Meta:
         model = GraveGood
         fields = [
@@ -320,19 +272,8 @@ class GraveGoodForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(GraveGoodForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_gravegood", user, current_object)
-        assign_perm("delete_gravegood", user, current_object)
-        assign_perm("change_gravegood", superusergroup, current_object)
-        assign_perm("delete_gravegood", superusergroup, current_object)
-        return current_object
-
 
 class GraveGoodOtherForm(forms.ModelForm):
-
     class Meta:
         model = GraveGoodOther
         fields = [
@@ -365,19 +306,8 @@ class GraveGoodOtherForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(GraveGoodOtherForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_gravegoodother", user, current_object)
-        assign_perm("delete_gravegoodother", user, current_object)
-        assign_perm("change_gravegoodother", superusergroup, current_object)
-        assign_perm("delete_gravegoodother", superusergroup, current_object)
-        return current_object
-
 
 class DeadBodyRemainsForm(forms.ModelForm):
-
     class Meta:
         model = DeadBodyRemains
         fields = [
@@ -423,19 +353,8 @@ class DeadBodyRemainsForm(forms.ModelForm):
             Submit("submit", "save"),
         )
 
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(DeadBodyRemainsForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_deadbodyremains", user, current_object)
-        assign_perm("delete_deadbodyremains", user, current_object)
-        assign_perm("change_deadbodyremains", superusergroup, current_object)
-        assign_perm("delete_deadbodyremains", superusergroup, current_object)
-        return current_object
-
 
 class AnimalRemainsForm(forms.ModelForm):
-
     class Meta:
         model = AnimalRemains
         fields = [
@@ -471,13 +390,3 @@ class AnimalRemainsForm(forms.ModelForm):
         self.helper.add_input(
             Submit("submit", "save"),
         )
-
-    def save(self, *args, **kwargs):
-        superusergroup, _ = Group.objects.get_or_create(name="superusergroup")
-        current_object = super(AnimalRemainsForm, self).save(*args, **kwargs)
-        user = self.user
-        assign_perm("change_animalremains", user, current_object)
-        assign_perm("delete_animalremains", user, current_object)
-        assign_perm("change_animalremains", superusergroup, current_object)
-        assign_perm("delete_animalremains", superusergroup, current_object)
-        return current_object
