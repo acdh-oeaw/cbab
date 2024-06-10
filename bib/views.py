@@ -25,7 +25,7 @@ def sync_zotero_action(request):
     try:
         r = requests.get(url)
         error = "No errors from ZoteroAPI"
-    except:
+    except:  # noqa
         error = "aa! errors! The API didn´t response with a proper json-file"
 
     response = r.json()
@@ -37,11 +37,11 @@ def sync_zotero_action(request):
             try:
                 x["data"]["creators"][0]["name"]
                 name = x["data"]["creators"][0]["name"]
-            except:
+            except:  # noqa
                 firstname = x["data"]["creators"][0]["firstName"]
                 lastname = x["data"]["creators"][0]["lastName"]
                 name = "{}, {}".format(lastname, firstname)
-        except:
+        except:  # noqa
             name = "no name provided"
 
         NewBook = Book(
@@ -55,7 +55,7 @@ def sync_zotero_action(request):
         try:
             NewBook.save()
             saved.append(x["data"])
-        except:
+        except:  # noqa
             failed(x["data"])
     books_after = len(Book.objects.all())
     context = {}

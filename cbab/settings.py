@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "burials",
     "bib",
     "browsing",
-    "guardian",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"

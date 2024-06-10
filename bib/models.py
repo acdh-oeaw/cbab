@@ -23,7 +23,7 @@ class Book(models.Model):
             return "/".join(
                 [settings.Z_BASE_URL, settings.Z_COLLECTION, "itemKey", self.zoterokey]
             )
-        except:
+        except:  # noqa
             return None
 
     def __str__(self):

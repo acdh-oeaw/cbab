@@ -29,13 +29,6 @@ class BurialSiteAC(autocomplete.Select2QuerySetView):
 
     def get_queryset(self):
         qs = BurialSite.objects.all()
-        # burial_site_name = self.request.GET.get('name')
-        # try:
-        #     selected_burial_site_name = BurialSite.objects.get(name=burial_site_name)
-        #     qs = BurialGroup.objects.filter(name=selected_burial_site_name)
-        # except:
-        #     qs = BurialGroup.objects.all()
-
         if self.q:
             qs = qs.filter(name__icontains=self.q)
 
