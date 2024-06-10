@@ -262,7 +262,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "C14_dendro",
+                    "c14_dendro",
                     models.BooleanField(
                         blank=True,
                         choices=[(None, "Unknown"), (True, "Yes"), (False, "No")],
