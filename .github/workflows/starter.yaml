@@ -1,5 +1,5 @@
 name: workflows starter
-# env: is empty, see setup-env and the outputs there
+# env: is empty, see setup-env and the outputs there.
 on:
   workflow_dispatch: {}
 jobs:
