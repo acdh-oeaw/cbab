@@ -1,12 +1,47 @@
-from django_tables2 import SingleTableView, RequestConfig
-from burials.models import *
-from .filters import *
-from .forms import GenericFilterFormHelper
-from .tables import *
 import csv
 import time
 import datetime
 from django.http import HttpResponse
+from django_tables2 import SingleTableView, RequestConfig
+
+from .forms import GenericFilterFormHelper
+
+from burials.models import (
+    Burial,
+    BurialSite,
+    BurialGroup,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
+)
+from .tables import (
+    BurialTable,
+    BurialSiteTable,
+    BurialGroupTable,
+    UrnTable,
+    UrnCoverTable,
+    GraveGoodTable,
+    GraveGoodOtherTable,
+    DeadBodyRemainsTable,
+    AnimalRemainsTable,
+)
+from .filters import (
+    MainListFilter,
+    MainListFilterFormHelper,
+    BurialListFilter,
+    BurialSiteListFilter,
+    BurialGroupListFilter,
+    UrnListFilter,
+    UrnCoverListFilter,
+    GraveGoodListFilter,
+    GraveGoodOtherListFilter,
+    DeadBodyRemainsListFilter,
+    AnimalRemainsListFilter,
+)
+
 
 
 class GenericListView(SingleTableView):
