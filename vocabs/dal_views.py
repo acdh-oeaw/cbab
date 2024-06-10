@@ -37,7 +37,7 @@ class SKOSConstraintAC(autocomplete.Select2QuerySetView):
         if self.q:
             qs = qs.filter(
                 Q(pref_label__icontains=self.q)
-                | Q(skos_broader__pref_label__icontains=self.q)
+                | Q(skos_broader__pref_label__icontains=self.q)  # noqa:
             )
 
         return qs

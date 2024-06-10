@@ -497,7 +497,7 @@ class GraveGoodOther(CrematedRemainsBaseClass):
     def __str__(self):
         if self.food is True and (
             self.other_organic_grave_good is False
-            or self.other_organic_grave_good is None
+            or self.other_organic_grave_good is None  # noqa:
         ):
             return "food ID {}".format(self.id)
         elif self.other_organic_grave_good is True and (

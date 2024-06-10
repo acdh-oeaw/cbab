@@ -1,6 +1,15 @@
 from rest_framework import serializers
-from .models import *
-from vocabs.serializers import *
+from .models import (
+    BurialSite,
+    BurialGroup,
+    Burial,
+    Urn,
+    UrnCover,
+    GraveGood,
+    GraveGoodOther,
+    DeadBodyRemains,
+    AnimalRemains,
+)
 
 
 class BurialSiteSerializer(serializers.HyperlinkedModelSerializer):

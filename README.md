@@ -1,3 +1,5 @@
+[![flake8 Lint](https://github.com/acdh-oeaw/cbab/actions/workflows/lint.yml/badge.svg)](https://github.com/acdh-oeaw/cbab/actions/workflows/lint.yml)
+
 # About
 
 The CBAB (Cremation Bronze Age Burials) application is used for coordinated assessment of the cremation burials in the Late Bronze Age (14th – 9th century BC) based on a shared database.
