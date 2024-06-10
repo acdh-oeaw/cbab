@@ -69,7 +69,7 @@ class SkosLabel(models.Model):
         choices=LABEL_TYPES,
         help_text="The type of the label.",
     )
-    isoCode = models.CharField(
+    isocode = models.CharField(
         max_length=3,
         blank=True,
         help_text="The ISO 639-3 code for the label's language.",
@@ -77,9 +77,9 @@ class SkosLabel(models.Model):
 
     def __str__(self):
         if self.label_type != "":
-            return "{} @{} ({})".format(self.label, self.isoCode, self.label_type)
+            return "{} @{} ({})".format(self.label, self.isocode, self.label_type)
         else:
-            return "{} @{}".format(self.label, self.isoCode)
+            return "{} @{}".format(self.label, self.isocode)
 
     def get_absolute_url(self):
         return reverse("vocabs:skoslabel_detail", kwargs={"pk": self.id})
