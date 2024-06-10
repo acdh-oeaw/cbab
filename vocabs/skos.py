@@ -104,7 +104,7 @@ class Csv2SkosImporter(Csv2SkosReader):
                 temp_label, _ = SkosLabel.objects.get_or_create(
                     label=x["concept"]["alt_label"],
                     label_type="altLabel",
-                    isoCode=x["concept"]["alt_label_lang"],
+                    isocode=x["concept"]["alt_label_lang"],
                 )
                 temp_first, _ = SkosConcept.objects.get_or_create(
                     pref_label=x["concept"]["pref_label"],
@@ -122,7 +122,7 @@ class Csv2SkosImporter(Csv2SkosReader):
                     temp_label, _ = SkosLabel.objects.get_or_create(
                         label=second["alt_label"],
                         label_type="altLabel",
-                        isoCode=second["alt_label_lang"],
+                        isocode=second["alt_label_lang"],
                     )
                     temp_second, _ = SkosConcept.objects.get_or_create(
                         pref_label=second["pref_label"],
@@ -308,14 +308,14 @@ class SkosImporter(SkosReader):
 
                 for y in x["pref_labels"][1:]:
                     temp_label, _ = SkosLabel.objects.get_or_create(
-                        label=y["text"], isoCode=y["lang"], label_type="prefLabel"
+                        label=y["text"], isocode=y["lang"], label_type="prefLabel"
                     )
                     temp_concept.label = [temp_label]
                     temp_concept.save()
 
                 for y in x["alt_labels"][1:]:
                     temp_label, _ = SkosLabel.objects.get_or_create(
-                        label=y["text"], isoCode=y["lang"], label_type="altLabel"
+                        label=y["text"], isocode=y["lang"], label_type="altLabel"
                     )
                     temp_concept.label = [temp_label]
                     temp_concept.save()

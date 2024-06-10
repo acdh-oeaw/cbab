@@ -5,7 +5,7 @@ from .models import SkosConcept, SkosConceptScheme, SkosLabel, SkosNamespace
 class SkosLabelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SkosLabel
-        fields = ("label", "label_type", "isoCode")
+        fields = ("label", "label_type", "isocode")
 
 
 class SkosNamespaceSerializer(serializers.HyperlinkedModelSerializer):

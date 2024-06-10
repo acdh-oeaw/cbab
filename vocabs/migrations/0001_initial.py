@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "isoCode",
+                    "isocode",
                     models.CharField(
                         blank=True,
                         help_text="The ISO 639-3 code for the label's language.",
