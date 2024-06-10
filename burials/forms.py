@@ -157,7 +157,7 @@ class BurialForm(forms.ModelForm):
                 "burial_group",
                 "burial_id",
                 "burial_type",
-                "C14_dendro",
+                "c14_dendro",
                 "absolute_age",
                 "secondary_burial",
                 "secondary_burial_text",
